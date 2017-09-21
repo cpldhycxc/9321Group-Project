@@ -18,7 +18,7 @@ Import project from IntelliJ or Spring Tools Suite
 # Doc
 https://docs.google.com/document/d/1u0VNI31ZD6fEJMf1dN0AKmopnT-AabMzSuZtS62CBCw/edit
 
-# ESlint Setup
+# ESlint Setup (Front-End lonly)
 ## Sublime
 1.globally install eslint
 ```sh
