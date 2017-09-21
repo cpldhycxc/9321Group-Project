@@ -41,7 +41,7 @@ module.exports = {
       },
       compress: true,
       inline:true,
-      port: 8090
+      port: 9000
 },
   node :{
     net:'empty',
