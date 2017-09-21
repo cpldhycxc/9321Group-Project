@@ -19,3 +19,5 @@ you need to import this project to sts(sprint tool suite), then
 right click and run as spring boot app
 ```
 
+# Doc
+https://docs.google.com/document/d/1u0VNI31ZD6fEJMf1dN0AKmopnT-AabMzSuZtS62CBCw/edit
