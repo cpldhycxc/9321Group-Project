@@ -33,4 +33,4 @@ npm install -g eslint
 3. install `SublimeLinter-contrib-eslint` by searching from Package control of Sublime(shift+cmd+p -> install package)
 
 ## Atom
-install `linter-eslint` by searching from Package control of Sublime(shift+cmd+p -> install package)
+install `linter-eslint` by searching from package of Atom(shift+cmd+p -> install package)
