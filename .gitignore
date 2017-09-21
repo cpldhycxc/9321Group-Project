@@ -17,3 +17,5 @@ frontend/node_modules
 # Maven
 log/
 target/
+
+bin/
