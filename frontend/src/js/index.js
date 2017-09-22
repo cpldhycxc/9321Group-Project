@@ -15,7 +15,7 @@ class App extends React.Component{
 				<Router>
 					<Switch>
 						<Route path='/' component={Main} />
-    			</Switch>		
+  				</Switch>		
 				</Router>
 			</Provider>
 

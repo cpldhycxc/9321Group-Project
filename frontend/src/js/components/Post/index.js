@@ -6,13 +6,11 @@ import PostComment from '../PostComment';
 import CommentBox from '../CommentBox';
 
 export default class Post extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {	
 		const text = this.props.text;
 		const comments = this.props.comments;
+		const numOfLikes = this.props.likes.length;
+		console.log(numOfLikes);
 		return (
 			<div className='Post_Root'>
 				<Card style={{ width: 800 }}>
@@ -29,6 +27,9 @@ export default class Post extends React.Component {
 						title={text}
 					/>
 					<div className="Post__footer">
+						<div className="Post_like-button">
+							<p>{numOfLikes} likes</p>
+						</div>
 						<PostComment comments={comments} />
 						<div className="Post__action-box">
 							<div className="Post__comment-box">

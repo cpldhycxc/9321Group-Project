@@ -249,6 +249,9 @@ input {
   cursor: pointer;
 }
 
+.Post_like-button {
+  margin-right: 8px;
+}
 
 .textarea:focus, input:focus{
     outline: none;

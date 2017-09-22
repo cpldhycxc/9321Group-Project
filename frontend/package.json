@@ -18,16 +18,19 @@
     "babel-preset-stage-0": "^6.3.13",
     "css-loader": "^0.28.1",
     "eslint-config-rallycoding": "^3.2.0",
-    "extract-text-webpack-plugin": "^2.1.0",
+    "extract-text-webpack-plugin": "^2.1.2",
     "react-dom": "^15.5.4",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
     "babel-plugin-transform-node-env-inline": "^0.2.0",
+    "elemental": "^0.6.1",
     "eslint-plugin-babel": "~4.0.1",
     "eslint-plugin-react": "^6.9.0",
+    "file-loader": "^0.11.2",
     "font-awesome": "^4.7.0",
+    "font-awesome-sass-loader": "^2.0.1",
     "jquery": "^3.2.1",
     "material-design-icons": "^3.0.1",
     "material-ui": "^0.19.2",
@@ -49,7 +52,8 @@
     "redux-logger": "^3.0.1",
     "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.2.0",
-    "style-loader": "^0.18.2"
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9"
   },
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot",

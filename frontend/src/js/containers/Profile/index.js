@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Media, Tab, Nav} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import {EditProfile} from "./EditProfile"
+import EditProfile from "./EditProfile"
 
 export default class Profile extends React.Component {
 	constructor(props){

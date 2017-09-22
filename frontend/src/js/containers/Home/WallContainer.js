@@ -7,7 +7,12 @@ class WallContainer extends React.Component {
 		return (
 			<div>
 				{posts.map((post, i) => (
-					<Post text={post.text} comments={post.comments} key={i}/>
+					<Post 
+						text={post.text} 
+						comments={post.comments} 
+						key={i}
+						likes={post.liked_by}
+					/>
 				))}
 			</div>
 		);
@@ -18,6 +23,7 @@ const posts = [
 	{
 		id: 1,
 		text: 'aaaaaaa',
+		liked_by: ['henry','gary','ryan'],
 		comments: [
 			{
 				username: 'henry',
@@ -36,6 +42,7 @@ const posts = [
 	{
 		id: 2,
 		text: 'bbbb',
+		liked_by: ['henry','gary','ryan'],
 		comments: [
 			{
 				username: 'henry',
@@ -54,6 +61,7 @@ const posts = [
 	{
 		id: 3,
 		text: 'kkkk',
+		liked_by: ['henry','gary','ryan'],
 		comments: [
 			{
 				username: 'henry',
@@ -72,6 +80,7 @@ const posts = [
 	{
 		id: 3,
 		text: 'fuckfuck',
+		liked_by: ['henry','gary','ryan'],
 		comments: [
 			{
 				username: 'henry',
