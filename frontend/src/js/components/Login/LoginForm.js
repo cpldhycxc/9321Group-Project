@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import SignupForm from '../Signup'
-import { login } from '../../actions/userActions.js';
+import { login } from '../../actions/userActions';
 
 @connect((store) => {
 	return {
