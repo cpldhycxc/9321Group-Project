@@ -1,0 +1,9 @@
+.Post_Root {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  border: 1px solid #efefef;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
