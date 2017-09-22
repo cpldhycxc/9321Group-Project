@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import Search from "../../containers/Search";
 import Discover from "../../containers/Discover";
 import Profile from "../../containers/Profile";
+import Home from '../../containers/Home';
 
 
 export default class Main extends React.Component {
@@ -14,10 +15,10 @@ export default class Main extends React.Component {
         <Nav path={this.props.location.pathname}/>
         <div className='content'>
             <Switch>
-                <Route exact path='/' render={() => <Redirect to='/discover'/>} />
+                <Route exact path='/' component={Home} />
                 <Route path='/discover' component={Discover} />
                 <Route path='/search' component={Search} />
-                <Route path='/profile' component={Profile}/>
+                <Route path='/profile' component={Profile} />
             </Switch>
         </div>
       </div>
