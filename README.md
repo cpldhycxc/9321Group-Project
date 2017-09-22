@@ -5,14 +5,14 @@ for frontend, we use reactjs.
 # frontend
 
 ```sh
-$ cd front
+$ cd frontend
 $ npm install
 $ npm start
 ```
 
 # backend
 
-Import project from IntelliJ or Spring Tools Suite
+Import project to IntelliJ or Spring Tools Suite
 
 
 # Doc

@@ -1,4 +1,4 @@
-package hello;
+package api;
 
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
