@@ -195,3 +195,13 @@ input {
   height: 17px;
   bottom: 2px;
 }
+
+.Post_Root {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+  border: 1px solid #efefef;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}

@@ -15,8 +15,8 @@ export default class Main extends React.Component {
         <Nav path={this.props.location.pathname} />
         <div className='content'>
             <Switch>
-                <Route exact path='/' component={Home} />
-                <Route path='/discover' component={Discover} />
+                <Route exact path='/' render={() => <Redirect to='/wall' />} />
+                <Route path='/wall' component={Home} />
                 <Route path='/search' component={Search} />
                 <Route path='/profile' component={Profile} />
             </Switch>
