@@ -19,7 +19,7 @@ export default class Home extends React.Component {
 
   render() {
     return(
-      <div className='HomeContainer'>
+      <div className>
         <WallContainer />
         <NewPostButton onClick={this.openModal} />
         <NewPost 

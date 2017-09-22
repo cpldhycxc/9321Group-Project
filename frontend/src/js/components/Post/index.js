@@ -10,7 +10,6 @@ export default class Post extends React.Component {
 		const text = this.props.text;
 		const comments = this.props.comments;
 		const numOfLikes = this.props.likes.length;
-		console.log(numOfLikes);
 		return (
 			<div className='Post_Root'>
 				<Card style={{ width: 800 }}>
