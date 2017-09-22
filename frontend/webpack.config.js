@@ -2,37 +2,64 @@ var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
 
-module.exports = {
-  context: path.join(__dirname, "src"),
-  devtool: debug ? "inline-sourcemap" : null,
-  entry: "./js/index.js",
-  externals:{
-    jquery:'jQuery'
-  },
 
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
-        }
-      }
+const settings = {
+context: path.join(__dirname, "src"),
+  devtool: debug ? "inline-sourcemap" : null,
+  entry: {
+    bundle: [
+     "react-hot-loader/patch",
+      "./js/index.js"
     ]
   },
-
   output: {
     path: __dirname + "/src/",
     filename: "client.min.js"
   },
-  plugins: debug ? [] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-  ],
+  resolve: {
+    extensions: [".js", ".json", ".css"]
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.js?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            ["es2015", { modules: false }],
+            "stage-2",
+            "react"
+          ],
+          plugins: [
+            "transform-node-env-inline"
+          ],
+          env: {
+            development: {
+              plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
+            }
+          }
+        }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              sourceMap: true,
+              importLoaders: 1,
+              localIdentName: "[name]--[local]--[hash:base64:8]"
+            }
+          },
+          "postcss-loader" // has separate config, see postcss.config.js nearby
+        ]
+      },
+    ]
+  },
   devServer: {
       headers: {
           "Access-Control-Allow-Origin": "*",
@@ -43,8 +70,11 @@ module.exports = {
       inline:true,
       port: 9000
 },
-  node :{
-    net:'empty',
-    dns:'empty'
-  }
+  plugins: debug ? [] : [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+  ],
 };
+
+module.exports = settings;

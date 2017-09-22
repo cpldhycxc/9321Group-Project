@@ -12,7 +12,7 @@ export default class Main extends React.Component {
   render() {
     return(
       <div >
-        <Nav path={this.props.location.pathname}/>
+        <Nav path={this.props.location.pathname} />
         <div className='content'>
             <Switch>
                 <Route exact path='/' component={Home} />
