@@ -199,9 +199,60 @@ input {
 .Post_Root {
   width: 100%;
   max-width: 800px;
-  margin: 40px auto;
+  margin: 30px auto;
   border: 1px solid #efefef;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+
+.Post__footer {
+  padding: 14px 24px;
+}
+
+.Comments_Details {
+  color: #262626;
+}
+
+.CommentBox__root {
+  width: 100%;
+}
+
+.CommentBox__input {
+  width: 100%;
+  margin: 0;
+  border: none !important;
+}
+
+.Post__comment-box {
+  flex-grow: 1;
+}
+
+.Comment__footer {
+  padding-bottom: 10px;
+}
+
+.Post__action-box {
+  display: flex;
+  border-top: 1px solid #efefef;
+  padding-top: 10px;
+}
+
+.Post__footer {
+  padding: 14px 24px;
+}
+
+.Comment_Delete {
+  float: right;
+  color: #dbdbdb;
+  transition: color 200ms;
+  cursor: pointer;
+}
+
+.Post_like-button {
+  margin-right: 8px;
+}
+
+.textarea:focus, input:focus{
+    outline: none;
 }
