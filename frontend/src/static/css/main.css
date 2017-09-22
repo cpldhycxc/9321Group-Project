@@ -211,7 +211,8 @@ input {
 }
 
 .Comments_Details {
-  color: #262626;
+  display: flex;
+  padding-top: 10px;
 }
 
 .CommentBox__root {
@@ -229,6 +230,7 @@ input {
 }
 
 .Comment__footer {
+  flex-grow: 1;
   padding-bottom: 10px;
 }
 
