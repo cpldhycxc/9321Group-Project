@@ -11,11 +11,9 @@ import {login} from '../../actions/userActions.js';
 export default class LoginForm extends React.Component {
 	constructor(props) {
 	  super(props);
-	   this.state = {
-		   user:{
-			   username:'',
-			   password:''
-		   },
+	   this.state= {
+		   username:'',
+		   password:'',
 		   isSubmitting:false,
 		   issignup: false,
 	   };
@@ -28,14 +26,19 @@ export default class LoginForm extends React.Component {
 	}
 
 	onChange(e){
-		this.setState({[e.target.name]:e.target.value});
-		console.log(this.state)
+		this.setState(
+			{[e.target.name]:e.target.value}
+		);
 	}
 
 	handleSubmit(e){
 		e.preventDefault();
+		var user ={
+			username:this.state.username,
+			password:this.state.password
+		}
 		this.setState({isSubmitting:true});
-		this.props.dispatch(login(this.state.user));
+		this.props.dispatch(login(user));
 
 	}
 

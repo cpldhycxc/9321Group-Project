@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 export function login(user) {
-  return function (dispatch){
+  console.log(user)
+  return function(dispatch){
     axios.post('http://localhost:8000/backend/login/',{
-        username: user.username,
-        password: user.password
+        user
     })
-    .then((response) => {
-        console.log(response.data);
-    });
-    };
+    .then((response)=>{
+        
+    })
+    }
 }
 
 export function setUserName(name) {
