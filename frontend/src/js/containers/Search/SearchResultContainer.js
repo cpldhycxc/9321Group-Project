@@ -5,7 +5,7 @@ import Resultitem from '../../components/Resultitem';
 export default class SearchResultContainer extends React.Component {
 	render() {
 		return (
-			<div>
+			<div class="ui link cards">
 				{users.map((user, i) => (
 					<Resultitem
 						key={i}

@@ -256,3 +256,51 @@ input {
 .textarea:focus, input:focus{
     outline: none;
 }
+
+.NewPostButton {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  font-size: 24px;
+  position: fixed;
+  bottom: 30px;
+  right: 10%;
+  border: none;
+  font-weight: 300;
+  box-shadow: 0 1px 1.5px 0 rgba(0,0,0,.12),0 1px 1px 0 rgba(0,0,0,.24);
+  color: white;
+  outline: none;
+  background:
+  radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%),
+  radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%),
+  radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%),
+  radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%),
+  radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%),
+  radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%),
+  radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent),
+  linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+}
+
+.NewPostButton:hover {
+  color: white;
+  outline: none;
+}
+
+
+.Comment_ActionBoard {
+  display: flex;
+  padding-top: 10px;
+}
+
+.Like-button {
+  margin-right: 8px;
+}
+
+
+
+
+
+

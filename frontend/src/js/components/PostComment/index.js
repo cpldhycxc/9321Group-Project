@@ -1,9 +1,4 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import { IconButton } from 'react-toolbox/lib/button';
-import 'semantic-ui-popup/popup.css';
-import 'semantic-ui-transition/transition.css';
-
 
 export default class PostComment extends React.Component {
 	render() {

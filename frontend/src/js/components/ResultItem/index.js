@@ -11,12 +11,14 @@ const extra = (
 export default class ResultItem extends React.Component {
 	render() {
 		return (
-		<Card
-			image='https://images.celebfamily.com/wp-content/uploads/2016/10/Kin-Jong-Un-Career.jpg'
-			meta='Friend'
-			description='Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
-			extra={extra}
-		/>
+		<div class="card">
+			<Card
+				image='https://images.celebfamily.com/wp-content/uploads/2016/10/Kin-Jong-Un-Career.jpg'
+				meta='Friend'
+				description='Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
+				extra={extra}
+			/>
+		</div>
 		);
 	}
 }
