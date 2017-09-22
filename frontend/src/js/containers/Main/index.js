@@ -11,7 +11,7 @@ import Home from '../../containers/Home';
 export default class Main extends React.Component {
   render() {
     return(
-      <div >
+      <div>
         <Nav path={this.props.location.pathname} />
         <div className='content'>
             <Switch>

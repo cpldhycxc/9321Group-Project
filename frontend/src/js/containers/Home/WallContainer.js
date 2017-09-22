@@ -7,7 +7,7 @@ class WallContainer extends React.Component {
 		return (
 			<div>
 				{posts.map((post, i) => (
-					<Post text={post.text} key={i}/>
+					<Post text={post.text} comments={post.comments} key={i}/>
 				))}
 			</div>
 		);
@@ -24,8 +24,8 @@ const posts = [
 				content: 'dddddddd'
 			},
 			{
-				username: 'gary',
-				content: 'dddddddd'
+				username: 'ryan',
+				content: ' i am shabi'
 			},
 			{
 				username: 'henry',
