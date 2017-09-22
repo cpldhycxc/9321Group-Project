@@ -24,4 +24,4 @@ class App extends React.Component{
 }
 
 
-ReactDOM.render(<App/>, app);
+ReactDOM.render(<App />, app);
