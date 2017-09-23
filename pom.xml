@@ -34,6 +34,9 @@
 		    <artifactId>spring-boot-devtools</artifactId>
 		    <optional>true</optional>
 		</dependency>
+
+        <!-- Sqlite dependency-->
+        <!-- Hibernate dependency-->
     </dependencies>
 
     <properties>
