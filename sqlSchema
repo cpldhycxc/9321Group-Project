@@ -6,9 +6,7 @@ user:
 	first name
 	last name
 	gender
-	born year
-	born month
-	born day
+	birthday
 	photo
 	type
 	timeJoin
@@ -22,7 +20,7 @@ posts:
 	post_id, primary key
 	user_id, foreign key index
 	content
-	image
+	imageasd
 	timeStamp
 
 likeTable:
