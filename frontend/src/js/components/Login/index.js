@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 @connect((store) => {
 	return {
-		user:store.user.user
+		user: store.user.user,
+		token: store.user.token
 	};
 })
 
@@ -26,16 +27,28 @@ export default class Login extends React.Component {
 		}
 
 		open() {
-			console.log(this.state)
 			this.setState({ showModal: true });
 		}
 
 		render() {
+			const { user, token } = this.props;
+			if (token) {
+				return (
+					<div className='user-icon-container'>
+						<img src='static/images/user.svg' className='user-icon'/>
+						<div className='user-detail'>
+							{ user.username }<br/>
+							<a href='#0' className='login logout'>Click to logout</a>
+						</div>
+					</div>
+				)
+			}
 			return (
 				<div>
 					<img src='static/images/user.svg' className='user-icon' />
 					<div className='user-detail'>
-						<a href='#' onClick={this.open} className='login logout'>Please Login</a>
+						Not Login<br/>
+						<a href='#' onClick={this.open} className='login logout'>Click to Login</a>
 					</div>
 					<div>
 						<Modal show={this.state.showModal} onHide={this.close}>

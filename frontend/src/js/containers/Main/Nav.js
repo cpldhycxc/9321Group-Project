@@ -1,6 +1,9 @@
 import React from "react";
-import Login from '../../components/Login';
+import { connect } from 'react-redux';
 import { Link, Switch, Route } from 'react-router-dom';
+import Login from '../../components/Login';
+
+
 
 class Header extends React.Component {
 	render() {
@@ -17,12 +20,18 @@ class Header extends React.Component {
 	}
 }
 
+@connect((store) => {
+	return {
+		user: store.user.user,
+		token: store.user.token
+	};
+})
 class SideBar extends React.Component {
 	render() {
 		const { path, token } = this.props;
-		console.log(path)
-		const active = path === '/feeds' ? 'feeds' : (path === '/profile' ? 'profile' : path.match('^/learning-centre') ? 'learning-centre' : path === '/search' ? 'search' :'discover');
-		const base_links = [['wall', true], ['search', true], ['profile', false], ['feeds', false], ['learning-centre', false]];
+		console.log(token)
+		const active = path === '/friends' ? 'friends' : (path === '/profile' ? 'profile' : path === '/search' ? 'search' :'wall');
+		const base_links = [['wall', true], ['search', true],['friends', false], ['profile', false]];
 		const links = base_links.filter((e) => e[1] || token).map((e) => e[0]);
 		const sideLinks = links.map((link, i) =>
 			<li className={link + '-sidebar sidebar ' + (active === link ? 'active' : '')} key={i}>

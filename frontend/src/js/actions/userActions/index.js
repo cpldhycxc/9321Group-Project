@@ -2,13 +2,10 @@ import axios from 'axios';
 
 
 export function login(user) {
-    localStorage.setItem('userinfo', "dfddf");
+    localStorage.setItem('id_token', user.username);
     return {
         type: 'LOGGED_IN',
-        payload: {
-            username: user.username,
-            password: user.password
-        }
+        payload: user
     }
 }
 

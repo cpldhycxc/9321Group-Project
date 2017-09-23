@@ -44,7 +44,8 @@ export default class LoginForm extends React.Component {
 	}
 
 	render() {
-		const { user, token } = this.props
+		const { user, token } = this.props;
+		console.log(token)
 		if(this.state.issignup){
 			return(
 				<div>
