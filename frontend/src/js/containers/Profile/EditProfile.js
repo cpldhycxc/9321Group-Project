@@ -13,11 +13,11 @@ export default class EditProfile extends React.Component {
 				</div>
 				<div className="form-group">
 					<label for="password"> New Password: </label>
-					<input type="password" className="form-control" id ="password" />
+					<input type="password" className="form-control" id="password" />
 				</div>
 				<div className="form-group">
 					<label for="confirm password"> New Password: </label>
-					<input type="password" className="form-control" id ="confirm password" />
+					<input type="password" className="form-control" id="confirm password" />
 				</div>
 				<input type="submit" value="Save Change" />
 				<input type="submit" value="Close" />
