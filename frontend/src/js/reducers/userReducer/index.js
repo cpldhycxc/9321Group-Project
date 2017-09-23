@@ -14,6 +14,14 @@ export default function reducer(state = {
             token: localStorage.getItem('id_token'),
         }
       }
+      case "LOGGED_OUT": {
+        localStorage.setItem('user_info', null);
+        return {
+            ...state,
+            user: null,
+            token: null,
+        }
+      }
     }
     return state
 }

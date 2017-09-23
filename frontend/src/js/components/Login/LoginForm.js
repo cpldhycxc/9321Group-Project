@@ -53,19 +53,7 @@ export default class LoginForm extends React.Component {
 				</div>
 			);
 		}
-		if(token){
-			return(
-				<div>
-					<Modal.Header closeButton>
-						<Modal.Title>Login</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
-						<h1>login sucessfully</h1>
-						<p>close the windows to continue</p>
-					</Modal.Body>
-				</div>
-			)
-		}
+
 		return(
 			<div>
 				<Modal.Header closeButton>

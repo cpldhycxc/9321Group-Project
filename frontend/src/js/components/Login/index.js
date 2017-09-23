@@ -2,7 +2,7 @@ import React from "react";
 import { Modal } from 'react-bootstrap';
 import LoginForm from './LoginForm';
 import { connect } from 'react-redux';
-
+import { logout } from '../../actions/userActions';
 @connect((store) => {
 	return {
 		user: store.user.user,
@@ -30,6 +30,13 @@ export default class Login extends React.Component {
 			this.setState({ showModal: true });
 		}
 
+		logout(e){
+			e.preventDefault();
+			this.props.dispatch(logout());
+			this.setState({ showModal: false });
+			window.location.href='/#/wall';
+		}
+
 		render() {
 			const { user, token } = this.props;
 			if (token) {
@@ -38,7 +45,7 @@ export default class Login extends React.Component {
 						<img src='static/images/user.svg' className='user-icon'/>
 						<div className='user-detail'>
 							{ user.username }<br/>
-							<a href='#0' className='login logout'>Click to logout</a>
+							<a href='#0' onClick={this.logout.bind(this)} className='login logout'>Click to logout</a>
 						</div>
 					</div>
 				)
