@@ -4,6 +4,7 @@ import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox
 import { Button } from 'react-toolbox/lib/button';
 import PostComment from '../PostComment';
 import CommentBox from '../CommentBox';
+import { Icon } from 'semantic-ui-react';
 
 export default class Post extends React.Component {
 	render() {	
@@ -29,7 +30,6 @@ export default class Post extends React.Component {
 						<div className="Post_like-button">
 							<p>{numOfLikes} likes</p>
 						</div>
-						<PostComment comments={comments} />
 						<div className="Post__action-box">
 							<div className="Post__comment-box">
 								<CommentBox />

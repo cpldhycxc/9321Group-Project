@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react';
 
 export default class CommentBox extends React.Component {
 	constructor(props) {
@@ -13,12 +13,7 @@ export default class CommentBox extends React.Component {
 					<Icon name='heart' size='large' />
 				</div>
 				<div className="CommentBox__root">
-				 <i className="fa fa-heart GalleryItem__heart-animation-icon" />
-					<input
-						className="CommentBox__input"
-						type="text"
-						placeholder="Add a comment..."
-					/>
+				<i className="fa fa-heart GalleryItem__heart-animation-icon" />
 				</div>
 			</div>
 		);
