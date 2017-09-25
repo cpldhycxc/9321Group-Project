@@ -3,6 +3,9 @@ package api;
 import Model.User;
 import DAO.*;
 
+/**
+ * API class that help to return a json
+ */
 public class InsertUser {
     private long requestID;
     private boolean success;
