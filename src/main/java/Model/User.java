@@ -1,5 +1,7 @@
 package Model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -13,10 +15,32 @@ public class User {
     private String firstName;
     private String lastName;
     private int gender;
-    private Date birthday;
+    private Date birthday; //date format like 2017-09-12T02:00:00.00
     private String photo;
     private String userType;
     private Date joinTime;
+
+    public User(String userName, String password, String email, String firstName, String lastName, int gender, String birthday, String photo, String userType) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.photo = photo;
+        this.userType = userType;
+
+        //convert date
+        String format = "yyyy-MM-dd";
+        SimpleDateFormat sdf =  new SimpleDateFormat(format);
+        birthday = birthday.split("T")[0];
+        try {
+            this.birthday = sdf.parse(birthday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public int getUserID() { return userID; }
     public String getUserName() { return userName; }

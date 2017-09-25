@@ -2,14 +2,17 @@ package api;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
+import DAO.*;
+import Model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 @RestController
 public class HomeController {
+
+    @Autowired
+    private DBDAO dbdao = new DBDAOImpl();
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
@@ -21,13 +24,18 @@ public class HomeController {
     }
 
     @RequestMapping("/insertUser")
-    public InsertUser insertUser(@RequestParam(value="userName", required=true) String userName,
-                                 @RequestParam(value="password", required=true) String password,
-                                 @RequestParam(value="email", required=true) String email,
-                                 @RequestParam(value="firstName", required=true) String firstName,
-                                 @RequestParam(value="lastName", required=true) String lastName,
-                                 @RequestParam(value="gender", required=true) int gender) {
-    return new InsertUser(counter.incrementAndGet(), userName, password, email, firstName, lastName, gender);
+    public InsertUser insertUser(@RequestParam(value="userName") String userName,
+                                 @RequestParam(value="password") String password,
+                                 @RequestParam(value="email") String email,
+                                 @RequestParam(value="firstName") String firstName,
+                                 @RequestParam(value="lastName") String lastName,
+                                 @RequestParam(value="gender") int gender,
+                                 @RequestParam(value="birthday") String birthday,
+                                 @RequestParam(value="photo") String photo,
+                                 @RequestParam(value="userType") String userType) {
+        
+        User aUser = new User(userName, password, email, firstName, lastName, gender, birthday, photo, userType);
+        return new InsertUser(counter.incrementAndGet(),  dbdao.userSignUp(aUser), aUser);
     }
 
 

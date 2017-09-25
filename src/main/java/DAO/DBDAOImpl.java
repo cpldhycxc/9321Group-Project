@@ -2,10 +2,8 @@ package DAO;
 
 import Model.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -38,14 +36,34 @@ public class DBDAOImpl implements DBDAO {
         return conn;
     }
 
-    public void userSignUp(User aUser) {
+    public boolean userSignUp(User aUser) {
         try (Connection conn = connect()) {
-            // prepare statement and ready to execute
-            PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Users" +
-                    "(userName, password, email, firstName, lastName, gender, birthday, photo, userType");
+            // check if the user already exists
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName = '" + aUser.getUserName() + "'");
+            if(rs.next()) {
+                return false;
+            }
 
+            // prepare statement and ready to execute
+            PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Users " +
+                    "(userName, password, email, firstName, lastName, gender, birthday, photo, userType)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            preStatment.setString(1, aUser.getUserName());
+            preStatment.setString(2, aUser.getPassword());
+            preStatment.setString(3, aUser.getEmail());
+            preStatment.setString(4, aUser.getFirstName());
+            preStatment.setString(5, aUser.getLastName());
+            preStatment.setString(6, Integer.toString(aUser.getGender()));
+            preStatment.setString(7, aUser.getBirthday().toString());
+            preStatment.setString(8, aUser.getPhoto());
+            preStatment.setString(9, aUser.getUserType());
+            preStatment.executeUpdate();
+            logger.info("Adding user");
+            return true;
         } catch (SQLException e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
@@ -55,24 +73,6 @@ public class DBDAOImpl implements DBDAO {
 
     public void userExistence(User aUser){
 
-    }
-
-    public  void save(TAppActivityLog tAppActivityLog) {
-        String sql = "INSERT INTO app_activity_log (username, user_ip, date_accessed,photos_sent) "
-                + "values (?,?,?,?)";
-
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1,tAppActivityLog.getUsername());
-            pstmt.setString(2,tAppActivityLog.getUserIp());
-            pstmt.setString(3,  tAppActivityLog.getDateAccessed().toString());
-            pstmt.setString(4,tAppActivityLog.getPhotosSent());
-            pstmt.executeUpdate();
-            logger.info("Activity recorded");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
 
