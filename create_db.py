@@ -8,7 +8,7 @@ import sqlite3
 #     email
 #     first name
 #     last name
-#     gender
+#     gender  # 0 is unspecified, 1 is mail, 2 is female
 #     birthday
 #     photo
 #     type
@@ -44,7 +44,7 @@ conn.execute('''CREATE TABLE Users
         email       TEXT     UNIQUE NOT NULL,
         firstName   TEXT,
         lastName    TEXT,
-        gender      TEXT,
+        gender      INTEGER, 
         birthday    DATETIME,
         photo       TEXT,
         userType    TEXT     NOT NULL,
