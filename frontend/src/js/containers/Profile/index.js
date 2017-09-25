@@ -18,7 +18,7 @@ class profile extends Component {
 	render() {
 		return (
 			<div className="profile">
-				<img src={this.state.image} />
+				<img alt="No" src={this.state.image} />
 				<Profile person={this.state.person} quote={this.state.quote} />
 			</div>
 		);
