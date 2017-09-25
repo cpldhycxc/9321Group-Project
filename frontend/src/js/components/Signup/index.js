@@ -3,7 +3,7 @@ import {Button, Modal} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import DatePicker from 'react-bootstrap-date-picker';
 import moment from 'moment';
-import validateInput from '../../functions/validation';
+import validateInput from '../../functions/signupvalidation';
 import classnames from 'classnames';
 
 
@@ -51,11 +51,11 @@ export default class SignupForm extends React.Component {
 
     handleSubmit(e){
       e.preventDefault();
+      console.log(this.state);
       if(this.isValid()){
         this.setState({ errors:{}, isloading:true });
 
       }
-      console.log(this.state.errors);
     }
 
     render() {
