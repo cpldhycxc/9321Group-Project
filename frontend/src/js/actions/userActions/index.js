@@ -17,7 +17,6 @@ export function logout() {
 }
 
 
-
 // return function(dispatch){
   // axios.post('http://localhost:8000/backend/login/',{
   //     user

@@ -1,12 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Post from '../../components/Post';
+import { getPosts } from '../../actions/postActions';
 
+@connect((store) => {
+  return store.post;
+})
 class WallContainer extends React.Component {
+
+	componentWillMount() {
+		this.props.dispatch(getPosts());
+	}
+
 	render() {
+		console.log(this.props);
 		return (
 			<div>
-				{posts.map((post, i) => (
+				{this.props.posts.map((post, i) => (
 					<Post 
 						text={post.text} 
 						comments={post.comments} 
@@ -18,86 +28,5 @@ class WallContainer extends React.Component {
 		);
 	}
 }
-
-const posts = [
-	{
-		id: 1,
-		text: 'aaaaaaa',
-		liked_by: ['henry','gary','ryan'],
-		comments: [
-			{
-				username: 'henry',
-				content: 'dddddddd'
-			},
-			{
-				username: 'ryan',
-				content: ' i am shabi'
-			},
-			{
-				username: 'henry',
-				content: 'dddddddd'
-			}
-		]
-	},
-	{
-		id: 2,
-		text: 'bbbb',
-		liked_by: ['henry','gary','ryan'],
-		comments: [
-			{
-				username: 'henry',
-				content: 'dddddddd'
-			},
-			{
-				username: 'gary',
-				content: 'dddddddd'
-			},
-			{
-				username: 'henry',
-				content: 'dddddddd'
-			}
-		]
-	},
-	{
-		id: 3,
-		text: 'kkkk',
-		liked_by: ['henry','gary','ryan'],
-		comments: [
-			{
-				username: 'henry',
-				content: 'dddddddd'
-			},
-			{
-				username: 'gary',
-				content: 'dddddddd'
-			},
-			{
-				username: 'henry',
-				content: 'dddddddd'
-			}
-		]
-	},
-	{
-		id: 3,
-		text: 'fuckfuck',
-		liked_by: ['henry','gary','ryan'],
-		comments: [
-			{
-				username: 'henry',
-				content: 'dddddddd'
-			},
-			{
-				username: 'gary',
-				content: 'dddddddd'
-			},
-			{
-				username: 'henry',
-				content: 'dddddddd'
-			}
-		]
-	}
-
-];
-
 
 export default connect()(WallContainer);
