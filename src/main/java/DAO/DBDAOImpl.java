@@ -38,8 +38,24 @@ public class DBDAOImpl implements DBDAO {
         return conn;
     }
 
-    public void insertUser(User aUser);
-    public void userExistence(User aUser);
+    public void userSignUp(User aUser) {
+        try (Connection conn = connect()) {
+            // prepare statement and ready to execute
+            PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Users" +
+                    "(userName, password, email, firstName, lastName, gender, birthday, photo, userType");
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void userActivation(String userName){
+
+    }
+
+    public void userExistence(User aUser){
+
+    }
 
     public  void save(TAppActivityLog tAppActivityLog) {
         String sql = "INSERT INTO app_activity_log (username, user_ip, date_accessed,photos_sent) "
