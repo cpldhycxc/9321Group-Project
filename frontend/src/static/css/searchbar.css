@@ -1,11 +1,14 @@
+body {
+  font-family: Helvetica, sans-serif;
+}
 
 .react-autosuggest__container {
   position: relative;
 }
 
 .react-autosuggest__input {
-  width: 240px;
-  height: 30px;
+  width: 600px;
+  height: 45px;
   padding: 10px 20px;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
@@ -28,13 +31,10 @@
 }
 
 .react-autosuggest__container--open .react-autosuggest__suggestions-container {
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
   display: block;
-  position: relative;
-  top: 50px;
-  width: 280px;
+  position: absolute;
+  top: 51px;
+  width: 600px;
   border: 1px solid #aaa;
   background-color: #fff;
   font-family: Helvetica, sans-serif;
@@ -49,6 +49,8 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .react-autosuggest__suggestion {
@@ -67,7 +69,22 @@
 
 .suggestion-content {
   display: flex;
+  align-items: center;
   background-repeat: no-repeat;
+}
+
+.name {
+  margin-left: 68px;
+  line-height: 45px;
+}
+
+.highlight {
+  color: #f45c41;
+  font-weight: bold;
+}
+
+.react-autosuggest__suggestion--focused .highlight {
+  color: #120000;
 }
 
 .dancounsell {
@@ -84,18 +101,4 @@
 
 .steveodom {
   background-image: url(https://s3.amazonaws.com/uifaces/faces/twitter/steveodom/48.jpg);
-}
-
-.name {
-  margin-left: 68px;
-  line-height: 45px;
-}
-
-.highlight {
-  color: #ee0000;
-  font-weight: bold;
-}
-
-.react-autosuggest__suggestion--focused .highlight {
-  color: #120000;
 }

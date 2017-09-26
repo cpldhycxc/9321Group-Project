@@ -10,9 +10,11 @@ export default class Search extends React.Component {
           <div className='unswbook'>
               UNSWBook
           </div>
+          <div className='search-bar-int'>
            <div className='input-group search-bar'>
              <SearchBar />
            </div>
+         </div>
       </div>
     );
   }

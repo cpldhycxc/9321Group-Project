@@ -3,11 +3,12 @@ import Autosuggest from 'react-autosuggest';
 import match  from 'autosuggest-highlight/match';
 import parse  from 'autosuggest-highlight/parse';
 
+import people from './data.data.json'
 const people = [
   {
-    first: 'Charlie',
-    last: 'Brown',
-    twitter: 'dancounsell'
+    first: 'Aaron',
+    last: 'Peirsol',
+    twitter: 'AaronPeirsol'
   },
   {
     first: 'Charlotte',
@@ -100,7 +101,7 @@ export default class SearchBar extends React.Component {
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
-      placeholder: "Type 'c'",
+      placeholder: "Search for Username",
       value,
       onChange: this.onChange
     };

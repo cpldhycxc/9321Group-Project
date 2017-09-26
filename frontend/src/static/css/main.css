@@ -309,10 +309,10 @@ input {
     text-align: center;
 }
 
+.search-bar-int {
+  margin: 20px auto;
+}
+
 .search-bar {
-  width: 100%;
-  max-width: 2016px;
-  text-align: center;
-  margin: auto;
-  padding-top: 10px;
+    margin: auto;
 }
