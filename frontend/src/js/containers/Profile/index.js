@@ -18,13 +18,31 @@ class profile extends React.Component {
   };
   console.log(this.state);
   this.openState = () => this.setState({ showModal: true });
+  this.closeState = () => this.setState({ showModal: false });
   this.openState = this.openState.bind(this);
+  this.closeState = this.closeState.bind(this);
  }
    render() {
        if (this.state.showModal) {
            return (
                <div>
-               <h1> Put Editted From here </h1>
+               <label>
+               Name:
+               <input type="text" name="name" />
+               </label>
+               <label>
+               biography
+               <input type="text" name="biography" />
+               </label>
+               <label>
+               quote-source
+               <input type="text" name="quote-source" />
+               </label>
+               <label>
+               quote-content
+               <input type="text" name="quote-content" />
+               </label>
+               <button onClick={this.closeState}>submit</button>
                </div>
            );
        }
