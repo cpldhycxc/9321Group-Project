@@ -1,28 +1,69 @@
 import React from 'react';
-import { Button, Media, Tab, Nav } from 'react-bootstrap';
+import TextInput from '../common/TextInput';
+import CheckBox from '../common/CheckBox';
 
+class EditProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.makeCheckBoxes = this.makeCheckBoxes.bind(this);
+  }
 
-export default class EditProfile extends React.Component {
-	render() {
-		return (
-			<div>
-			<form>
-				<div className="form-group">
-					<label for="email"> Email: </label>
-					<input type="email" className="form-control" value="email" id="email" />
-				</div>
-				<div className="form-group">
-					<label for="password"> New Password: </label>
-					<input type="password" className="form-control" id="password" />
-				</div>
-				<div className="form-group">
-					<label for="confirm password"> New Password: </label>
-					<input type="password" className="form-control" id="confirm password" />
-				</div>
-				<input type="submit" value="Save Change" />
-				<input type="submit" value="Close" />
-			</form>
-			</div>
-		)
-	}
+  makeCheckBoxes() {
+    return this.props.hobbies.map(hobby => {
+      return <CheckBox item={hobby} handleChange={this.props.onHobbyChange} key={hobby.id} />
+  });
+  }
+
+  render() {
+    const boxes = this.makeCheckBoxes();
+    return (
+      <div>
+        <form>
+          <TextInput
+            name="name"
+            label="name"
+            value={this.props.cat.name}
+            onChange={this.props.onChange} />
+
+          {boxes}
+
+          <TextInput
+            name="breed"
+            label="Breed"
+            value={this.props.cat.breed}
+            onChange={this.props.onChange} />
+
+          <TextInput
+            name="weight"
+            label="weight"
+            value={this.props.cat.weight}
+            onChange={this.props.onChange} />
+
+          <TextInput
+            name="temperament"
+            label="temperament"
+            value={this.props.cat.temperament}
+            onChange={this.props.onChange} />
+
+          <input
+            type="submit"
+            disabled={this.props.saving}
+            value={this.props.saving ? 'Saving...' : 'Save'}
+            className="btn btn-primary"
+            onClick={this.props.onSave} />
+        </form>
+      </div>
+  );
+  }
 }
+
+EditProfile.propTypes = {
+  cat: React.PropTypes.object.isRequired,
+  hobbies: React.PropTypes.array.isRequired,
+  onSave: React.PropTypes.func.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  onHobbyChange: React.PropTypes.func.isRequired,
+  saving: React.PropTypes.bool
+};
+
+export default EditProfile;
