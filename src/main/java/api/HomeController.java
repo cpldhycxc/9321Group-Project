@@ -26,11 +26,11 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public SignUp SignUp(@RequestParam(value="userName") String userName,
+    public SignUp SignUp(@RequestParam(value="useruame") String userName,
                              @RequestParam(value="password") String password,
                              @RequestParam(value="email") String email,
-                             @RequestParam(value="firstName") String firstName,
-                             @RequestParam(value="lastName") String lastName,
+                             @RequestParam(value="firstname") String firstName,
+                             @RequestParam(value="lastname") String lastName,
                              @RequestParam(value="birthday") String birthday) {
         
         User aUser = new User(userName, password, email, firstName, lastName, birthday);

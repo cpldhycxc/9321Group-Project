@@ -1,14 +1,19 @@
 import React from 'react';
 // import { connect } from "react-redux";
-import SearchResultContainer from './SearchResultContainer';
+import SearchBar from '../../components/Login';
 
 
 export default class Search extends React.Component {
   render() {
     return (
-      <div >
-        <SearchResultContainer />
-      </div>
+      <div className="content">
+        Search Bar</div>
     );
   }
 }
+
+
+
+/* <div >
+  <SearchResultContainer psotlist={}/>
+</div> */
