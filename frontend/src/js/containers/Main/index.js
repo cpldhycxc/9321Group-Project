@@ -1,15 +1,16 @@
-import React from "react";
+import React from 'react';
 // import { connect } from "react-redux";
 import { Link, Switch, Route, Redirect } from 'react-router-dom';
-import Nav from "./Nav";
-import Search from "../../containers/Search";
-import Profile from "../../containers/Profile";
+import Nav from './Nav';
+import Search from '../../containers/Search';
+import Profile from '../../containers/Profile';
 import Home from '../../containers/Home';
+import ActivityReport from '../../containers/ActivityReport';
 
 
 export default class Main extends React.Component {
   render() {
-    return(
+    return (
       <div>
         <Nav path={this.props.location.pathname} />
         <div className='content'>
@@ -17,7 +18,8 @@ export default class Main extends React.Component {
                 <Route exact path='/' render={() => <Redirect to='/wall' />} />
                 <Route path='/wall' component={Home} />
                 <Route path='/search' component={Search} />
-                <Route path='/profile/:username' component={Profile} />
+                <Route path='/profile' component={Profile} />
+                <Route path='/ActivityReport/:username' component={ActivityReport} />
             </Switch>
         </div>
       </div>
