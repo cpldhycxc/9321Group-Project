@@ -18,8 +18,8 @@ class profile extends React.Component {
  this.dataChanged = this.dataChanged.bind(this);
  }
  dataChanged(data) {
-     console.log(data)
-     this.setState({ ...data })
+     console.log(data);
+     this.setState({ ...data });
  }
 
  customValidateText(text) {
@@ -28,36 +28,36 @@ class profile extends React.Component {
  render() {
      return (
          <div>
-         <h2>Profile Page</h2>
-         <h5>U can edit it directly</h5>
-         <h3>Name</h3>
-         <InlineEdit
-         validate={this.customValidateText}
-         activeClassName="editing"
-         text={this.state.name}
-         paramName="message"
-         change={this.dataChanged}
-         />
-         <p></p>
-         <h3>Biography</h3>
-         <InlineEdit
-         validate={this.customValidateText}
-         activeClassName="editing"
-         text={this.state.biography}
-         paramName="message"
-         change={this.dataChanged}
-         />
-         <h3>Photo</h3>
-         <img alt="NothingToshow" src={this.state.image}></img>
-         <p></p>
-         <h3>Something awesome</h3>
-         <InlineEdit
-         validate={this.customValidateText}
-         activeClassName="editing"
-         text={this.state.content}
-         paramName="message"
-         change={this.dataChanged}
-         />
+            <h2>Profile Page</h2>
+            <h5>U can edit it directly</h5>
+            <h3>Name</h3>
+            <InlineEdit
+                validate={this.customValidateText}
+                activeClassName="editing"
+                text={this.state.name}
+                paramName="message"
+                change={this.dataChanged}
+                />
+            <p></p>
+            <h3>Biography</h3>
+            <InlineEdit
+                validate={this.customValidateText}
+                activeClassName="editing"
+                text={this.state.biography}
+                paramName="message"
+                change={this.dataChanged}
+            />
+            <h3>Photo</h3>
+            <img alt="NothingToshow" src={this.state.image}></img>
+            <p></p>
+            <h3>Something awesome</h3>
+            <InlineEdit
+                validate={this.customValidateText}
+                activeClassName="editing"
+                text={this.state.content}
+                paramName="message"
+                change={this.dataChanged}
+            />
          </div>
      )
  }
