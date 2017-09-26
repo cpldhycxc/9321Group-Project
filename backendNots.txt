@@ -1,0 +1,70 @@
+1. JDBC is API that connect project with database. if ue JDBC we can have multiple database. pros if using JDBC is we can use one API to query different database.
+
+2. JDBC belong to Data Access Layer which is one level higher than Data Storage Layer
+
+3. JDBC uses SQL like Query
+
+4. JDBC is a package (java.sql.*) of Java class that provides access to RDBS via SQL
+
+5. JDBC Interfaces
+	java.sql.Statement: Represents a SQL statment (select or update) to be sent to DBMS
+
+	java.sql.ResultSet: hold the result of executing a SQL query
+
+6. JDBC connection Scenario:
+	1. load JDBC driver for specific RDBM (Drive class)
+	2. Get connection to a named database (Connection class)
+	3. Set up an SQL query (or update) (Statement class)
+	4. Execute the query to obtain results (ResultSet class)
+	5. Iterate over the results in the ResultSet
+
+7. PreparedStatment: make a query as object, so we can use the query object in late query.
+
+8. DAO (Data Access Objects):
+JDBC lets you access data stored in relational tables
+DAO pattern provides abstract interface to the retrival of data from a data resource
+Pro:
+	1. changes to persistence access layer do not affect DAO clients as long as the interface remains correctly implemented
+	2. DAO is used to insulate an application from the numerous complex and varied Java persistence tech (JDBC, EJB CMP....)
+	3. the underlying technology can be upgrades or swapped without changing other parts of the application
+
+	Application -> DAO -> JDBC -> DATABASE
+	DTO (Data Transfer Object): carry the actual data (implement DAO)
+
+9. surrogate key: artifically generated key.
+
+10. Object-Relational Mapping (ORM): aim to give you automated persistence of objects in Java application to the tables in a relational database, using metadata that describes the mapping between the objects and the database. e.g. JDO, JPA, iBATIS, Hibernate.
+
+So we should have DAO interface and implement it with another class, use Hibernate to do the query for us so we don't have to write our own query our self.
+Application -> DAO -> Hibernate -> JDBC -> DATABASE
+
+NoSQL:
+1. CAP Theorem:
+	* Consistency (all copies have same value)
+	* Availability (system can run even if parts have failed)
+	* Partitions (network can break into two or more part)
+2. Why NoSQL:
+	* it make sense for applications that need to deal with very large semi-structured data (Social Networking Feeds)
+	* cheap, easy to implement
+	* data are replicated and can be partitioned
+	* easy to distribute
+	* don't require a schema
+	* can scale up and down
+	* quickly process large amounts of data
+	* relax the data consistency requirement (CAP)
+	* can handle web-scale data, whereas relational DBs can't
+3. Type of NoSQL:
+	* Column (Data Store): 
+	* Document-oriented database: designed for storing, retrieving and managing document-oriented information, also known as semi-structured data
+	* Key-value database: data storage paradigm designed for storing, retrieving and managing associative arrays, a data structure more commonly known today as a dictionary or hash
+	* Graph Database:
+4 Cons:
+	• New and sometimes buggy
+	• Data is generally duplicated, potential for inconsistency
+	• No standardized schema
+	• No standard format for queries
+	• No standard language
+	• Difficult to impose complicated structures
+	• Depend on the application layer to enforce data integrity
+	• No guarantee of support
+	• Too many options, which one, or ones to pick
