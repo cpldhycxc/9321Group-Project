@@ -300,3 +300,18 @@ input {
 }
 
 
+/*search page css*/
+.unswbook {
+    margin-top: 10%;
+    font-size: 70px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.search-bar-int {
+  margin: 20px auto;
+}
+
+.search-bar {
+    margin: auto;
+}
