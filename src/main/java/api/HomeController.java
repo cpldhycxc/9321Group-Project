@@ -38,8 +38,8 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
-    public boolean checkExistence(@PathVariable String loginName) {
-    	return true;
+    public CheckExistence checkExistence(@PathVariable String loginName) {
+    	return new CheckExistence(loginName,dbdao.userExistence(loginName));
 
     }	
 
