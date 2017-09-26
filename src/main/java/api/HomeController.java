@@ -41,6 +41,11 @@ public class HomeController {
     public CheckExistence checkExistence(@PathVariable String loginName) {
     	return new CheckExistence(loginName,dbdao.userExistence(loginName));
 
-    }	
+    }
+    
+    @RequestMapping(value = "/activation/{userName}", method = RequestMethod.GET)
+    public void userActivation(@PathVariable String userName) {
+    	dbdao.userActivation(userName);
+    }
 
 }

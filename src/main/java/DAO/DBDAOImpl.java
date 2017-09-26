@@ -84,12 +84,12 @@ public class DBDAOImpl implements DBDAO {
      */
     public void userActivation(String userName){
     	try (Connection conn = connect()) {
-    		 String updateType = "UPDATE Users SET userType=? WHERE userName =?";
+    		 String updateType = "UPDATE Users SET userType=? WHERE userName=?";
     		 PreparedStatement pstmt = conn.prepareStatement(updateType);
     		 if(userName.equals("Admin")) {
-    			 pstmt.setString(1, "2");
+    			 pstmt.setString(1, "ADMIN");
     		 }else {
-    			 pstmt.setString(1,"1");
+    			 pstmt.setString(1,"ACTIVATED");
     		 }    		 
     		 pstmt.setString(2, userName);
     		 pstmt.executeUpdate();
