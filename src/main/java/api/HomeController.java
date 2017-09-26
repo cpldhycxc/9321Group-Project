@@ -37,6 +37,6 @@ public class HomeController {
         User aUser = new User(userName, password, email, firstName, lastName, gender, birthday, photo, userType);
         return new InsertUser(counter.incrementAndGet(),  dbdao.userSignUp(aUser), aUser);
     }
-
+    
 
 }

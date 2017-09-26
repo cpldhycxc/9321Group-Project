@@ -104,7 +104,7 @@ export default class LoginForm extends React.Component {
 								<a style={{ color: 'blue' }} onClick={this.requestsignup}>Sign Up</a> Now!</p>
 						</div>
 						<div className="form-group">
-							<Button type="submit" name="Submit"> Login</Button>
+							<Button type="submit" name="Submit" className='btn btn-primary btn-md'> Login</Button>
 							{this.state.isSubmitting ?
 								<img src='static/images/loading.svg' height="50" width="50"/>:""}
 						</div>

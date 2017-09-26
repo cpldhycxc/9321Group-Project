@@ -9,6 +9,15 @@ export function login(user) {
     }
 }
 
+export function signuprequest(user) {
+
+}
+
+export function checkuser(username) {
+  console.log("checking the fucking user");
+  return axios.get(`http://localhost:8000/checKExistence/${username}`);
+}
+
 export function logout() {
   localStorage.removeItem('id_token')
   return {
