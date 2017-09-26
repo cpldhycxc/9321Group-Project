@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import DAO.*;
 import Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,11 @@ public class HomeController {
         User aUser = new User(userName, password, email, firstName, lastName, birthday);
         return new SignUp(counter.incrementAndGet(),  dbdao.userSignUp(aUser));
     }
-    
+
+    @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
+    public boolean checkExistence(@PathVariable String loginName) {
+    	return true;
+
+    }	
 
 }
