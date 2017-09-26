@@ -301,3 +301,18 @@ input {
 }
 
 
+/*search page css*/
+.unswbook {
+    margin-top: 10%;
+    font-size: 70px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 2016px;
+  text-align: center;
+  margin: auto;
+  padding-top: 10px;
+}

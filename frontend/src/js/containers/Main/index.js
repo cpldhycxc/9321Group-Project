@@ -3,7 +3,6 @@ import React from "react";
 import { Link, Switch, Route, Redirect } from 'react-router-dom';
 import Nav from "./Nav";
 import Search from "../../containers/Search";
-import Discover from "../../containers/Discover";
 import Profile from "../../containers/Profile";
 import Home from '../../containers/Home';
 

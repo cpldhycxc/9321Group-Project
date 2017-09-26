@@ -29,6 +29,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
+    "autosuggest-highlight": "^3.1.0",
     "babel-plugin-transform-node-env-inline": "^0.2.0",
     "classnames": "^2.2.5",
     "elemental": "^0.6.1",
@@ -47,6 +48,7 @@
     "postcss-loader": "^1.2.2",
     "postcss-mixins": "^5.4.1",
     "react": "^15.6.1",
+    "react-autosuggest": "^9.3.2",
     "react-bootstrap": "^0.31.3",
     "react-bootstrap-date-picker": "^5.1.0",
     "react-datepicker": "^0.55.0",
