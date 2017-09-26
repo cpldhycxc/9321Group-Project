@@ -4,9 +4,12 @@ import Model.User;
 
 import java.sql.*;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import java.util.ArrayList;
 
 
 
@@ -84,6 +87,50 @@ public class DBDAOImpl implements DBDAO {
     }
 
     public void userExistence(User aUser){
+
+    }
+
+    public ArrayList<User> Search(String param){
+        try(Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName LIKE '% "+ param +" %' ");
+            ArrayList<User> ret = new ArrayList<User>();
+            if(rs == null){
+                System.out.println("none");
+            }
+            System.out.println("goes here");
+            while(rs.next()){
+//                int total_row = rs.getMetaData().getColumnCount();
+//                JSONObject obj = new JSONObject();
+//                for(int i=0; i < total_row; i++){
+//                    String columName = rs.getMetaData().getColumnLabel(i+1).toLowerCase();
+//                    Object columValue = rs.getObject(i+1);
+//                    if(columValue == null){
+//                        columValue = "null";
+//                    }
+//                    if(obj.has(columName)){
+//                        columName += "1";
+//                    }
+//                    obj.put(columName,columValue);
+//                }
+                System.out.println("rs: " + rs.getString(1));
+                User u = new User(rs.getString(1),
+                                  rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        Integer.parseInt(rs.getString(6)),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                ret.add(u);
+            }
+            System.out.println();
+            return ret;
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
 
     }
 
