@@ -2,30 +2,59 @@ import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import match  from 'autosuggest-highlight/match';
 import parse  from 'autosuggest-highlight/parse';
+import { withRouter } from 'react-router';
 
-import people from './data.data.json'
 const people = [
   {
-    first: 'Aaron',
-    last: 'Peirsol',
-    twitter: 'AaronPeirsol'
+    "first": "Aaron",
+    "last": "Peirsol"
   },
   {
-    first: 'Charlotte',
-    last: 'White',
-    twitter: 'mtnmissy'
+    "first": "Carmen",
+    "last": "Electra"
   },
   {
-    first: 'Chloe',
-    last: 'Jones',
-    twitter: 'ladylexy'
+    "first": "Vitali",
+    "last": "Klitschko"
   },
   {
-    first: 'Cooper',
-    last: 'King',
-    twitter: 'steveodom'
-  }
+    "first": "Richard",
+    "last": "Virenque"
+  },
+  {
+    "first": "Lana",
+    "last": "Clarkson"
+  },
+  {
+    "first": "Amelia",
+    "last": "Vega"
+  },
+  {
+    "first": "Dominic",
+    "last": "Monaghan"
+  },
+  {
+    "first": "Juan",
+    "last": "Montoya"
+  },
+  {
+   first: 'Charlie',
+   last: 'Brown',
+ },
+ {
+   first: 'Charlotte',
+   last: 'White',
+ },
+ {
+   first: 'Chloe',
+   last: 'Jones',
+ },
+ {
+   first: 'Cooper',
+   last: 'King',
+ }
 ];
+
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
 function escapeRegexCharacters(str) {
@@ -54,7 +83,7 @@ function renderSuggestion(suggestion, { query }) {
   const parts = parse(suggestionText, matches);
 
   return (
-    <span className={'suggestion-content ' + suggestion.twitter}>
+    <span className='suggestion-content'>
       <span className="name">
         {
           parts.map((part, index) => {
@@ -70,7 +99,7 @@ function renderSuggestion(suggestion, { query }) {
   );
 }
 
-export default class SearchBar extends React.Component {
+class SearchBar extends React.Component {
   constructor() {
     super();
 
@@ -98,6 +127,15 @@ export default class SearchBar extends React.Component {
     });
   };
 
+  onSuggestionSelected = (event, { suggestion }) => {
+  const { callback } = this.props;
+  if (callback) {
+    callback(suggestion.id);
+  } else {
+    this.props.history.push(`/profile/${suggestion.first}`);
+  }
+}
+
   render() {
     const { value, suggestions } = this.state;
     const inputProps = {
@@ -111,9 +149,14 @@ export default class SearchBar extends React.Component {
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionSelected={this.onSuggestionSelected}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
-        inputProps={inputProps} />
+        inputProps={inputProps}
+        highlightFirstSuggestion={true} />
     );
   }
 }
+
+const SearchBarRoute = withRouter(SearchBar);
+export default SearchBarRoute;

@@ -17,7 +17,7 @@ export default class Main extends React.Component {
                 <Route exact path='/' render={() => <Redirect to='/wall' />} />
                 <Route path='/wall' component={Home} />
                 <Route path='/search' component={Search} />
-                <Route path='/profile' component={Profile} />
+                <Route path='/profile/:username' component={Profile} />
             </Switch>
         </div>
       </div>

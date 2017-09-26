@@ -1,7 +1,3 @@
-body {
-  font-family: Helvetica, sans-serif;
-}
-
 .react-autosuggest__container {
   position: relative;
 }
@@ -15,6 +11,12 @@ body {
   font-size: 16px;
   border: 1px solid #aaa;
   border-radius: 4px;
+  margin: auto;
+}
+
+
+.react-autosuggest__suggestions-container {
+  display: none;
 }
 
 .react-autosuggest__input:focus {
@@ -26,23 +28,21 @@ body {
   border-bottom-right-radius: 0;
 }
 
-.react-autosuggest__suggestions-container {
-  display: none;
-}
-
 .react-autosuggest__container--open .react-autosuggest__suggestions-container {
   display: block;
+  margin:auto;
   position: absolute;
-  top: 51px;
+  top: 45px;
   width: 600px;
   border: 1px solid #aaa;
   background-color: #fff;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 14px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   z-index: 2;
+  text-align: left;
 }
 
 .react-autosuggest__suggestions-list {
@@ -58,13 +58,8 @@ body {
   padding: 10px 20px;
 }
 
-.react-autosuggest__suggestion:not(:first-child) {
-  border-top: 1px solid #ddd;
-}
-
-.react-autosuggest__suggestion--focused {
-  background-color: #0C7EAF;
-  color: #fff;
+.react-autosuggest__suggestion--highlighted {
+  background-color: #f7fbff;
 }
 
 .suggestion-content {
@@ -74,31 +69,14 @@ body {
 }
 
 .name {
-  margin-left: 68px;
-  line-height: 45px;
+  line-height: 20px;
 }
 
 .highlight {
-  color: #f45c41;
+  color: #46567c;
   font-weight: bold;
 }
 
 .react-autosuggest__suggestion--focused .highlight {
   color: #120000;
-}
-
-.dancounsell {
-  background-image: url(https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/48.jpg);
-}
-
-.ladylexy {
-  background-image: url(https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/48.jpg);
-}
-
-.mtnmissy {
-  background-image: url(https://s3.amazonaws.com/uifaces/faces/twitter/mtnmissy/48.jpg);
-}
-
-.steveodom {
-  background-image: url(https://s3.amazonaws.com/uifaces/faces/twitter/steveodom/48.jpg);
 }
