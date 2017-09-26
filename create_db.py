@@ -8,11 +8,11 @@ import sqlite3
 #     email
 #     first name
 #     last name
-#     gender  # 0 is unspecified, 1 is mail, 2 is female
-#     birthday
+#     gender  # male, female
+#     birthday, UTC TIME
 #     photo
-#     type
-#     timeJoin
+#     type    # 0 inactivate, 1 activated, 2 admin
+#     timeJoin, UTC TIME
 
 # friends:
 #     user_id, foreign key index
@@ -44,7 +44,7 @@ conn.execute('''CREATE TABLE Users
         email       TEXT     UNIQUE NOT NULL,
         firstName   TEXT,
         lastName    TEXT,
-        gender      INTEGER, 
+        gender      String,  
         birthday    DATETIME,
         photo       TEXT,
         userType    INTEGER  NOT NULL,
@@ -86,5 +86,15 @@ conn.execute('''CREATE TABLE Likes
 conn.execute('CREATE INDEX LikeUserIDIndex ON Likes(userID)')
 
 print("Table created successfully")
+print("")
+print("Insert Admin user")
+print("If you want to login Please use userName and password below")
+print("UserName = Admin")
+print("Password = Admin")
+
+conn.execute("INSERT INTO Users (userName, password, email, firstName, lastName, gender, userType) VALUES (?,?,?,?,?,?,?)",
+             ("Admin", "Admin", "shiyun.zhangsyz@gmail.com", "JuBian", "Liang", "female", 2))
+conn.commit()
+print("Insert Completed")
 
 conn.close()
