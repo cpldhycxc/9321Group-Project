@@ -32,12 +32,12 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public SignUp SignUp(@RequestParam(value="userName") String userName,
-                             @RequestParam(value="password") String password,
-                             @RequestParam(value="email") String email,
-                             @RequestParam(value="firstName") String firstName,
-                             @RequestParam(value="lastName") String lastName,
-                             @RequestParam(value="birthday") String birthday) {
+    public SignUp signup(@RequestParam(value="userName") String userName,
+                         @RequestParam(value="password") String password,
+                         @RequestParam(value="email") String email,
+                         @RequestParam(value="firstName") String firstName,
+                         @RequestParam(value="lastName") String lastName,
+                         @RequestParam(value="birthday") String birthday) {
         User aUser = new User(userName, password, email, firstName, lastName, birthday);
 
         if(!dbdao.userSignUp(aUser)){
@@ -47,6 +47,21 @@ public class HomeController {
         sendTLSMail(email, Integer.toString(dbdao.getUserIdByUserName(userName)));
 
         return new SignUp(counter.incrementAndGet(), true);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Login login(@RequestParam(value="userName") String userName,
+                       @RequestParam(value="password") String password){
+        Login login = new Login();
+        User user = dbdao.getUserByUserName(userName, password);
+        login.setUser(user);
+        if(user.getUserName() == null){
+            login.setSuccess(false);
+            return login;
+        }
+        login.setPosts(dbdao.getPostsByUserID(user.getUserID()));
+        login.setFriends(dbdao.getFriendsByUserID(user.getUserID()));
+        return login;
     }
 
     /**

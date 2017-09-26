@@ -18,8 +18,6 @@ public class SignUp {
     public long getRequestID() {
          return requestID;
     }
-
-
     public boolean getSuccess() {
         return success;
     }
