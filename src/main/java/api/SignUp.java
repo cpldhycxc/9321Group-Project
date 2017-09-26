@@ -6,12 +6,11 @@ import DAO.*;
 /**
  * API class that help to return a json
  */
-public class InsertUser {
+public class SignUp {
     private long requestID;
     private boolean success;
-    private User u;
 
-    public InsertUser(long id, boolean suc, User aUser) {
+    public SignUp(long id, boolean suc) {
         requestID = id;
         success = suc;
     }

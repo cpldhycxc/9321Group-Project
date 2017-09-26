@@ -15,4 +15,5 @@ public interface DBDAO {
     public void userActivation(String userName);
     public void userExistence(User aUser);
     public ArrayList<User> Search(String param);
+    public boolean userExistence(String userName);
 }

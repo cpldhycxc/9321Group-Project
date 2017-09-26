@@ -1,11 +1,12 @@
 import React from "react";
+import axios from 'axios';
 import {Button, Modal} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import DatePicker from 'react-bootstrap-date-picker';
 import moment from 'moment';
-import validateInput from '../../functions/validation';
+import validateInput from '../../functions/signupvalidation';
 import classnames from 'classnames';
-
+import { checkuser } from '../../actions/userActions';
 
 
 export default class SignupForm extends React.Component {
@@ -18,13 +19,14 @@ export default class SignupForm extends React.Component {
           firstname: '',
           lastname: '',
           passwordconfirm: '',
-          startDate: moment().toISOString(),
-          isvalid: false,
+          birthday: moment().toISOString(),
+          invalid: false,
           errors: {}
         }
       this.onChange = this.onChange.bind(this);
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.checkUserExists = this.checkUserExists.bind(this);
     }
 
     onChange(e){
@@ -34,8 +36,32 @@ export default class SignupForm extends React.Component {
 
     handleChange(date) {
       this.setState({
-        startDate: date
+        birthday: date
       });
+    }
+
+    checkUserExists(e) {
+      const field = e.target.name;
+      const val = e.target.value;
+      console.log(val);
+      if (val !== '') {
+        checkuser(val)
+        .then(res => {
+          let errors = this.state.errors;
+          let invalid;
+          if (res.data.type) {
+            errors[field] = 'The user already exists';
+            invalid = true;
+          } else {
+            errors[field] = '';
+            invalid = false;
+          }
+          this.setState({ errors, invalid });
+        })
+        .catch((err) => {
+          console.log("fuc boi");
+        })
+      }
     }
 
     isValid() {
@@ -51,11 +77,11 @@ export default class SignupForm extends React.Component {
 
     handleSubmit(e){
       e.preventDefault();
+      console.log(this.state);
       if(this.isValid()){
         this.setState({ errors:{}, isloading:true });
 
       }
-      console.log(this.state.errors);
     }
 
     render() {
@@ -69,7 +95,7 @@ export default class SignupForm extends React.Component {
                 <form onSubmit={this.handleSubmit} >
                     <div className={classnames('form-group', {'has-error': errors.username})} >
                         <label className="control-label">Username:</label>
-                        <input onChange={this.onChange} type="text" className="form-control" id ="username" name="username" placeholder="Enter Username" />
+                        <input onBlur={this.checkUserExists} onChange={this.onChange} type="text" className="form-control" id ="username" name="username" placeholder="Enter Username" />
                         {errors.username && <span className="help-block">{errors.username}</span>}
                     </div>
                     <div className ={classnames('form-group', {'has-error': errors.email})}>
@@ -89,7 +115,7 @@ export default class SignupForm extends React.Component {
                     </div>
                     <div className ='form-group'>
                         <label className="control-label">Data of Birth: </label>
-                        <DatePicker id="example-datepicker" value={this.state.startDate} onChange={this.handleChange} />
+                        <DatePicker id="example-datepicker" value={this.state.birthday} onChange={this.handleChange} />
                     </div>
                     <div className ={classnames('form-group', {'has-error': errors.password})}>
                         <label className="control-label">Password: </label>
@@ -102,7 +128,7 @@ export default class SignupForm extends React.Component {
                     {errors.passwordconfirm && <span className="help-block">{errors.passwordconfirm}</span>}
                     </div>
                     <div className="form-group">
-                      <Button type="submit" name="Submit"> Signup</Button>
+                      <Button disabled={this.state.invalid} className='btn btn-primary btn-md' type="submit" name="Submit"> Signup</Button>
                     </div>
                 </form>
                 </Modal.Body>
