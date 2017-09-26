@@ -11,4 +11,5 @@ public interface DBDAO {
     public boolean userSignUp(User aUser);
     public void userActivation(String userName);
     public void userExistence(User aUser);
+    public int getUserIdByUserName(String userName);
 }

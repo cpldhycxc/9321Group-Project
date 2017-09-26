@@ -1,0 +1,5 @@
+message=Dear Elsa, Summer without you is as cold as Winter. Winter without you is even colder. A.F.
+from=z5040176
+latitude=-34.1399
+time=2013-05-26T23:40:19+0000
+longitude=150.9981

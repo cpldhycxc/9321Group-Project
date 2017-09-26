@@ -1,0 +1,5 @@
+message=Nivaaz Kaur. You have nice hair.\n\nLove L F
+longitude=151.2220
+time=2016-08-09T13:07:18+0000
+latitude=-33.9120
+from=z3466413

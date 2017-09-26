@@ -69,7 +69,7 @@ public class DBDAOImpl implements DBDAO {
             preStatment.setString(6, Integer.toString(aUser.getGender()));
             preStatment.setString(7, aUser.getBirthday().toString());
             preStatment.setString(8, aUser.getPhoto());
-            preStatment.setString(9, aUser.getUserType());
+            preStatment.setString(9, Integer.toString(aUser.getUserType()));
             preStatment.executeUpdate();
             logger.info("Adding user");
             return true;
@@ -77,6 +77,23 @@ public class DBDAOImpl implements DBDAO {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    /**
+     * get user id for a user, assume the user already exist
+     * @param userName
+     * @return
+     */
+    public int getUserIdByUserName(String userName) {
+        int userID = -1;
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT userID FROM Users WHERE userName = '" + userName + "'");
+            userID = rs.getInt(0);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return userID;
     }
 
     public void userActivation(String userName){

@@ -1,0 +1,5 @@
+longitude=151.2374
+time=2016-04-27T12:52:42+0000
+message=To the cute indian guy (I think your name is Arian..?)\nYou looked like a total hottie in the Elec tutorial last week <3\nCoffee and chill? ;)
+latitude=-33.9838
+from=z5099187

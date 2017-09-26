@@ -1,0 +1,5 @@
+from=z5099187
+message=To the brown girl in the library study lounge with the Kuala Lumpur sticker on her MacBook, I couldn't focus after I saw you just across the room but I didn't have the courage to come say hi. If only we may meet again, hopefully this time we may talk about just how beautiful you are.
+time=2016-09-04T06:32:03+0000
+longitude=151.2288
+latitude=-33.9186

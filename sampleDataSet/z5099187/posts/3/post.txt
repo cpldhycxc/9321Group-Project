@@ -1,0 +1,5 @@
+latitude=-33.9838
+message=To the guy who studies UNSW Medicine in 3rd year. I think your name is Jason and you hang out with a short guy named Andrew Do. Lets have coffee ;) lonelygirl94
+from=z5099187
+time=2013-05-10T09:22:49+0000
+longitude=151.2374

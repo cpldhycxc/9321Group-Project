@@ -1,0 +1,5 @@
+from=z3466413
+longitude=151.2247
+latitude=-33.9217
+message=To all the girls on campus who've been creeped out by a mildly attractive Asian guy squinting at them I apologise, I don't mean to do it but I have about 3 m of clear visibility without my glasses on and I get distracted easily.
+time=2016-05-05T21:42:22+0000
