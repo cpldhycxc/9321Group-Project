@@ -8,6 +8,10 @@ import java.util.Date;
  * Model of a user which represent what the user look like in our database
  */
 public class User {
+
+    public static final int ADMIN = 2;
+    public static final int ACTIVATED = 1;
+    public static final int UNACTIVATED = 0;
     private int userID;
     private String userName;
     private String password;
@@ -17,18 +21,19 @@ public class User {
     private int gender;
     private Date birthday; //date format like 2017-09-12T02:00:00.00
     private String photo;
-    private String userType;
+    private int userType;
     private Date joinTime;
 
-    public User(String userName, String password, String email, String firstName, String lastName, int gender, String birthday, String photo, String userType) {
+    /**
+     * Constructor used for sign up
+     */
+    public User(String userName, String password, String email, String firstName, String lastName, String birthday) {
         this.userName = userName;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.gender = gender;
-        this.photo = photo;
-        this.userType = userType;
+        this.userType = UNACTIVATED;
 
         //convert date
         String format = "yyyy-MM-dd";
@@ -51,7 +56,7 @@ public class User {
     public int getGender() { return gender; }
     public Date getBirthday() { return birthday; }
     public String getPhoto() { return photo; }
-    public String getUserType() { return userType; }
+    public int getUserType() { return userType; }
     public Date getJoinTime() { return joinTime; }
 
     public void setUserID(int userID) { this.userID = userID; }
@@ -63,6 +68,6 @@ public class User {
     public void setGender(int gender) { this.gender = gender; }
     public void setBirthday(Date birthday) { this.birthday = birthday; }
     public void setPhoto(String photo) { this.photo = photo; }
-    public void setUserType(String userType) { this.userType = userType; }
+    public void setUserType(int userType) { this.userType = userType; }
     public void setJoinTime(Date joinTime) { this.joinTime = joinTime; }
 }
