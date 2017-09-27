@@ -1,0 +1,11 @@
+courses=[2016 S1 BIOM9332, 2016 S1 BIOM9333, 2016 S1 BIOM9551, 2016 S1 BIOM9640, 2016 S2 BIOM9410, 2016 S2 BIOM9420, 2016 S2 BIOM9561, 2016 S2 BIOM9660]
+password=beach
+home_suburb=Randwick
+home_latitude=-33.9049
+home_longitude=151.2433
+mates=[z3466413, z5040176, z3413158, z3462191, z5063045, z5076002, z3493921, z5099187, z5014861]
+program=Biomedical Engineering
+birthday=1995-10-03
+zid=z5059413
+email=A.Vega@unsw.edu.au
+full_name=Amelia Vega

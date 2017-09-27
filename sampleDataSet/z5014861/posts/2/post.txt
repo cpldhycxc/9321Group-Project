@@ -1,0 +1,5 @@
+longitude=151.2105
+time=2016-06-22T13:45:00+0000
+message=To the Asian guy who never takes off his sunglasses and earphones in the Zoology AM lab. We exchange glances every class a couple of times but have never really spoken to each other and never got your name. You seem to be the only one who isn't afraid to touch all the live animals in class but leave early every lab. Since we won't be seeing each other anymore what do you think about grabbing coffee ?
+from=z5014861
+latitude=-33.9489

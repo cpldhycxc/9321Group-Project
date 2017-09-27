@@ -1,0 +1,5 @@
+from=z5040176
+latitude=-33.9225
+message=Stephen Sun reminds me of sex. lots of sex.
+time=2013-09-06T00:38:49+0000
+longitude=151.2227

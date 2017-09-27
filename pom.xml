@@ -41,6 +41,13 @@
             <version>3.20.0</version>
         </dependency>
 
+        <!-- Java Mail API -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
@@ -64,6 +71,10 @@
         <repository>
             <id>spring-releases</id>
             <url>https://repo.spring.io/libs-release</url>
+        </repository>
+        <repository>
+            <id>Java.Net</id>
+            <url>http://download.java.net/maven/2/</url>
         </repository>
     </repositories>
     <pluginRepositories>

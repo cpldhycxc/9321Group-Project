@@ -1,0 +1,5 @@
+time=2013-11-15T00:34:47+0000
+longitude=151.3224
+message=To a boy who shares a name with a city,\nWhose hair is bright as a blazing fire,\nYour eyes are calm and blue as the ocean,\nIn them I drown deep in desire.\n\nUnrequited I expect I'll be;\nIn a fair maiden's arms he does reside,\nBut I'll always feel a jolt & a spark,\nWhen our paths in life do collide.
+from=z5014861
+latitude=-33.6207

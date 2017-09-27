@@ -1,0 +1,5 @@
+from=z5076002
+longitude=150.8031
+latitude=-33.7751
+message=To the asian guy with an arm cast on tuesday. You fine as hell, need help carrying your books?
+time=2016-08-28T02:10:24+0000

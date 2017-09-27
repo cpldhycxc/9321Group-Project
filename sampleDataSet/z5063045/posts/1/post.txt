@@ -1,0 +1,5 @@
+from=z5063045
+message=Dear Rafa Rahman,\n\nYou are ugly in a beautiful way <3\nCoffee?\n\nYour secret admirer :)
+longitude=151.1681
+time=2016-07-11T23:15:22+0000
+latitude=-33.8846
