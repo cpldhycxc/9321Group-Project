@@ -77,7 +77,6 @@ public class DBDAOImpl implements DBDAO {
             preStatment.setString(6, aUser.getGender());
             preStatment.setString(7, aUser.getBirthday());
             preStatment.setString(8, aUser.getPhoto());
-            preStatment.setLong(9, aUser.getUserType());
             preStatment.setString(9, Integer.toString(aUser.getUserType()));
             preStatment.executeUpdate();
             logger.info("Adding user");

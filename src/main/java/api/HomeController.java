@@ -1,5 +1,7 @@
 package api;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -24,6 +26,7 @@ public class HomeController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
+    
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
@@ -36,7 +39,7 @@ public class HomeController {
      * @param user
      * @return json contain success, requestID
      */
-    @CrossOrigin(origins = "http://localhost:8070")
+    @CrossOrigin(origins = "http://localhost:9000")
     @PostMapping("/signup")
     public SignUp signup(@RequestBody User user) { // userName, password, email, firstName, lastName, birthday
         if(!dbdao.userSignUp(user)){
@@ -54,13 +57,15 @@ public class HomeController {
     @CrossOrigin(origins = "http://localhost:9000")
     @PostMapping("/login")
     public Login login(@RequestBody User user){
-        System.out.println(user.getUserName());
-        System.out.println(user.getPassword());
         Login login = new Login();
         user = dbdao.getUserByUserName(user.getUserName(), user.getPassword());
         login.setRequestID(counter.incrementAndGet());
         login.setUser(user);
         if(user.getUserName() == null){
+            login.getUser().setBirthday(new Date(1));
+            login.getUser().setJoinTime(new Date(1));
+            login.setPosts(new ArrayList<>());
+            login.setFriends(new ArrayList<>());
             login.setSuccess(false);
             return login;
         }
@@ -70,12 +75,13 @@ public class HomeController {
         return login;
     }
   
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "http://localhost:9000")
     @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
     public CheckExistence checkExistence(@PathVariable String loginName) {
     		return new CheckExistence(loginName,dbdao.userExistence(loginName));
     }
-    
+
+    @CrossOrigin(origins = "http://localhost:9000")
     @RequestMapping(value = "/activation/{userName}", method = RequestMethod.GET)
     public void userActivation(@PathVariable String userName) {
     	dbdao.userActivation(userName);
