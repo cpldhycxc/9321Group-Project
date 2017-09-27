@@ -2,6 +2,8 @@ export default function reducer(state = {
     user: {
         userName: localStorage.getItem('user_info')||null,
     },
+    posts: {},
+    friends: {},
     token: localStorage.getItem('id_token') || null,
   }, action) {
   switch (action.type) {
@@ -9,6 +11,8 @@ export default function reducer(state = {
       localStorage.setItem('user_info', action.payload.user.userName);
       return {
           ...state,
+          posts: action.payload.posts,
+          friends: action.payload.friends,
           user: action.payload.user,
           token: localStorage.getItem('id_token'),
       };
@@ -22,6 +26,6 @@ export default function reducer(state = {
       };
     }
   }
-  console.log(state)
+  console.log(state);
   return state;
 }

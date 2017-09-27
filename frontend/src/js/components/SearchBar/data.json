@@ -1,34 +1,35 @@
-{"people": [
+{"data":[
   {
-    "first": "Aaron",
-    "last": "Peirsol"
+    "username":"z3413158"
   },
   {
-    "first": "Carmen",
-    "last": "Electra"
+    "username":"z3462191"
   },
   {
-    "first": "Vitali",
-    "last": "Klitschko"
+    "username":"z3466413"
   },
   {
-    "first": "Richard",
-    "last": "Virenque"
+    "username":"z3493921"
   },
   {
-    "first": "Lana",
-    "last": "Clarkson"
+    "username":"z5014861"
   },
   {
-    "first": "Amelia",
-    "last": "Vega"
+    "username":"z5040176"
   },
   {
-    "first": "Dominic",
-    "last": "Monaghan"
+    "username":"z5059413"
   },
   {
-    "first": "Juan",
-    "last": "Montoya",
+    "username":"z5063045"
+  },
+  {
+    "username":"z5076002"
+  },
+  {
+    "username":"z5099187"
+  },
+  {
+    "username":"Ryan"
   }
 ]}
