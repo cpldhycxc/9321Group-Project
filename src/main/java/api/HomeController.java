@@ -24,7 +24,7 @@ public class HomeController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @CrossOrigin(origins = "http://localhost:8070")
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         sendTLSMail("shiyun.zhangsyz@gmail.com", "123");
@@ -36,7 +36,7 @@ public class HomeController {
      * @param user
      * @return json contain success, requestID
      */
-    @CrossOrigin(origins = "http://localhost:8070")
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/signup")
     public SignUp signup(@RequestBody User user) { // userName, password, email, firstName, lastName, birthday
         if(!dbdao.userSignUp(user)){
@@ -51,7 +51,7 @@ public class HomeController {
      * @param user
      * @return all user information, requestID, success, posts and friends
      */
-    @CrossOrigin(origins = "http://localhost:8070")
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/login")
     public Login login(@RequestBody User user){
         System.out.println(user.getUserName());
@@ -69,13 +69,15 @@ public class HomeController {
         login.setSuccess(true);
         return login;
     }
-  
+
+    @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
     public CheckExistence checkExistence(@PathVariable String loginName) {
     	return new CheckExistence(loginName,dbdao.userExistence(loginName));
 
     }
-    
+
+    @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value = "/activation/{userName}", method = RequestMethod.GET)
     public void userActivation(@PathVariable String userName) {
     	dbdao.userActivation(userName);
