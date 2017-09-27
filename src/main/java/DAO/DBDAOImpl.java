@@ -281,8 +281,11 @@ public class DBDAOImpl implements DBDAO {
             ResultSet rs = stmt.executeQuery("" +
                     "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
                     "FROM Users WHERE userName = '" + userName+ "'");
-//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            int userI = rs.getInt(1);
+            ArrayList<Friend> friendList = getFriendsByUserID(userI);
+            ArrayList<Post> postList = getPostsByUserID(userI);
             while(rs.next()){
+            	
             	System.out.println("hhhhh");
                 u.setUserID(rs.getInt(1));
                 u.setUserName(rs.getString(2));
@@ -294,7 +297,9 @@ public class DBDAOImpl implements DBDAO {
                 u.setPhoto(rs.getString(8));
                 u.setUserType(rs.getInt(9));
                 u.setJoinTime(rs.getString(10));
-            }
+                u.setFriendList(friendList);
+                u.setPostList(postList);
+            }     
         } catch (SQLException e){
             e.printStackTrace();
         }
