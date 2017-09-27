@@ -1,6 +1,5 @@
 import InlineEdit from 'react-edit-inline';
 import React from 'react';
-import EditProfile from './EditProfile';
 
 
 class profile extends React.Component {
