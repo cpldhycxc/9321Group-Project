@@ -26,5 +26,5 @@ public interface DBDAO {
     public UserProfile userProfile(String userName);
     public boolean deletePost(int postID);
     public String getEmailByUserID(int userID);
-
+    public void addFriendRelation(int userID, int friendID);
 }

@@ -203,6 +203,22 @@ public class DBDAOImpl implements DBDAO {
     }
 
     /**
+     * add friend realtion to the table
+     * @param userID
+     * @param friendID
+     */
+    public void addFriendRelation(int userID, int friendID){
+        try (Connection conn = connect()){
+            PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Friends (userID, friendID) VALUES (?, ?)");
+            preStatment.setInt(1, userID);
+            preStatment.setInt(2, friendID);
+            preStatment.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * change the userType to check if it is activated
      * @param userName
      */
