@@ -16,7 +16,7 @@ const WHY_WOULD_YOU = [
 	{ label: 'Chocolate (are you crazy?)', value: 'chocolate', disabled: true },
 ].concat(FLAVOURS.slice(1));
 
-var MultiSelectField = createClass({
+const MultiSelectField = createClass({
 	displayName: 'MultiSelectField',
 	propTypes: {
 		label: PropTypes.string,
@@ -54,23 +54,9 @@ var MultiSelectField = createClass({
 					simpleValue
 					value={value}
 				/>
-
-				<div className="checkbox-list">
-					<label className="checkbox">
-						<input type="checkbox" className="checkbox-control" name="disabled" checked={disabled} onChange={this.toggleCheckbox} />
-						<span className="checkbox-label">Disable the control</span>
-					</label>
-					<label className="checkbox">
-						<input type="checkbox" className="checkbox-control" name="crazy" checked={crazy} onChange={this.toggleCheckbox} />
-						<span className="checkbox-label">I don't like Chocolate (disabled the option)</span>
-					</label>
-					<label className="checkbox">
-						<input type="checkbox" className="checkbox-control" name="stayOpen" checked={stayOpen} onChange={this.toggleCheckbox}/>
-						<span className="checkbox-label">Stay open when an Option is selected</span>
-					</label>
-				</div>
 			</div>
 		);
 	}
 });
-module.exports = MultiSelectField;
+
+export default MultiSelectField;
