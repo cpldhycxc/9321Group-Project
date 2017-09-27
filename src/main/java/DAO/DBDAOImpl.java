@@ -306,6 +306,24 @@ public class DBDAOImpl implements DBDAO {
 		return u;
 	}
 
+	/**
+	 * function to delete the post by post id
+	 */
+	@Override
+	public boolean deletePost(int postID) {
+		boolean result = false;
+		try(Connection conn = connect()){			
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM Posts WHERE postID= '"+postID+"'");
+			System.out.println(postID);
+			ps.executeUpdate();
+			System.out.println("Record is deleted!");
+			result = true;
+		}catch (SQLException e){
+            e.printStackTrace();
+        }
+		return result;
+	}
+
 
 
 }
