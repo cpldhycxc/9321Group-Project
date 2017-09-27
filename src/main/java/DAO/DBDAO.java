@@ -3,6 +3,8 @@ package DAO;
 import Model.Friend;
 import Model.Post;
 import Model.User;
+import api.UserProfile;
+
 import org.json.JSONArray;
 
 import java.sql.Connection;
@@ -21,4 +23,6 @@ public interface DBDAO {
     public ArrayList<Friend> getFriendsByUserID(int userID);
     public ArrayList<User> Search(String param);
     public boolean userExistence(String userName);
+    public UserProfile userProfile(String userName);
+
 }

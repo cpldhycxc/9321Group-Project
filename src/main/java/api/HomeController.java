@@ -121,5 +121,11 @@ public class HomeController {
             throw new RuntimeException(e);
         }
     }
+    @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
+    public UserProfile userProfile(@PathVariable String userName) {
+    	System.out.println("dfddf");
+    	return dbdao.userProfile(userName);
+    }
+
 
 }
