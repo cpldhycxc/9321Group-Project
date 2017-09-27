@@ -26,7 +26,8 @@ public class HomeController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @CrossOrigin(origins = "http://localhost:9000")
+    
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         sendTLSMail("shiyun.zhangsyz@gmail.com", "123");
@@ -73,12 +74,11 @@ public class HomeController {
         login.setSuccess(true);
         return login;
     }
-
+  
     @CrossOrigin(origins = "http://localhost:9000")
     @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
     public CheckExistence checkExistence(@PathVariable String loginName) {
-    	return new CheckExistence(loginName,dbdao.userExistence(loginName));
-
+    		return new CheckExistence(loginName,dbdao.userExistence(loginName));
     }
 
     @CrossOrigin(origins = "http://localhost:9000")
@@ -127,5 +127,11 @@ public class HomeController {
             throw new RuntimeException(e);
         }
     }
+    @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
+    public UserProfile userProfile(@PathVariable String userName) {
+    	System.out.println("dfddf");
+    	return dbdao.userProfile(userName);
+    }
+
 
 }

@@ -3,6 +3,7 @@ package DAO;
 import Model.Friend;
 import Model.Post;
 import Model.User;
+import api.UserProfile;
 
 import java.sql.*;
 import java.text.ParseException;
@@ -208,20 +209,25 @@ public class DBDAOImpl implements DBDAO {
      * @return true if the user exists otherwise false
      */
     public boolean userExistence(String userName){
-    	boolean result;
+    	boolean result = false;
     	try(Connection conn = connect()) {
-    		Statement  stmt = conn.createStatement();
-    		ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName = '" + userName + "'");
-    		if (rs.next()) {
-    			//user exists
-    			result = true;
-    		}else {
-    			result = false;
-    		}
+    		 Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName = '" +userName+ "'");
+             if(rs.next()) {
+                 result = true;
+             }
+//
+//    		Statement  stmt = conn.createStatement();
+//    		ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName = '" + userName + "'");
+//    		if (rs.next()) {
+//    			//user exists
+//    			result = true;
+//    		}else {
+//    			result = false;
+//    		}
     		
     	}catch(SQLException e) {
     		System.out.println(e.getMessage());
-    		result = false;
     	}
     	return result;
     }
@@ -267,6 +273,40 @@ public class DBDAOImpl implements DBDAO {
         }
 
     }
+
+	@Override
+	public UserProfile userProfile(String userName) {
+		UserProfile u = new UserProfile();
+		try (Connection conn = connect()){
+			
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
+                    "FROM Users WHERE userName = '" + userName+ "'");
+            int userI = rs.getInt(1);
+            ArrayList<Friend> friendList = getFriendsByUserID(userI);
+            ArrayList<Post> postList = getPostsByUserID(userI);
+            while(rs.next()){
+            	
+            	System.out.println("hhhhh");
+                u.setUserID(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setEmail(rs.getString(3));
+                u.setFirstName(rs.getString(4));
+                u.setLastName(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setBirthday(rs.getString(7));
+                u.setPhoto(rs.getString(8));
+                u.setUserType(rs.getInt(9));
+                u.setJoinTime(rs.getString(10));
+                u.setFriendList(friendList);
+                u.setPostList(postList);
+            }     
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+		return u;
+	}
 
 
 
