@@ -2,9 +2,13 @@ package api;
 
 import Model.User;
 import DAO.*;
+import Model.Post;
+import Model.Friend;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UserProfile {
@@ -18,38 +22,45 @@ public class UserProfile {
 	    private String firstName;
 	    private String lastName;
 	    private String gender;
-	    private Date birthday; //date format like 2017-09-12T02:00:00.00
+//	    private Date birthday; //date format like 2017-09-12T02:00:00.00
+	    private String birthday;
 	    private String photo;
 	    private int userType;
-	    private Date joinTime;
+//	    private Date joinTime;
+	    private String joinTime;
 	    
-	    public UserProfile(int userId,String username, String em, String firstname, String lastname,String gend, String birthday,String pht,int usertype,String joinTime) {
+	    private ArrayList<Post> postList;
+	    private ArrayList<Friend> friendList;
+	    
+	    public UserProfile(int userId,String username, String em, String firstname, String lastname,String gend, String birthDay,String pht,int usertype,String jointime,ArrayList<Post> posts,ArrayList<Friend> friends) {
 	    	userID = userId;
 	    	userName = username;
 	    	email = em;
 	    	firstName = firstname;
 	    	lastName = lastname;
 	    	gender = gend;
-//	    	birthday = birthDay;
+	    	birthday = birthDay;
 	    	photo = pht;
 	    	userType = usertype;
-//	    	joinTime = jointime;
+	    	joinTime = jointime;
+	    	postList = posts;
+	    	friendList = friends;
 	    	
-	    	String format = "yyyy-MM-dd";
-	        SimpleDateFormat sdf =  new SimpleDateFormat(format);
-	        birthday = birthday.split("T")[0];
-	        try {
-	            this.birthday = sdf.parse(birthday);
-	        } catch (ParseException e) {
-	            e.printStackTrace();
-	        }
-
-	        joinTime = joinTime.split("T")[0];
-	        try {
-	            this.birthday = sdf.parse(joinTime);
-	        } catch (ParseException e) {
-	            e.printStackTrace();
-	        }
+//	    	String format = "yyyy-MM-dd";
+//	        SimpleDateFormat sdf =  new SimpleDateFormat(format);
+//	        birthday = birthday.split("T")[0];
+//	        try {
+//	            this.birthday = sdf.parse(birthday);
+//	        } catch (ParseException e) {
+//	            e.printStackTrace();
+//	        }
+//
+//	        joinTime = joinTime.split("T")[0];
+//	        try {
+//	            this.birthday = sdf.parse(joinTime);
+//	        } catch (ParseException e) {
+//	            e.printStackTrace();
+//	        }
 	    }
 	    
 	    public UserProfile() {
@@ -63,6 +74,8 @@ public class UserProfile {
 		    this.photo = null;
 		    this.userType = UNACTIVATED;
 		    this.joinTime = null;
+		    this.friendList = new ArrayList<Friend>();
+		    this.postList = new ArrayList<Post>();
 	    }
 
 		public int getUserID() {
@@ -89,7 +102,7 @@ public class UserProfile {
 			return gender;
 		}
 
-		public Date getBirthday() {
+		public String getBirthday() {
 			return birthday;
 		}
 
@@ -101,8 +114,16 @@ public class UserProfile {
 			return userType;
 		}
 
-		public Date getJoinTime() {
+		public String getJoinTime() {
 			return joinTime;
+		}
+		
+		public ArrayList<Post> getPostList() {
+			return postList;
+		}
+		
+		public ArrayList<Friend> getFriendList() {
+			return friendList;
 		}
 
 		public void setUserID(int userID) {
@@ -129,7 +150,7 @@ public class UserProfile {
 			this.gender = gender;
 		}
 
-		public void setBirthday(Date birthday) {
+		public void setBirthday(String birthday) {
 			this.birthday = birthday;
 		}
 
@@ -141,8 +162,16 @@ public class UserProfile {
 			this.userType = userType;
 		}
 
-		public void setJoinTime(Date joinTime) {
+		public void setJoinTime(String joinTime) {
 			this.joinTime = joinTime;
+		}
+		
+		public void setPostList(ArrayList<Post> postL) {
+			this.postList = postL;
+		}
+		
+		public void setFriendList(ArrayList<Friend> friendL) {
+			this.friendList = friendL;
 		}
 
 

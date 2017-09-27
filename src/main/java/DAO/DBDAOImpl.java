@@ -140,7 +140,7 @@ public class DBDAOImpl implements DBDAO {
     }
 
     /**
-     * give the userID of a user find out all his's post
+     * give the userID of a user find out all his's post and his friend post`
      * @param userID
      * @return arraylist of post for the user
      */
@@ -149,9 +149,11 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT postID, content, image, postTime FROM Posts WHERE userID = '" + Integer.toString(userID) + "' ORDER BY postTime DESC");
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts , Users WHERE Posts.userID=Users.userID AND " +
+                    "( Posts.userID IN (SELECT friendID from Friends WHERE userID = '" + Integer.toString(userID) + "') OR Posts.userID = '" + Integer.toString(userID) + "')" +
+                    "ORDER BY Posts.postTime DESC");
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -281,8 +283,11 @@ public class DBDAOImpl implements DBDAO {
             ResultSet rs = stmt.executeQuery("" +
                     "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
                     "FROM Users WHERE userName = '" + userName+ "'");
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            int userI = rs.getInt(1);
+            ArrayList<Friend> friendList = getFriendsByUserID(userI);
+            ArrayList<Post> postList = getPostsByUserID(userI);
             while(rs.next()){
+            	
             	System.out.println("hhhhh");
                 u.setUserID(rs.getInt(1));
                 u.setUserName(rs.getString(2));
@@ -290,15 +295,35 @@ public class DBDAOImpl implements DBDAO {
                 u.setFirstName(rs.getString(4));
                 u.setLastName(rs.getString(5));
                 u.setGender(rs.getString(6));
-                u.setBirthday(format.parse(rs.getString(7)));
+                u.setBirthday(rs.getString(7));
                 u.setPhoto(rs.getString(8));
                 u.setUserType(rs.getInt(9));
-                u.setJoinTime(format.parse(rs.getString(10)));
-            }
-        } catch (SQLException | ParseException e){
+                u.setJoinTime(rs.getString(10));
+                u.setFriendList(friendList);
+                u.setPostList(postList);
+            }     
+        } catch (SQLException e){
             e.printStackTrace();
         }
 		return u;
+	}
+
+	/**
+	 * function to delete the post by post id
+	 */
+	@Override
+	public boolean deletePost(int postID) {
+		boolean result = false;
+		try(Connection conn = connect()){			
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM Posts WHERE postID= '"+postID+"'");
+			System.out.println(postID);
+			ps.executeUpdate();
+			System.out.println("Record is deleted!");
+			result = true;
+		}catch (SQLException e){
+            e.printStackTrace();
+        }
+		return result;
 	}
 
 

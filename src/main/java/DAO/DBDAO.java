@@ -24,5 +24,6 @@ public interface DBDAO {
     public ArrayList<User> Search(String param);
     public boolean userExistence(String userName);
     public UserProfile userProfile(String userName);
+    public boolean deletePost(int postID);
 
 }

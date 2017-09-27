@@ -86,6 +86,17 @@ public class HomeController {
     public void userActivation(@PathVariable String userName) {
     	dbdao.userActivation(userName);
     }
+    
+    @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
+    public UserProfile userProfile(@PathVariable String userName) {
+    	System.out.println("dfddf");
+    	return dbdao.userProfile(userName);
+    }
+    
+    @RequestMapping(value = "/deletePost/{postID}", method = RequestMethod.GET)
+    public DeletePost deletePost(@PathVariable int postID) {
+    	return new DeletePost(postID, dbdao.deletePost(postID));
+    }
 
     /**
      * helder method that send email to user
@@ -127,11 +138,7 @@ public class HomeController {
             throw new RuntimeException(e);
         }
     }
-    @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
-    public UserProfile userProfile(@PathVariable String userName) {
-    	System.out.println("dfddf");
-    	return dbdao.userProfile(userName);
-    }
+
 
 
 }
