@@ -30,5 +30,21 @@
   {
     "first": "Juan",
     "last": "Montoya"
-  }
+  },
+  {
+   first: 'Charlie',
+   last: 'Brown',
+ },
+ {
+   first: 'Charlotte',
+   last: 'White',
+ },
+ {
+   first: 'Chloe',
+   last: 'Jones',
+ },
+ {
+   first: 'Cooper',
+   last: 'King',
+ }
 ]}
