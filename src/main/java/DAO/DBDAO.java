@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public interface DBDAO {
     public Connection connect();
     public boolean userSignUp(User aUser);
-    public void userActivation(String userName);
+    public void userActivation(int userID);
     public int getUserIdByUserName(String userName);
     public User getUserByUserName(String userName, String password);
     public ArrayList<Post> getPostsByUserID(int userID);

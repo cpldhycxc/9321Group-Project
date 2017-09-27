@@ -187,16 +187,17 @@ public class DBDAOImpl implements DBDAO {
      * change the userType to check if it is activated
      * @param userName
      */
-    public void userActivation(String userName){
+    public void userActivation(int userID){
     	try (Connection conn = connect()) {
-    		 String updateType = "UPDATE Users SET userType=? WHERE userName=?";
+    		 String updateType = "UPDATE Users SET userType=? WHERE userID=?";
     		 PreparedStatement pstmt = conn.prepareStatement(updateType);
-    		 if(userName.equals("Admin")) {
-    			 pstmt.setString(1, "ADMIN");
-    		 }else {
-    			 pstmt.setString(1,"ACTIVATED");
-    		 }    		 
-    		 pstmt.setString(2, userName);
+//    		 if(userName.equals("Admin")) {
+//    			 pstmt.setString(1, "ADMIN");
+//    		 }else {
+//    			 pstmt.setString(1,"ACTIVATED");
+//    		 } 
+    		 pstmt.setInt(1,1);
+    		 pstmt.setInt(2, userID);
     		 pstmt.executeUpdate();
     	}catch(SQLException e){
     		System.out.println(e.getMessage());
