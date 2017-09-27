@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
 import SignupForm from '../Signup'
 import { login } from '../../actions/userActions';
+import validateInput from '../../functions/loginvalidation';
+import classnames from 'classnames';
 
 @connect((store) => {
 	return {
@@ -19,6 +21,7 @@ export default class LoginForm extends React.Component {
 			password: '',
 			isSubmitting: false,
 			issignup: false,
+			errors:{}
 		};
 		this.requestsignup = this.requestsignup.bind(this);
 		this.onChange = this.onChange.bind(this);
@@ -33,18 +36,32 @@ export default class LoginForm extends React.Component {
 		this.setState({ issignup: true });
 	}
 
+	isValid() {
+		const { errors, isValid } = validateInput(this.state);
+
+		if(!isValid) {
+			this.setState({ errors });
+		}
+
+		return isValid;
+	}
+
 	handleSubmit(e){
 		e.preventDefault();
 		const user = {
 			username: this.state.username,
 			password: this.state.password
 		}
-		this.setState({ isSubmitting: true });
-		this.props.dispatch(login(user));
+		if(this.isValid()){
+			this.setState({ errors:{}, isSubmitting: true });
+			this.props.dispatch(login(user));
+		}
+
 	}
 
 	render() {
-		const { user, token } = this.props
+		const { user, token } = this.props;
+		const { errors } = this.state;
 		if(this.state.issignup){
 			return(
 				<div>
@@ -52,19 +69,7 @@ export default class LoginForm extends React.Component {
 				</div>
 			);
 		}
-		if(token){
-			return(
-				<div>
-					<Modal.Header closeButton>
-						<Modal.Title>Login</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
-						<h1>login sucessfully</h1>
-						<p>close the windows to continue</p>
-					</Modal.Body>
-				</div>
-			)
-		}
+
 		return(
 			<div>
 				<Modal.Header closeButton>
@@ -72,7 +77,7 @@ export default class LoginForm extends React.Component {
 				</Modal.Header>
 				<Modal.Body>
 					<form onSubmit={this.handleSubmit} method="post">
-						<div className ="form-group">
+						<div className={classnames('form-group', {'has-error': errors.username})}>
 							<label className="control-label">Username:</label>
 						<input
 						onChange={this.onChange}
@@ -81,8 +86,9 @@ export default class LoginForm extends React.Component {
 						name="username"
 						placeholder="Enter Username"
 						/>
+						{errors.username && <span className="help-block">{errors.username}</span>}
 						</div>
-						<div className="form-group">
+						<div className={classnames('form-group', {'has-error': errors.password})} >
 							<label className="control-label">Password:</label>
 							<input
 							onChange={this.onChange}
@@ -91,13 +97,14 @@ export default class LoginForm extends React.Component {
 							name="password"
 							placeholder="Enter Password"
 							/>
+							{errors.password && <span className="help-block">{errors.password}</span>}
 						</div>
 						<div>
 							<p>Not a member?
 								<a style={{ color: 'blue' }} onClick={this.requestsignup}>Sign Up</a> Now!</p>
 						</div>
 						<div className="form-group">
-							<Button type="submit" name="Submit"> Login</Button>
+							<Button type="submit" name="Submit" className='btn btn-primary btn-md'> Login</Button>
 							{this.state.isSubmitting ?
 								<img src='static/images/loading.svg' height="50" width="50"/>:""}
 						</div>

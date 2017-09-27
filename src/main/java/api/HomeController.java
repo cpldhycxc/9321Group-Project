@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import DAO.*;
 import Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,12 +33,14 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
+
     public SignUp signup(@RequestParam(value="userName") String userName,
                          @RequestParam(value="password") String password,
                          @RequestParam(value="email") String email,
                          @RequestParam(value="firstName") String firstName,
                          @RequestParam(value="lastName") String lastName,
                          @RequestParam(value="birthday") String birthday) {
+
         User aUser = new User(userName, password, email, firstName, lastName, birthday);
 
         if(!dbdao.userSignUp(aUser)){
@@ -64,6 +67,7 @@ public class HomeController {
         return login;
     }
 
+
     /**
      * method that send email to user
      */
@@ -72,7 +76,6 @@ public class HomeController {
 
         final String username = "yun553966858@gmail.com";
         final String password = "asdqwienvlasdkf";
-
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -105,5 +108,16 @@ public class HomeController {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+  
+    @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
+    public CheckExistence checkExistence(@PathVariable String loginName) {
+    	return new CheckExistence(loginName,dbdao.userExistence(loginName));
+
+    }
+    
+    @RequestMapping(value = "/activation/{userName}", method = RequestMethod.GET)
+    public void userActivation(@PathVariable String userName) {
+    	dbdao.userActivation(userName);
     }
 }

@@ -1,14 +1,35 @@
 import React from "react";
-import Login from '../../components/Login';
+import { connect } from 'react-redux';
 import { Link, Switch, Route } from 'react-router-dom';
+import Login from '../../components/Login';
+import NotificationSystem from 'react-notification-system';
 
 class Header extends React.Component {
-	render() {
+
+
+  componentDidMount() {
+    this.notificationSystem = this.refs.notificationSystem;
+    notifications.data.map((e) => (
+			this.addNotification(e)
+    ));
+  }
+
+  addNotification = (message) => {
+    this.notificationSystem.addNotification({
+			message: message,
+			level: 'success'
+		});
+  } 
+
+	render() {	
 		return (
 			<header className='header'>
+				<div>
+					<NotificationSystem ref="notificationSystem" />
+				</div>
 				<div className='logo'>
 					<Link to='/'>
-						<img src='static/images/steamRlogo.svg' className='logo-icon'/>
+						<img src='static/images/steamRlogo.svg' className='logo-icon' />
 						UNSWBook
 					</Link>
 				</div>
@@ -17,12 +38,25 @@ class Header extends React.Component {
 	}
 }
 
+const notifications = {
+	data: [
+	'Ryan like your post',
+	'Gary like your post',
+	'Bao is your friend now']
+};
+
+@connect((store) => {
+	return {
+		user: store.user.user,
+		token: store.user.token
+	};
+})
 class SideBar extends React.Component {
 	render() {
 		const { path, token } = this.props;
-		console.log(path)
-		const active = path === '/feeds' ? 'feeds' : (path === '/profile' ? 'profile' : path.match('^/learning-centre') ? 'learning-centre' : path === '/search' ? 'search' :'discover');
-		const base_links = [['wall', true], ['search', true], ['profile', false], ['feeds', false], ['learning-centre', false]];
+		console.log(token);
+		const active = path === '/friends' ? 'friends' : (path === '/profile' ? 'profile' : path === '/search' ? 'search' :'wall');
+		const base_links = [['wall', true], ['search', true],['friends', false], ['profile', false]];
 		const links = base_links.filter((e) => e[1] || token).map((e) => e[0]);
 		const sideLinks = links.map((link, i) =>
 			<li className={link + '-sidebar sidebar ' + (active === link ? 'active' : '')} key={i}>
@@ -50,7 +84,7 @@ export default class Nav extends React.Component {
     return (
 		<div>
 			<Header />
-			<SideBar path={this.props.path}/>
+			<SideBar path={this.props.path} />
 		</div>
     );
   }

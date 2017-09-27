@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 // import { connect } from "react-redux";
 import WallContainer from './WallContainer';
 import NewPostButton from '../../components/NewPostButton';
@@ -10,7 +10,7 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
        newPostModal: false,
-    }
+    };
 
     this.openModal = () => this.setState({ newPostModal: true });
     this.closeModal = () => this.setState({ newPostModal: false });
@@ -18,13 +18,13 @@ export default class Home extends React.Component {
 
 
   render() {
-    return(
-      <div className>
+    return (
+      <div>
         <WallContainer />
         <NewPostButton onClick={this.openModal} />
         <NewPost 
-        	isOpen={this.state.newPostModal}
-        	onRequestClose={this.closeModal}
+          isOpen={this.state.newPostModal}
+          onRequestClose={this.closeModal}
         />
       </div>
     );
