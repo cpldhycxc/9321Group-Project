@@ -77,6 +77,7 @@ public class DBDAOImpl implements DBDAO {
             preStatment.setString(6, aUser.getGender());
             preStatment.setString(7, aUser.getBirthday());
             preStatment.setString(8, aUser.getPhoto());
+            preStatment.setLong(9, aUser.getUserType());
             preStatment.setString(9, Integer.toString(aUser.getUserType()));
             preStatment.executeUpdate();
             logger.info("Adding user");
@@ -219,7 +220,7 @@ public class DBDAOImpl implements DBDAO {
     		
     	}catch(SQLException e) {
     		System.out.println(e.getMessage());
-    		result = false;
+    		resulthttps://github.com/cpldhycxc/9321Group-Project/pull/23/conflict?name=src%252Fmain%252Fjava%252FDAO%252FDBDAOImpl.java&ancestor_oid=99993b6b6c3471f80982906439be8b2024774830&base_oid=31ba3e8132dae0c62196439e4e4c347b56fc8688&head_oid=c6df6bea0a51fbfb103bfe264e0b2083b83fe5c2 = false;
     	}
     	return result;
     }
@@ -248,16 +249,14 @@ public class DBDAOImpl implements DBDAO {
 //                    obj.put(columName,columValue);
 //                }
                 System.out.println("rs: " + rs.getString(1));
-//                User u = new User(rs.getString(1),
-//                                  rs.getString(2),
-//                        rs.getString(3),
-//                        rs.getString(4),
-//                        rs.getString(5),
-//                        Integer.parseInt(rs.getString(6)),
-//                        rs.getString(7),
-//                        rs.getString(8),
-//                        rs.getString(9));
-//                ret.add(u);
+
+                User u = new User(rs.getString(1),
+                                  rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(7));
+                ret.add(u);
             }
             System.out.println();
             return ret;

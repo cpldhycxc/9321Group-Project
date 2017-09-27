@@ -13,6 +13,8 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+
+@CrossOrigin
 @RestController
 public class HomeController {
 
@@ -118,5 +120,16 @@ public class HomeController {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
+    public CheckExistence checkExistence(@PathVariable String loginName) {
+    	return new CheckExistence(loginName,dbdao.userExistence(loginName));
+
+    }
+    
+    @RequestMapping(value = "/activation/{userName}", method = RequestMethod.GET)
+    public void userActivation(@PathVariable String userName) {
+    	dbdao.userActivation(userName);
     }
 }
