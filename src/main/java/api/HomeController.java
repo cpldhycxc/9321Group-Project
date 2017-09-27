@@ -26,8 +26,7 @@ public class HomeController {
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         sendTLSMail("shiyun.zhangsyz@gmail.com", "123");
-        return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name));
+        return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 
     @CrossOrigin(origins = "http://localhost:8070")
@@ -57,6 +56,7 @@ public class HomeController {
         System.out.println(user.getPassword());
         Login login = new Login();
         user = dbdao.getUserByUserName(user.getUserName(), user.getPassword());
+        login.setRequestID(counter.incrementAndGet());
         login.setUser(user);
         if(user.getUserName() == null){
             login.setSuccess(false);
