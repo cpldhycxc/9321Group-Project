@@ -3,6 +3,7 @@ package DAO;
 import Model.Friend;
 import Model.Post;
 import Model.User;
+import api.UserActivities;
 import api.UserProfile;
 
 import org.json.JSONArray;
@@ -24,5 +25,6 @@ public interface DBDAO {
     public ArrayList<User> Search(String param);
     public boolean userExistence(String userName);
     public UserProfile userProfile(String userName);
+    public UserActivities userActivities(int userID);
 
 }
