@@ -47,6 +47,7 @@ export default class SignupForm extends React.Component {
       if (val !== '') {
         checkuser(val)
         .then(res => {
+          console.log(res);
           let errors = this.state.errors;
           let invalid;
           if (res.data.type) {

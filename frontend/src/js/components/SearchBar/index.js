@@ -132,7 +132,7 @@ class SearchBar extends React.Component {
   if (callback) {
     callback(suggestion.id);
   } else {
-    this.props.history.push(`/profile/${suggestion.first}`);
+    this.props.history.push(`/user/${suggestion.first}`);
   }
 }
 

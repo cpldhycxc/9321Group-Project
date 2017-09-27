@@ -4,8 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
-    <artifactId>gs-rest-service</artifactId>
+    <artifactId>gs-rest-service-cors</artifactId>
     <version>0.1.0</version>
+   
 
     <parent>
         <groupId>org.springframework.boot</groupId>

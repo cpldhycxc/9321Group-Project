@@ -72,7 +72,7 @@ public class DBDAOImpl implements DBDAO {
             preStatment.setString(6, Integer.toString(aUser.getGender()));
             preStatment.setString(7, aUser.getBirthday().toString());
             preStatment.setString(8, aUser.getPhoto());
-            preStatment.setString(9, aUser.getUserType());
+            preStatment.setLong(9, aUser.getUserType());
             preStatment.executeUpdate();
             logger.info("Adding user");
             return true;
@@ -154,10 +154,7 @@ public class DBDAOImpl implements DBDAO {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        Integer.parseInt(rs.getString(6)),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(9));
+                        rs.getString(7));
                 ret.add(u);
             }
             System.out.println();
@@ -168,6 +165,12 @@ public class DBDAOImpl implements DBDAO {
         }
 
     }
+
+	@Override
+	public void userExistence(User aUser) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 

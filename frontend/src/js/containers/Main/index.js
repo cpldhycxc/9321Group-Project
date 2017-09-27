@@ -6,6 +6,7 @@ import Search from '../../containers/Search';
 import Profile from '../../containers/Profile';
 import Home from '../../containers/Home';
 import ActivityReport from '../../containers/ActivityReport';
+import User from '../../containers/User';
 
 
 export default class Main extends React.Component {
@@ -18,7 +19,7 @@ export default class Main extends React.Component {
                 <Route exact path='/' render={() => <Redirect to='/wall' />} />
                 <Route path='/wall' component={Home} />
                 <Route path='/search' component={Search} />
-                <Route path='/profile' component={Profile} />
+                <Route path='/user/:username' component={User} />
                 <Route path='/ActivityReport/:username' component={ActivityReport} />
             </Switch>
         </div>

@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+
+@CrossOrigin
 @RestController
 public class HomeController {
 
@@ -36,7 +40,8 @@ public class HomeController {
         User aUser = new User(userName, password, email, firstName, lastName, birthday);
         return new SignUp(counter.incrementAndGet(),  dbdao.userSignUp(aUser));
     }
-
+    
+    @CrossOrigin
     @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
     public CheckExistence checkExistence(@PathVariable String loginName) {
     	return new CheckExistence(loginName,dbdao.userExistence(loginName));
