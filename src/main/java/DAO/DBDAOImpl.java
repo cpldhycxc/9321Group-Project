@@ -140,7 +140,7 @@ public class DBDAOImpl implements DBDAO {
     }
 
     /**
-     * give the userID of a user find out all his's post
+     * give the userID of a user find out all his's post and his friend post`
      * @param userID
      * @return arraylist of post for the user
      */
@@ -149,9 +149,11 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT postID, content, image, postTime FROM Posts WHERE userID = '" + Integer.toString(userID) + "' ORDER BY postTime DESC");
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts , Users WHERE Posts.userID=Users.userID AND " +
+                    "( Posts.userID IN (SELECT friendID from Friends WHERE userID = '" + Integer.toString(userID) + "') OR Posts.userID = '" + Integer.toString(userID) + "')" +
+                    "ORDER BY Posts.postTime DESC");
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
         } catch (SQLException e){
             e.printStackTrace();
