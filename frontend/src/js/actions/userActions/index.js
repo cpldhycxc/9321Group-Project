@@ -2,30 +2,28 @@ import axios from 'axios';
 
 
 export function login(user) {
-    localStorage.setItem('userinfo', "dfddf");
+    localStorage.setItem('id_token', user.username);
     return {
         type: 'LOGGED_IN',
-        payload: {
-            username: user.username,
-            password: user.password
-        }
+        payload: user
     }
 }
 
-export function setUserName(name) {
-  return {
-    type: 'SET_USER_NAME',
-    payload: name,
-  };
+export function signuprequest(user) {
+
 }
 
-export function usersignup() {
-  return {
-    type: 'SET_USER_AGE',
-    payload: age,
-  };
+export function checkuser(username) {
+  console.log("checking the fucking user");
+  return axios.get(`http://localhost:8000/checKExistence/${username}`);
 }
 
+export function logout() {
+  localStorage.removeItem('id_token')
+  return {
+    type: 'LOGGED_OUT',
+  };
+}
 
 
 // return function(dispatch){

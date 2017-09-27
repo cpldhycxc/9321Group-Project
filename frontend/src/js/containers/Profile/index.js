@@ -1,65 +1,118 @@
-import React from "react";
-import {Button, Media, Tab, Nav} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import EditProfile from "./EditProfile";
-
-export default class Profile extends React.Component {
-	constructor(props){
-		super(props);
-		this.state ={
-			user :{
-				username:'',
-            	email:'',
-            	password:''
-        },
-         	isedit:false,
-		};
-		this.requestedit = this.requestedit.bind(this);
-	}
-	requestedit(){
-		this.setState({ isedit: true });
-	}
+import InlineEdit from 'react-edit-inline';
+import React from 'react';
+import EditProfile from './EditProfile';
 
 
-	render () {
-		if (this.state.isedit){
-			return (
-				<div className = "content">
-				<EditProfile />
-				</div>
-				);
-		}
-		return(
-			<div className = "content">
-				<form>
-					<div className ="media-left">
-						<img src = "http://www.ravalyogimatrimony.com/Content/images/default-profile-pic.png" alt = "profile picture"/>
-					</div>
-					<div className = "media-body">
-					<p> Username :</p>
-    				<p> Email : </p>
-    				<input type = "submit" value = "Edit Profile" name = "edit" onClick={this.requestedit}/>
-					</div>
-				</form>
-				<ul className="nav nav-tabs">
-  					<li className ="active"><a data-toggle ="tab" href="#playlist">Play List</a></li>
-  					<li><a data-toggle ="tab" href="#wishlist">Wishlist</a></li>
-				</ul>
-				<div className ="tab-content">
-					<div id ="playlist" className = "tab-pane fade in active">
-						<li><a href="#">1</a></li>
-    					<li><a href="#">2</a></li>
-    					<li><a href="#">3</a></li>
-    					<li><a href="#">4</a></li>
-					</div>
-				<div id ="wishlist" className = "tab-pane fade">
-						<li><a href="#">1</a></li>
-    					<li><a href="#">2</a></li>
-    					<li><a href="#">3</a></li>
-    					<li><a href="#">4</a></li>
-				</div>
-			</div>
-		</div>
-			);
-	}
+class profile extends React.Component {
+ constructor(props) {
+  super(props);
+  this.state = {
+    name: 'Random Test',
+    biography: '14 years-old genius student on UTS studying Computer Science',
+    image: 'https://cdn.someecards.com/posts/time-person-of-the-year-2016-twitter-reactions-SRN.png',
+    content: 'FUCKED UP',
+    source: 'TEST ',
+    showModal: false,
+    saving: false,
+  };
+ this.dataChanged = this.dataChanged.bind(this);
+ }
+ dataChanged(data) {
+     console.log(data);
+     this.setState({ ...data });
+ }
+
+ customValidateText(text) {
+     return (text.length > 0 && text.length < 128);
+ }
+ render() {
+     return (
+         <div>
+            <h2>Profile Page</h2>
+            <h5>U can edit it directly</h5>
+            <h3>Name</h3>
+            <InlineEdit
+                validate={this.customValidateText}
+                activeClassName="editing"
+                text={this.state.name}
+                paramName="message"
+                change={this.dataChanged}
+                />
+            <p></p>
+            <h3>Biography</h3>
+            <InlineEdit
+                validate={this.customValidateText}
+                activeClassName="editing"
+                text={this.state.biography}
+                paramName="message"
+                change={this.dataChanged}
+            />
+            <h3>Photo</h3>
+            <img alt="NothingToshow" src={this.state.image}></img>
+            <p></p>
+            <h3>Something awesome</h3>
+            <InlineEdit
+                validate={this.customValidateText}
+                activeClassName="editing"
+                text={this.state.content}
+                paramName="message"
+                change={this.dataChanged}
+            />
+         </div>
+     )
+ }
+ //
+ // componentWillReceiveProps(nextProps) {
+ //   if (this.props.name !== nextProps.name) {
+ //     this.setState({ name: Object.assign({}, nextProps.name) });
+ //   }
+ //   this.setState({ saving: false, showModal: false });
+ // }
+ //
+ // updateName(event) {
+ //     const field = event.target.name;
+ //     const name = this.state.name;
+ //     name[field] = event.target.value;
+ //     return this.setState({ name: name });
+ // }
+ //
+ // saveName(event) {
+ //     event.preventDefault();
+ //     this.setState({ saving: true });
+ //     console.log(this.props);
+ //     this.props.location.updateName(this.state.name);
+ // }
+ //
+ //
+ //
+ // render() {
+ //       if (this.state.showModal) {
+ //           return (
+ //               <div>
+ //               <EditProfile
+ //               name={this.state.name}
+ //               bio={this.state.biography}
+ //               onSave={this.saveName}
+ //               onChange={this.updateName}
+ //               saving={this.state.saving}
+ //
+ //               />
+ //               </div>
+ //           );
+ //       }
+ //       return (
+ //           <div className="col-md-8 col-md-offset-2">
+ //            <h1>{this.state.name}</h1>
+ //            <p>{this.state.biography}</p>
+ //            <img alt="NothingToshow" src={this.state.image}></img>
+ //            <div className="Quote">
+ //            <blockquote>&ldquo; {this.state.content} &rdquo;</blockquote>
+ //            <div className="byline">&mdash; {this.state.source}</div>
+ //            <button onClick={this.openState}>edit</button>
+ //            </div>
+ //           </div>
+ //       );
+ //   }
+ // }
 }
+export default profile;

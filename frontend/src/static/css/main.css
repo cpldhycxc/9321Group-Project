@@ -30,7 +30,7 @@ input {
   z-index: 1;
   left: 0;
   top: 55px;
-  width: 200px;
+  width: 220px;
   background-color:  #4d4d4d;
   height: 100%;
   -webkit-font-smoothing: antialiased;
@@ -99,13 +99,12 @@ input {
 
 .user-detail {
   margin-left: 60px;
-  padding-top:15px;
   height: 50px;
   font-weight: 700;
 }
 
 .login .logout {
-  font-size: 14px;
+  font-size: 10px;
   opacity: 0.5;
 }
 
@@ -291,7 +290,6 @@ input {
   outline: none;
 }
 
-
 .Comment_ActionBoard {
   display: flex;
   padding-top: 10px;
@@ -302,7 +300,18 @@ input {
 }
 
 
+/*search page css*/
+.unswbook {
+    margin-top: 10%;
+    font-size: 70px;
+    font-weight: 400;
+    text-align: center;
+}
 
+.search-bar-int {
+  margin: 20px auto;
+}
 
-
-
+.search-bar {
+    margin: auto;
+}
