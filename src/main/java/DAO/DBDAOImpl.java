@@ -78,14 +78,50 @@ public class DBDAOImpl implements DBDAO {
             return false;
         }
     }
-
+    /**
+     * change the userType to check if it is activated
+     * @param String userName
+     */
     public void userActivation(String userName){
-
+    	try (Connection conn = connect()) {
+    		 String updateType = "UPDATE Users SET userType=? WHERE userName=?";
+    		 PreparedStatement pstmt = conn.prepareStatement(updateType);
+    		 if(userName.equals("Admin")) {
+    			 pstmt.setString(1, "ADMIN");
+    		 }else {
+    			 pstmt.setString(1,"ACTIVATED");
+    		 }    		 
+    		 pstmt.setString(2, userName);
+    		 pstmt.executeUpdate();
+    	}catch(SQLException e){
+    		System.out.println(e.getMessage());
+    	}
+    }
+    
+    /**
+     * function to check if the user exists in the databse
+     * @param username as a string
+     * @return true if the user exists otherwise false
+     */
+    public boolean userExistence(String userName){
+    	boolean result = false;
+    	try(Connection conn = connect()) {
+    		Statement  stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName = '" + userName + "'");
+    		if (rs.next()) {
+    			//user exists
+    			result = true;
+    		}else {
+    			result = false;
+    		}
+    		
+    	}catch(SQLException e) {
+    		System.out.println(e.getMessage());
+    		result = false;
+    	}
+    	return result;
     }
 
-    public void userExistence(User aUser){
-
-    }
 
 
 }
