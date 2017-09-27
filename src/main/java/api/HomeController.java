@@ -63,11 +63,8 @@ public class HomeController {
         if(user.getUserName() == null){
             login.getUser().setBirthday(new Date(1));
             login.getUser().setJoinTime(new Date(1));
-            System.out.println("1");
             login.setPosts(new ArrayList<>());
-            System.out.println("2");
             login.setFriends(new ArrayList<>());
-            System.out.println("3");
             login.setSuccess(false);
             return login;
         }
