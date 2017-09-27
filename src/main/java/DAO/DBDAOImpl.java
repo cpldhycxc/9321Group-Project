@@ -296,7 +296,7 @@ public class DBDAOImpl implements DBDAO {
         try(Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet joinDate = stmt.executeQuery("SELECT joinTime from users WHERE userID = '"+ userID +"'");
-            ResultSet activities = stmt.executeQuery("SELECT content, postTime from posts WHERE userID= '"+ userID +"'");
+            ResultSet activities = stmt.executeQuery("SELECT content, postTime from posts WHERE userID= '"+ userID +"' ORDER BY postTime");
             joinDate.next();
             userAct.setJoinDate(joinDate.getString(1));
             while(activities.next()){
