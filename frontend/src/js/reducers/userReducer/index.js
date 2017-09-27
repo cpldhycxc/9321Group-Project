@@ -1,13 +1,12 @@
 export default function reducer(state = {
     user: {
-        firstName: localStorage.getItem('user_info')||null,
+        userName: localStorage.getItem('user_info')||null,
     },
     token: localStorage.getItem('id_token') || null,
   }, action) {
-  console.log(action.payload);
   switch (action.type) {
     case "LOGGED_IN": {
-      localStorage.setItem('user_info', action.payload.user.firstName);
+      localStorage.setItem('user_info', action.payload.user.userName);
       return {
           ...state,
           user: action.payload.user,

@@ -6,53 +6,35 @@ import { withRouter } from 'react-router';
 
 const people = [
   {
-    "first": "Aaron",
-    "last": "Peirsol"
+    username:'z3413158',
   },
   {
-    "first": "Carmen",
-    "last": "Electra"
+    username:'z3462191',
   },
   {
-    "first": "Vitali",
-    "last": "Klitschko"
+    username:'z3466413',
   },
   {
-    "first": "Richard",
-    "last": "Virenque"
+    username:'z3493921',
   },
   {
-    "first": "Lana",
-    "last": "Clarkson"
+    username:'z5014861',
   },
   {
-    "first": "Amelia",
-    "last": "Vega"
+    username:'z5040176',
   },
   {
-    "first": "Dominic",
-    "last": "Monaghan"
+    username:'z5059413',
   },
   {
-    "first": "Juan",
-    "last": "Montoya"
+    username:'z5063045',
   },
   {
-   first: 'Charlie',
-   last: 'Brown',
- },
- {
-   first: 'Charlotte',
-   last: 'White',
- },
- {
-   first: 'Chloe',
-   last: 'Jones',
- },
- {
-   first: 'Cooper',
-   last: 'King',
- }
+    username:'z5076002',
+  },
+  {
+    username:'z5099187',
+  },
 ];
 
 
@@ -74,11 +56,11 @@ function getSuggestions(value) {
 }
 
 function getSuggestionValue(suggestion) {
-  return `${suggestion.first} ${suggestion.last}`;
+  return `${suggestion.username}`;
 }
 
 function renderSuggestion(suggestion, { query }) {
-  const suggestionText = `${suggestion.first} ${suggestion.last}`;
+  const suggestionText = `${suggestion.username}`;
   const matches = match(suggestionText, query);
   const parts = parse(suggestionText, matches);
 
@@ -132,7 +114,7 @@ class SearchBar extends React.Component {
   if (callback) {
     callback(suggestion.id);
   } else {
-    this.props.history.push(`/user/${suggestion.first}`);
+    this.props.history.push(`/user/${suggestion.username}`);
   }
 }
 
