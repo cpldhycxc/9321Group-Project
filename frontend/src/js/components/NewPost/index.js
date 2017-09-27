@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/lib/Button';
 import { Form, TextArea } from 'semantic-ui-react';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
+import NewPostBoard from '../../containers/NewPostBoard';
 
 const customStyles = {
   overlay : {
@@ -49,7 +50,8 @@ export default class NewPost extends React.Component {
         contentLabel="NewPostModal"
         onRequestClose={this.props.onRequestClose}
         style={customStyles}>
-        <section>
+        <NewPostBoard />
+        {/*<section>
           <div className="dropzone">
             <Dropzone
               accept="image/*"
@@ -79,7 +81,7 @@ export default class NewPost extends React.Component {
           <TextArea autoHeight placeholder='Try adding multiple lines' />
         </Form>
         <Button>Create</Button>
-        <Button onClick={this.props.onRequestClose}>Close</Button>
+        <Button onClick={this.props.onRequestClose}>Close</Button>*/}
       </Modal>
     );
   }
