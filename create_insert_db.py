@@ -74,6 +74,7 @@ conn.execute('''DROP TABLE IF EXISTS Friends;''')
 conn.execute('''CREATE TABLE Friends
        (userID      INTEGER  NOT NULL,
         friendID    INTEGER  NOT NULL,
+        startDate	DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (userID, friendID),
         FOREIGN KEY (userID) REFERENCES Users(userID),
         FOREIGN KEY (friendID) REFERENCES Users(userID));''')

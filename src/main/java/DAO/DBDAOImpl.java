@@ -184,6 +184,25 @@ public class DBDAOImpl implements DBDAO {
     }
 
     /**
+     * get email by userID
+     * @param userID
+     * @return email for the userID
+     */
+    public String getEmailByUserID(int userID){
+        String email = null;
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT email FROM Users WHERE userID = '" + Integer.toString(userID) + "'");
+            while(rs.next()){
+                email = rs.getString(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return email;
+    }
+
+    /**
      * change the userType to check if it is activated
      * @param userName
      */
