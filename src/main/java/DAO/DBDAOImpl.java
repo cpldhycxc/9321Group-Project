@@ -281,7 +281,7 @@ public class DBDAOImpl implements DBDAO {
             ResultSet rs = stmt.executeQuery("" +
                     "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
                     "FROM Users WHERE userName = '" + userName+ "'");
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             while(rs.next()){
             	System.out.println("hhhhh");
                 u.setUserID(rs.getInt(1));
@@ -290,12 +290,12 @@ public class DBDAOImpl implements DBDAO {
                 u.setFirstName(rs.getString(4));
                 u.setLastName(rs.getString(5));
                 u.setGender(rs.getString(6));
-                u.setBirthday(format.parse(rs.getString(7)));
+                u.setBirthday(rs.getString(7));
                 u.setPhoto(rs.getString(8));
                 u.setUserType(rs.getInt(9));
-                u.setJoinTime(format.parse(rs.getString(10)));
+                u.setJoinTime(rs.getString(10));
             }
-        } catch (SQLException | ParseException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
 		return u;

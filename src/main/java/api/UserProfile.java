@@ -18,38 +18,40 @@ public class UserProfile {
 	    private String firstName;
 	    private String lastName;
 	    private String gender;
-	    private Date birthday; //date format like 2017-09-12T02:00:00.00
+//	    private Date birthday; //date format like 2017-09-12T02:00:00.00
+	    private String birthday;
 	    private String photo;
 	    private int userType;
-	    private Date joinTime;
+//	    private Date joinTime;
+	    private String joinTime;
 	    
-	    public UserProfile(int userId,String username, String em, String firstname, String lastname,String gend, String birthday,String pht,int usertype,String joinTime) {
+	    public UserProfile(int userId,String username, String em, String firstname, String lastname,String gend, String birthDay,String pht,int usertype,String jointime) {
 	    	userID = userId;
 	    	userName = username;
 	    	email = em;
 	    	firstName = firstname;
 	    	lastName = lastname;
 	    	gender = gend;
-//	    	birthday = birthDay;
+	    	birthday = birthDay;
 	    	photo = pht;
 	    	userType = usertype;
-//	    	joinTime = jointime;
+	    	joinTime = jointime;
 	    	
-	    	String format = "yyyy-MM-dd";
-	        SimpleDateFormat sdf =  new SimpleDateFormat(format);
-	        birthday = birthday.split("T")[0];
-	        try {
-	            this.birthday = sdf.parse(birthday);
-	        } catch (ParseException e) {
-	            e.printStackTrace();
-	        }
-
-	        joinTime = joinTime.split("T")[0];
-	        try {
-	            this.birthday = sdf.parse(joinTime);
-	        } catch (ParseException e) {
-	            e.printStackTrace();
-	        }
+//	    	String format = "yyyy-MM-dd";
+//	        SimpleDateFormat sdf =  new SimpleDateFormat(format);
+//	        birthday = birthday.split("T")[0];
+//	        try {
+//	            this.birthday = sdf.parse(birthday);
+//	        } catch (ParseException e) {
+//	            e.printStackTrace();
+//	        }
+//
+//	        joinTime = joinTime.split("T")[0];
+//	        try {
+//	            this.birthday = sdf.parse(joinTime);
+//	        } catch (ParseException e) {
+//	            e.printStackTrace();
+//	        }
 	    }
 	    
 	    public UserProfile() {
@@ -89,7 +91,7 @@ public class UserProfile {
 			return gender;
 		}
 
-		public Date getBirthday() {
+		public String getBirthday() {
 			return birthday;
 		}
 
@@ -101,7 +103,7 @@ public class UserProfile {
 			return userType;
 		}
 
-		public Date getJoinTime() {
+		public String getJoinTime() {
 			return joinTime;
 		}
 
@@ -129,7 +131,7 @@ public class UserProfile {
 			this.gender = gender;
 		}
 
-		public void setBirthday(Date birthday) {
+		public void setBirthday(String birthday) {
 			this.birthday = birthday;
 		}
 
@@ -141,7 +143,7 @@ public class UserProfile {
 			this.userType = userType;
 		}
 
-		public void setJoinTime(Date joinTime) {
+		public void setJoinTime(String joinTime) {
 			this.joinTime = joinTime;
 		}
 
