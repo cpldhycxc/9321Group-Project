@@ -1,0 +1,11 @@
+program=Exercise Physiology
+email=J.P.Montoya@unsw.edu.au
+birthday=1996-01-27
+home_longitude=151.2323
+password=abgrtyu
+mates=[z5014861, z5040176, z5099187, z3413158]
+courses=[2015 S1 BABS1201, 2015 S1 CHEM1831, 2015 S1 HESC1501, 2015 S1 PSYC1001, 2015 S2 ANAT2111, 2015 S2 HESC1511, 2015 S2 MATH1041, 2015 S2 PSYC1011, 2016 S1 ANAT2451, 2016 S1 BIOC2181, 2016 S1 BIOM2451, 2016 S1 PHSL2501, 2016 S2 HESC2452, 2016 S2 HESC2501, 2016 S2 PATH2202, 2016 S2 PHSL2502]
+home_suburb=University Of New South Wales
+home_latitude=-33.9103
+zid=z5076002
+full_name=Juan Pablo Montoya

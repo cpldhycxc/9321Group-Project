@@ -1,0 +1,3 @@
+time=2016-08-17T03:41:26+0000
+from=z3413158
+message=Haha I've been meaning to tell you something

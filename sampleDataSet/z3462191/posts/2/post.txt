@@ -1,0 +1,3 @@
+from=z3462191
+time=2013-05-10T05:41:31+0000
+message=When you meet someone who you've never seen before outside of a lecture theatre and you realise you do the same course. From then on, their face is the only one you want to see out of the rest.

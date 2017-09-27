@@ -1,0 +1,3 @@
+message=Lel sure I'll come to syd asap
+from=z5099187
+time=2016-05-17T09:33:41+0000

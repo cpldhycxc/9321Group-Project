@@ -1,0 +1,5 @@
+message=taylah\nmeeting you was my favourite part of my first year at university. you are truly one of a kind and deserve to be loved wholeheartedly
+from=z5099187
+time=2016-09-26T00:07:52+0000
+longitude=151.2263
+latitude=-33.9109
