@@ -207,7 +207,7 @@ public class DBDAOImpl implements DBDAO {
      * @return true if the user exists otherwise false
      */
     public boolean userExistence(String userName){
-    	boolean result = false;
+    	boolean result;
     	try(Connection conn = connect()) {
     		Statement  stmt = conn.createStatement();
     		ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName = '" + userName + "'");
@@ -220,7 +220,7 @@ public class DBDAOImpl implements DBDAO {
     		
     	}catch(SQLException e) {
     		System.out.println(e.getMessage());
-    		resulthttps://github.com/cpldhycxc/9321Group-Project/pull/23/conflict?name=src%252Fmain%252Fjava%252FDAO%252FDBDAOImpl.java&ancestor_oid=99993b6b6c3471f80982906439be8b2024774830&base_oid=31ba3e8132dae0c62196439e4e4c347b56fc8688&head_oid=c6df6bea0a51fbfb103bfe264e0b2083b83fe5c2 = false;
+    		result = false;
     	}
     	return result;
     }
