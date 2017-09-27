@@ -19,3 +19,6 @@ log/
 target/
 
 bin/
+
+#database
+student.db

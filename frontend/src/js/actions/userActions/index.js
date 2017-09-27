@@ -2,11 +2,22 @@ import axios from 'axios';
 
 
 export function login(user) {
-    localStorage.setItem('id_token', user.username);
-    return {
-        type: 'LOGGED_IN',
-        payload: user
-    }
+    localStorage.setItem('id_token', user.userName);
+    return function(dispatch){
+      axios.post('http://localhost:8080/login/', {
+          userName:user.userName,
+          password:user.password,
+      })
+      .then((response)=>{
+        dispatch({
+          type: 'LOGGED_IN',
+          payload: response.data,
+        })
+      })
+      .catch((err)=> {
+        console.log(err);
+      })
+      }
 }
 
 export function signuprequest(user) {
