@@ -1,0 +1,5 @@
+latitude=-33.7435
+longitude=151.0665
+message=Tfw you dont find asian girls attractive but you go to UNSW.
+from=z3466413
+time=2016-05-12T15:22:08+0000

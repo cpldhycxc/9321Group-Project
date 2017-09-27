@@ -1,0 +1,5 @@
+longitude=151.2238
+time=2013-04-07T00:18:05+0000
+latitude=-33.9195
+message=To the media girl with that funny shaped bag. Heya cowgirl :)
+from=z5099187

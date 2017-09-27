@@ -1,0 +1,5 @@
+latitude=-33.9165
+from=z3413158
+time=2013-06-18T10:52:52+0000
+message=to luke who works at the unsw gym. you can give me a workout any day.
+longitude=151.2395

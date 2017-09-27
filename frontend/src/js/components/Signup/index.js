@@ -7,6 +7,7 @@ import moment from 'moment';
 import validateInput from '../../functions/signupvalidation';
 import classnames from 'classnames';
 import { checkuser } from '../../actions/userActions';
+import { signuprequest } from '../../actions/userActions';
 
 
 export default class SignupForm extends React.Component {
@@ -30,8 +31,11 @@ export default class SignupForm extends React.Component {
     }
 
     onChange(e){
+      const field = e.target.name;
+      let errors = this.state.errors;
+      errors[field]= ''
+      this.setState({ errors });
       this.setState({ [e.target.name]: e.target.value });
-      console.log(this.state);
     }
 
     handleChange(date) {
@@ -43,13 +47,12 @@ export default class SignupForm extends React.Component {
     checkUserExists(e) {
       const field = e.target.name;
       const val = e.target.value;
-      console.log(val);
       if (val !== '') {
         checkuser(val)
         .then(res => {
           let errors = this.state.errors;
           let invalid;
-          if (res.data.type) {
+          if (res.data.result) {
             errors[field] = 'The user already exists';
             invalid = true;
           } else {
@@ -57,9 +60,6 @@ export default class SignupForm extends React.Component {
             invalid = false;
           }
           this.setState({ errors, invalid });
-        })
-        .catch((err) => {
-          console.log("fuc boi");
         })
       }
     }
@@ -77,10 +77,11 @@ export default class SignupForm extends React.Component {
 
     handleSubmit(e){
       e.preventDefault();
-      console.log(this.state);
       if(this.isValid()){
         this.setState({ errors:{}, isloading:true });
+        signuprequest(this.state).then((res)=>{
 
+        });
       }
     }
 
@@ -129,6 +130,8 @@ export default class SignupForm extends React.Component {
                     </div>
                     <div className="form-group">
                       <Button disabled={this.state.invalid} className='btn btn-primary btn-md' type="submit" name="Submit"> Signup</Button>
+                      {this.state.isloading ?
+                        <img src='static/images/loading.svg' height="50" width="50"/>:""}
                     </div>
                 </form>
                 </Modal.Body>

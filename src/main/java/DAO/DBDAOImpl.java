@@ -1,12 +1,21 @@
 package DAO;
 
+import Model.Friend;
+import Model.Post;
 import Model.User;
+import api.UserProfile;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import java.util.ArrayList;
 
 
 
@@ -66,10 +75,10 @@ public class DBDAOImpl implements DBDAO {
             preStatment.setString(3, aUser.getEmail());
             preStatment.setString(4, aUser.getFirstName());
             preStatment.setString(5, aUser.getLastName());
-            preStatment.setString(6, Integer.toString(aUser.getGender()));
-            preStatment.setString(7, aUser.getBirthday().toString());
+            preStatment.setString(6, aUser.getGender());
+            preStatment.setString(7, aUser.getBirthday());
             preStatment.setString(8, aUser.getPhoto());
-            preStatment.setString(9, aUser.getUserType());
+            preStatment.setString(9, Integer.toString(aUser.getUserType()));
             preStatment.executeUpdate();
             logger.info("Adding user");
             return true;
@@ -78,9 +87,124 @@ public class DBDAOImpl implements DBDAO {
             return false;
         }
     }
+
+
+    /**
+     * get user id for a user, assume the user already exist
+     * @param userName
+     * @return
+     */
+    public int getUserIdByUserName(String userName) {
+        int userID = -1;
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT userID FROM Users WHERE userName = '" + userName + "'");
+            userID = rs.getInt(1);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return userID;
+    }
+
+    /**
+     * get user info by userName
+     * @param userName
+     * @return if username doesn't exist userName field of the user is null, otherwise return user info
+     */
+    public User getUserByUserName(String userName, String password) {
+        User user = new User();
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
+                    "FROM Users WHERE userName = '" + userName + "' AND password = '" + password + "'");
+
+            // result set start from 1
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            while(rs.next()){
+                user.setUserID(rs.getInt(1));
+                user.setUserName(rs.getString(2));
+                user.setEmail(rs.getString(3));
+                user.setFirstName(rs.getString(4));
+                user.setLastName(rs.getString(5));
+                user.setGender(rs.getString(6));
+                user.setBirthday(format.parse(rs.getString(7)));
+                user.setPhoto(rs.getString(8));
+                user.setUserType(rs.getInt(9));
+                user.setJoinTime(format.parse(rs.getString(10)));
+            }
+        } catch (SQLException | ParseException e){
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    /**
+     * give the userID of a user find out all his's post and his friend post`
+     * @param userID
+     * @return arraylist of post for the user
+     */
+    public ArrayList<Post> getPostsByUserID(int userID) {
+        ArrayList<Post> postArrayList = new ArrayList<>();
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts , Users WHERE Posts.userID=Users.userID AND " +
+                    "( Posts.userID IN (SELECT friendID from Friends WHERE userID = '" + Integer.toString(userID) + "') OR Posts.userID = '" + Integer.toString(userID) + "')" +
+                    "ORDER BY Posts.postTime DESC");
+            while(rs.next()){
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return postArrayList;
+    }
+
+
+    /**
+     * give the userID of a user find out all his friend
+     * @param userID
+     * @return arraylist of friend of the user
+     */
+    public ArrayList<Friend> getFriendsByUserID(int userID){
+        ArrayList<Friend> friendArrayList = new ArrayList<>();
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT Friends.friendID, Users.userName FROM Friends INNER JOIN Users " +
+                    "ON Friends.friendID=Users.userID WHERE Friends.userID = '" + Integer.toString(userID) + "'");
+            while(rs.next()){
+                friendArrayList.add(new Friend(rs.getInt(1), rs.getString(2)));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return friendArrayList;
+    }
+
+    /**
+     * get email by userID
+     * @param userID
+     * @return email for the userID
+     */
+    public String getEmailByUserID(int userID){
+        String email = null;
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT email FROM Users WHERE userID = '" + Integer.toString(userID) + "'");
+            while(rs.next()){
+                email = rs.getString(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return email;
+    }
+
     /**
      * change the userType to check if it is activated
-     * @param String userName
+     * @param userName
      */
     public void userActivation(String userName){
     	try (Connection conn = connect()) {
@@ -100,27 +224,126 @@ public class DBDAOImpl implements DBDAO {
     
     /**
      * function to check if the user exists in the databse
-     * @param username as a string
+     * @param userName as a string
      * @return true if the user exists otherwise false
      */
     public boolean userExistence(String userName){
     	boolean result = false;
     	try(Connection conn = connect()) {
-    		Statement  stmt = conn.createStatement();
-    		ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName = '" + userName + "'");
-    		if (rs.next()) {
-    			//user exists
-    			result = true;
-    		}else {
-    			result = false;
-    		}
+    		 Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName = '" +userName+ "'");
+             if(rs.next()) {
+                 result = true;
+             }
+//
+//    		Statement  stmt = conn.createStatement();
+//    		ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName = '" + userName + "'");
+//    		if (rs.next()) {
+//    			//user exists
+//    			result = true;
+//    		}else {
+//    			result = false;
+//    		}
     		
     	}catch(SQLException e) {
     		System.out.println(e.getMessage());
-    		result = false;
     	}
     	return result;
     }
+
+    public ArrayList<User> Search(String param){
+        try(Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName LIKE '% "+ param +" %' ");
+            ArrayList<User> ret = new ArrayList<User>();
+            if(rs == null){
+                System.out.println("none");
+            }
+            System.out.println("goes here");
+            while(rs.next()){
+//                int total_row = rs.getMetaData().getColumnCount();
+//                JSONObject obj = new JSONObject();
+//                for(int i=0; i < total_row; i++){
+//                    String columName = rs.getMetaData().getColumnLabel(i+1).toLowerCase();
+//                    Object columValue = rs.getObject(i+1);
+//                    if(columValue == null){
+//                        columValue = "null";
+//                    }
+//                    if(obj.has(columName)){
+//                        columName += "1";
+//                    }
+//                    obj.put(columName,columValue);
+//                }
+                System.out.println("rs: " + rs.getString(1));
+
+                User u = new User(rs.getString(1),
+                                  rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(7));
+                ret.add(u);
+            }
+            System.out.println();
+            return ret;
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
+
+	@Override
+	public UserProfile userProfile(String userName) {
+		UserProfile u = new UserProfile();
+		try (Connection conn = connect()){
+			
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
+                    "FROM Users WHERE userName = '" + userName+ "'");
+            int userI = rs.getInt(1);
+            ArrayList<Friend> friendList = getFriendsByUserID(userI);
+            ArrayList<Post> postList = getPostsByUserID(userI);
+            while(rs.next()){
+            	
+            	System.out.println("hhhhh");
+                u.setUserID(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setEmail(rs.getString(3));
+                u.setFirstName(rs.getString(4));
+                u.setLastName(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setBirthday(rs.getString(7));
+                u.setPhoto(rs.getString(8));
+                u.setUserType(rs.getInt(9));
+                u.setJoinTime(rs.getString(10));
+                u.setFriendList(friendList);
+                u.setPostList(postList);
+            }     
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+		return u;
+	}
+
+	/**
+	 * function to delete the post by post id
+	 */
+	@Override
+	public boolean deletePost(int postID) {
+		boolean result = false;
+		try(Connection conn = connect()){			
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM Posts WHERE postID= '"+postID+"'");
+			System.out.println(postID);
+			ps.executeUpdate();
+			System.out.println("Record is deleted!");
+			result = true;
+		}catch (SQLException e){
+            e.printStackTrace();
+        }
+		return result;
+	}
 
 
 

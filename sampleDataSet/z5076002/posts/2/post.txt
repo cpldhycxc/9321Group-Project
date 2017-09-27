@@ -1,0 +1,5 @@
+time=2016-08-22T12:28:08+0000
+latitude=-33.9050
+message=Dear Karen,\nYou are just so cute. You are the only reason uni is worth coming to. Are you single by any chance?
+from=z5076002
+longitude=151.1255

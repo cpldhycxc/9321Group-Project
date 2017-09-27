@@ -2,16 +2,34 @@ import React from "react";
 import { connect } from 'react-redux';
 import { Link, Switch, Route } from 'react-router-dom';
 import Login from '../../components/Login';
-
-
+import NotificationSystem from 'react-notification-system';
 
 class Header extends React.Component {
-	render() {
+
+
+  componentDidMount() {
+    this.notificationSystem = this.refs.notificationSystem;
+    notifications.data.map((e) => (
+			this.addNotification(e)
+    ));
+  }
+
+  addNotification = (message) => {
+    this.notificationSystem.addNotification({
+			message: message,
+			level: 'success'
+		});
+  } 
+
+	render() {	
 		return (
 			<header className='header'>
+				<div>
+					<NotificationSystem ref="notificationSystem" />
+				</div>
 				<div className='logo'>
 					<Link to='/'>
-						<img src='static/images/steamRlogo.svg' className='logo-icon'/>
+						<img src='static/images/steamRlogo.svg' className='logo-icon' />
 						UNSWBook
 					</Link>
 				</div>
@@ -19,6 +37,13 @@ class Header extends React.Component {
 		);
 	}
 }
+
+const notifications = {
+	data: [
+	'Ryan like your post',
+	'Gary like your post',
+	'Bao is your friend now']
+};
 
 @connect((store) => {
 	return {
@@ -29,7 +54,7 @@ class Header extends React.Component {
 class SideBar extends React.Component {
 	render() {
 		const { path, token } = this.props;
-		console.log(token)
+		console.log(token);
 		const active = path === '/friends' ? 'friends' : (path === '/profile' ? 'profile' : path === '/search' ? 'search' :'wall');
 		const base_links = [['wall', true], ['search', true],['friends', false], ['profile', false]];
 		const links = base_links.filter((e) => e[1] || token).map((e) => e[0]);
@@ -59,7 +84,7 @@ export default class Nav extends React.Component {
     return (
 		<div>
 			<Header />
-			<SideBar path={this.props.path}/>
+			<SideBar path={this.props.path} />
 		</div>
     );
   }

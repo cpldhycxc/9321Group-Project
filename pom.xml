@@ -4,8 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
-    <artifactId>gs-rest-service</artifactId>
+    <artifactId>gs-rest-service-cors</artifactId>
     <version>0.1.0</version>
+   
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -40,6 +41,13 @@
             <version>3.20.0</version>
         </dependency>
 
+        <!-- Java Mail API -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
@@ -63,6 +71,10 @@
         <repository>
             <id>spring-releases</id>
             <url>https://repo.spring.io/libs-release</url>
+        </repository>
+        <repository>
+            <id>Java.Net</id>
+            <url>http://download.java.net/maven/2/</url>
         </repository>
     </repositories>
     <pluginRepositories>
