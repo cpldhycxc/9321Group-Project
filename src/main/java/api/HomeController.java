@@ -6,6 +6,8 @@ import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
 import DAO.*;
+import Model.FriendRequest;
+import Model.Post;
 import Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -74,7 +76,25 @@ public class HomeController {
         login.setSuccess(true);
         return login;
     }
-  
+
+    @CrossOrigin(origins = "http://localhost:9000")
+    @PostMapping("addfreind")
+    public AddFriend addfriend(@RequestBody FriendRequest rf){
+
+        return new AddFriend(counter.incrementAndGet(), true);
+    }
+
+    /**
+     * get userID posts and all his friends' posts
+     * @param userID
+     * @return posts
+     */
+    @CrossOrigin(origins = "http://localhost:9000")
+    @GetMapping("getPosts")
+    public Posts getPosts(@RequestParam(value = "userID") int userID){
+        return new Posts(counter.incrementAndGet(), dbdao.getPostsByUserID(userID));
+    }
+
     @CrossOrigin(origins = "http://localhost:9000")
     @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
     public CheckExistence checkExistence(@PathVariable String loginName) {
