@@ -5,6 +5,8 @@ import Model.Post;
 import Model.User;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -73,7 +75,7 @@ public class DBDAOImpl implements DBDAO {
             preStatment.setString(4, aUser.getFirstName());
             preStatment.setString(5, aUser.getLastName());
             preStatment.setString(6, aUser.getGender());
-            preStatment.setString(7, aUser.getBirthday().toString());
+            preStatment.setString(7, aUser.getBirthday());
             preStatment.setString(8, aUser.getPhoto());
             preStatment.setLong(9, aUser.getUserType());
             preStatment.setString(9, Integer.toString(aUser.getUserType()));
@@ -97,7 +99,7 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT userID FROM Users WHERE userName = '" + userName + "'");
-            userID = rs.getInt(0);
+            userID = rs.getInt(1);
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -116,19 +118,22 @@ public class DBDAOImpl implements DBDAO {
             ResultSet rs = stmt.executeQuery("" +
                     "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
                     "FROM Users WHERE userName = '" + userName + "' AND password = '" + password + "'");
+
+            // result set start from 1
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             while(rs.next()){
-                user.setUserID(rs.getInt(0));
-                user.setUserName(rs.getString(1));
-                user.setEmail(rs.getString(2));
-                user.setFirstName(rs.getString(3));
-                user.setLastName(rs.getString(4));
-                user.setGender(rs.getString(5));
-                user.setBirthday(rs.getDate(6));
-                user.setPhoto(rs.getString(7));
-                user.setUserType(rs.getInt(8));
-                user.setJoinTime(rs.getDate(9));
+                user.setUserID(rs.getInt(1));
+                user.setUserName(rs.getString(2));
+                user.setEmail(rs.getString(3));
+                user.setFirstName(rs.getString(4));
+                user.setLastName(rs.getString(5));
+                user.setGender(rs.getString(6));
+                user.setBirthday(format.parse(rs.getString(7)));
+                user.setPhoto(rs.getString(8));
+                user.setUserType(rs.getInt(9));
+                user.setJoinTime(format.parse(rs.getString(10)));
             }
-        } catch (SQLException e){
+        } catch (SQLException | ParseException e){
             e.printStackTrace();
         }
         return user;
@@ -144,9 +149,9 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT postID, content, image, postTime FROM Posts WHERE userID = '" + Integer.toString(userID) + "'");
+                    "SELECT postID, content, image, postTime FROM Posts WHERE userID = '" + Integer.toString(userID) + "' ORDER BY postTime DESC");
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(0), rs.getString(1), rs.getString(2), rs.getDate(3)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -168,7 +173,7 @@ public class DBDAOImpl implements DBDAO {
                     "SELECT Friends.friendID, Users.userName FROM Friends INNER JOIN Users " +
                     "ON Friends.friendID=Users.userID WHERE Friends.userID = '" + Integer.toString(userID) + "'");
             while(rs.next()){
-                friendArrayList.add(new Friend(rs.getInt(0), rs.getString(1)));
+                friendArrayList.add(new Friend(rs.getInt(1), rs.getString(2)));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -178,7 +183,7 @@ public class DBDAOImpl implements DBDAO {
 
     /**
      * change the userType to check if it is activated
-     * @param String userName
+     * @param userName
      */
     public void userActivation(String userName){
     	try (Connection conn = connect()) {
@@ -198,11 +203,11 @@ public class DBDAOImpl implements DBDAO {
     
     /**
      * function to check if the user exists in the databse
-     * @param username as a string
+     * @param userName as a string
      * @return true if the user exists otherwise false
      */
     public boolean userExistence(String userName){
-    	boolean result = false;
+    	boolean result;
     	try(Connection conn = connect()) {
     		Statement  stmt = conn.createStatement();
     		ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName = '" + userName + "'");
@@ -244,6 +249,7 @@ public class DBDAOImpl implements DBDAO {
 //                    obj.put(columName,columValue);
 //                }
                 System.out.println("rs: " + rs.getString(1));
+
                 User u = new User(rs.getString(1),
                                   rs.getString(2),
                         rs.getString(3),

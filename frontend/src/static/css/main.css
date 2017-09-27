@@ -326,5 +326,14 @@ input {
 }
 
 .friendlist{
+  height: 760px;
+}
+
+.postlist{
   height: 500px;
+  overflow: auto;
+}
+
+.userprofile {
+  height: 250px;
 }

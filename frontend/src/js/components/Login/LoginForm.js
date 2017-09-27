@@ -49,7 +49,7 @@ export default class LoginForm extends React.Component {
 	handleSubmit(e){
 		e.preventDefault();
 		const user = {
-			username: this.state.username,
+			userName: this.state.username,
 			password: this.state.password
 		}
 		if(this.isValid()){

@@ -39,12 +39,13 @@ export default class Login extends React.Component {
 
 	render() {
 		const { user, token } = this.props;
+		console.log(user);
 		if (token) {
 			return (
 				<div className='user-icon-container'>
 					<img src='static/images/user.svg' className='user-icon'/>
 					<div className='user-detail'>
-						Hi, { user.username }<br/>
+						Hi, { user.firstName }<br/>
 						<a href='#0' onClick={this.logout.bind(this)} className='login logout'>Click to logout</a>
 					</div>
 				</div>

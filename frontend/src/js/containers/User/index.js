@@ -12,30 +12,12 @@ export default class UserProfile extends React.Component {
     return (
         <div className='row'>
         <div className='col-sm-12 col-md-8' style={{padding: 0}}>
-         <div className='white-container'>
+         <div className='white-container userprofile'>
               <h1>
                 userprofile
               </h1>
-              <h1>
-                testing
-              </h1>
-              <h1>
-                testing
-              </h1>
-              <h1>
-                testing
-              </h1>
          </div>
-         <div className='white-container'>
-            <h1>
-              posts
-            </h1>
-            <h1>
-              posts
-            </h1>
-            <h1>
-              posts
-            </h1>
+         <div className='white-container postlist'>
             <h1>
               posts
             </h1>
