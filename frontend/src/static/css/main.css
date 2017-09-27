@@ -222,6 +222,10 @@ input {
   border-radius: 4px;
 }
 
+.white-bg-container{
+  padding:0;
+}
+
 .friendlist{
   height: 760px;
 }
