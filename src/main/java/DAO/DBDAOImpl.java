@@ -75,7 +75,7 @@ public class DBDAOImpl implements DBDAO {
             preStatment.setString(4, aUser.getFirstName());
             preStatment.setString(5, aUser.getLastName());
             preStatment.setString(6, aUser.getGender());
-            preStatment.setString(7, aUser.getBirthday().toString());
+            preStatment.setString(7, aUser.getBirthday());
             preStatment.setString(8, aUser.getPhoto());
             preStatment.setString(9, Integer.toString(aUser.getUserType()));
             preStatment.executeUpdate();
@@ -98,7 +98,7 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT userID FROM Users WHERE userName = '" + userName + "'");
-            userID = rs.getInt(0);
+            userID = rs.getInt(1);
         } catch (SQLException e){
             e.printStackTrace();
         }

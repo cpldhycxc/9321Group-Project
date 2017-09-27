@@ -29,26 +29,26 @@ public class HomeController {
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 
+    /**
+     * API call for sign up a user
+     * @param user
+     * @return json contain success, requestID
+     */
     @CrossOrigin(origins = "http://localhost:8070")
     @PostMapping("/signup")
-    public SignUp signup(@RequestParam(value="userName") String userName,
-                         @RequestParam(value="password") String password,
-                         @RequestParam(value="email") String email,
-                         @RequestParam(value="firstName") String firstName,
-                         @RequestParam(value="lastName") String lastName,
-                         @RequestParam(value="birthday") String birthday) {
-
-        User aUser = new User(userName, password, email, firstName, lastName, birthday);
-
-        if(!dbdao.userSignUp(aUser)){
+    public SignUp signup(@RequestBody User user) { // userName, password, email, firstName, lastName, birthday
+        if(!dbdao.userSignUp(user)){
             return new SignUp(counter.incrementAndGet(), false);
         }
-
-        sendTLSMail(email, Integer.toString(dbdao.getUserIdByUserName(userName)));
-
+        sendTLSMail(user.getEmail(), Integer.toString(dbdao.getUserIdByUserName(user.getUserName())));
         return new SignUp(counter.incrementAndGet(), true);
     }
 
+    /**
+     * API call for user login
+     * @param user
+     * @return all user information, requestID, success, posts and friends
+     */
     @CrossOrigin(origins = "http://localhost:8070")
     @PostMapping("/login")
     public Login login(@RequestBody User user){
@@ -67,7 +67,17 @@ public class HomeController {
         login.setSuccess(true);
         return login;
     }
+  
+    @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
+    public CheckExistence checkExistence(@PathVariable String loginName) {
+    	return new CheckExistence(loginName,dbdao.userExistence(loginName));
 
+    }
+    
+    @RequestMapping(value = "/activation/{userName}", method = RequestMethod.GET)
+    public void userActivation(@PathVariable String userName) {
+    	dbdao.userActivation(userName);
+    }
 
     /**
      * helder method that send email to user
@@ -91,7 +101,6 @@ public class HomeController {
                 });
 
         try {
-
             // front end URL to activate user localhost:9000/validation/{userID}
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("UNSWBook"));
@@ -109,16 +118,5 @@ public class HomeController {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-    }
-  
-    @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
-    public CheckExistence checkExistence(@PathVariable String loginName) {
-    	return new CheckExistence(loginName,dbdao.userExistence(loginName));
-
-    }
-    
-    @RequestMapping(value = "/activation/{userName}", method = RequestMethod.GET)
-    public void userActivation(@PathVariable String userName) {
-    	dbdao.userActivation(userName);
     }
 }
