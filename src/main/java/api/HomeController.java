@@ -102,9 +102,9 @@ public class HomeController {
     }
 
     @CrossOrigin(origins = "http://localhost:9000")
-    @RequestMapping(value = "/activation/{userName}", method = RequestMethod.GET)
-    public void userActivation(@PathVariable String userName) {
-    	dbdao.userActivation(userName);
+    @RequestMapping(value = "/activation/{userID}", method = RequestMethod.GET)
+    public void userActivation(@PathVariable int userID) {
+    	dbdao.userActivation(userID);
     }
     
     @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
