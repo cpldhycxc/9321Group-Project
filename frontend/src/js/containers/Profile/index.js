@@ -8,7 +8,8 @@ const Info = {
     Dob: '1999-9-9',
     home_suburb: 'UNSW',
     program: 'Commerce/Economics',
-}
+};
+
 class profile extends React.Component {
  constructor(props) {
   super(props);
@@ -22,6 +23,7 @@ class profile extends React.Component {
   };
  this.dataChanged = this.dataChanged.bind(this);
  }
+
  dataChanged(data) {
      console.log(data);
      this.setState({ ...data });

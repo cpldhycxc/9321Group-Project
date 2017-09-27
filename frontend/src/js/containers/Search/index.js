@@ -1,21 +1,37 @@
 import React from 'react';
-// import { connect } from "react-redux";
-import ReactDOM from 'react-dom';
-import Multiselect from './asearch.js'
-import SearchBar from '../../components/SearchBar';
+import Select from 'react-select';
+import Dob from '../../components/asearch/DOB'
+import Gender from '../../components/asearch/gender'
+
+class search extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			disabled: false,
+            isGender: false,
+            isDOB: false,
+			value: [],
+            gender: [],
+		};
+		this.selectChange = this.selectChange.bind(this);
+	}
+	selectChange(value) {
+		console.log('You selected: ', value);
+		this.setState({ value });
+	}
+
+	render() {
+		return (
+			<div className="section">
+			<h3 className="section-heading">Advance Search</h3>
+			<Dob />
+            <Gender />
+            <p></p>
+            <button >submit</button>
+			</div>
+		);
+	}
+}
 
 
-// export default class Search extends React.Component {
-//   render() {
-//     return (
-//       <div className="front-page">
-//       <Multiselect label="Multiselect" />
-//       </div>
-//     );
-//   }
-// }
-ReactDOM.render(
-	<div>
-		<Multiselect label="Multiselect" />
-	</div>,
-);
+export default search;
