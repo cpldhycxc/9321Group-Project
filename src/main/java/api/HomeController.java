@@ -80,7 +80,7 @@ public class HomeController {
     @CrossOrigin(origins = "http://localhost:9000")
     @PostMapping("addfreind")
     public AddFriend addfriend(@RequestBody FriendRequest rf){
-
+        String toEmail = dbdao.getEmailByUserID(rf.getRequestUserID());
         return new AddFriend(counter.incrementAndGet(), true);
     }
 
@@ -109,7 +109,6 @@ public class HomeController {
     
     @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
     public UserProfile userProfile(@PathVariable String userName) {
-    	System.out.println("dfddf");
     	return dbdao.userProfile(userName);
     }
     
