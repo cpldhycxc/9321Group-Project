@@ -6,10 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import DAO.*;
 import Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -24,14 +21,16 @@ public class HomeController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/greeting")
+    @CrossOrigin(origins = "http://localhost:8070")
+    @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         sendTLSMail("shiyun.zhangsyz@gmail.com", "123");
         return new Greeting(counter.incrementAndGet(),
                             String.format(template, name));
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    @CrossOrigin(origins = "http://localhost:8070")
+    @PostMapping("/signup")
     public SignUp signup(@RequestParam(value="userName") String userName,
                          @RequestParam(value="password") String password,
                          @RequestParam(value="email") String email,
@@ -49,11 +48,13 @@ public class HomeController {
         return new SignUp(counter.incrementAndGet(), true);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Login login(@RequestParam(value="userName") String userName,
-                       @RequestParam(value="password") String password){
+    @CrossOrigin(origins = "http://localhost:8070")
+    @PostMapping("/login")
+    public Login login(@RequestBody User user){
+        System.out.println(user.getUserName());
+        System.out.println(user.getPassword());
         Login login = new Login();
-        User user = dbdao.getUserByUserName(userName, password);
+        user = dbdao.getUserByUserName(user.getUserName(), user.getPassword());
         login.setUser(user);
         if(user.getUserName() == null){
             login.setSuccess(false);
@@ -61,11 +62,12 @@ public class HomeController {
         }
         login.setPosts(dbdao.getPostsByUserID(user.getUserID()));
         login.setFriends(dbdao.getFriendsByUserID(user.getUserID()));
+        login.setSuccess(true);
         return login;
     }
 
     /**
-     * method that send email to user
+     * helder method that send email to user
      */
     private void sendTLSMail(String toEmail, String userId){
         System.out.println("Trying to send email to " + toEmail);

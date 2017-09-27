@@ -9,9 +9,11 @@ import java.util.Date;
  */
 public class User {
 
+
     public static final int ADMIN = 2;
     public static final int ACTIVATED = 1;
     public static final int UNACTIVATED = 0;
+    public static final SimpleDateFormat SDF =  new SimpleDateFormat("yyyy-MM-dd");
     private int userID;
     private String userName;
     private String password;
@@ -36,11 +38,10 @@ public class User {
         this.userType = UNACTIVATED;
 
         //convert date
-        String format = "yyyy-MM-dd";
-        SimpleDateFormat sdf =  new SimpleDateFormat(format);
+
         birthday = birthday.split("T")[0];
         try {
-            this.birthday = sdf.parse(birthday);
+            this.birthday = SDF.parse(birthday);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -62,10 +63,10 @@ public class User {
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getGender() { return gender; }
-    public Date getBirthday() { return birthday; }
+    public String getBirthday() { return SDF.format(birthday); }
     public String getPhoto() { return photo; }
     public int getUserType() { return userType; }
-    public Date getJoinTime() { return joinTime; }
+    public String getJoinTime() { return SDF.format(joinTime); }
 
     public void setUserID(int userID) { this.userID = userID; }
     public void setUserName(String userName) { this.userName = userName; }

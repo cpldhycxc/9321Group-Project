@@ -5,6 +5,8 @@ import Model.Post;
 import Model.User;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
@@ -111,19 +113,22 @@ public class DBDAOImpl implements DBDAO {
             ResultSet rs = stmt.executeQuery("" +
                     "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
                     "FROM Users WHERE userName = '" + userName + "' AND password = '" + password + "'");
+
+            // result set start from 1
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             while(rs.next()){
-                user.setUserID(rs.getInt(0));
-                user.setUserName(rs.getString(1));
-                user.setEmail(rs.getString(2));
-                user.setFirstName(rs.getString(3));
-                user.setLastName(rs.getString(4));
-                user.setGender(rs.getString(5));
-                user.setBirthday(rs.getDate(6));
-                user.setPhoto(rs.getString(7));
-                user.setUserType(rs.getInt(8));
-                user.setJoinTime(rs.getDate(9));
+                user.setUserID(rs.getInt(1));
+                user.setUserName(rs.getString(2));
+                user.setEmail(rs.getString(3));
+                user.setFirstName(rs.getString(4));
+                user.setLastName(rs.getString(5));
+                user.setGender(rs.getString(6));
+                user.setBirthday(format.parse(rs.getString(7)));
+                user.setPhoto(rs.getString(8));
+                user.setUserType(rs.getInt(9));
+                user.setJoinTime(format.parse(rs.getString(10)));
             }
-        } catch (SQLException e){
+        } catch (SQLException | ParseException e){
             e.printStackTrace();
         }
         return user;
@@ -141,7 +146,7 @@ public class DBDAOImpl implements DBDAO {
             ResultSet rs = stmt.executeQuery("" +
                     "SELECT postID, content, image, postTime FROM Posts WHERE userID = '" + Integer.toString(userID) + "'");
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(0), rs.getString(1), rs.getString(2), rs.getDate(3)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -163,7 +168,7 @@ public class DBDAOImpl implements DBDAO {
                     "SELECT Friends.friendID, Users.userName FROM Friends INNER JOIN Users " +
                     "ON Friends.friendID=Users.userID WHERE Friends.userID = '" + Integer.toString(userID) + "'");
             while(rs.next()){
-                friendArrayList.add(new Friend(rs.getInt(0), rs.getString(1)));
+                friendArrayList.add(new Friend(rs.getInt(1), rs.getString(2)));
             }
         } catch (SQLException e){
             e.printStackTrace();
