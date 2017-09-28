@@ -48,7 +48,6 @@ export function searchByUsername(username){
   return axios.get(`http://localhost:8080/userProfile/${username}`)
 }
 
-
 // return function(dispatch){
   // axios.post('http://localhost:8000/backend/login/',{
   //     user
