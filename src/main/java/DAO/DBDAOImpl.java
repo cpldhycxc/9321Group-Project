@@ -226,11 +226,11 @@ public class DBDAOImpl implements DBDAO {
     	try (Connection conn = connect()) {
     		 String updateType = "UPDATE Users SET userType=? WHERE userID=?";
     		 PreparedStatement pstmt = conn.prepareStatement(updateType);
-//    		 if(userName.equals("Admin")) {
-//    			 pstmt.setString(1, "ADMIN");
-//    		 }else {
-//    			 pstmt.setString(1,"ACTIVATED");
-//    		 } 
+    		 if(userID == 1) {
+    			 pstmt.setInt(1, 2);
+    		 }else {
+    			 pstmt.setInt(1,1);
+    		 } 
     		 pstmt.setInt(1,1);
     		 pstmt.setInt(2, userID);
     		 pstmt.executeUpdate();
