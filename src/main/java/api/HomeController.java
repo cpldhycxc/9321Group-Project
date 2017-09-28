@@ -197,21 +197,21 @@ public class HomeController {
     @RequestMapping(value="/upload/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload(
             @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
-        String name = Integer.toString(userID); //userID, content
+        String filePath = "/users/" + Integer.toString(userID); //userID, content
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(name + "-uploaded")));
+                        new BufferedOutputStream(new FileOutputStream(new File(filePath)));
                 stream.write(bytes);
                 stream.close();
 
-                return "You successfully uploaded " + userID + " into " + name + "-uploaded !";
+                return "You successfully uploaded " + userID + " into " + filePath + "-uploaded !";
             } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
+                return "You failed to upload " + filePath + " => " + e.getMessage();
             }
         } else {
-            return "You failed to upload " + name + " because the file was empty.";
+            return "You failed to upload " + filePath + " because the file was empty.";
         }
     }
 
