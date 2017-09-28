@@ -19,9 +19,9 @@ class Header extends React.Component {
 			message: message,
 			level: 'success'
 		});
-  } 
+  }
 
-	render() {	
+	render() {
 		return (
 			<header className='header'>
 				<div>
@@ -54,7 +54,6 @@ const notifications = {
 class SideBar extends React.Component {
 	render() {
 		const { path, token } = this.props;
-		console.log(token);
 		const active = path === '/friends' ? 'friends' : (path === '/profile' ? 'profile' : path === '/search' ? 'search' :'wall');
 		const base_links = [['wall', true], ['search', true],['friends', false], ['profile', false]];
 		const links = base_links.filter((e) => e[1] || token).map((e) => e[0]);
