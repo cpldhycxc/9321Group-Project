@@ -152,8 +152,9 @@ public class HomeController {
     }
     
     @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/randomPost", method = RequestMethod.GET)
+    @RequestMapping(value = "/randomPost")
     public Posts randomPost() {
+    	System.out.println("hhhhhhhh");
     		return new Posts(counter.incrementAndGet(),dbdao.getPostsRandomly());
     }
 
