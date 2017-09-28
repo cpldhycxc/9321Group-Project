@@ -30,5 +30,6 @@ public interface DBDAO {
     public void addFriendRelation(int userID, int friendID);
     public ArrayList<Post> getOwnPostsByUserID(int userID);
     public boolean likePost(int userID, int postID);
+    public int getUserIdByPostID(int postID);
 //    public UserActivities userActivities(int userID);
 }

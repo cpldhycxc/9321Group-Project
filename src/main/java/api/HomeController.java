@@ -1,6 +1,5 @@
 package api;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -35,9 +34,6 @@ public class HomeController {
 
     @Autowired
     private DBDAO dbdao = new DBDAOImpl();
-
-    @Autowired
-    private ServletContext context;
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
@@ -160,10 +156,18 @@ public class HomeController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/likePost")
-    public LikePost deletePost(@RequestBody LikePostM post) {
+    public LikePost likePost(@RequestBody LikePostM post) {
     	String userName = post.getUserName();
+    	boolean getLike = post.isLike();
     	int userID = dbdao.getUserIdByUserName(userName);
     	int postID = Integer.parseInt(post.getPostID());
+    	int posterID = dbdao.getUserIdByPostID(postID);
+    	if(getLike == true) {
+    		Notification noti = new Notification(posterID,userName+" likes your post!");
+    		notification.add(noti);
+    		System.out.println(posterID);
+    		System.out.println(userName+" likes your post!");
+    	}
     	return new LikePost(userID,postID,dbdao.likePost(userID, postID));
     }
 

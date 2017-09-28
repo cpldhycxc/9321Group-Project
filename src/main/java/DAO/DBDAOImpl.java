@@ -425,5 +425,18 @@ public class DBDAOImpl implements DBDAO {
 		return result;
 	}
 	
+	//return the posterID
+    public int getUserIdByPostID(int postID) {
+        int userID = -1;
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT userID FROM Posts WHERE postID = '" + postID + "'");
+            userID = rs.getInt(1);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return userID;
+    }
+	
 
 }
