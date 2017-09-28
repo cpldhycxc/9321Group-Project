@@ -151,11 +151,11 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts , Users WHERE Posts.userID=Users.userID AND " +
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.postTime FROM Posts , Users WHERE Posts.userID=Users.userID AND " +
                     "( Posts.userID IN (SELECT friendID from Friends WHERE userID = '" + Integer.toString(userID) + "') OR Posts.userID = '" + Integer.toString(userID) + "')" +
                     "ORDER BY Posts.postTime DESC");
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -383,11 +383,11 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts, Users WHERE Posts.userID=Users.userID AND Posts.userID='" + Integer.toString(userID) + "'" +
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.postTime FROM Posts, Users WHERE Posts.userID=Users.userID AND Posts.userID='" + Integer.toString(userID) + "'" +
                     "ORDER BY Posts.postTime DESC");
             System.out.println(userID);
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
             }
         } catch (SQLException e){
             e.printStackTrace();
