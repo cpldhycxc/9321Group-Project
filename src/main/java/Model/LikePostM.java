@@ -12,11 +12,11 @@ public class LikePostM {
 	}
 	
 //
-//	public LikePostM() {
-//		userName= null;
-//		postID = null;
-//		like = false;
-//	}
+	public LikePostM() {
+		userName= null;
+		postID = null;
+		like = false;
+	}
 
 	public String getUserName() {
 		return userName;
