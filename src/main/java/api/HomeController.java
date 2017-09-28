@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
+
 import DAO.*;
 import Model.FriendRequest;
 import Model.Post;
@@ -28,6 +29,7 @@ public class HomeController {
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
+    private ArrayList<Notification> notification = new ArrayList<Notification>();
 
 
     @CrossOrigin(origins = "http://localhost:9000")
@@ -107,6 +109,11 @@ public class HomeController {
     public FriendRelated addFriend(@RequestBody FriendRequest rf){
         dbdao.addFriendRelation(rf.getUserID(), rf.getFriendID());
         dbdao.addFriendRelation(rf.getFriendID(), rf.getUserID());
+        String friendName = rf.getFriendName();
+        Notification noti = new Notification(rf.getUserID(), friendName+" is your friend now!");
+        notification.add(noti);
+        System.out.println(rf.getUserID());
+        System.out.println(friendName+" is your friend now!");
         return new FriendRelated(counter.incrementAndGet(), true);
     }
 
@@ -147,11 +154,32 @@ public class HomeController {
     
     @CrossOrigin(origins = "http://localhost:9000")
     @PostMapping("/likePost")
-    public LikePost deletePost(@RequestBody LikePostM post) {
+    public LikePost likePost(@RequestBody LikePostM post) {
     	String userName = post.getUserName();
+    	boolean getLike = post.isLike();
     	int userID = dbdao.getUserIdByUserName(userName);
     	int postID = Integer.parseInt(post.getPostID());
+    	int posterID = dbdao.getUserIdByPostID(postID);
+    	if(getLike == true) {
+    		Notification noti = new Notification(posterID,userName+" likes your post!");
+    		notification.add(noti);
+    		System.out.println(posterID);
+    		System.out.println(userName+" likes your post!");
+    	}
     	return new LikePost(userID,postID,dbdao.likePost(userID, postID));
+    }
+    
+    @CrossOrigin(origins = "http://localhost:9000")
+    @RequestMapping(value = "/getNotification/{userID}", method = RequestMethod.GET)
+    public ArrayList<Notification> getNotification(@PathVariable int userID) {
+    	ArrayList<Notification> result = new ArrayList<Notification>();
+    	for(Notification noti: notification) {
+    		if(noti.getUserID() == userID){
+    			result.add(noti);
+    		}
+    	}
+    	notification.clear();
+    	return result;
     }
     
 
