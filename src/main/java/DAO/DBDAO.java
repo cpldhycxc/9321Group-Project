@@ -3,6 +3,7 @@ package DAO;
 import Model.Friend;
 import Model.Post;
 import Model.User;
+import api.UserActivities;
 import api.UserProfile;
 
 import org.json.JSONArray;
@@ -29,4 +30,5 @@ public interface DBDAO {
     public void addFriendRelation(int userID, int friendID);
     public ArrayList<Post> getOwnPostsByUserID(int userID);
     public boolean likePost(int userID, int postID);
+//    public UserActivities userActivities(int userID);
 }

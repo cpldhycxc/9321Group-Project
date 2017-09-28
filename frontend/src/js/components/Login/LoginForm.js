@@ -26,6 +26,7 @@ export default class LoginForm extends React.Component {
 		this.requestsignup = this.requestsignup.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.changeform = this.changeform.bind(this);
 	}
 
 	onChange(e){
@@ -59,13 +60,16 @@ export default class LoginForm extends React.Component {
 
 	}
 
+	changeform(){
+		this.setState({ issignup: false });
+	}
 	render() {
 		const { user, token } = this.props;
 		const { errors } = this.state;
 		if(this.state.issignup){
 			return(
 				<div>
-					<SignupForm />
+					<SignupForm changeform={this.changeform}/>
 				</div>
 			);
 		}
