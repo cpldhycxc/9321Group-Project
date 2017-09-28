@@ -142,7 +142,7 @@ public class DBDAOImpl implements DBDAO {
     }
 
     /**
-     * give the userID of a user find out all his's post
+     * give the userID of a user find out all his's post and his friend post`
      * @param userID
      * @return arraylist of post for the user
      */
@@ -151,9 +151,11 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT postID, content, image, postTime FROM Posts WHERE userID = '" + Integer.toString(userID) + "' ORDER BY postTime DESC");
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts , Users WHERE Posts.userID=Users.userID AND " +
+                    "( Posts.userID IN (SELECT friendID from Friends WHERE userID = '" + Integer.toString(userID) + "') OR Posts.userID = '" + Integer.toString(userID) + "')" +
+                    "ORDER BY Posts.postTime DESC");
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -184,19 +186,55 @@ public class DBDAOImpl implements DBDAO {
     }
 
     /**
+     * get email by userID
+     * @param userID
+     * @return email for the userID
+     */
+    public String getEmailByUserID(int userID){
+        String email = null;
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT email FROM Users WHERE userID = '" + Integer.toString(userID) + "'");
+            while(rs.next()){
+                email = rs.getString(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return email;
+    }
+
+    /**
+     * add friend realtion to the table
+     * @param userID
+     * @param friendID
+     */
+    public void addFriendRelation(int userID, int friendID){
+        try (Connection conn = connect()){
+            PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Friends (userID, friendID) VALUES (?, ?)");
+            preStatment.setInt(1, userID);
+            preStatment.setInt(2, friendID);
+            preStatment.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * change the userType to check if it is activated
      * @param userName
      */
-    public void userActivation(String userName){
+    public void userActivation(int userID){
     	try (Connection conn = connect()) {
-    		 String updateType = "UPDATE Users SET userType=? WHERE userName=?";
+    		 String updateType = "UPDATE Users SET userType=? WHERE userID=?";
     		 PreparedStatement pstmt = conn.prepareStatement(updateType);
-    		 if(userName.equals("Admin")) {
-    			 pstmt.setString(1, "ADMIN");
-    		 }else {
-    			 pstmt.setString(1,"ACTIVATED");
-    		 }    		 
-    		 pstmt.setString(2, userName);
+//    		 if(userName.equals("Admin")) {
+//    			 pstmt.setString(1, "ADMIN");
+//    		 }else {
+//    			 pstmt.setString(1,"ACTIVATED");
+//    		 } 
+    		 pstmt.setInt(1,1);
+    		 pstmt.setInt(2, userID);
     		 pstmt.executeUpdate();
     	}catch(SQLException e){
     		System.out.println(e.getMessage());
@@ -270,8 +308,11 @@ public class DBDAOImpl implements DBDAO {
             ResultSet rs = stmt.executeQuery("" +
                     "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
                     "FROM Users WHERE userName = '" + userName+ "'");
-//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            int userI = rs.getInt(1);
+            ArrayList<Friend> friendList = getFriendsByUserID(userI);
+            ArrayList<Post> postList = getPostsByUserID(userI);
             while(rs.next()){
+            	
             	System.out.println("hhhhh");
                 u.setUserID(rs.getInt(1));
                 u.setUserName(rs.getString(2));
@@ -283,14 +324,16 @@ public class DBDAOImpl implements DBDAO {
                 u.setPhoto(rs.getString(8));
                 u.setUserType(rs.getInt(9));
                 u.setJoinTime(rs.getString(10));
-            }
+                u.setFriendList(friendList);
+                u.setPostList(postList);
+            }     
         } catch (SQLException e){
             e.printStackTrace();
         }
 		return u;
 	}
 
-	@Override
+	  @Override
     public UserActivities userActivities(int userID){
         UserActivities userAct = new UserActivities();
         try(Connection conn = connect()){
@@ -303,12 +346,32 @@ public class DBDAOImpl implements DBDAO {
                 Activity act = new Activity(3, activities.getString(1), activities.getString(2));
                 userAct.addActivity(act);
             }
-
+          
         }catch (SQLException e){
             e.printStackTrace();
         }
 
         return userAct;
     }
+
+
+	/**
+	 * function to delete the post by post id
+	 */
+	@Override
+	public boolean deletePost(int postID) {
+		boolean result = false;
+		try(Connection conn = connect()){			
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM Posts WHERE postID= '"+postID+"'");
+			System.out.println(postID);
+			ps.executeUpdate();
+			System.out.println("Record is deleted!");
+			result = true;
+		}catch (SQLException e){
+            e.printStackTrace();
+        }
+		return result;
+	}
+
 
 }

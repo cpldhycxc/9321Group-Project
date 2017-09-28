@@ -6,6 +6,7 @@ import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
 import DAO.*;
+import Model.FriendRequest;
 import Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,8 +27,8 @@ public class HomeController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    
-    @CrossOrigin(origins = "http://localhost:8080")
+
+    @CrossOrigin(origins = "http://localhost:9000")
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         sendTLSMail("shiyun.zhangsyz@gmail.com", "123");
@@ -45,7 +46,10 @@ public class HomeController {
         if(!dbdao.userSignUp(user)){
             return new SignUp(counter.incrementAndGet(), false);
         }
-        sendTLSMail(user.getEmail(), Integer.toString(dbdao.getUserIdByUserName(user.getUserName())));
+        String msg = "Dear User,"
+                + "\n\n Please click the link to activate your account for UNSW Book" +
+                "\n localhost:9000/validation/" + Integer.toString(dbdao.getUserIdByUserName(user.getUserName()));
+        sendTLSMail(user.getEmail(), msg);
         return new SignUp(counter.incrementAndGet(), true);
     }
 
@@ -74,7 +78,47 @@ public class HomeController {
         login.setSuccess(true);
         return login;
     }
-  
+
+    /**
+     * api call to send email to user ask them if they want to add the user
+     * @param rf
+     * @return json of success
+     */
+    @CrossOrigin(origins = "http://localhost:9000")
+    @PostMapping("/friendRequest")
+    public FriendRelated friendRequest(@RequestBody FriendRequest rf){
+        String toEmail = dbdao.getEmailByUserID(rf.getFriendID());
+        String msg = "Dear " + rf.getFriendName() + ","
+                + "\n\n User " + rf.getUserName() + " want to add you as friend on UNSW Book, click the link below to accept" +
+                "\n  localhost:9000/addfriend/" + Integer.toString(rf.getUserID());
+        sendTLSMail(toEmail, msg);
+        return new FriendRelated(counter.incrementAndGet(), true);
+    }
+
+    /**
+     * confirm to add friend relationship between two user in the db
+     * @param rf
+     * @return
+     */
+    @CrossOrigin(origins = "http://localhost:9000")
+    @PostMapping("addFriend")
+    public FriendRelated addFriend(@RequestBody FriendRequest rf){
+        dbdao.addFriendRelation(rf.getUserID(), rf.getFriendID());
+        dbdao.addFriendRelation(rf.getFriendID(), rf.getUserID());
+        return new FriendRelated(counter.incrementAndGet(), true);
+    }
+
+    /**
+     * get userID posts and all his friends' posts
+     * @param userID
+     * @return posts
+     */
+    @CrossOrigin(origins = "http://localhost:9000")
+    @GetMapping("getPosts")
+    public Posts getPosts(@RequestParam(value = "userID") int userID){
+        return new Posts(counter.incrementAndGet(), dbdao.getPostsByUserID(userID));
+    }
+
     @CrossOrigin(origins = "http://localhost:9000")
     @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
     public CheckExistence checkExistence(@PathVariable String loginName) {
@@ -82,15 +126,25 @@ public class HomeController {
     }
 
     @CrossOrigin(origins = "http://localhost:9000")
-    @RequestMapping(value = "/activation/{userName}", method = RequestMethod.GET)
-    public void userActivation(@PathVariable String userName) {
-    	dbdao.userActivation(userName);
+    @RequestMapping(value = "/activation/{userID}", method = RequestMethod.GET)
+    public void userActivation(@PathVariable int userID) {
+    	dbdao.userActivation(userID);
+    }
+    
+    @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
+    public UserProfile userProfile(@PathVariable String userName) {
+    	return dbdao.userProfile(userName);
+    }
+    
+    @RequestMapping(value = "/deletePost/{postID}", method = RequestMethod.GET)
+    public DeletePost deletePost(@PathVariable int postID) {
+    	return new DeletePost(postID, dbdao.deletePost(postID));
     }
 
     /**
      * helder method that send email to user
      */
-    private void sendTLSMail(String toEmail, String userId){
+    private void sendTLSMail(String toEmail, String msg){
         System.out.println("Trying to send email to " + toEmail);
 
         final String username = "yun553966858@gmail.com";
@@ -115,9 +169,7 @@ public class HomeController {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(toEmail));
             message.setSubject("Registration Confirmation");
-            message.setText("Dear User,"
-                    + "\n\n Please click the link to activate your account for UNSW Book" +
-                    "\n localhost:9000/validation/" + userId);
+            message.setText(msg);
 
             Transport.send(message);
 
@@ -127,11 +179,7 @@ public class HomeController {
             throw new RuntimeException(e);
         }
     }
-    @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
-    public UserProfile userProfile(@PathVariable String userName) {
-    	System.out.println("dfddf");
-    	return dbdao.userProfile(userName);
-    }
+
 
 
 }
