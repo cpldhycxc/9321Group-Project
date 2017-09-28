@@ -13,7 +13,6 @@ import Model.User;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +20,6 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.server.PathParam;
 
 
 @CrossOrigin
@@ -175,6 +173,13 @@ public class HomeController {
     	return new LikePost(userID,postID,dbdao.likePost(userID, postID));
     }
 
+    /**
+     * upload new post with image
+     * @param file
+     * @param userID
+     * @param content
+     * @return
+     */
     @CrossOrigin(origins = "*")
     @RequestMapping(value="/upload/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload(
@@ -198,10 +203,38 @@ public class HomeController {
     }
 
     /**
+     * update user profile image
+     * @param file
+     * @param userID
+     * @return
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value="/changeProfile/{userID}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
+    public @ResponseBody String userProfileChange(
+            @RequestParam("file") MultipartFile file, @PathVariable int userID){
+        String name = Integer.toString(userID); // postID, userID, content
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File(name + "-uploaded")));
+                stream.write(bytes);
+                stream.close();
+
+                return "You successfully uploaded " + userID + " into " + name + "-uploaded !";
+            } catch (Exception e) {
+                return "You failed to upload " + name + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + name + " because the file was empty.";
+        }
+    }
+
+    /**
      * return a image at the given path
      */
     @CrossOrigin(value = "*")
-    @RequestMapping(value = "/files/{fileName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/files/{fileName}", method = RequestMethod.GET) //users/userID or /posts/postID
     public void getFile( @PathVariable("fileName") String fileName, HttpServletResponse response) {
         try {
             // get your file as InputStream

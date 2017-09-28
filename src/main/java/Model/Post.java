@@ -5,11 +5,12 @@ import java.text.ParseException;
 
 public class Post {
     private int postId;
+    private int userID;
     private String userName;
     private String content;
     private Date postTime;
 
-    public Post(int postId, String userName, String content, String image, String postTime){
+    public Post(int postId, String userName, String content, String postTime){
         this.postId = postId;
         this.userName = userName;
         this.content = content;
@@ -18,22 +19,22 @@ public class Post {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
     public Post(){
         this.postId = 0;
         this.userName = null;
         this.content = null;
-//        this.image = null;
         this.postTime = null;
     }
 
     public int getPostId() { return postId; }
+    public int getUserID() { return userID; }
     public String getUserName() { return userName; }
     public String getContent() { return content; }
     public String getPostTime() { return User.SDF.format(postTime); }
 
     public void setPostId(int postId) { this.postId = postId; }
+    public void setUserID(int userID) { this.userID = userID; }
     public void setUserName(String userName) { this.userName = userName; }
     public void setContent(String content) { this.content = content; }
     public void setPostTime(Date postTime) { this.postTime = postTime; }
