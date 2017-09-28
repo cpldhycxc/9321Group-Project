@@ -22,7 +22,6 @@ public class User {
     private String lastName;
     private String gender;
     private Date birthday; //date format like 2017-09-12T02:00:00.00
-    private String photo;
     private int userType;
     private Date joinTime;
 
@@ -38,7 +37,6 @@ public class User {
         this.userType = UNACTIVATED;
 
         //convert date
-
         birthday = birthday.split("T")[0];
         try {
             this.birthday = SDF.parse(birthday);
@@ -64,7 +62,6 @@ public class User {
     public String getLastName() { return lastName; }
     public String getGender() { return gender; }
     public String getBirthday() { return SDF.format(birthday); }
-    public String getPhoto() { return photo; }
     public int getUserType() { return userType; }
     public String getJoinTime() { return SDF.format(joinTime); }
 
@@ -76,7 +73,6 @@ public class User {
     public void setLastName(String lastName) { this.lastName = lastName; }
     public void setGender(String gender) { this.gender = gender; }
     public void setBirthday(Date birthday) { this.birthday = birthday; }
-    public void setPhoto(String photo) { this.photo = photo; }
     public void setUserType(int userType) { this.userType = userType; }
     public void setJoinTime(Date joinTime) { this.joinTime = joinTime; }
 }

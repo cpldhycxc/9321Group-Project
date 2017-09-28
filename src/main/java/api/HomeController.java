@@ -1,5 +1,6 @@
 package api;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -9,13 +10,23 @@ import DAO.*;
 import Model.FriendRequest;
 import Model.LikePostM;
 import Model.User;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.ServletContextResource;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 
 @CrossOrigin
@@ -24,6 +35,9 @@ public class HomeController {
 
     @Autowired
     private DBDAO dbdao = new DBDAOImpl();
+
+    @Autowired
+    private ServletContext context;
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
@@ -151,6 +165,28 @@ public class HomeController {
     	int userID = dbdao.getUserIdByUserName(userName);
     	int postID = Integer.parseInt(post.getPostID());
     	return new LikePost(userID,postID,dbdao.likePost(userID, postID));
+    }
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value="/upload/{userID}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
+    public @ResponseBody String handleFileUpload(
+            @RequestParam("file") MultipartFile file, @PathVariable int userID){
+        String name = "1234";
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File(name + "-uploaded")));
+                stream.write(bytes);
+                stream.close();
+
+                return "You successfully uploaded " + userID + " into " + name + "-uploaded !";
+            } catch (Exception e) {
+                return "You failed to upload " + name + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + name + " because the file was empty.";
+        }
     }
 
 
