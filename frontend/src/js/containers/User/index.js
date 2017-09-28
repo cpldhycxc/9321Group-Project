@@ -1,10 +1,16 @@
 import React from 'react';
+import { searchByUsername } from '../../actions/userActions';
 // import { connect } from "react-redux";
 
 
 export default class UserProfile extends React.Component {
   componentWillMount () {
-     console.log(this.props.match.params);
+     const { username }= this.props.match.params;
+     console.log(username);
+     searchByUsername(username)
+     .then((res)=>{
+       console.log(res.data);
+     });
   }
 
 
