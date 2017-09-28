@@ -1,22 +1,27 @@
 package api;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
-
 import DAO.*;
 import Model.FriendRequest;
 import Model.LikePostM;
 import Model.User;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
 
 
 @CrossOrigin
@@ -28,7 +33,6 @@ public class HomeController {
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
-    private ArrayList<Notification> notification = new ArrayList<Notification>();
 
 
     @CrossOrigin(origins = "*")
@@ -108,11 +112,6 @@ public class HomeController {
     public FriendRelated addFriend(@RequestBody FriendRequest rf){
         dbdao.addFriendRelation(rf.getUserID(), rf.getFriendID());
         dbdao.addFriendRelation(rf.getFriendID(), rf.getUserID());
-        String friendName = rf.getFriendName();
-        Notification noti = new Notification(rf.getUserID(), friendName+" is your friend now!");
-        notification.add(noti);
-        System.out.println(rf.getUserID());
-        System.out.println(friendName+" is your friend now!");
         return new FriendRelated(counter.incrementAndGet(), true);
     }
 
@@ -165,27 +164,53 @@ public class HomeController {
     	int userID = dbdao.getUserIdByUserName(userName);
     	int postID = Integer.parseInt(post.getPostID());
     	int posterID = dbdao.getUserIdByPostID(postID);
-    	if(getLike == true) {
+    	if(getLike) {
     		Notification noti = new Notification(posterID,userName+" likes your post!");
-    		notification.add(noti);
+    		//notification.add(noti);
     		System.out.println(posterID);
     		System.out.println(userName+" likes your post!");
     	}
     	return new LikePost(userID,postID,dbdao.likePost(userID, postID));
     }
 
-    
-    @CrossOrigin(origins = "http://localhost:9000")
-    @RequestMapping(value = "/getNotification/{userID}", method = RequestMethod.GET)
-    public ArrayList<String> getNotification(@PathVariable int userID) {
-    	ArrayList<String> result = new ArrayList<String>();
-    	for(Notification noti: notification) {
-    		if(noti.getUserID() == userID){
-    			result.add(noti.getNoti());
-    		}
-    	}
-    	notification.clear();
-    	return result;
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value="/upload/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
+    public @ResponseBody String handleFileUpload(
+            @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
+        String name = Integer.toString(userID); // postID, userID, content
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File(name + "-uploaded")));
+                stream.write(bytes);
+                stream.close();
+
+                return "You successfully uploaded " + userID + " into " + name + "-uploaded !";
+            } catch (Exception e) {
+                return "You failed to upload " + name + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + name + " because the file was empty.";
+        }
+    }
+
+    /**
+     * return a image at the given path
+     */
+    @CrossOrigin(value = "*")
+    @RequestMapping(value = "/files/{fileName}", method = RequestMethod.GET)
+    public void getFile( @PathVariable("fileName") String fileName, HttpServletResponse response) {
+        try {
+            // get your file as InputStream
+            InputStream is = new FileInputStream(new File(fileName));
+            // copy it to response's OutputStream
+            IOUtils.copy(is, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException ex) {
+            throw new RuntimeException("IOError writing file to output stream");
+        }
+
     }
     
     /**

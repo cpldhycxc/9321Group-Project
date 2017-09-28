@@ -72,7 +72,7 @@ public class DBDAOImpl implements DBDAO {
 
             // prepare statement and ready to execute
             PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Users " +
-                    "(userName, password, email, firstName, lastName, gender, birthday, photo, userType)" +
+                    "(userName, password, email, firstName, lastName, gender, birthday, userType)" +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             preStatment.setString(1, aUser.getUserName());
             preStatment.setString(2, aUser.getPassword());
@@ -81,8 +81,7 @@ public class DBDAOImpl implements DBDAO {
             preStatment.setString(5, aUser.getLastName());
             preStatment.setString(6, aUser.getGender());
             preStatment.setString(7, aUser.getBirthday());
-            preStatment.setString(8, aUser.getPhoto());
-            preStatment.setString(9, Integer.toString(aUser.getUserType()));
+            preStatment.setString(8, Integer.toString(aUser.getUserType()));
             preStatment.executeUpdate();
             logger.info("Adding user");
             return true;
@@ -120,7 +119,7 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
+                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, userType, joinTime " +
                     "FROM Users WHERE userName = '" + userName + "' AND password = '" + password + "'");
 
             // result set start from 1
@@ -133,9 +132,8 @@ public class DBDAOImpl implements DBDAO {
                 user.setLastName(rs.getString(5));
                 user.setGender(rs.getString(6));
                 user.setBirthday(format.parse(rs.getString(7)));
-                user.setPhoto(rs.getString(8));
-                user.setUserType(rs.getInt(9));
-                user.setJoinTime(format.parse(rs.getString(10)));
+                user.setUserType(rs.getInt(8));
+                user.setJoinTime(format.parse(rs.getString(9)));
             }
         } catch (SQLException | ParseException e){
             e.printStackTrace();
@@ -224,7 +222,7 @@ public class DBDAOImpl implements DBDAO {
 
     /**
      * change the userType to check if it is activated
-     * @param userName
+     * @param userID
      */
     public void userActivation(int userID){
     	try (Connection conn = connect()) {

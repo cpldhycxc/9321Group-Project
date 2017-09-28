@@ -49,7 +49,6 @@ conn.execute('''CREATE TABLE Users
         lastName    TEXT,
         gender      String,  
         birthday    DATETIME,
-        photo       TEXT,
         userType    INTEGER  NOT NULL,
         joinTime    DATETIME DEFAULT CURRENT_TIMESTAMP);''')
 conn.execute('CREATE INDEX firstNameIndex ON Users(firstName)')
@@ -63,7 +62,6 @@ conn.execute('''CREATE TABLE Posts
        (postID      INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
         userID      INTEGER  NOT NULL,
         content     TEXT     NOT NULL,
-        image       TEXT,
         postTime    DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (userID) REFERENCES Users(userID));''')
 conn.execute('CREATE INDEX postUserIDIndex ON Posts(userID)')

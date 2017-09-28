@@ -227,7 +227,7 @@ input {
 }
 
 .friendlist{
-  height: 760px;
+  height: 770px;
 }
 
 .postlist{
@@ -237,8 +237,35 @@ input {
 
 .userprofile {
   height: 250px;
+  padding: 0;
 }
 
 .backbutton {
   margin-right: 5px;
+}
+
+.username {
+  display: inline-block;
+  font-size: 25px;
+  padding: 2px 3px;
+}
+
+.panelbody{
+  height: 250px;
+  border: 1px #e5e5e5 solid;
+  border-radius: 4px;
+}
+
+.buttons{
+  display: inline-block;
+  float: right;
+}
+
+.profile-img {
+  height: 140px;
+  ali
+}
+
+.heart{
+  color: #ff0000;
 }
