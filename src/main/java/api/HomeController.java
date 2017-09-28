@@ -161,6 +161,7 @@ public class HomeController {
     			result.add(noti.getNoti());
     		}
     	}
+    	notification.clear();
     	return result;
     }
     
