@@ -473,14 +473,13 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT PostID,UserID,content,posttime FROM Posts WHERE postID = '" + postID + "'");
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             while(rs.next()){
             	post.setPostId(rs.getInt(1));
             	System.out.println(rs.getInt(1));
             	post.setUserName(getUserNameByUserID(rs.getInt(2)));
             	System.out.println(rs.getInt(2));
             	post.setContent(rs.getString(3));
-            	post.setPostTime(format.parse(rs.getString(4)));
+            	post.setPostTime(User.SDF.parse(rs.getString(4)));
             }
         } catch (SQLException | ParseException e){
             e.printStackTrace();

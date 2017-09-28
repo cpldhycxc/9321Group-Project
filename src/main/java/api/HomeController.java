@@ -20,7 +20,6 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.server.PathParam;
 
 
 @CrossOrigin
@@ -63,7 +62,7 @@ public class HomeController {
     }
 
 
-    // test curl -H "Content-Type: application/json" -X POST -d '{"userName":"z3462191","password":"maxwell"}' http://localhost:8080/login
+    // curl -H "Content-Type: application/json" -X POST -d '{"userName":"z3462191","password":"maxwell"}' http://localhost:8080/login
     /**
      * API call for user login
      * @param user

@@ -13,7 +13,7 @@ public class User {
     public static final int ADMIN = 2;
     public static final int ACTIVATED = 1;
     public static final int UNACTIVATED = 0;
-    public static final SimpleDateFormat SDF =  new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat SDF =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private int userID;
     private String userName;
     private String password;
@@ -37,7 +37,7 @@ public class User {
         this.userType = UNACTIVATED;
 
         //convert date
-        birthday = birthday.split("T")[0];
+        this.birthday = birthday;
     }
 
     public User(int userID, String userName, String email, String firstName, String lastName) {

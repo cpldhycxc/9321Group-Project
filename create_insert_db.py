@@ -194,6 +194,8 @@ for path in paths:
             post['longitude'] =re.sub(r'^\s*longitude=\s*', "", line)
         elif re.match(r'^\s*time=\s*', line):
             post['posttime'] = re.sub(r'^\s*time=\s*', "", line)
+            post['posttime'] = post['posttime'].split('+')[0]
+            post['posttime'] = re.sub(r'T', " ", post['posttime'])
     #insert post
 
     conn.execute("INSERT INTO posts (userID, content, postTime) VALUES (?,?,?)",
