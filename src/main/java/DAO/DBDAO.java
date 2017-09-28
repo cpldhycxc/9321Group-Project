@@ -28,5 +28,8 @@ public interface DBDAO {
     public boolean deletePost(int postID);
     public String getEmailByUserID(int userID);
     public void addFriendRelation(int userID, int friendID);
-    public UserActivities userActivities(int userID);
+    public ArrayList<Post> getOwnPostsByUserID(int userID);
+    public boolean likePost(int userID, int postID);
+    public int getUserIdByPostID(int postID);
+//    public UserActivities userActivities(int userID);
 }
