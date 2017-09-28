@@ -13,7 +13,7 @@ public class User {
     public static final int ADMIN = 2;
     public static final int ACTIVATED = 1;
     public static final int UNACTIVATED = 0;
-    public static final SimpleDateFormat SDF =  new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat SDF =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private int userID;
     private String userName;
     private String password;
@@ -21,10 +21,9 @@ public class User {
     private String firstName;
     private String lastName;
     private String gender;
-    private Date birthday; //date format like 2017-09-12T02:00:00.00
-    private String photo;
+    private String birthday; //date format like 2017-09-12T02:00:00.00
     private int userType;
-    private Date joinTime;
+    private String joinTime;
 
     /**
      * Constructor used for sign up
@@ -38,14 +37,15 @@ public class User {
         this.userType = UNACTIVATED;
 
         //convert date
+        this.birthday = birthday;
+    }
 
-        birthday = birthday.split("T")[0];
-        try {
-            this.birthday = SDF.parse(birthday);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+    public User(int userID, String userName, String email, String firstName, String lastName) {
+        this.userID = userID;
+        this.userName = userName;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     /**
@@ -63,10 +63,9 @@ public class User {
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getGender() { return gender; }
-    public String getBirthday() { return SDF.format(birthday); }
-    public String getPhoto() { return photo; }
+    public String getBirthday() { return birthday; }
     public int getUserType() { return userType; }
-    public String getJoinTime() { return SDF.format(joinTime); }
+    public String getJoinTime() { return joinTime; }
 
     public void setUserID(int userID) { this.userID = userID; }
     public void setUserName(String userName) { this.userName = userName; }
@@ -75,8 +74,7 @@ public class User {
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
     public void setGender(String gender) { this.gender = gender; }
-    public void setBirthday(Date birthday) { this.birthday = birthday; }
-    public void setPhoto(String photo) { this.photo = photo; }
+    public void setBirthday(String birthday) { this.birthday = birthday; }
     public void setUserType(int userType) { this.userType = userType; }
-    public void setJoinTime(Date joinTime) { this.joinTime = joinTime; }
+    public void setJoinTime(String joinTime) { this.joinTime = joinTime; }
 }

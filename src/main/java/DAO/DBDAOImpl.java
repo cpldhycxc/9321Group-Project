@@ -4,6 +4,7 @@ import Model.Friend;
 import Model.Post;
 import Model.User;
 import api.Activity;
+
 import api.UserActivities;
 import api.UserProfile;
 
@@ -11,6 +12,7 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -70,8 +72,8 @@ public class DBDAOImpl implements DBDAO {
 
             // prepare statement and ready to execute
             PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Users " +
-                    "(userName, password, email, firstName, lastName, gender, birthday, photo, userType)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    "(userName, password, email, firstName, lastName, gender, birthday, userType)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             preStatment.setString(1, aUser.getUserName());
             preStatment.setString(2, aUser.getPassword());
             preStatment.setString(3, aUser.getEmail());
@@ -79,8 +81,7 @@ public class DBDAOImpl implements DBDAO {
             preStatment.setString(5, aUser.getLastName());
             preStatment.setString(6, aUser.getGender());
             preStatment.setString(7, aUser.getBirthday());
-            preStatment.setString(8, aUser.getPhoto());
-            preStatment.setString(9, Integer.toString(aUser.getUserType()));
+            preStatment.setString(8, Integer.toString(aUser.getUserType()));
             preStatment.executeUpdate();
             logger.info("Adding user");
             return true;
@@ -118,11 +119,9 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
+                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, userType, joinTime " +
                     "FROM Users WHERE userName = '" + userName + "' AND password = '" + password + "'");
 
-            // result set start from 1
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             while(rs.next()){
                 user.setUserID(rs.getInt(1));
                 user.setUserName(rs.getString(2));
@@ -130,12 +129,11 @@ public class DBDAOImpl implements DBDAO {
                 user.setFirstName(rs.getString(4));
                 user.setLastName(rs.getString(5));
                 user.setGender(rs.getString(6));
-                user.setBirthday(format.parse(rs.getString(7)));
-                user.setPhoto(rs.getString(8));
-                user.setUserType(rs.getInt(9));
-                user.setJoinTime(format.parse(rs.getString(10)));
+                user.setBirthday(rs.getString(7));
+                user.setUserType(rs.getInt(8));
+                user.setJoinTime(rs.getString(9));
             }
-        } catch (SQLException | ParseException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
         return user;
@@ -151,11 +149,19 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts , Users WHERE Posts.userID=Users.userID AND " +
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.postTime, Users.userID FROM Posts , Users WHERE Posts.userID=Users.userID AND " +
                     "( Posts.userID IN (SELECT friendID from Friends WHERE userID = '" + Integer.toString(userID) + "') OR Posts.userID = '" + Integer.toString(userID) + "')" +
                     "ORDER BY Posts.postTime DESC");
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
+            }
+
+            for(Post p : postArrayList){
+                p.setLikeBy(new ArrayList<>());
+                rs = stmt.executeQuery("SELECT userID, userName, email, firstName, lastName FROM Users WHERE userID IN (SELECT userID FROM Likes WHERE postID = '" + p.getPostId() + "')");
+                while(rs.next()){
+                    p.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
+                }
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -222,7 +228,7 @@ public class DBDAOImpl implements DBDAO {
 
     /**
      * change the userType to check if it is activated
-     * @param userName
+     * @param userID
      */
     public void userActivation(int userID){
     	try (Connection conn = connect()) {
@@ -383,11 +389,11 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts, Users WHERE Posts.userID=Users.userID AND Posts.userID='" + Integer.toString(userID) + "'" +
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.postTime, Users.userID FROM Posts, Users WHERE Posts.userID=Users.userID AND Posts.userID='" + Integer.toString(userID) + "'" +
                     "ORDER BY Posts.postTime DESC");
             System.out.println(userID);
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(userID)));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -437,6 +443,73 @@ public class DBDAOImpl implements DBDAO {
         }
         return userID;
     }
-	
+    
+    public ArrayList<Post> getPostsRandomly() {
+    	System.out.println("hhhhhhhh");
+    	ArrayList<Post> postList = new ArrayList<Post>();
+    	int count = 0;
+    	try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Posts");
+            rs.next();
+            count = rs.getInt(1);
+            System.out.println(count);
+            int r = 0;
+            Random rand = new Random();
+            int max = count - 1;
+            for(int i = 0;i < 10;i++) {
+            	r=rand.nextInt((max - 0) + 1) + 0;
+            	System.out.println(r);
+            	postList.add(getPostByPostID(r));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    	return postList;
+    }
+    
+    public Post getPostByPostID(int postID) {
+    	Post post = new Post();
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT PostID,UserID,content,posttime FROM Posts WHERE postID = '" + postID + "'");
+            while(rs.next()){
+            	post.setPostId(rs.getInt(1));
+            	System.out.println(rs.getInt(1));
+            	post.setUserName(getUserNameByUserID(rs.getInt(2)));
+            	System.out.println(rs.getInt(2));
+            	post.setContent(rs.getString(3));
+            	post.setPostTime(User.SDF.parse(rs.getString(4)));
+            }
+        } catch (SQLException | ParseException e){
+            e.printStackTrace();
+        }
+        return post;
+    }
+    
+    public String getUserNameByUserID(int userID) {
+        String name = null;
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT userName FROM Users WHERE userID = '" + userID + "'");
+            name = rs.getString(1);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return name;
+    }
+
+    public boolean addPost(int userID, String content){
+        try (Connection conn = connect()){
+            PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Posts (userID, content) VALUES (?, ?)");
+            preStatment.setInt(1, userID);
+            preStatment.setString(2, content);
+            preStatment.executeUpdate();
+            return true;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }

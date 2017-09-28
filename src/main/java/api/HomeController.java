@@ -1,22 +1,25 @@
 package api;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
-
 import DAO.*;
 import Model.FriendRequest;
 import Model.LikePostM;
 import Model.User;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
 
 
 @CrossOrigin
@@ -38,6 +41,7 @@ public class HomeController {
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 
+    //curl -H "Content-Type: application/json" -X POST -d '{"userName":"shiyun","password":"haha","email":"shiyun.zhangsyz@gmail.com","firstName":"shiyun","lastName":"zhang","birthday":"1996-08-06"}' http://localhost:8080/signup
     /**
      * API call for sign up a user
      * @param user
@@ -46,6 +50,7 @@ public class HomeController {
     @CrossOrigin(origins = "*")
     @PostMapping("/signup")
     public SignUp signup(@RequestBody User user) { // userName, password, email, firstName, lastName, birthday
+        System.out.println(user.getBirthday());
         if(!dbdao.userSignUp(user)){
             return new SignUp(counter.incrementAndGet(), false);
         }
@@ -56,6 +61,8 @@ public class HomeController {
         return new SignUp(counter.incrementAndGet(), true);
     }
 
+
+    // curl -H "Content-Type: application/json" -X POST -d '{"userName":"z3462191","password":"maxwell"}' http://localhost:8080/login
     /**
      * API call for user login
      * @param user
@@ -69,8 +76,6 @@ public class HomeController {
         login.setRequestID(counter.incrementAndGet());
         login.setUser(user);
         if(user.getUserName() == null){
-            login.getUser().setBirthday(new Date(1));
-            login.getUser().setJoinTime(new Date(1));
             login.setPosts(new ArrayList<>());
             login.setFriends(new ArrayList<>());
             login.setSuccess(false);
@@ -108,16 +113,11 @@ public class HomeController {
     public FriendRelated addFriend(@RequestBody FriendRequest rf){
         dbdao.addFriendRelation(rf.getUserID(), rf.getFriendID());
         dbdao.addFriendRelation(rf.getFriendID(), rf.getUserID());
-        String friendName = rf.getFriendName();
-        Notification noti = new Notification(rf.getUserID(), friendName+" is your friend now!");
-        notification.add(noti);
-        System.out.println(rf.getUserID());
-        System.out.println(friendName+" is your friend now!");
         return new FriendRelated(counter.incrementAndGet(), true);
     }
 
     /**
-     * get userID posts and all his friends' posts
+     * get userID posts and all his friends' posts and likes by
      * @param userID
      * @return posts
      */
@@ -150,6 +150,25 @@ public class HomeController {
     public DeletePost deletePost(@PathVariable int postID) {
     	return new DeletePost(postID, dbdao.deletePost(postID));
     }
+    
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/notification/{userID}", method = RequestMethod.GET)
+    public ArrayList<String> getNotification(@PathVariable int userID) {
+    	ArrayList<String> result = new ArrayList<String>();
+    	for(Notification noti:notification) {
+    		if(noti.getUserID() == userID){
+    			result.add(noti.getNoti());
+    		}
+    	}
+    	notification.clear();
+    	return result;
+    }
+    
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/randomPost")
+    public Posts randomPost() {
+    		return new Posts(counter.incrementAndGet(),dbdao.getPostsRandomly());
+    }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/likePost")
@@ -159,7 +178,7 @@ public class HomeController {
     	int userID = dbdao.getUserIdByUserName(userName);
     	int postID = Integer.parseInt(post.getPostID());
     	int posterID = dbdao.getUserIdByPostID(postID);
-    	if(getLike == true) {
+    	if(getLike) {
     		Notification noti = new Notification(posterID,userName+" likes your post!");
     		notification.add(noti);
     		System.out.println(posterID);
@@ -168,20 +187,89 @@ public class HomeController {
     	return new LikePost(userID,postID,dbdao.likePost(userID, postID));
     }
 
-    
-    @CrossOrigin(origins = "http://localhost:9000")
-    @RequestMapping(value = "/getNotification/{userID}", method = RequestMethod.GET)
-    public ArrayList<String> getNotification(@PathVariable int userID) {
-    	ArrayList<String> result = new ArrayList<String>();
-    	for(Notification noti: notification) {
-    		if(noti.getUserID() == userID){
-    			result.add(noti.getNoti());
-    		}
-    	}
-    	notification.clear();
-    	return result;
+    /**
+     * upload new post with image
+     * @param file
+     * @param userID
+     * @param content
+     * @return
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value="/addPost/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
+    public @ResponseBody SignUp handleFileUpload(
+            @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
+        String filePath = "posts/" + Integer.toString(userID); //userID, content
+        if (!file.isEmpty()) {
+            try {
+                System.out.println(filePath);
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File(filePath)));
+                stream.write(bytes);
+                stream.close();
+
+                dbdao.addPost(userID, content);
+
+                return new SignUp(counter.incrementAndGet(), true);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("asdasd");
+                return new SignUp(counter.incrementAndGet(), false);
+            }
+        } else {
+            System.out.println("kkkk");
+            return new SignUp(counter.incrementAndGet(), false);
+        }
     }
 
+    /**
+     * update user profile image
+     * @param file
+     * @param userID
+     * @return
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value="/changeProfile/{userID}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
+    public @ResponseBody SignUp userProfileChange(
+            @RequestParam("file") MultipartFile file, @PathVariable int userID){
+        String filePath = "users/" + Integer.toString(userID); // postID, userID, content
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File(filePath)));
+                stream.write(bytes);
+                stream.close();
+
+                return new SignUp(counter.incrementAndGet(), true);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new SignUp(counter.incrementAndGet(), false);
+            }
+        } else {
+            return new SignUp(counter.incrementAndGet(), false);
+        }
+    }
+
+    /**
+     * return a image at the given path
+     */
+    @CrossOrigin(value = "*")
+    @RequestMapping(value = "/files/{folder}/{imageID}", method = RequestMethod.GET) //users/userID or /posts/postID
+    public void getFile(@PathVariable("folder") String folder, @PathVariable("imageID") int id, HttpServletResponse response) {
+        try {
+            // get your file as InputStream
+            InputStream is = new FileInputStream(new File(folder + "/" + id));
+            // copy it to response's OutputStream
+            IOUtils.copy(is, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            throw new RuntimeException("IOError writing file to output stream");
+        }
+
+    }
+    
     /**
      * helder method that send email to user
      */

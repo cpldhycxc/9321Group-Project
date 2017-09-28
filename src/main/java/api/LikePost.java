@@ -5,7 +5,7 @@ import DAO.*;
 import Model.Post;
 
 public class LikePost {
-	private int  userID;
+	private int userID;
 	private int postID;
 	private boolean result;
 	

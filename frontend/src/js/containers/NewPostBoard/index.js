@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PictureDropzone from '../../components/PictureDropzone';
 import { Button,Form, TextArea } from 'semantic-ui-react';
 import Image from 'react-image-resizer';
+import axios from 'axios';
 
 export default class NewPostBoard extends React.Component {
   constructor(props) {
@@ -35,6 +36,18 @@ export default class NewPostBoard extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    var formData = new FormData();
+    formData.append('file', this.state.files[0]);
+    fetch('http://localhost:8080/upload/3', {
+      method: 'POST',
+      body: formData
+    }).then(function(response){
+      console.log(response);
+    }).catch(function(err){
+      console.log(err);
+    })
+
+    // axios.post('http://localhost:8080/upload', data);
     console.log('submit');
   }
 
@@ -83,8 +96,8 @@ export default class NewPostBoard extends React.Component {
                        >
                         <Image src={preview} 
                           role="presentation"  
-                          height={ 800 }
-                          width={ 1200 }/>
+                          height={ 300 }
+                          width={ 300 }/>
                       </div>
                     </div>
                   </div>

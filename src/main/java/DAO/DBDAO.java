@@ -31,5 +31,9 @@ public interface DBDAO {
     public ArrayList<Post> getOwnPostsByUserID(int userID);
     public boolean likePost(int userID, int postID);
     public int getUserIdByPostID(int postID);
+    public ArrayList<Post> getPostsRandomly();
+    public Post getPostByPostID(int postID);
+    public String getUserNameByUserID(int userID);
+    public boolean addPost(int userID, String content);
 //    public UserActivities userActivities(int userID);
 }
