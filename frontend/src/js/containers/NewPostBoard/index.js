@@ -38,10 +38,7 @@ export default class NewPostBoard extends React.Component {
     e.preventDefault();
     var formData = new FormData();
     formData.append('file', this.state.files[0]);
-    var data = {
-      file: formData
-    }
-    fetch('http://localhost:8080/upload', {
+    fetch('http://localhost:8080/upload/3', {
       method: 'POST',
       body: formData
     }).then(function(response){

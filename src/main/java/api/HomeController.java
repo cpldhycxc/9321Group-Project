@@ -1,5 +1,6 @@
 package api;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -12,20 +13,15 @@ import Model.User;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
 
 
 @CrossOrigin
@@ -162,9 +158,9 @@ public class HomeController {
     	int userID = dbdao.getUserIdByUserName(userName);
     	int postID = Integer.parseInt(post.getPostID());
     	int posterID = dbdao.getUserIdByPostID(postID);
-    	if(getLike == true) {
+    	if(getLike) {
     		Notification noti = new Notification(posterID,userName+" likes your post!");
-    		notification.add(noti);
+    		//notification.add(noti);
     		System.out.println(posterID);
     		System.out.println(userName+" likes your post!");
     	}
@@ -172,10 +168,10 @@ public class HomeController {
     }
 
     @CrossOrigin(origins = "*")
-    @RequestMapping(value="/upload/{userID}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
+    @RequestMapping(value="/upload/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload(
-            @RequestParam("file") MultipartFile file, @PathVariable int userID){
-        String name = "1234";
+            @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
+        String name = Integer.toString(userID); // postID, userID, content
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
@@ -193,6 +189,23 @@ public class HomeController {
         }
     }
 
+    /**
+     * return a image at the given path
+     */
+    @CrossOrigin(value = "*")
+    @RequestMapping(value = "/files/{fileName}", method = RequestMethod.GET)
+    public void getFile( @PathVariable("fileName") String fileName, HttpServletResponse response) {
+        try {
+            // get your file as InputStream
+            InputStream is = new FileInputStream(new File(fileName));
+            // copy it to response's OutputStream
+            IOUtils.copy(is, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException ex) {
+            throw new RuntimeException("IOError writing file to output stream");
+        }
+
+    }
 
     /**
      * helder method that send email to user
