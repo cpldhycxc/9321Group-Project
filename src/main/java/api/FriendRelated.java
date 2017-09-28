@@ -1,10 +1,10 @@
 package api;
 
-public class AddFriend {
+public class FriendRelated {
     private long requestID;
     private boolean success;
 
-    AddFriend(long id, boolean suc){
+    FriendRelated(long id, boolean suc){
         requestID = id;
         success = suc;
     }

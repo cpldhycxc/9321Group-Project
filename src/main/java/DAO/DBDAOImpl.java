@@ -3,6 +3,8 @@ package DAO;
 import Model.Friend;
 import Model.Post;
 import Model.User;
+import api.Activity;
+import api.UserActivities;
 import api.UserProfile;
 
 import java.sql.*;
@@ -203,19 +205,36 @@ public class DBDAOImpl implements DBDAO {
     }
 
     /**
+     * add friend realtion to the table
+     * @param userID
+     * @param friendID
+     */
+    public void addFriendRelation(int userID, int friendID){
+        try (Connection conn = connect()){
+            PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Friends (userID, friendID) VALUES (?, ?)");
+            preStatment.setInt(1, userID);
+            preStatment.setInt(2, friendID);
+            preStatment.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * change the userType to check if it is activated
      * @param userName
      */
-    public void userActivation(String userName){
+    public void userActivation(int userID){
     	try (Connection conn = connect()) {
-    		 String updateType = "UPDATE Users SET userType=? WHERE userName=?";
+    		 String updateType = "UPDATE Users SET userType=? WHERE userID=?";
     		 PreparedStatement pstmt = conn.prepareStatement(updateType);
-    		 if(userName.equals("Admin")) {
-    			 pstmt.setString(1, "ADMIN");
+    		 if(userID == 1) {
+    			 pstmt.setInt(1, 2);
     		 }else {
-    			 pstmt.setString(1,"ACTIVATED");
-    		 }    		 
-    		 pstmt.setString(2, userName);
+    			 pstmt.setInt(1,1);
+    		 } 
+    		 pstmt.setInt(1,1);
+    		 pstmt.setInt(2, userID);
     		 pstmt.executeUpdate();
     	}catch(SQLException e){
     		System.out.println(e.getMessage());
@@ -261,19 +280,6 @@ public class DBDAOImpl implements DBDAO {
             }
             System.out.println("goes here");
             while(rs.next()){
-//                int total_row = rs.getMetaData().getColumnCount();
-//                JSONObject obj = new JSONObject();
-//                for(int i=0; i < total_row; i++){
-//                    String columName = rs.getMetaData().getColumnLabel(i+1).toLowerCase();
-//                    Object columValue = rs.getObject(i+1);
-//                    if(columValue == null){
-//                        columValue = "null";
-//                    }
-//                    if(obj.has(columName)){
-//                        columName += "1";
-//                    }
-//                    obj.put(columName,columValue);
-//                }
                 System.out.println("rs: " + rs.getString(1));
 
                 User u = new User(rs.getString(1),
@@ -327,6 +333,28 @@ public class DBDAOImpl implements DBDAO {
 		return u;
 	}
 
+	  @Override
+    public UserActivities userActivities(int userID){
+        UserActivities userAct = new UserActivities();
+        try(Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet joinDate = stmt.executeQuery("SELECT joinTime from users WHERE userID = '"+ userID +"'");
+            ResultSet activities = stmt.executeQuery("SELECT content, postTime from posts WHERE userID= '"+ userID +"' ORDER BY postTime");
+            joinDate.next();
+            userAct.setJoinDate(joinDate.getString(1));
+            while(activities.next()){
+                Activity act = new Activity(3, activities.getString(1), activities.getString(2));
+                userAct.addActivity(act);
+            }
+          
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return userAct;
+    }
+
+
 	/**
 	 * function to delete the post by post id
 	 */
@@ -344,7 +372,6 @@ public class DBDAOImpl implements DBDAO {
         }
 		return result;
 	}
-
 
 
 }
