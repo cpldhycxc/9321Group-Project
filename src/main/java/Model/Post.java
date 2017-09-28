@@ -12,7 +12,8 @@ public class Post {
     private Date postTime;
     private ArrayList<User> likeBy;
 
-    public Post(int postId, String userName, String content, String postTime){
+    public Post(int postId, String userName, String content, String postTime, int userID){
+        this.userID = userID;
         this.postId = postId;
         this.userName = userName;
         this.content = content;
