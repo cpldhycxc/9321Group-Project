@@ -69,11 +69,10 @@ public class DBDAOImpl implements DBDAO {
             if(rs.next()) {
                 return false;
             }
-
             // prepare statement and ready to execute
             PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Users " +
                     "(userName, password, email, firstName, lastName, gender, birthday, userType)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             preStatment.setString(1, aUser.getUserName());
             preStatment.setString(2, aUser.getPassword());
             preStatment.setString(3, aUser.getEmail());
@@ -122,8 +121,6 @@ public class DBDAOImpl implements DBDAO {
                     "SELECT userID, userName, email, firstName, lastName, gender, birthday, userType, joinTime " +
                     "FROM Users WHERE userName = '" + userName + "' AND password = '" + password + "'");
 
-            // result set start from 1
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             while(rs.next()){
                 user.setUserID(rs.getInt(1));
                 user.setUserName(rs.getString(2));
@@ -131,11 +128,11 @@ public class DBDAOImpl implements DBDAO {
                 user.setFirstName(rs.getString(4));
                 user.setLastName(rs.getString(5));
                 user.setGender(rs.getString(6));
-                user.setBirthday(format.parse(rs.getString(7)));
+                user.setBirthday(rs.getString(7));
                 user.setUserType(rs.getInt(8));
-                user.setJoinTime(format.parse(rs.getString(9)));
+                user.setJoinTime(rs.getString(9));
             }
-        } catch (SQLException | ParseException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
         return user;
@@ -151,11 +148,19 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts , Users WHERE Posts.userID=Users.userID AND " +
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.postTime FROM Posts , Users WHERE Posts.userID=Users.userID AND " +
                     "( Posts.userID IN (SELECT friendID from Friends WHERE userID = '" + Integer.toString(userID) + "') OR Posts.userID = '" + Integer.toString(userID) + "')" +
                     "ORDER BY Posts.postTime DESC");
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            }
+
+            for(Post p : postArrayList){
+                p.setLikeBy(new ArrayList<>());
+                rs = stmt.executeQuery("SELECT userID, userName, email, firstName, lastName FROM Users WHERE userID IN (SELECT userID FROM Likes WHERE postID = '" + p.getPostId() + "')");
+                while(rs.next()){
+                    p.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
+                }
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -383,11 +388,11 @@ public class DBDAOImpl implements DBDAO {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts, Users WHERE Posts.userID=Users.userID AND Posts.userID='" + Integer.toString(userID) + "'" +
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.postTime FROM Posts, Users WHERE Posts.userID=Users.userID AND Posts.userID='" + Integer.toString(userID) + "'" +
                     "ORDER BY Posts.postTime DESC");
             System.out.println(userID);
             while(rs.next()){
-                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
             }
         } catch (SQLException e){
             e.printStackTrace();
