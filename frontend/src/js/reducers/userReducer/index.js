@@ -1,14 +1,14 @@
 export default function reducer(state = {
-    user: {
-        userName: localStorage.getItem('user_info')||null,
-    },
-    posts: {},
-    friends: {},
+    user: JSON.parse(localStorage.getItem('user_info'))||{},
+    posts: JSON.parse(localStorage.getItem('posts'))||{},
+    friends: JSON.parse(localStorage.getItem('friends'))||{},
     token: localStorage.getItem('id_token') || null,
   }, action) {
   switch (action.type) {
     case "LOGGED_IN": {
-      localStorage.setItem('user_info', action.payload.user.userName);
+      localStorage.setItem('user_info', JSON.stringify(action.payload.user));
+      localStorage.setItem('posts', JSON.stringify(action.payload.posts));
+      localStorage.setItem('friends', JSON.stringify(action.payload.friends));
       return {
           ...state,
           posts: action.payload.posts,
@@ -19,6 +19,8 @@ export default function reducer(state = {
     }
     case "LOGGED_OUT": {
       localStorage.removeItem('user_info');
+      localStorage.removeItem('posts');
+      localStorage.removeItem('friends');
       return {
           ...state,
           user: null,
@@ -26,6 +28,5 @@ export default function reducer(state = {
       };
     }
   }
-  console.log(state);
   return state;
 }
