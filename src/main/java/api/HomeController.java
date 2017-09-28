@@ -152,8 +152,21 @@ public class HomeController {
     }
     
     @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/randomPost", method = RequestMethod.GET)
+    @RequestMapping(value = "/notification/{userID}", method = RequestMethod.GET)
+    public ArrayList<String> getNotification(@PathVariable int userID) {
+    	ArrayList<String> result = new ArrayList<String>();
+    	for(Notification noti:notification) {
+    		if(noti.getUserID() == userID){
+    			result.add(noti.getNoti());
+    		}
+    	}
+    	return result;
+    }
+    
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/randomPost")
     public Posts randomPost() {
+    	System.out.println("hhhhhhhh");
     		return new Posts(counter.incrementAndGet(),dbdao.getPostsRandomly());
     }
 

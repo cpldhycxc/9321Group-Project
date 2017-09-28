@@ -69,6 +69,7 @@ public class DBDAOImpl implements DBDAO {
             if(rs.next()) {
                 return false;
             }
+
             // prepare statement and ready to execute
             PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Users " +
                     "(userName, password, email, firstName, lastName, gender, birthday, userType)" +
@@ -444,19 +445,21 @@ public class DBDAOImpl implements DBDAO {
     }
     
     public ArrayList<Post> getPostsRandomly() {
+    	System.out.println("hhhhhhhh");
     	ArrayList<Post> postList = new ArrayList<Post>();
     	int count = 0;
     	try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Posts");
-            while(rs.next()) {
-            	count = rs.getInt(1);
-            }
+            rs.next();
+            count = rs.getInt(1);
+            System.out.println(count);
             int r = 0;
             Random rand = new Random();
             int max = count - 1;
             for(int i = 0;i < 10;i++) {
             	r=rand.nextInt((max - 0) + 1) + 0;
+            	System.out.println(r);
             	postList.add(getPostByPostID(r));
             }
         } catch (SQLException e){
@@ -469,16 +472,14 @@ public class DBDAOImpl implements DBDAO {
     	Post post = new Post();
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("" +
-                    "SELECT postID, userID, content, postTime" +
-                    "FROM Posts WHERE postID = '" + postID + "'");
-
+            ResultSet rs = stmt.executeQuery("SELECT PostID,UserID,content,posttime FROM Posts WHERE postID = '" + postID + "'");
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             while(rs.next()){
             	post.setPostId(rs.getInt(1));
+            	System.out.println(rs.getInt(1));
             	post.setUserName(getUserNameByUserID(rs.getInt(2)));
+            	System.out.println(rs.getInt(2));
             	post.setContent(rs.getString(3));
-//            	post.setImage(rs.getString(4));
             	post.setPostTime(format.parse(rs.getString(4)));
             }
         } catch (SQLException | ParseException e){
