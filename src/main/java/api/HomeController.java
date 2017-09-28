@@ -117,7 +117,7 @@ public class HomeController {
     }
 
     /**
-     * get userID posts and all his friends' posts
+     * get userID posts and all his friends' posts and likes by
      * @param userID
      * @return posts
      */
@@ -166,7 +166,6 @@ public class HomeController {
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/randomPost")
     public Posts randomPost() {
-    	System.out.println("hhhhhhhh");
     		return new Posts(counter.incrementAndGet(),dbdao.getPostsRandomly());
     }
 
@@ -198,7 +197,7 @@ public class HomeController {
     @RequestMapping(value="/upload/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload(
             @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
-        String name = Integer.toString(userID); // postID, userID, content
+        String name = Integer.toString(userID); //userID, content
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
