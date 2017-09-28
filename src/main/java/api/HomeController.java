@@ -41,6 +41,7 @@ public class HomeController {
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 
+    //curl -H "Content-Type: application/json" -X POST -d '{"userName":"shiyun","password":"haha","email":"shiyun.zhangsyz@gmail.com","firstName":"shiyun","lastName":"zhang","birthday":"1996-08-06"}' http://localhost:8080/signup
     /**
      * API call for sign up a user
      * @param user
@@ -49,6 +50,7 @@ public class HomeController {
     @CrossOrigin(origins = "*")
     @PostMapping("/signup")
     public SignUp signup(@RequestBody User user) { // userName, password, email, firstName, lastName, birthday
+        System.out.println(user.getBirthday());
         if(!dbdao.userSignUp(user)){
             return new SignUp(counter.incrementAndGet(), false);
         }
@@ -59,6 +61,8 @@ public class HomeController {
         return new SignUp(counter.incrementAndGet(), true);
     }
 
+
+    // test curl -H "Content-Type: application/json" -X POST -d '{"userName":"z3462191","password":"maxwell"}' http://localhost:8080/login
     /**
      * API call for user login
      * @param user
@@ -72,8 +76,6 @@ public class HomeController {
         login.setRequestID(counter.incrementAndGet());
         login.setUser(user);
         if(user.getUserName() == null){
-            login.getUser().setBirthday(new Date(1));
-            login.getUser().setJoinTime(new Date(1));
             login.setPosts(new ArrayList<>());
             login.setFriends(new ArrayList<>());
             login.setSuccess(false);
@@ -115,7 +117,7 @@ public class HomeController {
     }
 
     /**
-     * get userID posts and all his friends' posts
+     * get userID posts and all his friends' posts and likes by
      * @param userID
      * @return posts
      */
@@ -164,7 +166,6 @@ public class HomeController {
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/randomPost")
     public Posts randomPost() {
-    	System.out.println("hhhhhhhh");
     		return new Posts(counter.incrementAndGet(),dbdao.getPostsRandomly());
     }
 
@@ -196,7 +197,7 @@ public class HomeController {
     @RequestMapping(value="/upload/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload(
             @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
-        String name = Integer.toString(userID); // postID, userID, content
+        String name = Integer.toString(userID); //userID, content
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();

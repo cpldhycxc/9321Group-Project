@@ -95,7 +95,7 @@ print("UserName = Admin")
 print("Password = Admin")
 
 conn.execute("INSERT INTO Users (userName, password, email, firstName, lastName, gender, userType) VALUES (?,?,?,?,?,?,?)",
-             ("Admin", "Admin", "shiyun.zhangsyz@gmail.com", "JuBian", "Liang", "female", 2))
+             ("Admin", "Admin", "553966858@qq.com", "JuBian", "Liang", "female", 2))
 conn.commit()
 print("Insert Completed")
 
