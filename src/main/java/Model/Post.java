@@ -24,7 +24,7 @@ public class Post {
         this.postId = 0;
         this.userName = null;
         this.content = null;
-        this.image = null;
+//        this.image = null;
         this.postTime = null;
     }
 

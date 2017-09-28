@@ -33,6 +33,7 @@ public class HomeController {
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
+    private ArrayList<Notification> notification = new ArrayList<Notification>();
 
 
     @CrossOrigin(origins = "*")
@@ -166,7 +167,7 @@ public class HomeController {
     	int posterID = dbdao.getUserIdByPostID(postID);
     	if(getLike) {
     		Notification noti = new Notification(posterID,userName+" likes your post!");
-    		//notification.add(noti);
+    		notification.add(noti);
     		System.out.println(posterID);
     		System.out.println(userName+" likes your post!");
     	}
