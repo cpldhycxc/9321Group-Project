@@ -3,6 +3,7 @@ package DAO;
 import Model.Friend;
 import Model.Post;
 import Model.User;
+import api.UserActivities;
 import api.UserProfile;
 
 import org.json.JSONArray;
@@ -27,4 +28,5 @@ public interface DBDAO {
     public boolean deletePost(int postID);
     public String getEmailByUserID(int userID);
     public void addFriendRelation(int userID, int friendID);
+    public UserActivities userActivities(int userID);
 }
