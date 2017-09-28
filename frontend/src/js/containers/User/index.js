@@ -1,7 +1,10 @@
 import React from 'react';
 import { searchByUsername } from '../../actions/userActions';
 import { connect } from 'react-redux';
-import UserProfile from '../../components/User/Userprofile.js';
+import { Icon } from 'semantic-ui-react';
+import UserProfile from '../../components/UserProfile';
+import UserPosts from '../../components/UserPosts';
+import UserFriendList from '../../components/UserFriendList';
 // import { connect } from "react-redux";
 
 
@@ -15,7 +18,7 @@ export default class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selecteduser:{}
+      selecteduser:null
     }
   }
 
@@ -29,40 +32,25 @@ export default class User extends React.Component {
 
 
   render() {
-    const { selecteduser }= this.state;
-    console.log(selecteduser.postList);
+    if(!this.state.selecteduser){
+      return null
+    }
     return (
         <div className='row'>
         <div className='col-sm-12 col-md-8' style={{padding: 0}}>
          <div className='white-container userprofile'>
-           <UserProfile selecteduser={this.state.selecteduser}/>
+           <UserProfile selecteduser={this.state.selecteduser} />
          </div>
          <div className='white-container postlist'>
-           <div className='panel panel-default'>
-             <div className='panel-body'>
-               <div className='row'>
-                 <div className='col-sm-12' >
-                   <div>
-                     dsfsdfsdfdsjfksjdlfkjasdlkfjlksadjflkjsdakfjslkdafjlksadjflkjsadlkfjsdlkjflk
-                   </div>
-                    <span className="glyphicon glyphicon-heart heart"></span>
-                   <div className='label'>
-                     dfjsddfdfklfjs
-                   </div>
-
-                 </div>
-
-               </div>
-             </div>
-
-         </div>
+              <UserPosts
+                 postlist={this.state.selecteduser.postList}
+                 userName={this.state.selecteduser.userName} />
           </div>
        </div>
        <div className='col-sm-12 col-md-4 white-bg-container'>
          <div className='white-container friendlist'>
-           <h1>friendlist</h1>
+           <UserFriendList friendlist={this.state.selecteduser.friendList} />
         </div>
-
        </div>
        </div>
     );

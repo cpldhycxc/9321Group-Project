@@ -81,7 +81,8 @@ export default class SignupForm extends React.Component {
       if(this.isValid()){
         this.setState({ errors:{}, isloading:true });
         signuprequest(this.state).then((res)=>{
-          if(res.success){
+          console.log(res)
+          if(res.data.success){
             this.setState({ issuccess: 1 });
           } else {
             this.setState({ issuccess: 0 });
@@ -92,6 +93,7 @@ export default class SignupForm extends React.Component {
 
     render() {
         const { errors, issuccess } = this.state;
+        console.log(issuccess);
         const result = ((issuccess) => {
           if (issuccess == 1) return (
             <div>

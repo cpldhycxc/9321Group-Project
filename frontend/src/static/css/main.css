@@ -263,9 +263,33 @@ input {
 
 .profile-img {
   height: 140px;
-  ali
 }
 
-.heart{
-  color: #ff0000;
+.postlist-username {
+  display: inline;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.post-content {
+  position: absolute;
+  top: 3px;
+  margin-left: 10px;
+}
+
+.friend-img {
+  height:35px;
+}
+
+.friendlist-title {
+  text-align: center;
+}
+
+.friendlist-body {
+  text-align: center;
+  padding-left: 0;
+}
+
+.friend-a{
+  color:seagreen;
 }
