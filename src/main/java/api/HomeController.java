@@ -10,6 +10,7 @@ import Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
+import sun.misc.Request;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -33,6 +34,16 @@ public class HomeController {
         sendTLSMail("shiyun.zhangsyz@gmail.com", "123");
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
+    @RequestMapping("/searchResult")
+    public ArrayList<User> search(@RequestParam(value="param", defaultValue="") String param ){
+        return search(param);
+    }
+
+    @RequestMapping("/advSearchResult")
+    public ArrayList<User> advanceSearch(@RequestParam(value="param", defaultValue = "") String param){
+        return null;
+    }
+
 
     /**
      * API call for sign up a user
@@ -131,6 +142,11 @@ public class HomeController {
     public UserProfile userProfile(@PathVariable String userName) {
     	System.out.println("dfddf");
     	return dbdao.userProfile(userName);
+    }
+
+    @RequestMapping(value = "/activeReport/{userID}", method = RequestMethod.GET)
+    public UserActivities userActivity(@PathVariable int userID){
+        return dbdao.userActivities(userID);
     }
 
 
