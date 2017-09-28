@@ -5,13 +5,15 @@ import { Button } from 'react-toolbox/lib/button';
 import PostComment from '../PostComment';
 import LikeButton from '../LikeButton';
 import { Icon } from 'semantic-ui-react';
+import axios from 'axios';
 
 export default class Post extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			numOfLikes: this.props.likes.length
+			numOfLikes: this.props.likes.length,
+			avatarURL: 'http://localhost:8080/files/users/'.concat(this.props.userID)
 		};
 	}
 
