@@ -17,7 +17,7 @@ export default class UserProfile extends React.Component {
             <div className='col-md-3 col-lg-3'>
               <img src='static/images/userprofile.svg' className='profile-img'/>
             </div>
-          <div className=" col-md-9 col-lg-9 ">
+          <div className=" col-md-9 col-lg-9">
         <table className="table table-user-information">
           <tbody>
           <tr>

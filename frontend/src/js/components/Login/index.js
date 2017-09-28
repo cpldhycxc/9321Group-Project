@@ -39,7 +39,6 @@ export default class Login extends React.Component {
 
 	render() {
 		const { user, token } = this.props;
-		console.log(user);
 		if (token) {
 			return (
 				<div className='user-icon-container'>
