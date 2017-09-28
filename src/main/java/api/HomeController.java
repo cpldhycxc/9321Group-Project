@@ -20,6 +20,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
 
 
 @CrossOrigin
@@ -194,24 +195,30 @@ public class HomeController {
      * @return
      */
     @CrossOrigin(origins = "*")
-    @RequestMapping(value="/upload/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
-    public @ResponseBody String handleFileUpload(
+    @RequestMapping(value="/addPost/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
+    public @ResponseBody SignUp handleFileUpload(
             @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
-        String filePath = "/users/" + Integer.toString(userID); //userID, content
+        String filePath = "posts/" + Integer.toString(userID); //userID, content
         if (!file.isEmpty()) {
             try {
+                System.out.println(filePath);
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =
                         new BufferedOutputStream(new FileOutputStream(new File(filePath)));
                 stream.write(bytes);
                 stream.close();
 
-                return "You successfully uploaded " + userID + " into " + filePath + "-uploaded !";
+                dbdao.addPost(userID, content);
+
+                return new SignUp(counter.incrementAndGet(), true);
             } catch (Exception e) {
-                return "You failed to upload " + filePath + " => " + e.getMessage();
+                e.printStackTrace();
+                System.out.println("asdasd");
+                return new SignUp(counter.incrementAndGet(), false);
             }
         } else {
-            return "You failed to upload " + filePath + " because the file was empty.";
+            System.out.println("kkkk");
+            return new SignUp(counter.incrementAndGet(), false);
         }
     }
 
@@ -223,23 +230,24 @@ public class HomeController {
      */
     @CrossOrigin(origins = "*")
     @RequestMapping(value="/changeProfile/{userID}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
-    public @ResponseBody String userProfileChange(
+    public @ResponseBody SignUp userProfileChange(
             @RequestParam("file") MultipartFile file, @PathVariable int userID){
-        String name = Integer.toString(userID); // postID, userID, content
+        String filePath = "users/" + Integer.toString(userID); // postID, userID, content
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File(name + "-uploaded")));
+                        new BufferedOutputStream(new FileOutputStream(new File(filePath)));
                 stream.write(bytes);
                 stream.close();
 
-                return "You successfully uploaded " + userID + " into " + name + "-uploaded !";
+                return new SignUp(counter.incrementAndGet(), true);
             } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
+                e.printStackTrace();
+                return new SignUp(counter.incrementAndGet(), false);
             }
         } else {
-            return "You failed to upload " + name + " because the file was empty.";
+            return new SignUp(counter.incrementAndGet(), false);
         }
     }
 
@@ -247,15 +255,16 @@ public class HomeController {
      * return a image at the given path
      */
     @CrossOrigin(value = "*")
-    @RequestMapping(value = "/files/{fileName}", method = RequestMethod.GET) //users/userID or /posts/postID
-    public void getFile( @PathVariable("fileName") String fileName, HttpServletResponse response) {
+    @RequestMapping(value = "/files/{folder}/{imageID}", method = RequestMethod.GET) //users/userID or /posts/postID
+    public void getFile(@PathVariable("folder") String folder, @PathVariable("imageID") int id, HttpServletResponse response) {
         try {
             // get your file as InputStream
-            InputStream is = new FileInputStream(new File(fileName));
+            InputStream is = new FileInputStream(new File(folder + "/" + id));
             // copy it to response's OutputStream
             IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {
+            ex.printStackTrace();
             throw new RuntimeException("IOError writing file to output stream");
         }
 

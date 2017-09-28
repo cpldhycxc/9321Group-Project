@@ -499,6 +499,18 @@ public class DBDAOImpl implements DBDAO {
         }
         return name;
     }
-	
+
+    public boolean addPost(int userID, String content){
+        try (Connection conn = connect()){
+            PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Posts (userID, content) VALUES (?, ?)");
+            preStatment.setInt(1, userID);
+            preStatment.setString(2, content);
+            preStatment.executeUpdate();
+            return true;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
