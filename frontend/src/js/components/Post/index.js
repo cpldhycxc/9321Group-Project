@@ -13,7 +13,8 @@ export default class Post extends React.Component {
 		super(props);
 		this.state = {
 			numOfLikes: this.props.likes.length,
-			avatarURL: 'http://localhost:8080/files/users/'.concat(this.props.userID)
+			avatarURL: 'http://localhost:8080/files/users/'.concat(this.props.userID),
+			imageURL: 'http://localhost:8080/files/posts/'.concat(this.props.postID)
 		};
 	}
 
@@ -33,7 +34,6 @@ export default class Post extends React.Component {
 		const userName = this.props.userName;
 		const postID = this.props.postID;
 		const selfID = this.props.selfID;
-		const numOfLikes = this.props.likes.length;
 		let likeByMySelf = false;
 		this.props.likes.map((e) => {
 			if (e.userID === selfID) {
