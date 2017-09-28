@@ -171,11 +171,11 @@ public class HomeController {
     
     @CrossOrigin(origins = "http://localhost:9000")
     @RequestMapping(value = "/getNotification/{userID}", method = RequestMethod.GET)
-    public ArrayList<Notification> getNotification(@PathVariable int userID) {
-    	ArrayList<Notification> result = new ArrayList<Notification>();
+    public ArrayList<String> getNotification(@PathVariable int userID) {
+    	ArrayList<String> result = new ArrayList<String>();
     	for(Notification noti: notification) {
     		if(noti.getUserID() == userID){
-    			result.add(noti);
+    			result.add(noti.getNoti());
     		}
     	}
     	notification.clear();
