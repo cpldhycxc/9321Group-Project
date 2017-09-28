@@ -150,6 +150,12 @@ public class HomeController {
     public DeletePost deletePost(@PathVariable int postID) {
     	return new DeletePost(postID, dbdao.deletePost(postID));
     }
+    
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/randomPost", method = RequestMethod.GET)
+    public Posts randomPost() {
+    		return new Posts(counter.incrementAndGet(),dbdao.getPostsRandomly());
+    }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/likePost")
@@ -181,7 +187,7 @@ public class HomeController {
     	notification.clear();
     	return result;
     }
-
+    
     /**
      * helder method that send email to user
      */

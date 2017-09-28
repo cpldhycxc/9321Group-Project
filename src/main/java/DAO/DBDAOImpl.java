@@ -4,6 +4,7 @@ import Model.Friend;
 import Model.Post;
 import Model.User;
 import api.Activity;
+
 import api.UserActivities;
 import api.UserProfile;
 
@@ -11,6 +12,7 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -436,6 +438,62 @@ public class DBDAOImpl implements DBDAO {
             e.printStackTrace();
         }
         return userID;
+    }
+    
+    public ArrayList<Post> getPostsRandomly() {
+    	ArrayList<Post> postList = new ArrayList<Post>();
+    	int count = 0;
+    	try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM Posts");
+            while(rs.next()) {
+            	count = rs.getInt(1);
+            }
+            int r = 0;
+            Random rand = new Random();
+            int max = count - 1;
+            for(int i = 0;i < 10;i++) {
+            	r=rand.nextInt((max - 0) + 1) + 0;
+            	postList.add(getPostByPostID(r));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    	return postList;
+    }
+    
+    public Post getPostByPostID(int postID) {
+    	Post post = new Post();
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT postID, userID, content, image, postTime" +
+                    "FROM Posts WHERE postID = '" + postID + "'");
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            while(rs.next()){
+            	post.setPostId(rs.getInt(1));
+            	post.setUserName(getUserNameByUserID(rs.getInt(2)));
+            	post.setContent(rs.getString(3));
+            	post.setImage(rs.getString(4));
+            	post.setPostTime(format.parse(rs.getString(5)));
+            }
+        } catch (SQLException | ParseException e){
+            e.printStackTrace();
+        }
+        return post;
+    }
+    
+    public String getUserNameByUserID(int userID) {
+        String name = null;
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT userName FROM Users WHERE userID = '" + userID + "'");
+            name = rs.getString(1);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return name;
     }
 	
 

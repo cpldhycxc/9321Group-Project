@@ -22,6 +22,13 @@ public class Post {
         }
 
     }
+    public Post(){
+        this.postId = 0;
+        this.userName = null;
+        this.content = null;
+        this.image = null;
+        this.postTime = null;
+    }
 
     public int getPostId() { return postId; }
     public String getUserName() { return userName; }
