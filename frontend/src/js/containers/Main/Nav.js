@@ -3,15 +3,27 @@ import { connect } from 'react-redux';
 import { Link, Switch, Route } from 'react-router-dom';
 import Login from '../../components/Login';
 import NotificationSystem from 'react-notification-system';
+import axios from 'axios';
 
+@connect((store) => {
+	return {
+		user: store.user.user,
+	};
+})
 class Header extends React.Component {
-
 
   componentDidMount() {
     this.notificationSystem = this.refs.notificationSystem;
-    notifications.data.map((e) => (
-			this.addNotification(e)
-    ));
+    const url = 'http://localhost:8080/notification/'.concat(this.props.user.userID);
+    axios.get(url)
+    .then((response) => {
+			response.data.map((e) => (
+				this.addNotification(e)
+			));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   addNotification = (message) => {
