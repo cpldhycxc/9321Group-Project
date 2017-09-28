@@ -7,9 +7,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import DAO.*;
 import Model.FriendRequest;
-import Model.Post;
-import Model.User;
 import Model.LikePostM;
+import Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +29,7 @@ public class HomeController {
     private final AtomicLong counter = new AtomicLong();
 
 
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin(origins = "*")
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         sendTLSMail("shiyun.zhangsyz@gmail.com", "123");
@@ -42,7 +41,7 @@ public class HomeController {
      * @param user
      * @return json contain success, requestID
      */
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin(origins = "*")
     @PostMapping("/signup")
     public SignUp signup(@RequestBody User user) { // userName, password, email, firstName, lastName, birthday
         if(!dbdao.userSignUp(user)){
@@ -60,7 +59,7 @@ public class HomeController {
      * @param user
      * @return all user information, requestID, success, posts and friends
      */
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public Login login(@RequestBody User user){
         Login login = new Login();
@@ -86,13 +85,13 @@ public class HomeController {
      * @param rf
      * @return json of success
      */
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin(origins = "*")
     @PostMapping("/friendRequest")
     public FriendRelated friendRequest(@RequestBody FriendRequest rf){
         String toEmail = dbdao.getEmailByUserID(rf.getFriendID());
         String msg = "Dear " + rf.getFriendName() + ","
                 + "\n\n User " + rf.getUserName() + " want to add you as friend on UNSW Book, click the link below to accept" +
-                "\n  localhost:9000/addfriend/" + Integer.toString(rf.getUserID());
+                "\n  localhost:9000/addfriend/" + Integer.toString(rf.getFriendID());
         sendTLSMail(toEmail, msg);
         return new FriendRelated(counter.incrementAndGet(), true);
     }
@@ -102,7 +101,7 @@ public class HomeController {
      * @param rf
      * @return
      */
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin(origins = "*")
     @PostMapping("addFriend")
     public FriendRelated addFriend(@RequestBody FriendRequest rf){
         dbdao.addFriendRelation(rf.getUserID(), rf.getFriendID());
@@ -115,37 +114,37 @@ public class HomeController {
      * @param userID
      * @return posts
      */
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin(origins = "*")
     @GetMapping("getPosts")
     public Posts getPosts(@RequestParam(value = "userID") int userID){
         return new Posts(counter.incrementAndGet(), dbdao.getPostsByUserID(userID));
     }
 
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/checkExistence/{loginName}", method = RequestMethod.GET)
     public CheckExistence checkExistence(@PathVariable String loginName) {
     		return new CheckExistence(loginName,dbdao.userExistence(loginName));
     }
 
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/activation/{userID}", method = RequestMethod.GET)
     public void userActivation(@PathVariable int userID) {
     	dbdao.userActivation(userID);
     }
-    
-    @CrossOrigin(origins = "http://localhost:9000")
+
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
     public UserProfile userProfile(@PathVariable String userName) {
     	return dbdao.userProfile(userName);
     }
-    
-    @CrossOrigin(origins = "http://localhost:9000")
+
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/deletePost/{postID}", method = RequestMethod.GET)
     public DeletePost deletePost(@PathVariable int postID) {
     	return new DeletePost(postID, dbdao.deletePost(postID));
     }
-    
-    @CrossOrigin(origins = "http://localhost:9000")
+
+    @CrossOrigin(origins = "*")
     @PostMapping("/likePost")
     public LikePost deletePost(@RequestBody LikePostM post) {
     	String userName = post.getUserName();
@@ -153,7 +152,7 @@ public class HomeController {
     	int postID = Integer.parseInt(post.getPostID());
     	return new LikePost(userID,postID,dbdao.likePost(userID, postID));
     }
-    
+
 
     /**
      * helder method that send email to user
