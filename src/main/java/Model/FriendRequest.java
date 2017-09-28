@@ -6,11 +6,6 @@ public class FriendRequest {
     private int friendID;
     private String friendName;
 
-    public FriendRequest(int id1, int id2){
-        userID = id1;
-        friendID = id2;
-    }
-
     public int getUserID() { return userID; }
     public int getFriendID() { return friendID; }
     public String getUserName() { return userName; }

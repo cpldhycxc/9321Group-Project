@@ -85,7 +85,7 @@ public class HomeController {
      * @return json of success
      */
     @CrossOrigin(origins = "http://localhost:9000")
-    @PostMapping("friendRequest")
+    @PostMapping("/friendRequest")
     public FriendRelated friendRequest(@RequestBody FriendRequest rf){
         String toEmail = dbdao.getEmailByUserID(rf.getFriendID());
         String msg = "Dear " + rf.getFriendName() + ","
@@ -104,6 +104,7 @@ public class HomeController {
     @PostMapping("addFriend")
     public FriendRelated addFriend(@RequestBody FriendRequest rf){
         dbdao.addFriendRelation(rf.getUserID(), rf.getFriendID());
+        dbdao.addFriendRelation(rf.getFriendID(), rf.getUserID());
         return new FriendRelated(counter.incrementAndGet(), true);
     }
 
