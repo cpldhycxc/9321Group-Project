@@ -321,7 +321,7 @@ public class DBDAOImpl implements DBDAO {
                     "FROM Users WHERE userName = '" + userName+ "'");
             int userI = rs.getInt(1);
             ArrayList<Friend> friendList = getFriendsByUserID(userI);
-            ArrayList<Post> postList = getPostsByUserID(userI);
+            ArrayList<Post> postList = getOwnPostsByUserID(userI);
             while(rs.next()){
             	
             	System.out.println("hhhhh");
@@ -361,7 +361,59 @@ public class DBDAOImpl implements DBDAO {
         }
 		return result;
 	}
-
+	
+	/**
+     * give the userID of a user find out all his's own post 
+     * @param userID
+     * @return arraylist of post for the user
+     */
+    public ArrayList<Post> getOwnPostsByUserID(int userID) {
+        ArrayList<Post> postArrayList = new ArrayList<>();
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.image, Posts.postTime FROM Posts, Users WHERE Posts.userID=Users.userID AND Posts.userID='" + Integer.toString(userID) + "'" +
+                    "ORDER BY Posts.postTime DESC");
+            System.out.println(userID);
+            while(rs.next()){
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return postArrayList;
+    }
+    /**
+     * function to like/unlike post
+     * @param userID postID
+     * @return boolean true for successful like and unlike 
+     */
+	@Override
+	public boolean likePost(int userID, int postID) {
+		boolean result = false;		
+		System.out.println(userID);
+		System.out.println(postID);
+		try(Connection conn = connect()){
+			PreparedStatement psA = conn.prepareStatement("INSERT INTO Likes (userID, postID) VALUES (?, ?)");
+			PreparedStatement psD = conn.prepareStatement("DELETE FROM Likes WHERE postID= '"+postID+"'and userID='"+userID+"'");
+			try{
+				psA.setInt(1,userID);
+				psA.setInt(2,postID);
+				psA.executeUpdate();
+				System.out.println("Like successfully");
+				result = true;
+			}catch(SQLException e){
+				
+				psD.executeUpdate();
+				System.out.println("Unlike successfully");
+				result = true;
+			}
+		}catch (SQLException e){
+            e.printStackTrace();
+        }		
+		return result;
+	}
+	
 
 
 }

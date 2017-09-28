@@ -7,7 +7,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import DAO.*;
 import Model.FriendRequest;
+import Model.Post;
 import Model.User;
+import Model.LikePostM;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -131,15 +133,27 @@ public class HomeController {
     	dbdao.userActivation(userID);
     }
     
+    @CrossOrigin(origins = "http://localhost:9000")
     @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
     public UserProfile userProfile(@PathVariable String userName) {
     	return dbdao.userProfile(userName);
     }
     
+    @CrossOrigin(origins = "http://localhost:9000")
     @RequestMapping(value = "/deletePost/{postID}", method = RequestMethod.GET)
     public DeletePost deletePost(@PathVariable int postID) {
     	return new DeletePost(postID, dbdao.deletePost(postID));
     }
+    
+    @CrossOrigin(origins = "http://localhost:9000")
+    @PostMapping("/likePost")
+    public LikePost deletePost(@RequestBody LikePostM post) {
+    	String userName = post.getUserName();
+    	int userID = dbdao.getUserIdByUserName(userName);
+    	int postID = Integer.parseInt(post.getPostID());
+    	return new LikePost(userID,postID,dbdao.likePost(userID, postID));
+    }
+    
 
     /**
      * helder method that send email to user
