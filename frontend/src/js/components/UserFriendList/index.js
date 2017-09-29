@@ -14,7 +14,6 @@ class UserFriendList extends React.Component {
 
     render(){
       const { friendlist } = this.props;
-      console.log(friendlist);
       const result = friendlist.map((friend,i)=>(
           <tr>
           <td><img src='static/images/userprofile.svg' className='friend-img' /></td>
