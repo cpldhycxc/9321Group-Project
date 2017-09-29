@@ -46,14 +46,14 @@ public class HomeController {
         return dbdao.search(param);
     }
 
- //   @RequestMapping("/advSarchResult")
- //   public ArrayList<User> advsearch(@RequestParam(value="param", defaultValue="") String param ){
- //       return dbdao.advSearch(param);
- //   }
+    @RequestMapping("/advSarchResult")
+    public ArrayList<User> advsearch(@RequestParam(value="param", defaultValue="") String param ){
+        return dbdao.advSearch(param);
+    }
 
     @RequestMapping("/advSearchResult")
     public ArrayList<User> advanceSearch(@RequestParam(value="param", defaultValue = "") String param){
-        return dbdao.advSearch(param);
+        return null;
     }
 
 
