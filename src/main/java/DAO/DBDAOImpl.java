@@ -282,9 +282,8 @@ public class DBDAOImpl implements DBDAO {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName LIKE '% "+ param +" %' ");
             ArrayList<User> ret = new ArrayList<User>();
             if(rs == null){
-                System.out.println("none");
+                System.out.println("no result found");
             }
-            System.out.println("goes here");
             while(rs.next()){
                 System.out.println("rs: " + rs.getString(1));
 
@@ -303,6 +302,39 @@ public class DBDAOImpl implements DBDAO {
             return null;
         }
 
+    }
+
+    public ArrayList<User> advSearch(String param) {
+//        ArrayList<String> data = new ArrayList<String>();
+        String[] data = param.split("&&");
+        String dob = data[0];
+        String gender = data[1];
+
+        try (Connection conn = connect()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE  birthday = ' " + dob + " '  " +
+                    "AND gender = '"+ gender + "' " );
+            ArrayList<User> ret = new ArrayList<User>();
+            if (rs == null) {
+                System.out.println("none");
+            }
+            while (rs.next()) {
+                System.out.println("rs: " + rs.getString(1));
+
+                User u = new User(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(7));
+                ret.add(u);
+            }
+            System.out.println();
+            return ret;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
 	@Override
@@ -387,6 +419,7 @@ public class DBDAOImpl implements DBDAO {
         ArrayList<Post> postArrayList = new ArrayList<>();
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
+<<<<<<< HEAD
             ResultSet rs = stmt.executeQuery("" +
                     "SELECT Posts.postID, Users.userName, Posts.content, Posts.postTime, Users.userID FROM Posts, Users WHERE Posts.userID=Users.userID AND Posts.userID='" + Integer.toString(userID) + "'" +
                     "ORDER BY Posts.postTime DESC");
@@ -395,6 +428,28 @@ public class DBDAOImpl implements DBDAO {
                 postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(userID)));
             }
         } catch (SQLException e){
+=======
+            ResultSet joinDate = stmt.executeQuery("SELECT joinTime FROM users WHERE userID = '"+ userID +"'");
+            ResultSet posts = stmt.executeQuery("SELECT content, postTime FROM posts WHERE userID= '"+ userID +"' ORDER BY postTime");
+            ResultSet addFriends = stmt.executeQuery("SELECT friendID, startDate FROM Friends WHERE userID = '"+ userID +"' ORDER BY startDate");
+            //init join date
+            joinDate.next();
+            userAct.setJoinDate(joinDate.getString(1));
+            // adding posts record
+            while(posts.next()){
+                Activity act = new Activity(1, posts.getString(1), posts.getString(2));
+                userAct.addActivity(act);
+            }
+
+            while(addFriends.next()){
+                Activity act = new Activity(2, addFriends.getString(1), addFriends.getString(2));
+                userAct.addActivity(act);
+            }
+            if(!userAct.checkEmpty()){
+                userAct.sortActivities();
+            }
+        }catch (SQLException e){
+>>>>>>> origin/UserAct
             e.printStackTrace();
         }
         return postArrayList;

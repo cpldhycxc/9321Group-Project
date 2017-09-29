@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.Request;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -40,6 +41,21 @@ public class HomeController {
         sendTLSMail("shiyun.zhangsyz@gmail.com", "123");
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
+    @RequestMapping("/searchResult")
+    public ArrayList<User> search(@RequestParam(value="param", defaultValue="") String param ){
+        return dbdao.search(param);
+    }
+
+ //   @RequestMapping("/advSarchResult")
+ //   public ArrayList<User> advsearch(@RequestParam(value="param", defaultValue="") String param ){
+ //       return dbdao.advSearch(param);
+ //   }
+
+    @RequestMapping("/advSearchResult")
+    public ArrayList<User> advanceSearch(@RequestParam(value="param", defaultValue = "") String param){
+        return dbdao.advSearch(param);
+    }
+
 
     //curl -H "Content-Type: application/json" -X POST -d '{"userName":"shiyun","password":"haha","email":"shiyun.zhangsyz@gmail.com","firstName":"shiyun","lastName":"zhang","birthday":"1996-08-06"}' http://localhost:8080/signup
     /**
@@ -309,6 +325,11 @@ public class HomeController {
         }
     }
 
+
+    @RequestMapping(value = "/activeReport/{userID}", method = RequestMethod.GET)
+    public UserActivities userActivity(@PathVariable int userID){
+        return dbdao.userActivities(userID);
+    }
 
 
 }
