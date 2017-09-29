@@ -282,8 +282,9 @@ public class DBDAOImpl implements DBDAO {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName LIKE '% "+ param +" %' ");
             ArrayList<User> ret = new ArrayList<User>();
             if(rs == null){
-                System.out.println("no result found");
+                System.out.println("none");
             }
+            System.out.println("goes here");
             while(rs.next()){
                 System.out.println("rs: " + rs.getString(1));
 
@@ -302,39 +303,6 @@ public class DBDAOImpl implements DBDAO {
             return null;
         }
 
-    }
-
-    public ArrayList<User> advSearch(String param) {
-//        ArrayList<String> data = new ArrayList<String>();
-        String[] data = param.split("&&");
-        String dob = data[0];
-        String gender = data[1];
-
-        try (Connection conn = connect()) {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE  birthday = ' " + dob + " '  " +
-                    "AND gender = '"+ gender + "' " );
-            ArrayList<User> ret = new ArrayList<User>();
-            if (rs == null) {
-                System.out.println("none");
-            }
-            while (rs.next()) {
-                System.out.println("rs: " + rs.getString(1));
-
-                User u = new User(rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(7));
-                ret.add(u);
-            }
-            System.out.println();
-            return ret;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
     }
 
 	@Override
