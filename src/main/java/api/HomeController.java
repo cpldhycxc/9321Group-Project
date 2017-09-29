@@ -36,7 +36,7 @@ public class HomeController {
     }
     @RequestMapping("/searchResult")
     public ArrayList<User> search(@RequestParam(value="param", defaultValue="") String param ){
-        return dbdao.search(param);
+        return dbdao.Search(param);
     }
 
  //   @RequestMapping("/advSarchResult")
