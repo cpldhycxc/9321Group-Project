@@ -24,7 +24,6 @@ public class UserProfile {
 	    private String gender;
 //	    private Date birthday; //date format like 2017-09-12T02:00:00.00
 	    private String birthday;
-	    private String photo;
 	    private int userType;
 //	    private Date joinTime;
 	    private String joinTime;
@@ -32,7 +31,7 @@ public class UserProfile {
 	    private ArrayList<Post> postList;
 	    private ArrayList<Friend> friendList;
 	    
-	    public UserProfile(int userId,String username, String em, String firstname, String lastname,String gend, String birthDay,String pht,int usertype,String jointime,ArrayList<Post> posts,ArrayList<Friend> friends) {
+	    public UserProfile(int userId,String username, String em, String firstname, String lastname,String gend, String birthDay,int usertype,String jointime,ArrayList<Post> posts,ArrayList<Friend> friends) {
 	    	userID = userId;
 	    	userName = username;
 	    	email = em;
@@ -40,7 +39,6 @@ public class UserProfile {
 	    	lastName = lastname;
 	    	gender = gend;
 	    	birthday = birthDay;
-	    	photo = pht;
 	    	userType = usertype;
 	    	joinTime = jointime;
 	    	postList = posts;
@@ -71,7 +69,6 @@ public class UserProfile {
 		    this.lastName = null;
 		    this.gender = null;
 		    this.birthday = null; //date format like 2017-09-12T02:00:00.00
-		    this.photo = null;
 		    this.userType = UNACTIVATED;
 		    this.joinTime = null;
 		    this.friendList = new ArrayList<Friend>();
@@ -106,9 +103,6 @@ public class UserProfile {
 			return birthday;
 		}
 
-		public String getPhoto() {
-			return photo;
-		}
 
 		public int getUserType() {
 			return userType;
@@ -154,9 +148,6 @@ public class UserProfile {
 			this.birthday = birthday;
 		}
 
-		public void setPhoto(String photo) {
-			this.photo = photo;
-		}
 
 		public void setUserType(int userType) {
 			this.userType = userType;

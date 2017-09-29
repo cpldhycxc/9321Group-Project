@@ -312,7 +312,7 @@ public class DBDAOImpl implements DBDAO {
 			
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, photo, userType, joinTime " +
+                    "SELECT userID, userName, email, firstName, lastName, gender, birthday,userType, joinTime " +
                     "FROM Users WHERE userName = '" + userName+ "'");
             int userI = rs.getInt(1);
             ArrayList<Friend> friendList = getFriendsByUserID(userI);
@@ -327,9 +327,8 @@ public class DBDAOImpl implements DBDAO {
                 u.setLastName(rs.getString(5));
                 u.setGender(rs.getString(6));
                 u.setBirthday(rs.getString(7));
-                u.setPhoto(rs.getString(8));
-                u.setUserType(rs.getInt(9));
-                u.setJoinTime(rs.getString(10));
+                u.setUserType(rs.getInt(8));
+                u.setJoinTime(rs.getString(9));
                 u.setFriendList(friendList);
                 u.setPostList(postList);
             }     
