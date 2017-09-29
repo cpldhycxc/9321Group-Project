@@ -1,5 +1,6 @@
 const default_state = {
-  posts: []
+  posts: [],
+  selfID: 0
 };
 
 export default function reducer(state = default_state, action) {
@@ -8,6 +9,12 @@ export default function reducer(state = default_state, action) {
 				return {
 					...state,
 					posts: action.payload
+				};
+			}
+			case 'GET_SELFID': {
+				return {
+					...state,
+					selfID: action.payload
 				};
 			}
     }
