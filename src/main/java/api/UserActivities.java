@@ -1,6 +1,7 @@
 package api;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class UserActivities {
     private String joinDate;
@@ -33,6 +34,10 @@ public class UserActivities {
     }
 
     public void sortActivities(){
+        Collections.sort(this.activities);
+    }
 
+    public boolean checkEmpty(){
+        return this.activities.isEmpty();
     }
 }

@@ -1,6 +1,6 @@
 package api;
 
-public class Activity{
+public class Activity implements Comparable<Activity>{
     private int type;
     private String description;
     private String date;
@@ -23,7 +23,7 @@ public class Activity{
         return date;
     }
 
-//    public int compareTo(Activity o){
-//        return ;
-//    }
+    public int compareTo(Activity o){
+         return 0;
+    }
 }
