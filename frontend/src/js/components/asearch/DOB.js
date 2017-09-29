@@ -15,16 +15,13 @@ class DOB extends React.Component {
 		super(props);
 		this.state = {
 			disabled: false,
-            isGender: false,
-            isDOB: false,
-			value: [],
-            gender: [],
+			value: 'none',
 		};
 		this.selectChange = this.selectChange.bind(this);
 	}
 	selectChange(value) {
 		console.log('You selected: ', value);
-		this.setState({ value });
+		this.setState({ value: value });
 	}
 
 	render() {
