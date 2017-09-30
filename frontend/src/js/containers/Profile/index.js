@@ -42,12 +42,13 @@ class profile extends React.Component {
      return (text.length > 0 && text.length < 128);
  }
 
- onSubmit = (e) => {
-   e.preventDefault();
+ onSubmit = text => event => {
+   event.preventDefault();
    var formData = new FormData();
    console.log(formData);
+   const url = 'http://localhost:8080/changeProfile/' + text;
    formData.append('file', this.state.pictures);
-   fetch('http://localhost:8080/changeProfile/11', {
+   fetch(url, {
 	method: 'POST',
 	body: formData
    }).then((response) => {
@@ -62,6 +63,8 @@ class profile extends React.Component {
  render() {
     const { user, token } = this.props;
 	console.log(user);
+	const id = user.userID;
+	const url = 'http://localhost:8080/files/users/' + id;
      if (token) {
          return (
              <div>
@@ -95,7 +98,7 @@ class profile extends React.Component {
                     change={this.dataChanged}
                 />
                 <h3>Photo</h3>
-                <img alt="NothingToshow" src="http://localhost:8080/files/users/11"></img>
+                <img alt="NothingToshow" src={url}></img>
 				<form>
 					<FileInput
 					name="myImage"
@@ -105,7 +108,7 @@ class profile extends React.Component {
 					onChange={this.handleInput}
 					/>
 				</form>
-				<button type="submit" onClick={this.onSubmit}> Update Picture </button>
+				<button type="submit" onClick={this.onSubmit(id)}> Update Picture </button>
                 <h3>email</h3>
                 <InlineEdit
                     validate={this.customValidateText}
