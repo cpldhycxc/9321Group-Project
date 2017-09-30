@@ -1,6 +1,7 @@
 import InlineEdit from 'react-edit-inline';
 import React from 'react';
 import { connect } from 'react-redux';
+import FileInput from 'react-file-input';
 
 
 @connect((store) => {
@@ -14,9 +15,22 @@ class profile extends React.Component {
  constructor(props) {
   super(props);
   this.state = {
-
+	pictures: [],
+	username: '',
+	fname: '',
+	lname: '',
+	gender: '',
+	dob: '',
+	email: '',
   };
  this.dataChanged = this.dataChanged.bind(this);
+ this.handleInput = this.handleInput.bind(this);
+ }
+
+ handleInput(event) {
+	this.setState({
+		pictures: event.target.files[0],
+	});
  }
 
  dataChanged(data) {
@@ -28,15 +42,46 @@ class profile extends React.Component {
      return (text.length > 0 && text.length < 128);
  }
 
+ onSubmit = (e) => {
+   e.preventDefault();
+   var formData = new FormData();
+   console.log(formData);
+   formData.append('file', this.state.pictures);
+   fetch('http://localhost:8080/changeProfile/11', {
+	method: 'POST',
+	body: formData
+   }).then((response) => {
+	console.log(response);
+   }).catch((err) => {
+	console.log(err);
+   });
+   console.log('submit');
+ }
+
+
  render() {
-     const { user, token } = this.props;
-     console.log(user);
+    const { user, token } = this.props;
+	console.log(user);
      if (token) {
          return (
              <div>
                 <h2>Profile Page</h2>
-                <h3>Full Name</h3>
-                { user.firstName } {user.lastName}
+                <h3>First Name</h3>
+				<InlineEdit
+                    validate={this.customValidateText}
+                    activeClassName="editing"
+                    text={user.firstName}
+                    paramName="message"
+                    change={this.dataChanged}
+                />
+				<h3>Last Name</h3>
+				<InlineEdit
+					validate={this.customValidateText}
+					activeClassName="editing"
+					text={user.lastName}
+					paramName="message"
+					change={this.dataChanged}
+				/>
                 <br />
                 <h3>User name</h3>
                 {user.userName}
@@ -50,8 +95,17 @@ class profile extends React.Component {
                     change={this.dataChanged}
                 />
                 <h3>Photo</h3>
-                <img alt="NothingToshow" src={this.state.image}></img>
-                <br />
+                <img alt="NothingToshow" src="http://localhost:8080/files/users/11"></img>
+				<form>
+					<FileInput
+					name="myImage"
+					accept=".png,.jpg,.jpeg"
+					placeholder="My image"
+					className="inputClass"
+					onChange={this.handleInput}
+					/>
+				</form>
+				<button type="submit" onClick={this.onSubmit}> Update Picture </button>
                 <h3>email</h3>
                 <InlineEdit
                     validate={this.customValidateText}
@@ -69,9 +123,6 @@ class profile extends React.Component {
                     paramName="message"
                     change={this.dataChanged}
                 />
-                <br />
-                <h3>Join Time</h3>
-                {user.joinTime}
              </div>
          );
      }
