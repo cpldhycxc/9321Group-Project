@@ -23,8 +23,13 @@ class profile extends React.Component {
 	dob: '',
 	email: '',
   };
- this.dataChanged = this.dataChanged.bind(this);
+ this.fChanged = this.fChanged.bind(this);
+ this.lChanged = this.lChanged.bind(this);
+ this.gChanged = this.gChanged.bind(this);
+ this.dChanged = this.dChanged.bind(this);
+ this.eChanged = this.eChanged.bind(this);
  this.handleInput = this.handleInput.bind(this);
+ this.handleEdit = this.handleEdit.bind(this);
  }
 
  handleInput(event) {
@@ -33,21 +38,40 @@ class profile extends React.Component {
 	});
  }
 
- dataChanged(data) {
-     console.log(data);
-     this.setState({ ...data });
+handleEdit(event){
+	const allvalue = 'fname: '+ this.state.fname.message + ' lname:' + this.state.lname.message
+	+ ' gender: ' + this.state.gender.message + ' dob: ' + this.state.dob.message + ' email: '
+	+ this.state.email.message;
+	console.log(allvalue);
+}
+
+ fChanged(data) {
+     this.setState({ fname: data });
+ }
+ lChanged(data) {
+     this.setState({ lname: data });
+ }
+ gChanged(data) {
+	this.setState({ gender: data });
+ }
+ dChanged(data) {
+	this.setState({ dob: data });
+ }
+ eChanged(data) {
+	this.setState({ email: data });
  }
 
  customValidateText(text) {
      return (text.length > 0 && text.length < 128);
  }
 
- onSubmit = (e) => {
-   e.preventDefault();
+ onSubmit = text => event => {
+   event.preventDefault();
    var formData = new FormData();
    console.log(formData);
+   const url = 'http://localhost:8080/changeProfile/' + text;
    formData.append('file', this.state.pictures);
-   fetch('http://localhost:8080/changeProfile/11', {
+   fetch(url, {
 	method: 'POST',
 	body: formData
    }).then((response) => {
@@ -62,6 +86,9 @@ class profile extends React.Component {
  render() {
     const { user, token } = this.props;
 	console.log(user);
+	console.log(this.state);
+	const id = user.userID;
+	const url = 'http://localhost:8080/files/users/' + id;
      if (token) {
          return (
              <div>
@@ -72,7 +99,7 @@ class profile extends React.Component {
                     activeClassName="editing"
                     text={user.firstName}
                     paramName="message"
-                    change={this.dataChanged}
+                    change={this.fChanged}
                 />
 				<h3>Last Name</h3>
 				<InlineEdit
@@ -80,7 +107,7 @@ class profile extends React.Component {
 					activeClassName="editing"
 					text={user.lastName}
 					paramName="message"
-					change={this.dataChanged}
+					change={this.lChanged}
 				/>
                 <br />
                 <h3>User name</h3>
@@ -92,10 +119,10 @@ class profile extends React.Component {
                     activeClassName="editing"
                     text={user.gender}
                     paramName="message"
-                    change={this.dataChanged}
+                    change={this.gChanged}
                 />
                 <h3>Photo</h3>
-                <img alt="NothingToshow" src="http://localhost:8080/files/users/11"></img>
+                <img alt="NothingToshow" src={url}></img>
 				<form>
 					<FileInput
 					name="myImage"
@@ -105,14 +132,14 @@ class profile extends React.Component {
 					onChange={this.handleInput}
 					/>
 				</form>
-				<button type="submit" onClick={this.onSubmit}> Update Picture </button>
+				<button type="submit" onClick={this.onSubmit(id)}> Update Picture </button>
                 <h3>email</h3>
                 <InlineEdit
                     validate={this.customValidateText}
                     activeClassName="editing"
                     text={user.email}
                     paramName="message"
-                    change={this.dataChanged}
+                    change={this.eChanged}
                 />
                 <br />
                 <h3>DOB</h3>
@@ -121,8 +148,10 @@ class profile extends React.Component {
                     activeClassName="editing"
                     text={user.birthday}
                     paramName="message"
-                    change={this.dataChanged}
+                    change={this.dChanged}
                 />
+				<br />
+				<button type="submit" onClick={this.handleEdit}> Submit Edit </button>
              </div>
          );
      }
