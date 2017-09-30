@@ -57,12 +57,7 @@ class profile extends React.Component {
    });
    console.log('submit');
  }
- getPicture() {
-	 fetch('http://localhost:8080/users/11'),{
-		 method: 'GET',
-		 
-	 }
- }
+
 
  render() {
     const { user, token } = this.props;
@@ -100,7 +95,7 @@ class profile extends React.Component {
                     change={this.dataChanged}
                 />
                 <h3>Photo</h3>
-                <img alt="NothingToshow" src={this.getPicture}></img>
+                <img alt="NothingToshow" src="http://localhost:8080/files/users/11"></img>
 				<form>
 					<FileInput
 					name="myImage"
