@@ -1,7 +1,7 @@
 import InlineEdit from 'react-edit-inline';
 import React from 'react';
 import { connect } from 'react-redux';
-
+import ImageUploader from 'react-images-uploader';
 
 @connect((store) => {
 	return {
@@ -14,9 +14,16 @@ class profile extends React.Component {
  constructor(props) {
   super(props);
   this.state = {
-
+	pictures: [],
   };
  this.dataChanged = this.dataChanged.bind(this);
+ this.onDrop = this.onDrop.bind(this);
+ }
+
+ onDrop(picture) {
+	this.setState({
+		pictures: this.state.pictures.concat(picture),
+	});
  }
 
  dataChanged(data) {
@@ -31,6 +38,9 @@ class profile extends React.Component {
  render() {
      const { user, token } = this.props;
      console.log(user);
+	 const id = "http://localhost:8080/users/" + user.userID;
+	 console.log(id);
+	 const img = "";
      if (token) {
          return (
              <div>
@@ -50,7 +60,18 @@ class profile extends React.Component {
                     change={this.dataChanged}
                 />
                 <h3>Photo</h3>
-                <img alt="NothingToshow" src={this.state.image}></img>
+                <img alt="NothingToshow" src={img}></img>
+				<ImageUploader
+					//url=id
+					optimisticPreviews
+					multiple={false}
+					onLoadEnd={(err) => {
+						if (err) {
+							console.log(err);
+						}
+					}}
+					label="Upload a picture"
+				/>
                 <br />
                 <h3>email</h3>
                 <InlineEdit
