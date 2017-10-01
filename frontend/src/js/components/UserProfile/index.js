@@ -1,8 +1,25 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
+
+
+@connect((store) => {
+  return {
+    self: store.user.user,
+  };
+})
 export default class UserProfile extends React.Component {
-    render(){
+
+    renderFollowButton = () => {
+      if (this.props.self.userName !== this.props.selecteduser.userName) {
+        return (
+          <Button className='buttons btn btn-primary'>follow</Button>
+        );
+      }
+    }
+
+    render() {
       const { selecteduser } = this.props;
       return (
         <div className='panel panel-info panelbody'>
@@ -10,7 +27,7 @@ export default class UserProfile extends React.Component {
             <div className="panel-title username">
               <h3 >UserName: {selecteduser.userName}</h3>
             </div>
-            <Button className='buttons btn btn-primary'>follow</Button>
+            {this.renderFollowButton()}
           </div>
         <div className="panel-body">
           <div className="row">
