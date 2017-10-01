@@ -14,6 +14,7 @@ export default class SearchResultContainer extends React.Component {
 						self_intro={user.self_intro}
 						numOfFriend={user.numOfFriend}
 					/>
+
 				))}
 			</div>
 		);
