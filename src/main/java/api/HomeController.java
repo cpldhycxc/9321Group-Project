@@ -309,24 +309,26 @@ public class HomeController {
         }
     }
 
-
+    @CrossOrigin(value = "*")
     @RequestMapping(value = "/activityReport/{userID}", method = RequestMethod.GET)
     public UserActivities userActivity(@PathVariable int userID){
         return dbdao.userActivities(userID);
     }
 
+    @CrossOrigin(value = "*")
     @RequestMapping(value = "/searchResult", params = {"userName"}, method = RequestMethod.GET)
     public ArrayList<UserProfile> search(@RequestParam("userName") String param ){
         return dbdao.search(param);
     }
 
-
+    @CrossOrigin(value = "*")
     @RequestMapping(value = "/advSearchResult", params = {"gender", "dob"}, method = RequestMethod.GET)
     public ArrayList<UserProfile> advSearch( @RequestParam("gender") String gender ,@RequestParam("dob") String dob){
         System.out.println(gender + " " + dob);
         return dbdao.advSearch(gender, dob);
     }
 
+    @CrossOrigin(value = "*")
     @RequestMapping(value = "/updateProfile/{userID}", params = {"fname","lname", "dob", "email", "gender"}, method = RequestMethod.GET)
     public boolean updateProfile(@PathVariable String userID,
                                  @RequestParam("fname") String fname,
