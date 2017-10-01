@@ -31,7 +31,9 @@ public class UserProfile {
 	    private ArrayList<Post> postList;
 	    private ArrayList<Friend> friendList;
 	    
-	    public UserProfile(int userId,String username, String em, String firstname, String lastname,String gend, String birthDay,int usertype,String jointime,ArrayList<Post> posts,ArrayList<Friend> friends) {
+	    private boolean relationShip;
+	    
+	    public UserProfile(int userId,String username, String em, String firstname, String lastname,String gend, String birthDay,int usertype,String jointime,ArrayList<Post> posts,ArrayList<Friend> friends, boolean rela) {
 	    	userID = userId;
 	    	userName = username;
 	    	email = em;
@@ -43,6 +45,7 @@ public class UserProfile {
 	    	joinTime = jointime;
 	    	postList = posts;
 	    	friendList = friends;
+	    	relationShip = rela;
 	    	
 //	    	String format = "yyyy-MM-dd";
 //	        SimpleDateFormat sdf =  new SimpleDateFormat(format);
@@ -61,7 +64,15 @@ public class UserProfile {
 //	        }
 	    }
 	    
-	    public UserProfile() {
+	    public boolean isRelationShip() {
+			return relationShip;
+		}
+
+		public void setRelationShip(boolean relationShip) {
+			this.relationShip = relationShip;
+		}
+
+		public UserProfile() {
 		    this.userID = 0;
 		    this.userName = null;
 		    this.email = null;
@@ -73,6 +84,7 @@ public class UserProfile {
 		    this.joinTime = null;
 		    this.friendList = new ArrayList<Friend>();
 		    this.postList = new ArrayList<Post>();
+		    this.relationShip = false;
 	    }
 
 		public int getUserID() {
