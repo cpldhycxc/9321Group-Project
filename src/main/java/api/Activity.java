@@ -1,11 +1,13 @@
 package api;
 
+import java.util.Date;
+
 public class Activity implements Comparable<Activity>{
     private int type;
     private String description;
-    private String date;
+    private Date date;
 
-    public Activity(int t, String descrip, String d){
+    public Activity(int t, String descrip, Date d){
         this.type = t;
         this.description = descrip;
         this.date = d;
@@ -19,11 +21,11 @@ public class Activity implements Comparable<Activity>{
         return description;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
     public int compareTo(Activity o){
-         return 0;
+         return this.date.compareTo(o.date);
     }
 }

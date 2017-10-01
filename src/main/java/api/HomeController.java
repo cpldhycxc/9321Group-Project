@@ -34,20 +34,6 @@ public class HomeController {
         sendTLSMail("shiyun.zhangsyz@gmail.com", "123");
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
-    @RequestMapping("/searchResult")
-    public ArrayList<User> search(@RequestParam(value="param", defaultValue="") String param ){
-        return dbdao.search(param);
-    }
-
-    @RequestMapping("/advSarchResult")
-    public ArrayList<User> advsearch(@RequestParam(value="param", defaultValue="") String param ){
-        return dbdao.advSearch(param);
-    }
-
-    @RequestMapping("/advSearchResult")
-    public ArrayList<User> advanceSearch(@RequestParam(value="param", defaultValue = "") String param){
-        return null;
-    }
 
 
     /**
@@ -152,6 +138,18 @@ public class HomeController {
     @RequestMapping(value = "/activeReport/{userID}", method = RequestMethod.GET)
     public UserActivities userActivity(@PathVariable int userID){
         return dbdao.userActivities(userID);
+    }
+
+    @RequestMapping(value = "/searchResult", params = {"userName"}, method = RequestMethod.GET)
+    public ArrayList<UserProfile> search(@RequestParam("userName") String param ){
+        return dbdao.search(param);
+    }
+
+
+    @RequestMapping(value = "/advSearchResult", params = {"gender", "dob"}, method = RequestMethod.GET)
+    public ArrayList<UserProfile> advSearch( @RequestParam("gender") String gender ,@RequestParam("dob") String dob){
+        System.out.println(gender + " " + dob);
+        return dbdao.advSearch(gender, dob);
     }
 
 

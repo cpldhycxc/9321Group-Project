@@ -2,12 +2,13 @@ package api;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 public class UserActivities {
-    private String joinDate;
+    private Date joinDate;
     private ArrayList<Activity> activities;
 
-    public UserActivities(String jd, ArrayList<Activity> acti){
+    public UserActivities(Date jd, ArrayList<Activity> acti){
         this.joinDate = jd;
         this.activities = acti;
     }
@@ -17,7 +18,7 @@ public class UserActivities {
         this.activities = new ArrayList<Activity>();
     }
 
-    public String getJoinDate() {
+    public Date getJoinDate() {
         return joinDate;
     }
 
@@ -29,7 +30,7 @@ public class UserActivities {
         this.activities.add(act);
     }
 
-    public void setJoinDate(String date){
+    public void setJoinDate(Date date){
         this.joinDate = date;
     }
 

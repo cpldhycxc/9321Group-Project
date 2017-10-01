@@ -22,8 +22,8 @@ public interface DBDAO {
     public User getUserByUserName(String userName, String password);
     public ArrayList<Post> getPostsByUserID(int userID);
     public ArrayList<Friend> getFriendsByUserID(int userID);
-    public ArrayList<User> Search(String param);
-    public ArrayList<User> advSearch(String param);
+    public ArrayList<UserProfile> search(String param);
+    public ArrayList<UserProfile> advSearch(String gender, String dob);
 
     public boolean userExistence(String userName);
     public UserProfile userProfile(String userName);
