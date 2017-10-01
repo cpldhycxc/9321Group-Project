@@ -421,7 +421,7 @@ public class DBDAOImpl implements DBDAO {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             ResultSet joinDate = stmt1.executeQuery("SELECT joinTime FROM users WHERE userID = '" + userID + "'");
             ResultSet posts = stmt2.executeQuery("SELECT content, postTime FROM posts WHERE userID= '" + userID + "' ORDER BY postTime");
-            ResultSet addFriends = stmt3.executeQuery("SELECT Users.userName, startDate FROM users JOIN friends on users.userID = friends.friendId WHERE users.userID = '" + userID + "' ORDER BY startDate");
+            ResultSet addFriends = stmt3.executeQuery("SELECT Users.userName, startDate FROM friends JOIN users on users.userID = friends.friendId WHERE friends.userID = '" + userID + "' ORDER BY startDate");
             //init join date
 //            user.setJoinTime(format.parse(rs.(10)));
             System.out.println("join date: " + joinDate.getString(1));
