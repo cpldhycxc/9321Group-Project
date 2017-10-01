@@ -27,13 +27,12 @@ export default class Post extends React.Component {
 		this.setState({ numOfLikes: i - 1 });
 	}
 
-	render() {	
+	render() {
 		const text = this.props.text;
 		const postTime = this.props.postTime;
 		const userName = this.props.userName;
 		const postID = this.props.postID;
 		const selfID = this.props.selfID;
-		const numOfLikes = this.props.likes.length;
 		let likeByMySelf = false;
 		this.props.likes.map((e) => {
 			if (e.userID === selfID) {

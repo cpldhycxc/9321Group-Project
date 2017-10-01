@@ -1,9 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PictureDropzone from '../../components/PictureDropzone';
 import { Button,Form, TextArea } from 'semantic-ui-react';
 import Image from 'react-image-resizer';
 import axios from 'axios';
 
+@connect((store) => {
+  return  {
+    user: store.user.user
+  };
+})
 export default class NewPostBoard extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +43,8 @@ export default class NewPostBoard extends React.Component {
     e.preventDefault();
     var formData = new FormData();
     formData.append('file', this.state.files[0]);
-    fetch('http://localhost:8080/upload/3'.concat(this.state.Description), {
+    url = 'http://localhost:8080/addPost/' + this.props.user.userID;
+    fetch(url.concat(this.state.Description), {
       method: 'POST',
       body: formData
     }).then((response) => {
