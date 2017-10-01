@@ -43,7 +43,7 @@ export default class Post extends React.Component {
 			<div className='Post_Root'>
 				<Card style={{ width: 800 }}>
 					<CardTitle
-						avatar="https://placeimg.com/80/80/animals"
+						avatar={this.state.avatarURL}
 						title={userName}
 						subtitle={postTime}
 					/>
