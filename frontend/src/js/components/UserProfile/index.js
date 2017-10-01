@@ -11,15 +11,23 @@ import { connect } from 'react-redux';
 })
 export default class UserProfile extends React.Component {
     renderFollowButton = () => {
-      if (this.props.self.userName !== this.props.selecteduser.userName) {
+      if (this.props.self.userType === 2 && this.props.self.userName !== this.props.selecteduser.userName){
+        return (
+          <Button className='buttons btn btn-primary'>Ban</Button>
+        );
+      }
+
+      if (this.props.self.userType===1 && this.props.self.userName !== this.props.selecteduser.userName) {
         return (
           <Button className='buttons btn btn-primary'>follow</Button>
         );
-      } else {
+      }
+      if (this.props.self.userType===1 && this.props.self.userName === this.props.selecteduser.userName) {
         return (
           <Button className='buttons btn btn-primary'>Edit</Button>
         );
       }
+
     }
 
     render() {
