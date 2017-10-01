@@ -421,7 +421,7 @@ public class DBDAOImpl implements DBDAO {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             ResultSet joinDate = stmt1.executeQuery("SELECT joinTime FROM users WHERE userID = '" + userID + "'");
             ResultSet posts = stmt2.executeQuery("SELECT content, postTime FROM posts WHERE userID= '" + userID + "' ORDER BY postTime");
-            ResultSet addFriends = stmt3.executeQuery("SELECT Users.userName, startDate FROM friends JOIN users on users.userID = friends.friendId WHERE friends.userID = '" + userID + "' ORDER BY startDate");
+            ResultSet addFriends = stmt3.executeQuery("SELECT Users.userName, friends.startDate FROM friends JOIN users on users.userID = friends.friendId WHERE friends.userID = '" + userID + "' ORDER BY startDate");
             //init join date
 //            user.setJoinTime(format.parse(rs.(10)));
             System.out.println("join date: " + joinDate.getString(1));
@@ -588,5 +588,40 @@ public class DBDAOImpl implements DBDAO {
             return false;
         }
     }
+
+    public boolean editProfile(String userID, String fname, String lname, String dob, String email, String gender){
+        try (Connection conn = connect()){
+            Statement stmt1 = conn.createStatement();
+            Statement stmt2 = conn.createStatement();
+            Statement stmt3 = conn.createStatement();
+            Statement stmt4 = conn.createStatement();
+            Statement stmt5 = conn.createStatement();
+
+            if(!fname.equalsIgnoreCase("null")){
+                stmt1.executeUpdate("UPDATE users SET fname ='"+ fname+"' WHERE userID = '"+userID+"'");
+            }
+            if(!lname.equalsIgnoreCase("null")){
+                stmt2.executeUpdate("UPDATE users SET lname ='"+ lname+"' WHERE userID = '"+userID+"'");
+            }
+            if(!dob.equalsIgnoreCase("null")){
+                stmt3.executeUpdate("UPDATE users SET dob ='"+ dob+"' WHERE userID = '"+userID+"'");
+
+            }
+            if(!email.equalsIgnoreCase("null")){
+                stmt4.executeUpdate("UPDATE users SET email ='"+ email+"' WHERE userID = '"+userID+"'");
+
+            }
+            if(!gender.equalsIgnoreCase("null")){
+                stmt5.executeUpdate("UPDATE users SET gender ='"+ gender+"' WHERE userID = '"+userID+"'");
+            }
+            return true;
+        } catch (SQLException e){
+
+            e.printStackTrace();
+            return false;
+
+        }
+    }
+
 
 }

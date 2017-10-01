@@ -327,5 +327,14 @@ public class HomeController {
         return dbdao.advSearch(gender, dob);
     }
 
+    @RequestMapping(value = "/updateProfile/{userID}", params = {"fname","lname", "dob", "email", "gender"}, method = RequestMethod.GET)
+    public boolean updateProfile(@PathVariable String userID,
+                                 @RequestParam("fname") String fname,
+                                 @RequestParam("lanme") String lname,
+                                 @RequestParam("dob") String dob,
+                                 @RequestParam("email") String email,
+                                 @RequestParam("gender") String gender){
+            return dbdao.editProfile(userID, fname, lname, dob, email, gender );
+    }
 
 }
