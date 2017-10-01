@@ -26,6 +26,21 @@ export default class LikeButton extends React.Component {
 		};
 	}
 
+	// componentWillMount() {
+	// 	const postID = this.props.postID;
+	// 	this.clickLike = () => {
+	// 		if (this.state.liked) {
+	// 			this.props.dispatch(likeButton('unlike', postID));
+	// 			this.props.decLike();
+	// 			this.setState({ liked: false });
+	// 		} else {
+	// 			this.props.dispatch(likeButton('like', postID));
+	// 			this.props.addLike();
+	// 			this.setState({ liked: true });
+	// 		}
+	// 	};
+	// }
+
 	render() {
 		const renderIcon = () => {
 			if (this.state.liked) {
