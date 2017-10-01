@@ -329,10 +329,10 @@ public class HomeController {
     }
 
     @CrossOrigin(value = "*")
-    @RequestMapping(value = "/updateProfile/{userID}", params = {"fname","lname", "dob", "email", "gender"}, method = RequestMethod.POST)
+    @RequestMapping(value = "/updateProfile/{userID}", params = {"fname","lname", "dob", "email", "gender"}, method = RequestMethod.GET)
     public boolean updateProfile(@PathVariable String userID,
                                  @RequestParam("fname") String fname,
-                                 @RequestParam("lanme") String lname,
+                                 @RequestParam("lname") String lname,
                                  @RequestParam("dob") String dob,
                                  @RequestParam("email") String email,
                                  @RequestParam("gender") String gender){

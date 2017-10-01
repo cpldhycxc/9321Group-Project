@@ -43,19 +43,19 @@ class profile extends React.Component {
  }
 
 handleEdit = text => event => {
-	const allvalue = 'fname:' + this.state.fname.message + '&&lname:' + this.state.lname.message
-	+ '&&gender:' + this.state.gender.message + '&&dob:' + this.state.dob.message + '&&email:'
+	const allvalue = 'fname=' + this.state.fname.message + '&lname=' + this.state.lname.message
+	+ '&gender=' + this.state.gender.message + '&dob=' + this.state.dob.message + '&email='
 	+ this.state.email.message;
 	this.setState({ edit: true });
 	event.preventDefault();
-    const url = 'http://localhost:8080/updateProfile/'+ text + '?'+ allvalue;
+    const url = 'http://localhost:8080/updateProfile/' + text + '?' + allvalue;
 	console.log(url);
     fetch(url, {
  		method: 'GET',
     }).then((response) => {
- 	console.log(response);
+ 		console.log(response);
     }).catch((err) => {
- 	console.log(err);
+ 		console.log(err);
     });
     console.log('submit');
 }
