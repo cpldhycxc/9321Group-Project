@@ -310,7 +310,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping(value = "/activeReport/{userID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/activityReport/{userID}", method = RequestMethod.GET)
     public UserActivities userActivity(@PathVariable int userID){
         return dbdao.userActivities(userID);
     }
