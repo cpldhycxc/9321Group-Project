@@ -119,7 +119,7 @@ componentWillReceiveProps(nextProps) {
 						<div className="row">
 							<div className='col-md-3 col-lg-3'>
 								<img alt="nonthing" src={url} className='profile-img' />
-							
+
 									<FileInput
 										name="myImage"
 										accept=".png,.jpg,.jpeg"
@@ -146,68 +146,66 @@ componentWillReceiveProps(nextProps) {
 										</td>
 									</tr>
 									<tr>
-						<td>Last Name</td>
-						<td>
-						<InlineEdit
-							validate={this.customValidateText}
-							activeClassName="editing"
-							text={user.lastName}
-							paramName="message"
-							change={this.lChanged}
-						/>
-						</td>
-					</tr>
-					<tr>
-						<td>Gender</td>
-						<td>
-							<InlineEdit
-								validate={this.customValidateText}
-								activeClassName="editing"
-								text={user.gender}
-								paramName="message"
-								change={this.gChanged}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>Date of Birth</td>
-						<td>
-							<InlineEdit
-								validate={this.customValidateText}
-								activeClassName="editing"
-								text={user.birthday}
-								paramName="message"
-								change={this.dChanged}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>Email</td>
-						<td>
-							<InlineEdit
-								validate={this.customValidateText}
-								activeClassName="editing"
-								text={user.email}
-								paramName="message"
-								change={this.eChanged}
-							/>
-						</td>
-					</tr>
-					<tr>
-						<td>Join Date</td>
-						<td>
-						{user.joinTime}
-						</td>
-					</tr>
-
-				</tbody>
-			</table>
-        </div>
-	</div>
-</div>
+										<td>Last Name</td>
+										<td>
+										<InlineEdit
+											validate={this.customValidateText}
+											activeClassName="editing"
+											text={user.lastName}
+											paramName="message"
+											change={this.lChanged}
+										/>
+										</td>
+									</tr>
+									<tr>
+										<td>Gender</td>
+										<td>
+										<InlineEdit
+											validate={this.customValidateText}
+											activeClassName="editing"
+											text={user.gender}
+											paramName="message"
+											change={this.gChanged}
+										/>
+										</td>
+									</tr>
+									<tr>
+										<td>Date of Birth</td>
+										<td>
+										<InlineEdit
+											validate={this.customValidateText}
+											activeClassName="editing"
+											text={user.birthday}
+											paramName="message"
+											change={this.dChanged}
+										/>
+										</td>
+									</tr>
+									<tr>
+										<td>Email</td>
+										<td>
+										<InlineEdit
+											validate={this.customValidateText}
+											activeClassName="editing"
+											text={user.email}
+											paramName="message"
+											change={this.eChanged}
+										/>
+										</td>
+									</tr>
+									<tr>
+										<td>Join Date</td>
+										<td>
+											{user.joinTime}
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 		<br />
-		<button type="submit" onClick={this.handleEdit(id)}> Submit Edit </button>
-
+			<button type="submit" onClick={this.handleEdit(id)}> Submit Edit </button>
 		</div>
          );
      }
