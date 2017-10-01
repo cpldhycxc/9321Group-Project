@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
   };
 })
 export default class UserProfile extends React.Component {
-
     renderFollowButton = () => {
       if (this.props.self.userName !== this.props.selecteduser.userName) {
         return (

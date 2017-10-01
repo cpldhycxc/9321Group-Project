@@ -18,7 +18,7 @@ export default class Main extends React.Component {
         <div className='content'>
             <Switch>
                 <Route exact path='/' render={() => <Redirect to='/wall' />} />
-                <Route path='/wall' component={Home} />
+                <Route path='/wall'  />
                 <Route path='/search' component={Search} />
                 <Route path='/profile' component={Profile} />
                 <Route path='/user/:username' component={User} />
@@ -30,3 +30,4 @@ export default class Main extends React.Component {
     );
   }
 }
+// component={Home}
