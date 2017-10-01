@@ -1,117 +1,211 @@
 import InlineEdit from 'react-edit-inline';
 import React from 'react';
+import { connect } from 'react-redux';
+import FileInput from 'react-file-input';
+import { Button, Icon, Image } from 'semantic-ui-react';
 
+
+@connect((store) => {
+	return {
+		user: store.user.user,
+		token: store.user.token
+	};
+})
 
 class profile extends React.Component {
  constructor(props) {
   super(props);
   this.state = {
-    name: 'Random Test',
-    biography: '14 years-old genius student on UTS studying Computer Science',
-    image: 'https://cdn.someecards.com/posts/time-person-of-the-year-2016-twitter-reactions-SRN.png',
-    content: 'FUCKED UP',
-    source: 'TEST ',
-    showModal: false,
-    saving: false,
+	pictures: [],
+	pictureChange: '',
+	edit: '',
+	username: '',
+	fname: '',
+	lname: '',
+	gender: '',
+	dob: '',
+	email: '',
   };
- this.dataChanged = this.dataChanged.bind(this);
+ this.fChanged = this.fChanged.bind(this);
+ this.lChanged = this.lChanged.bind(this);
+ this.gChanged = this.gChanged.bind(this);
+ this.dChanged = this.dChanged.bind(this);
+ this.eChanged = this.eChanged.bind(this);
+ this.handleInput = this.handleInput.bind(this);
+ this.handleEdit = this.handleEdit.bind(this);
  }
- dataChanged(data) {
-     console.log(data);
-     this.setState({ ...data });
+
+ handleInput(event) {
+	this.setState({
+		pictures: event.target.files[0],
+		pictureChange: true,
+	});
+ }
+
+handleEdit(event) {
+	const allvalue = 'fname: ' + this.state.fname.message + ' lname:' + this.state.lname.message
+	+ ' gender: ' + this.state.gender.message + ' dob: ' + this.state.dob.message + ' email: '
+	+ this.state.email.message;
+	this.setState({ edit: true });
+	console.log(allvalue);
+}
+
+componentWillReceiveProps(nextProps) {
+  this.setState({ pictureChange: nextProps.pictureChange });
+}
+
+ fChanged(data) {
+     this.setState({ fname: data });
+ }
+ lChanged(data) {
+     this.setState({ lname: data });
+ }
+ gChanged(data) {
+	this.setState({ gender: data });
+ }
+ dChanged(data) {
+	this.setState({ dob: data });
+ }
+ eChanged(data) {
+	this.setState({ email: data });
  }
 
  customValidateText(text) {
-     return (text.length > 0 && text.length < 128);
+     return (text.length > 0 && text.length < 512);
  }
+
+ onSubmit = text => event => {
+   event.preventDefault();
+   var formData = new FormData();
+   const url = 'http://localhost:8080/changeProfile/' + text;
+   formData.append('file', this.state.pictures);
+   fetch(url, {
+	method: 'POST',
+	body: formData
+   }).then((response) => {
+	console.log(response);
+   }).catch((err) => {
+	console.log(err);
+   });
+   console.log('submit');
+ }
+
  render() {
+    const { user, token } = this.props;
+	console.log(user);
+	console.log(this.state);
+	const id = user.userID;
+	const url = 'http://localhost:8080/files/users/' + id;
+     if (token) {
+         return (
+				<div className='panel panel-info panelbody'>
+					<div className="panel-heading">
+						<div className="panel-title username">
+							<h3 >UserName: {user.userName}</h3>
+						</div>
+					</div>
+					<div className="panel-body">
+						<div className="row">
+							<div className='col-md-3 col-lg-3'>
+								<img alt="nonthing" src={url} className='profile-img' />
+								<form>
+									<FileInput
+										name="myImage"
+										accept=".png,.jpg,.jpeg"
+										placeholder="My image"
+										className="inputClass"
+										onChange={this.handleInput}
+									/>
+								</form>
+								<button type="submit" onClick={this.onSubmit(id)} > Update Picture </button>
+							</div>
+							<div className=" col-md-9 col-lg-9">
+								<table className="table table-user-information">
+								<tbody>
+									<tr>
+										<td>First Name</td>
+										<td>
+										<InlineEdit
+											validate={this.customValidateText}
+											activeClassName="editing"
+											text={user.firstName}
+											paramName="message"
+											change={this.fChanged}
+										/>
+										</td>
+									</tr>
+									<tr>
+						<td>Last Name</td>
+						<td>
+						<InlineEdit
+							validate={this.customValidateText}
+							activeClassName="editing"
+							text={user.lastName}
+							paramName="message"
+							change={this.lChanged}
+						/>
+						</td>
+					</tr>
+					<tr>
+						<td>Gender</td>
+						<td>
+							<InlineEdit
+								validate={this.customValidateText}
+								activeClassName="editing"
+								text={user.gender}
+								paramName="message"
+								change={this.gChanged}
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>Date of Birth</td>
+						<td>
+							<InlineEdit
+								validate={this.customValidateText}
+								activeClassName="editing"
+								text={user.birthday}
+								paramName="message"
+								change={this.dChanged}
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td>
+							<InlineEdit
+								validate={this.customValidateText}
+								activeClassName="editing"
+								text={user.email}
+								paramName="message"
+								change={this.eChanged}
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>Join Date</td>
+						<td>
+						{user.joinTime}
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+        </div>
+	</div>
+</div>
+		<br />
+		<button type="submit" onClick={this.handleEdit}> Submit Edit </button>
+
+		</div>
+         );
+     }
      return (
          <div>
-            <h2>Profile Page</h2>
-            <h5>U can edit it directly</h5>
-            <h3>Name</h3>
-            <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.name}
-                paramName="message"
-                change={this.dataChanged}
-                />
-            <p></p>
-            <h3>Biography</h3>
-            <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.biography}
-                paramName="message"
-                change={this.dataChanged}
-            />
-            <h3>Photo</h3>
-            <img alt="NothingToshow" src={this.state.image}></img>
-            <p></p>
-            <h3>Something awesome</h3>
-            <InlineEdit
-                validate={this.customValidateText}
-                activeClassName="editing"
-                text={this.state.content}
-                paramName="message"
-                change={this.dataChanged}
-            />
+         <h3>Please Log in!</h3>
          </div>
-     )
+     );
  }
- //
- // componentWillReceiveProps(nextProps) {
- //   if (this.props.name !== nextProps.name) {
- //     this.setState({ name: Object.assign({}, nextProps.name) });
- //   }
- //   this.setState({ saving: false, showModal: false });
- // }
- //
- // updateName(event) {
- //     const field = event.target.name;
- //     const name = this.state.name;
- //     name[field] = event.target.value;
- //     return this.setState({ name: name });
- // }
- //
- // saveName(event) {
- //     event.preventDefault();
- //     this.setState({ saving: true });
- //     console.log(this.props);
- //     this.props.location.updateName(this.state.name);
- // }
- //
- //
- //
- // render() {
- //       if (this.state.showModal) {
- //           return (
- //               <div>
- //               <EditProfile
- //               name={this.state.name}
- //               bio={this.state.biography}
- //               onSave={this.saveName}
- //               onChange={this.updateName}
- //               saving={this.state.saving}
- //
- //               />
- //               </div>
- //           );
- //       }
- //       return (
- //           <div className="col-md-8 col-md-offset-2">
- //            <h1>{this.state.name}</h1>
- //            <p>{this.state.biography}</p>
- //            <img alt="NothingToshow" src={this.state.image}></img>
- //            <div className="Quote">
- //            <blockquote>&ldquo; {this.state.content} &rdquo;</blockquote>
- //            <div className="byline">&mdash; {this.state.source}</div>
- //            <button onClick={this.openState}>edit</button>
- //            </div>
- //           </div>
- //       );
- //   }
- // }
+
 }
 export default profile;

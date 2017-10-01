@@ -49,7 +49,6 @@ conn.execute('''CREATE TABLE Users
         lastName    TEXT,
         gender      String,  
         birthday    DATETIME,
-        photo       TEXT,
         userType    INTEGER  NOT NULL,
         joinTime    DATETIME DEFAULT CURRENT_TIMESTAMP);''')
 conn.execute('CREATE INDEX firstNameIndex ON Users(firstName)')
@@ -63,7 +62,6 @@ conn.execute('''CREATE TABLE Posts
        (postID      INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
         userID      INTEGER  NOT NULL,
         content     TEXT     NOT NULL,
-        image       TEXT,
         postTime    DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (userID) REFERENCES Users(userID));''')
 conn.execute('CREATE INDEX postUserIDIndex ON Posts(userID)')
@@ -72,9 +70,10 @@ conn.execute('CREATE INDEX postTime ON Posts(postTime)')
 
 conn.execute('''DROP TABLE IF EXISTS Friends;''')
 conn.execute('''CREATE TABLE Friends
-       (userID      INTEGER  NOT NULL,
+       (friendship  INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
+        userID      INTEGER  NOT NULL,
         friendID    INTEGER  NOT NULL,
-        PRIMARY KEY (userID, friendID),
+        startDate   DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (userID) REFERENCES Users(userID),
         FOREIGN KEY (friendID) REFERENCES Users(userID));''')
 conn.execute('CREATE INDEX firendUserIDIndex ON Friends(userID)')
@@ -96,8 +95,8 @@ print("UserName = Admin")
 print("Password = Admin")
 
 conn.execute("INSERT INTO Users (userName, password, email, firstName, lastName, gender, userType) VALUES (?,?,?,?,?,?,?)",
-             ("Admin", "Admin", "shiyun.zhangsyz@gmail.com", "JuBian", "Liang", "female", 2))
-
+             ("Admin", "Admin", "553966858@qq.com", "JuBian", "Liang", "female", 2))
+conn.commit()
 print("Insert Completed")
 
 #################################### Insert
@@ -195,6 +194,8 @@ for path in paths:
             post['longitude'] =re.sub(r'^\s*longitude=\s*', "", line)
         elif re.match(r'^\s*time=\s*', line):
             post['posttime'] = re.sub(r'^\s*time=\s*', "", line)
+            post['posttime'] = post['posttime'].split('+')[0]
+            post['posttime'] = re.sub(r'T', " ", post['posttime'])
     #insert post
 
     conn.execute("INSERT INTO posts (userID, content, postTime) VALUES (?,?,?)",
@@ -216,9 +217,15 @@ for firid in userNameMapUserId:
 index_list = random.sample(range(0, len(friend_list)), 10)
 
 for index in index_list:
-        conn.execute("INSERT INTO Friends (userID, friendID) VALUES (?,?)",
+    if friend_list[index][0] == friend_list[index][1]:
+        continue
+
+    conn.execute("INSERT INTO Friends (userID, friendID) VALUES (?,?)",
                   (friend_list[index][0],
                    friend_list[index][1]))
+    conn.execute("INSERT INTO Friends (userID, friendID) VALUES (?,?)",
+                  (friend_list[index][1],
+                   friend_list[index][0]))
 
 # Likes table
 c = conn.cursor()

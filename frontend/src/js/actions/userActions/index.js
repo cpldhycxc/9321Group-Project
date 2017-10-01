@@ -9,6 +9,7 @@ export function login(user) {
           password:user.password,
       })
       .then((response)=>{
+        console.log(response);
         dispatch({
           type: 'LOGGED_IN',
           payload: response.data,
@@ -21,12 +22,19 @@ export function login(user) {
 }
 
 export function signuprequest(user) {
-
+    console.log(user);
+    return axios.post('http://localhost:8080/signup/',{
+      userName:user.username,
+      password:user.password,
+      email:user.email,
+      firstName:user.firstname,
+      lastName:user.lastname,
+      birthday:user.birthday,
+    })
 }
 
 export function checkuser(username) {
-  console.log("checking the fucking user");
-  return axios.get(`http://localhost:8080/checKExistence/${username}`);
+  return axios.get(`http://localhost:8080/checkExistence/${username}`)
 }
 
 export function logout() {
@@ -36,6 +44,9 @@ export function logout() {
   };
 }
 
+export function searchByUsername(username){
+  return axios.get(`http://localhost:8080/userProfile/${username}`)
+}
 
 // return function(dispatch){
   // axios.post('http://localhost:8000/backend/login/',{

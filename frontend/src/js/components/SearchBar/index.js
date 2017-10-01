@@ -3,57 +3,9 @@ import Autosuggest from 'react-autosuggest';
 import match  from 'autosuggest-highlight/match';
 import parse  from 'autosuggest-highlight/parse';
 import { withRouter } from 'react-router';
+import data from './data.json';
 
-const people = [
-  {
-    "first": "Aaron",
-    "last": "Peirsol"
-  },
-  {
-    "first": "Carmen",
-    "last": "Electra"
-  },
-  {
-    "first": "Vitali",
-    "last": "Klitschko"
-  },
-  {
-    "first": "Richard",
-    "last": "Virenque"
-  },
-  {
-    "first": "Lana",
-    "last": "Clarkson"
-  },
-  {
-    "first": "Amelia",
-    "last": "Vega"
-  },
-  {
-    "first": "Dominic",
-    "last": "Monaghan"
-  },
-  {
-    "first": "Juan",
-    "last": "Montoya"
-  },
-  {
-   first: 'Charlie',
-   last: 'Brown',
- },
- {
-   first: 'Charlotte',
-   last: 'White',
- },
- {
-   first: 'Chloe',
-   last: 'Jones',
- },
- {
-   first: 'Cooper',
-   last: 'King',
- }
-];
+const people = data.data;
 
 
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
@@ -74,11 +26,11 @@ function getSuggestions(value) {
 }
 
 function getSuggestionValue(suggestion) {
-  return `${suggestion.first} ${suggestion.last}`;
+  return `${suggestion.username}`;
 }
 
 function renderSuggestion(suggestion, { query }) {
-  const suggestionText = `${suggestion.first} ${suggestion.last}`;
+  const suggestionText = `${suggestion.username}`;
   const matches = match(suggestionText, query);
   const parts = parse(suggestionText, matches);
 
@@ -132,7 +84,7 @@ class SearchBar extends React.Component {
   if (callback) {
     callback(suggestion.id);
   } else {
-    this.props.history.push(`/user/${suggestion.first}`);
+    this.props.history.push(`/user/${suggestion.username}`);
   }
 }
 

@@ -222,8 +222,12 @@ input {
   border-radius: 4px;
 }
 
+.white-bg-container{
+  padding:0;
+}
+
 .friendlist{
-  height: 760px;
+  height: 770px;
 }
 
 .postlist{
@@ -233,4 +237,59 @@ input {
 
 .userprofile {
   height: 250px;
+  padding: 0;
+}
+
+.backbutton {
+  margin-right: 5px;
+}
+
+.username {
+  display: inline-block;
+  font-size: 25px;
+  padding: 2px 3px;
+}
+
+.panelbody{
+  height: 300px;
+  border: 1px #e5e5e5 solid;
+  border-radius: 4px;
+}
+
+.buttons{
+  display: inline-block;
+  float: right;
+}
+
+.profile-img {
+  height: 140px;
+}
+
+.postlist-username {
+  display: inline;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.post-content {
+  position: absolute;
+  top: 3px;
+  margin-left: 10px;
+}
+
+.friend-img {
+  height:35px;
+}
+
+.friendlist-title {
+  text-align: center;
+}
+
+.friendlist-body {
+  text-align: center;
+  padding-left: 0;
+}
+
+.friend-a{
+  color:seagreen;
 }

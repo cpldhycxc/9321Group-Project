@@ -8,12 +8,12 @@ public class UserActivities {
     private Date joinDate;
     private ArrayList<Activity> activities;
 
-    public UserActivities(Date jd, ArrayList<Activity> acti){
+    public UserActivities(Date jd, ArrayList<Activity> acti) {
         this.joinDate = jd;
         this.activities = acti;
     }
 
-    public UserActivities(){
+    public UserActivities() {
         this.joinDate = null;
         this.activities = new ArrayList<Activity>();
     }
@@ -26,19 +26,19 @@ public class UserActivities {
         return activities;
     }
 
-    public void addActivity(Activity act){
+    public void addActivity(Activity act) {
         this.activities.add(act);
     }
 
-    public void setJoinDate(Date date){
+    public void setJoinDate(Date date) {
         this.joinDate = date;
     }
 
-    public void sortActivities(){
+    public void sortActivities() {
         Collections.sort(this.activities);
     }
 
-    public boolean checkEmpty(){
+    public boolean checkEmpty() {
         return this.activities.isEmpty();
     }
 }

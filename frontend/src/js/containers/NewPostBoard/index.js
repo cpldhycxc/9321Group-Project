@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PictureDropzone from '../../components/PictureDropzone';
 import { Button,Form, TextArea } from 'semantic-ui-react';
 import Image from 'react-image-resizer';
+import axios from 'axios';
 
 export default class NewPostBoard extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class NewPostBoard extends React.Component {
       filter: '',
       Description: '',
       address: '',
-    }
+    };
 
     this.onDescriptionChange = (e) => this.setState({ Description: e.target.value });
     this.onAddressChange = (address) => this.setState({ address });
@@ -35,6 +35,18 @@ export default class NewPostBoard extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    var formData = new FormData();
+    formData.append('file', this.state.files[0]);
+    fetch('http://localhost:8080/upload/3'.concat(this.state.Description), {
+      method: 'POST',
+      body: formData
+    }).then((response) => {
+      console.log(response);
+    }).catch((err) => {
+      console.log(err);
+    });
+
+    // axios.post('http://localhost:8080/upload', data);
     console.log('submit');
   }
 
@@ -45,11 +57,14 @@ export default class NewPostBoard extends React.Component {
           <div>
             <h3>Description</h3>
             <Form>
-              <TextArea style={{ minHeight: 100 }} />
+              <TextArea 
+                style={{ minHeight: 100 }} 
+                onChange={this.onDescriptionChange}
+              />
             </Form>
           </div>
         </div>
-      )
+      );
     }
   }
 
@@ -83,8 +98,8 @@ export default class NewPostBoard extends React.Component {
                        >
                         <Image src={preview} 
                           role="presentation"  
-                          height={ 800 }
-                          width={ 1200 }/>
+                          height={ 300 }
+                          width={ 400 }/>
                       </div>
                     </div>
                   </div>

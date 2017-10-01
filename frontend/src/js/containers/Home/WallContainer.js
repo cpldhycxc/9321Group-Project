@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Post from '../../components/Post';
-import { getPosts } from '../../actions/postActions';
+import { getPosts, getSelfID } from '../../actions/postActions';
 
 @connect((store) => {
   return store.post;
@@ -10,18 +10,22 @@ class WallContainer extends React.Component {
 
 	componentWillMount() {
 		this.props.dispatch(getPosts());
+		this.props.dispatch(getSelfID());
 	}
 
 	render() {
-		console.log(this.props);
 		return (
 			<div>
 				{this.props.posts.map((post, i) => (
 					<Post 
-						text={post.text} 
-						comments={post.comments} 
+						selfID={this.props.selfID}
+						postID={post.postId}
+						userName={post.userName}
+						userID={post.userID}
+						text={post.content} 
 						key={i}
-						likes={post.liked_by}
+						postTime={post.postTime}
+						likes={post.likeBy}
 					/>
 				))}
 			</div>
