@@ -46,6 +46,8 @@ class search extends React.Component {
     }
 
 	render() {
+		const img = 'http://localhost:8080/files/users/';
+		const l = 'http://127.0.0.1:9000/#/user/';
         if (this.state.isClick === false) {
             return (
                 <div className="section">
@@ -69,20 +71,19 @@ class search extends React.Component {
         if (this.state.result[0] !== undefined) {
             return (
                 <div className="result">
-                    <div class="ui link cards">
-                        {this.state.result.map((user, i) => (
-                            <Resultitem
-                                key={i}
-                                id={user.id}
-                                joined_date={user.joined_date}
-                                self_intro={user.self_intro}
-                                numOfFriend={user.numOfFriend}
-                                />
-                            ))}
-                    </div>
-                        <div className="button">
-                            <button type="submit" onClick={this.handlebuttonpress}> back </button>
-                        </div>
+				<div class="ui link cards">
+					{this.state.result.map((user, i) => (
+						<Resultitem
+							key={i}
+							img={img + this.state.result[i].userID}
+							id={this.state.result[i].firstName}
+							link={l + this.state.result[i].userName}
+						/>
+					))}
+				</div>
+                	<div className="button">
+                    	<button type="submit" onClick={this.handlebuttonpress}> back </button>
+                	</div>
                 </div>
             );
         }
