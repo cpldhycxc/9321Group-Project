@@ -2,7 +2,6 @@ package api;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -336,7 +335,8 @@ public class HomeController {
                                  @RequestParam("dob") String dob,
                                  @RequestParam("email") String email,
                                  @RequestParam("gender") String gender){
-            return dbdao.editProfile(userID, fname, lname, dob, email, gender );
+        boolean flag = dbdao.editProfile(userID, fname, lname, dob, email, gender );
+            return new EditProfile(counter.incrementAndGet(), flag );
     }
 
 }

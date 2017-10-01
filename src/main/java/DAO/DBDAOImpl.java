@@ -605,11 +605,9 @@ public class DBDAOImpl implements DBDAO {
             }
             if(!dob.equalsIgnoreCase("undefined")){
                 stmt3.executeUpdate("UPDATE users SET dob ='"+ dob+"' WHERE userID = '"+userID+"'");
-
             }
             if(!email.equalsIgnoreCase("undefined")){
                 stmt4.executeUpdate("UPDATE users SET email ='"+ email+"' WHERE userID = '"+userID+"'");
-
             }
             if(!gender.equalsIgnoreCase("undefined")){
                 stmt5.executeUpdate("UPDATE users SET gender ='"+ gender+"' WHERE userID = '"+userID+"'");
