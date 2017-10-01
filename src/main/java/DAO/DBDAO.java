@@ -27,7 +27,7 @@ public interface DBDAO {
     public UserActivities userActivities(int userID);
 
     public boolean userExistence(String userName);
-    public UserProfile userProfile(String userName);
+    public UserProfile userProfile(String selectedName,String userName);
     public boolean deletePost(int postID);
     public String getEmailByUserID(int userID);
     public void addFriendRelation(int userID, int friendID);
@@ -40,4 +40,6 @@ public interface DBDAO {
     public boolean addPost(int userID, String content);
 //    public UserActivities userActivities(int userID);
     public boolean editProfile(String userID,String fname, String lname, String dob, String email, String gender);
+    public void deleteFriendRelation(int userID, int friendID);
+    public void backUserActivation(int userID);
 }

@@ -1,13 +1,24 @@
 import React from 'react';
 import ActivityTable from '../../components/ActivityTable';
+import axios from 'axios';
 
 
 export default class ActivityReport extends React.Component {
 
 	constructor(props) {
 		super(props);
-		console.log(this.props.match.params.username);
 	}
+
+	getReport = () => {
+		const url = 'http://localhost:8080/activityReport/'.concat(this.props.match.params.username);
+		axios.get(url)
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 
   render() {
     return (

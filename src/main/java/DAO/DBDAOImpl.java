@@ -246,6 +246,26 @@ public class DBDAOImpl implements DBDAO {
     		System.out.println(e.getMessage());
     	}
     }
+    /**
+     * change the userType to check if it is activated
+     * @param userID
+     */
+    public void backUserActivation(int userID){
+    	try (Connection conn = connect()) {
+    		 String updateType = "UPDATE Users SET userType=? WHERE userID=?";
+    		 PreparedStatement pstmt = conn.prepareStatement(updateType);
+    		 if(userID == 1) {
+    			 pstmt.setInt(1, 2);
+    		 }else {
+    			 pstmt.setInt(1,0);
+    		 } 
+//    		 pstmt.setInt(1,1);
+    		 pstmt.setInt(2, userID);
+    		 pstmt.executeUpdate();
+    	}catch(SQLException e){
+    		System.out.println(e.getMessage());
+    	}
+    }
     
     /**
      * function to check if the user exists in the databse
@@ -352,17 +372,23 @@ public class DBDAOImpl implements DBDAO {
 
 
 	@Override
-	public UserProfile userProfile(String userName) {
+	public UserProfile userProfile(String selectedName,String userName) {
 		UserProfile u = new UserProfile();
 		try (Connection conn = connect()){
 			
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT userID, userName, email, firstName, lastName, gender, birthday,userType, joinTime " +
-                    "FROM Users WHERE userName = '" + userName+ "'");
-            int userI = rs.getInt(1);
-            ArrayList<Friend> friendList = getFriendsByUserID(userI);
-            ArrayList<Post> postList = getOwnPostsByUserID(userI);
+                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, userType, joinTime " +
+                    "FROM Users WHERE userName = '" + selectedName+ "'");
+            int sUserI = rs.getInt(1);
+            ArrayList<Friend> friendList = getFriendsByUserID(sUserI);
+            ArrayList<Post> postList = getOwnPostsByUserID(sUserI);
+            for(Friend f: friendList) {
+            	if(f.getUserName().equals(userName)){
+            		u.setRelationShip(true);
+            		break;
+            	}
+            }
             while(rs.next()){
             	
             	System.out.println("hhhhh");
@@ -463,19 +489,26 @@ public class DBDAOImpl implements DBDAO {
      */
     public ArrayList<Post> getOwnPostsByUserID(int userID) {
         ArrayList<Post> postArrayList = new ArrayList<>();
-        try (Connection conn = connect()) {
+        try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
-                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.postTime, Users.userID FROM Posts, Users WHERE Posts.userID=Users.userID AND Posts.userID='" + Integer.toString(userID) + "'" +
-                    "ORDER BY Posts.postTime DESC");
-            System.out.println(userID);
-            while (rs.next()) {
-                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(userID)));
+                    "SELECT Posts.postID, Users.userName, Posts.content, Posts.postTime, Users.userID FROM Posts, Users WHERE Posts.userID=Users.userID AND Posts.userID='" + userID +
+                    "'ORDER BY Posts.postTime DESC");
+//            System.out.println(userID);
+            while(rs.next()){
+                postArrayList.add(new Post(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)));
             }
-        } catch (SQLException e) {
+            for(Post p : postArrayList){
+                p.setLikeBy(new ArrayList<>());
+                rs = stmt.executeQuery("SELECT userID, userName, email, firstName, lastName FROM Users WHERE userID IN (SELECT userID FROM Likes WHERE postID = '" + p.getPostId() + "')");
+                while(rs.next()){
+                    p.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
+                }
+            }
+        } catch (SQLException e){
             e.printStackTrace();
         }
-            return postArrayList;
+        return postArrayList;
     }
     /**
      * function to like/unlike post
@@ -619,7 +652,19 @@ public class DBDAOImpl implements DBDAO {
             return false;
 
         }
+
     }
+
+    
+	@Override
+	public void deleteFriendRelation(int userID, int friendID) {
+        try (Connection conn = connect()){
+            PreparedStatement preStatment = conn.prepareStatement("DELETE FROM Friends WHERE userID= '"+userID+"'and friendID='"+friendID+"'");
+            preStatment.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }		
+	}
 
 
 }

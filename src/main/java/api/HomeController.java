@@ -9,6 +9,8 @@ import DAO.*;
 import Model.FriendRequest;
 import Model.LikePostM;
 import Model.User;
+import Model.UserP;
+
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -114,6 +116,19 @@ public class HomeController {
         dbdao.addFriendRelation(rf.getFriendID(), rf.getUserID());
         return new FriendRelated(counter.incrementAndGet(), true);
     }
+    
+    /**
+     * confirm to add friend relationship between two user in the db
+     * @param rf
+     * @return
+     */
+    @CrossOrigin(origins = "*")
+    @PostMapping("deleteFriend")
+    public FriendRelated deleteFriend(@RequestBody FriendRequest rf){
+        dbdao.deleteFriendRelation(rf.getUserID(), rf.getFriendID());
+        dbdao.deleteFriendRelation(rf.getFriendID(), rf.getUserID());
+        return new FriendRelated(counter.incrementAndGet(), true);
+    }
 
     /**
      * get userID posts and all his friends' posts and likes by
@@ -137,11 +152,17 @@ public class HomeController {
     public void userActivation(@PathVariable int userID) {
     	dbdao.userActivation(userID);
     }
+    
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/backActivation/{userID}", method = RequestMethod.GET)
+    public void backUserActivation(@PathVariable int userID) {
+    	dbdao.backUserActivation(userID);
+    }
 
     @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
-    public UserProfile userProfile(@PathVariable String userName) {
-    	return dbdao.userProfile(userName);
+    @PostMapping("/userProfile")
+    public UserProfile userProfile(@RequestBody UserP user) {
+    	return dbdao.userProfile(user.getSelectUserName(),user.getUserName());
     }
 
     @CrossOrigin(origins = "*")
@@ -157,9 +178,10 @@ public class HomeController {
     	for(Notification noti:notification) {
     		if(noti.getUserID() == userID){
     			result.add(noti.getNoti());
+    			notification.remove(noti);
     		}
     	}
-    	notification.clear();
+//    	notification.clear();
     	return result;
     }
     
