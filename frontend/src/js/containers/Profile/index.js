@@ -18,6 +18,7 @@ class profile extends React.Component {
   this.state = {
 	pictures: [],
 	pictureChange: '',
+	edit: '',
 	username: '',
 	fname: '',
 	lname: '',
@@ -41,11 +42,16 @@ class profile extends React.Component {
 	});
  }
 
-handleEdit(event){
-	const allvalue = 'fname: '+ this.state.fname.message + ' lname:' + this.state.lname.message
+handleEdit(event) {
+	const allvalue = 'fname: ' + this.state.fname.message + ' lname:' + this.state.lname.message
 	+ ' gender: ' + this.state.gender.message + ' dob: ' + this.state.dob.message + ' email: '
 	+ this.state.email.message;
+	this.setState({ edit: true });
 	console.log(allvalue);
+}
+
+componentWillReceiveProps(nextProps) {
+  this.setState({ pictureChange: nextProps.pictureChange });
 }
 
  fChanged(data) {
@@ -65,13 +71,12 @@ handleEdit(event){
  }
 
  customValidateText(text) {
-     return (text.length > 0 && text.length < 128);
+     return (text.length > 0 && text.length < 512);
  }
 
  onSubmit = text => event => {
    event.preventDefault();
    var formData = new FormData();
-   console.log(formData);
    const url = 'http://localhost:8080/changeProfile/' + text;
    formData.append('file', this.state.pictures);
    fetch(url, {
@@ -103,6 +108,16 @@ handleEdit(event){
 						<div className="row">
 							<div className='col-md-3 col-lg-3'>
 								<img alt="nonthing" src={url} className='profile-img' />
+								<form>
+									<FileInput
+										name="myImage"
+										accept=".png,.jpg,.jpeg"
+										placeholder="My image"
+										className="inputClass"
+										onChange={this.handleInput}
+									/>
+								</form>
+								<button type="submit" onClick={this.onSubmit(id)} > Update Picture </button>
 							</div>
 							<div className=" col-md-9 col-lg-9">
 								<table className="table table-user-information">
@@ -179,18 +194,6 @@ handleEdit(event){
         </div>
 	</div>
 </div>
-		<h3>update photo</h3>
-		<form>
-			<FileInput
-				name="myImage"
-				accept=".png,.jpg,.jpeg"
-				placeholder="My image"
-				className="inputClass"
-				onChange={this.handleInput}
-			/>
-		</form>
-		<button type="submit" onClick={this.onSubmit(id)} > Update Picture </button>
-
 		<br />
 		<button type="submit" onClick={this.handleEdit}> Submit Edit </button>
 
