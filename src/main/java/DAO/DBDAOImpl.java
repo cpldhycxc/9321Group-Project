@@ -597,21 +597,21 @@ public class DBDAOImpl implements DBDAO {
             Statement stmt4 = conn.createStatement();
             Statement stmt5 = conn.createStatement();
 
-            if(!fname.equalsIgnoreCase("null")){
-                stmt1.executeUpdate("UPDATE users SET fname ='"+ fname+"' WHERE userID = '"+userID+"'");
+            if(!fname.equalsIgnoreCase("undefined")){
+                stmt1.executeUpdate("UPDATE users SET firstname ='"+ fname+"' WHERE userID = '"+userID+"'");
             }
-            if(!lname.equalsIgnoreCase("null")){
-                stmt2.executeUpdate("UPDATE users SET lname ='"+ lname+"' WHERE userID = '"+userID+"'");
+            if(!lname.equalsIgnoreCase("undefined")){
+                stmt2.executeUpdate("UPDATE users SET lastname ='"+ lname+"' WHERE userID = '"+userID+"'");
             }
-            if(!dob.equalsIgnoreCase("null")){
-                stmt3.executeUpdate("UPDATE users SET dob ='"+ dob+"' WHERE userID = '"+userID+"'");
+            if(!dob.equalsIgnoreCase("undefined")){
+                stmt3.executeUpdate("UPDATE users SET birthday ='"+ dob+"' WHERE userID = '"+userID+"'");
 
             }
-            if(!email.equalsIgnoreCase("null")){
+            if(!email.equalsIgnoreCase("undefined")){
                 stmt4.executeUpdate("UPDATE users SET email ='"+ email+"' WHERE userID = '"+userID+"'");
 
             }
-            if(!gender.equalsIgnoreCase("null")){
+            if(!gender.equalsIgnoreCase("undefined")){
                 stmt5.executeUpdate("UPDATE users SET gender ='"+ gender+"' WHERE userID = '"+userID+"'");
             }
             return true;

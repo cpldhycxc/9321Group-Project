@@ -2,7 +2,6 @@ package api;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -327,14 +326,16 @@ public class HomeController {
         return dbdao.advSearch(gender, dob);
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/updateProfile/{userID}", params = {"fname","lname", "dob", "email", "gender"}, method = RequestMethod.GET)
-    public boolean updateProfile(@PathVariable String userID,
+    public EditProfile updateProfile(@PathVariable String userID,
                                  @RequestParam("fname") String fname,
-                                 @RequestParam("lanme") String lname,
+                                 @RequestParam("lname") String lname,
                                  @RequestParam("dob") String dob,
                                  @RequestParam("email") String email,
                                  @RequestParam("gender") String gender){
-            return dbdao.editProfile(userID, fname, lname, dob, email, gender );
+        boolean flag = dbdao.editProfile(userID, fname, lname, dob, email, gender );
+            return new EditProfile(counter.incrementAndGet(), flag );
     }
 
 }
