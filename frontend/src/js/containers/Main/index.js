@@ -8,6 +8,7 @@ import Home from '../../containers/Home';
 import ActivityReport from '../../containers/ActivityReport';
 import User from '../../containers/User';
 import UserRedirect from '../../containers/User/userredirect.js';
+import AdvancedSearch from '../../containers/adSearch'
 
 
 export default class Main extends React.Component {
@@ -22,6 +23,7 @@ export default class Main extends React.Component {
                 <Route path='/search' component={Search} />
                 <Route path='/profile' component={Profile} />
                 <Route path='/user/:username' component={User} />
+                <Route paht='/adsearch' component={AdvancedSearch}/>
                 <Route path='/userredirect/:username' component={UserRedirect}/>
                 <Route path='/ActivityReport/:username' component={ActivityReport} />
             </Switch>

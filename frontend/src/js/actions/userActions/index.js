@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-export function login(user) {
+export function login(user,changestate) {
     localStorage.setItem('id_token', user.userName);
     return function(dispatch){
       axios.post('http://localhost:8080/login/', {
@@ -9,11 +9,15 @@ export function login(user) {
           password:user.password,
       })
       .then((response)=>{
-        console.log(response);
-        dispatch({
-          type: 'LOGGED_IN',
-          payload: response.data,
-        })
+        if(response.data.success){
+          dispatch({
+            type: 'LOGGED_IN',
+            payload: response.data,
+          })
+        } else {
+          localStorage.removeItem('id_token');
+          changestate();
+        }
       })
       .catch((err)=> {
         console.log(err);

@@ -13,7 +13,10 @@ export default class UserProfile extends React.Component {
     renderFollowButton = () => {
       if (this.props.self.userType === 2 && this.props.self.userName !== this.props.selecteduser.userName){
         return (
+          <div className='admin-block'>
+          <Button className='buttons btn btn-primary admin-button'>Activity</Button>
           <Button className='buttons btn btn-primary'>Ban</Button>
+        </div>
         );
       }
 

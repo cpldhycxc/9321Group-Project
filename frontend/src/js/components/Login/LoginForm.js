@@ -5,11 +5,12 @@ import SignupForm from '../Signup'
 import { login } from '../../actions/userActions';
 import validateInput from '../../functions/loginvalidation';
 import classnames from 'classnames';
+import Loginfail from './Loginfail'
 
 @connect((store) => {
 	return {
 		user: store.user.user,
-		token: store.user.token
+		token: store.user.token,
 	};
 })
 
@@ -19,14 +20,15 @@ export default class LoginForm extends React.Component {
 		this.state = {
 			username: '',
 			password: '',
-			isSubmitting: false,
 			issignup: false,
-			errors:{}
+			errors:{},
+			failed:false,
 		};
 		this.requestsignup = this.requestsignup.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.changeform = this.changeform.bind(this);
+		this.changestate = this.changestate.bind(this);
 	}
 
 	onChange(e){
@@ -35,6 +37,10 @@ export default class LoginForm extends React.Component {
 
 	requestsignup(){
 		this.setState({ issignup: true });
+	}
+
+	changestate(){
+		this.setState({ failed: !this.state.failed });
 	}
 
 	isValid() {
@@ -54,8 +60,8 @@ export default class LoginForm extends React.Component {
 			password: this.state.password
 		}
 		if(this.isValid()){
-			this.setState({ errors:{}, isSubmitting: true });
-			this.props.dispatch(login(user));
+			this.setState({ errors:{}});
+			this.props.dispatch(login(user,this.changestate));
 		}
 
 	}
@@ -65,6 +71,7 @@ export default class LoginForm extends React.Component {
 	}
 	render() {
 		const { user, token } = this.props;
+		console.log(this.state.failed);
 		const { errors } = this.state;
 		if(this.state.issignup){
 			return(
@@ -72,6 +79,13 @@ export default class LoginForm extends React.Component {
 					<SignupForm changeform={this.changeform}/>
 				</div>
 			);
+		}
+
+		if(this.state.failed){
+			return (
+				<Loginfail changestate={this.changestate}/>
+			)
+
 		}
 
 		return(
@@ -109,8 +123,6 @@ export default class LoginForm extends React.Component {
 						</div>
 						<div className="form-group">
 							<Button type="submit" name="Submit" className='btn btn-primary btn-md'> Login</Button>
-							{this.state.isSubmitting ?
-								<img src='static/images/loading.svg' height="50" width="50"/>:""}
 						</div>
 					</form>
 				</Modal.Body>
@@ -118,3 +130,7 @@ export default class LoginForm extends React.Component {
 );
 }
 }
+
+			// isSubmitting: false,
+// {this.state.isSubmitting ?
+// 	<img src='static/images/loading.svg' height="50" width="50"/>:""}

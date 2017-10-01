@@ -293,3 +293,10 @@ input {
 .friend-a{
   color:seagreen;
 }
+
+.admin-block{
+  display: inline;
+}
+.admin-button {
+  margin-left:5px;
+}
