@@ -15,6 +15,10 @@ export default class UserProfile extends React.Component {
         return (
           <Button className='buttons btn btn-primary'>follow</Button>
         );
+      } else {
+        return (
+          <Button className='buttons btn btn-primary'>Edit</Button>
+        );
       }
     }
 
