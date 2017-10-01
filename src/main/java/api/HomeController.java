@@ -2,7 +2,6 @@ package api;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -208,7 +207,11 @@ public class HomeController {
                 stream.write(bytes);
                 stream.close();
 
-                dbdao.addPost(userID, content);
+                if(content.equals("null")){
+                    dbdao.addPost(userID, null);
+                } else {
+                    dbdao.addPost(userID, content);
+                }
 
                 return new SignUp(counter.incrementAndGet(), true);
             } catch (Exception e) {
@@ -330,13 +333,14 @@ public class HomeController {
 
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/updateProfile/{userID}", params = {"fname","lname", "dob", "email", "gender"}, method = RequestMethod.GET)
-    public boolean updateProfile(@PathVariable String userID,
+    public EditProfile updateProfile(@PathVariable String userID,
                                  @RequestParam("fname") String fname,
                                  @RequestParam("lname") String lname,
                                  @RequestParam("dob") String dob,
                                  @RequestParam("email") String email,
                                  @RequestParam("gender") String gender){
-            return dbdao.editProfile(userID, fname, lname, dob, email, gender );
+        boolean flag = dbdao.editProfile(userID, fname, lname, dob, email, gender );
+        return new EditProfile(counter.incrementAndGet(), flag);
     }
 
 }
