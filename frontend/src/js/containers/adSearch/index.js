@@ -1,14 +1,15 @@
 import React from 'react';
-import data from './data.json';
+import Resultitem from '../../components/Resultitem';
 
 class search extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleDobChange = this.handleDobChange.bind(this);
 		this.state = {
-			dob: [],
-            gender: [],
+			dob: null,
+            gender: null,
             isClick: false,
+            result: [],
 		};
         this.handlebuttonpress = this.handlebuttonpress.bind(this);
         this.handlegenderChange = this.handlegenderChange.bind(this);
@@ -26,9 +27,23 @@ class search extends React.Component {
         }));
     }
 	handleSubmit(e) {
-		console.log('dob: ' + this.state.dob + ' gender: ' + this.state.gender);
 		e.preventDefault();
-	}
+		const text = 'dob=' + this.state.dob + '&&gender=' + this.state.gender;
+		const url = 'http://localhost:8080/advSearchResult/?' + text;
+        console.log(url);
+        fetch(url).then(response =>
+            response.json().then(data => ({
+                data: data,
+                status: response.status
+            })
+        ).then(res => {
+            this.setState({ result: res.data });
+            console.log(this.state.result[0]);
+        }));
+        this.setState(prevState => ({
+            isClick: !prevState.isClick
+        }))
+    }
 
 	render() {
         if (this.state.isClick === false) {
@@ -46,17 +61,38 @@ class search extends React.Component {
                     <input type="text" value={this.state.gender} name="geder" onChange={this.handlegenderChange} />
                 </label>
                 <br />
-                <button type="submit" onClick={this.handlebuttonpress}> submit </button>
+                <button type="submit" onClick={this.handleSubmit}> submit </button>
                 </form>
                 </div>
             );
         }
-        return (
-                <div>
-                    <h3>asdasd</h3>
-                    <button type="submit" onClick={this.handlebuttonpress}> back </button>
+        if (this.state.result[0] !== undefined) {
+            return (
+                <div className="result">
+                    <div class="ui link cards">
+                        {this.state.result.map((user, i) => (
+                            <Resultitem
+                                key={i}
+                                id={user.id}
+                                joined_date={user.joined_date}
+                                self_intro={user.self_intro}
+                                numOfFriend={user.numOfFriend}
+                                />
+                            ))}
+                    </div>
+                        <div className="button">
+                            <button type="submit" onClick={this.handlebuttonpress}> back </button>
+                        </div>
                 </div>
-        );
+            );
+        }
+        return (
+            <div className="result">
+                <h1>No result found! Please try again!</h1>
+                <button type="submit" onClick={this.handlebuttonpress}> back </button>
+            </div>
+        )
+
 	}
 }
 

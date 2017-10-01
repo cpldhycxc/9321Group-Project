@@ -18,13 +18,13 @@ class profile extends React.Component {
   this.state = {
 	pictures: [],
 	pictureChange: '',
-	edit: '',
-	username: '',
-	fname: '',
-	lname: '',
-	gender: '',
-	dob: '',
-	email: '',
+	edit: null,
+	username: null,
+	fname: null,
+	lname: null,
+	gender: null,
+	dob: null,
+	email: null,
   };
  this.fChanged = this.fChanged.bind(this);
  this.lChanged = this.lChanged.bind(this);
@@ -43,8 +43,8 @@ class profile extends React.Component {
  }
 
 handleEdit(event) {
-	const allvalue = 'fname: ' + this.state.fname.message + ' lname:' + this.state.lname.message
-	+ ' gender: ' + this.state.gender.message + ' dob: ' + this.state.dob.message + ' email: '
+	const allvalue = 'fname:' + this.state.fname.message + '&&lname:' + this.state.lname.message
+	+ '&&gender: ' + this.state.gender.message + '&&dob: ' + this.state.dob.message + '&&email: '
 	+ this.state.email.message;
 	this.setState({ edit: true });
 	console.log(allvalue);
