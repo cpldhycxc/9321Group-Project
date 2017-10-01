@@ -9,7 +9,7 @@ class UserFriendList extends React.Component {
     }
 
     handleClick(username){
-      this.props.history.push(`/user/${username}`);
+      this.props.history.push(`/userredirect/${username}`);
     }
 
     render(){

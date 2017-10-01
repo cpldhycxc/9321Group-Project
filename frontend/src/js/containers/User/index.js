@@ -29,7 +29,7 @@ export default class User extends React.Component {
        this.setState({ selecteduser: res.data });
      });
   }
-  
+
   render() {
     if(!this.state.selecteduser){
       return null
