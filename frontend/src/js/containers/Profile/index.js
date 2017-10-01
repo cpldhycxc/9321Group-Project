@@ -57,6 +57,7 @@ handleEdit = text => event => {
     }).catch((err) => {
  		console.log(err);
     });
+	this.setState({ edit: true });
     console.log('submit');
 }
 
@@ -118,7 +119,7 @@ componentWillReceiveProps(nextProps) {
 						<div className="row">
 							<div className='col-md-3 col-lg-3'>
 								<img alt="nonthing" src={url} className='profile-img' />
-								<form>
+							
 									<FileInput
 										name="myImage"
 										accept=".png,.jpg,.jpeg"
@@ -126,7 +127,7 @@ componentWillReceiveProps(nextProps) {
 										className="inputClass"
 										onChange={this.handleInput}
 									/>
-								</form>
+
 								<button type="submit" onClick={this.onSubmit(id)} > Update Picture </button>
 							</div>
 							<div className=" col-md-9 col-lg-9">

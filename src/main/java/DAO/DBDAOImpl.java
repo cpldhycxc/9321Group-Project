@@ -598,10 +598,10 @@ public class DBDAOImpl implements DBDAO {
             Statement stmt5 = conn.createStatement();
 
             if(!fname.equalsIgnoreCase("undefined")){
-                stmt1.executeUpdate("UPDATE users SET fname ='"+ fname+"' WHERE userID = '"+userID+"'");
+                stmt1.executeUpdate("UPDATE users SET firstname ='"+ fname+"' WHERE userID = '"+userID+"'");
             }
             if(!lname.equalsIgnoreCase("undefined")){
-                stmt2.executeUpdate("UPDATE users SET lname ='"+ lname+"' WHERE userID = '"+userID+"'");
+                stmt2.executeUpdate("UPDATE users SET lastname ='"+ lname+"' WHERE userID = '"+userID+"'");
             }
             if(!dob.equalsIgnoreCase("undefined")){
                 stmt3.executeUpdate("UPDATE users SET dob ='"+ dob+"' WHERE userID = '"+userID+"'");
