@@ -276,24 +276,32 @@ public class DBDAOImpl implements DBDAO {
     	return result;
     }
 
-    public ArrayList<User> Search(String param){
+    public ArrayList<UserProfile> search(String param){
         try(Connection conn = connect()){
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName LIKE '% "+ param +" %' ");
-            ArrayList<User> ret = new ArrayList<User>();
+//            ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName LIKE '% "+ param +" %' ");
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, userType, joinTime " +
+                    "FROM Users WHERE userName LIKE '%" + param + "%'");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            ArrayList<UserProfile> ret = new ArrayList<UserProfile>();
+            System.out.println(param);
             if(rs == null){
                 System.out.println("none");
             }
             System.out.println("goes here");
             while(rs.next()){
+                UserProfile u = new UserProfile();
                 System.out.println("rs: " + rs.getString(1));
-
-                User u = new User(rs.getString(1),
-                                  rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(7));
+                u.setUserID(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setEmail(rs.getString(3));
+                u.setFirstName(rs.getString(4));
+                u.setLastName(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setBirthday(rs.getString(7));
+                u.setUserType(rs.getInt(8));
+                u.setJoinTime(rs.getString(9));
                 ret.add(u);
             }
             System.out.println();
@@ -304,6 +312,44 @@ public class DBDAOImpl implements DBDAO {
         }
 
     }
+
+    public ArrayList<UserProfile> advSearch(String gender, String dob) {
+//        ArrayList<String> data = new ArrayList<String>();
+
+        try (Connection conn = connect()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT userID, userName, email, firstName, lastName, gender, birthday, userType, joinTime " +
+                    "FROM Users WHERE gender = '" + gender + "' " +
+                    "AND birthday = '" + dob +"'");
+            ArrayList<UserProfile> ret = new ArrayList<UserProfile>();
+            if (rs == null) {
+                System.out.println("none");
+            }
+            while (rs.next()) {
+                System.out.println("rs: " + rs.getString(1));
+                UserProfile u = new UserProfile();
+                System.out.println("rs: " + rs.getString(1));
+                u.setUserID(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setEmail(rs.getString(3));
+                u.setFirstName(rs.getString(4));
+                u.setLastName(rs.getString(5));
+                u.setGender(rs.getString(6));
+                u.setBirthday(rs.getString(7));
+                u.setUserType(rs.getInt(8));
+                u.setJoinTime(rs.getString(9));
+                ret.add(u);
+
+            }
+            System.out.println();
+            return ret;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
 
 	@Override
 	public UserProfile userProfile(String userName) {
@@ -364,6 +410,38 @@ public class DBDAOImpl implements DBDAO {
 	 * function to delete the post by post id
 	 */
 	@Override
+    public UserActivities userActivities(int userID) {
+        UserActivities userAct = new UserActivities();
+        try (Connection conn = connect()) {
+            Statement stmt1 = conn.createStatement();
+            Statement stmt2 = conn.createStatement();
+            Statement stmt3 = conn.createStatement();
+
+
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            ResultSet joinDate = stmt1.executeQuery("SELECT joinTime FROM users WHERE userID = '" + userID + "'");
+            ResultSet posts = stmt2.executeQuery("SELECT content, postTime FROM posts WHERE userID= '" + userID + "' ORDER BY postTime");
+            ResultSet addFriends = stmt3.executeQuery("SELECT friendID, startDate FROM Friends WHERE userID = '" + userID + "' ORDER BY startDate");
+            //init join date
+//            user.setJoinTime(format.parse(rs.(10)));
+            System.out.println("join date: " + joinDate.getString(1));
+            userAct.setJoinDate(format.parse(joinDate.getString(1)));
+            // adding posts record
+            while (posts.next()) {
+                Activity act = new Activity(1, posts.getString(1), format.parse(posts.getString(2)));
+                userAct.addActivity(act);
+            }
+
+            while (addFriends.next()) {
+                Activity act = new Activity(2, addFriends.getString(1), format.parse(addFriends.getString(2)));
+                userAct.addActivity(act);
+            }
+        } catch (SQLException | ParseException e) {
+            e.printStackTrace();
+        }
+        return userAct;
+    }
+
 	public boolean deletePost(int postID) {
 		boolean result = false;
 		try(Connection conn = connect()){			

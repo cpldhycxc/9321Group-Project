@@ -310,10 +310,22 @@ public class HomeController {
     }
 
 
-//    @RequestMapping(value = "/activeReport/{userID}", method = RequestMethod.GET)
-//    public UserActivities userActivity(@PathVariable int userID){
-//        return dbdao.userActivities(userID);
-//    }
+    @RequestMapping(value = "/activeReport/{userID}", method = RequestMethod.GET)
+    public UserActivities userActivity(@PathVariable int userID){
+        return dbdao.userActivities(userID);
+    }
+
+    @RequestMapping(value = "/searchResult", params = {"userName"}, method = RequestMethod.GET)
+    public ArrayList<UserProfile> search(@RequestParam("userName") String param ){
+        return dbdao.search(param);
+    }
+
+
+    @RequestMapping(value = "/advSearchResult", params = {"gender", "dob"}, method = RequestMethod.GET)
+    public ArrayList<UserProfile> advSearch( @RequestParam("gender") String gender ,@RequestParam("dob") String dob){
+        System.out.println(gender + " " + dob);
+        return dbdao.advSearch(gender, dob);
+    }
 
 
 }
