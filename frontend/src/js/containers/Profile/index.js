@@ -2,6 +2,7 @@ import InlineEdit from 'react-edit-inline';
 import React from 'react';
 import { connect } from 'react-redux';
 import FileInput from 'react-file-input';
+import { Button, Icon, Image } from 'semantic-ui-react';
 
 
 @connect((store) => {
@@ -16,6 +17,8 @@ class profile extends React.Component {
   super(props);
   this.state = {
 	pictures: [],
+	pictureChange: '',
+	edit: '',
 	username: '',
 	fname: '',
 	lname: '',
@@ -35,14 +38,20 @@ class profile extends React.Component {
  handleInput(event) {
 	this.setState({
 		pictures: event.target.files[0],
+		pictureChange: true,
 	});
  }
 
-handleEdit(event){
-	const allvalue = 'fname: '+ this.state.fname.message + ' lname:' + this.state.lname.message
+handleEdit(event) {
+	const allvalue = 'fname: ' + this.state.fname.message + ' lname:' + this.state.lname.message
 	+ ' gender: ' + this.state.gender.message + ' dob: ' + this.state.dob.message + ' email: '
 	+ this.state.email.message;
+	this.setState({ edit: true });
 	console.log(allvalue);
+}
+
+componentWillReceiveProps(nextProps) {
+  this.setState({ pictureChange: nextProps.pictureChange });
 }
 
  fChanged(data) {
@@ -62,13 +71,12 @@ handleEdit(event){
  }
 
  customValidateText(text) {
-     return (text.length > 0 && text.length < 128);
+     return (text.length > 0 && text.length < 512);
  }
 
  onSubmit = text => event => {
    event.preventDefault();
    var formData = new FormData();
-   console.log(formData);
    const url = 'http://localhost:8080/changeProfile/' + text;
    formData.append('file', this.state.pictures);
    fetch(url, {
@@ -82,7 +90,6 @@ handleEdit(event){
    console.log('submit');
  }
 
-
  render() {
     const { user, token } = this.props;
 	console.log(user);
@@ -91,68 +98,106 @@ handleEdit(event){
 	const url = 'http://localhost:8080/files/users/' + id;
      if (token) {
          return (
-             <div>
-                <h2>Profile Page</h2>
-                <h3>First Name</h3>
-				<InlineEdit
-                    validate={this.customValidateText}
-                    activeClassName="editing"
-                    text={user.firstName}
-                    paramName="message"
-                    change={this.fChanged}
-                />
-				<h3>Last Name</h3>
-				<InlineEdit
-					validate={this.customValidateText}
-					activeClassName="editing"
-					text={user.lastName}
-					paramName="message"
-					change={this.lChanged}
-				/>
-                <br />
-                <h3>User name</h3>
-                {user.userName}
-                <br />
-                <h3>Gender</h3>
-                <InlineEdit
-                    validate={this.customValidateText}
-                    activeClassName="editing"
-                    text={user.gender}
-                    paramName="message"
-                    change={this.gChanged}
-                />
-                <h3>Photo</h3>
-                <img alt="NothingToshow" src={url}></img>
-				<form>
-					<FileInput
-					name="myImage"
-					accept=".png,.jpg,.jpeg"
-					placeholder="My image"
-					className="inputClass"
-					onChange={this.handleInput}
-					/>
-				</form>
-				<button type="submit" onClick={this.onSubmit(id)}> Update Picture </button>
-                <h3>email</h3>
-                <InlineEdit
-                    validate={this.customValidateText}
-                    activeClassName="editing"
-                    text={user.email}
-                    paramName="message"
-                    change={this.eChanged}
-                />
-                <br />
-                <h3>DOB</h3>
-                <InlineEdit
-                    validate={this.customValidateText}
-                    activeClassName="editing"
-                    text={user.birthday}
-                    paramName="message"
-                    change={this.dChanged}
-                />
-				<br />
-				<button type="submit" onClick={this.handleEdit}> Submit Edit </button>
-             </div>
+				<div className='panel panel-info panelbody'>
+					<div className="panel-heading">
+						<div className="panel-title username">
+							<h3 >UserName: {user.userName}</h3>
+						</div>
+					</div>
+					<div className="panel-body">
+						<div className="row">
+							<div className='col-md-3 col-lg-3'>
+								<img alt="nonthing" src={url} className='profile-img' />
+								<form>
+									<FileInput
+										name="myImage"
+										accept=".png,.jpg,.jpeg"
+										placeholder="My image"
+										className="inputClass"
+										onChange={this.handleInput}
+									/>
+								</form>
+								<button type="submit" onClick={this.onSubmit(id)} > Update Picture </button>
+							</div>
+							<div className=" col-md-9 col-lg-9">
+								<table className="table table-user-information">
+								<tbody>
+									<tr>
+										<td>First Name</td>
+										<td>
+										<InlineEdit
+											validate={this.customValidateText}
+											activeClassName="editing"
+											text={user.firstName}
+											paramName="message"
+											change={this.fChanged}
+										/>
+										</td>
+									</tr>
+									<tr>
+						<td>Last Name</td>
+						<td>
+						<InlineEdit
+							validate={this.customValidateText}
+							activeClassName="editing"
+							text={user.lastName}
+							paramName="message"
+							change={this.lChanged}
+						/>
+						</td>
+					</tr>
+					<tr>
+						<td>Gender</td>
+						<td>
+							<InlineEdit
+								validate={this.customValidateText}
+								activeClassName="editing"
+								text={user.gender}
+								paramName="message"
+								change={this.gChanged}
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>Date of Birth</td>
+						<td>
+							<InlineEdit
+								validate={this.customValidateText}
+								activeClassName="editing"
+								text={user.birthday}
+								paramName="message"
+								change={this.dChanged}
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td>
+							<InlineEdit
+								validate={this.customValidateText}
+								activeClassName="editing"
+								text={user.email}
+								paramName="message"
+								change={this.eChanged}
+							/>
+						</td>
+					</tr>
+					<tr>
+						<td>Join Date</td>
+						<td>
+						{user.joinTime}
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+        </div>
+	</div>
+</div>
+		<br />
+		<button type="submit" onClick={this.handleEdit}> Submit Edit </button>
+
+		</div>
          );
      }
      return (
