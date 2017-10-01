@@ -48,12 +48,10 @@ handleEdit = text => event => {
 	+ this.state.email.message;
 	this.setState({ edit: true });
 	event.preventDefault();
-    var formData = new FormData();
     const url = 'http://localhost:8080/updateProfile/'+ text + '?'+ allvalue;
 	console.log(url);
     fetch(url, {
- 		method: 'POST',
- 		body: formData
+ 		method: 'GET',
     }).then((response) => {
  	console.log(response);
     }).catch((err) => {
