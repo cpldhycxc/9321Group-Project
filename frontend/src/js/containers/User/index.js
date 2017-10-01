@@ -30,15 +30,6 @@ export default class User extends React.Component {
      });
   }
   
-  componentWillUpdate(nextProps) {
-    const { username }= nextProps.match.params;
-    searchByUsername(username)
-    .then((res)=>{
-      this.setState({ selecteduser: res.data });
-    });
-  }
-
-
   render() {
     if(!this.state.selecteduser){
       return null
