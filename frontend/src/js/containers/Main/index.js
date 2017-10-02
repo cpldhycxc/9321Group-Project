@@ -23,8 +23,8 @@ export default class Main extends React.Component {
                 <Route path='/search' component={Search} />
                 <Route path='/profile' component={Profile} />
                 <Route path='/user/:username' component={User} />
-                <Route paht='/adsearch' component={AdvancedSearch}/>
                 <Route path='/userredirect/:username' component={UserRedirect}/>
+                <Route paht='/adsearch' component={AdvancedSearch}/>
                 <Route path='/ActivityReport/:username' component={ActivityReport} />
             </Switch>
         </div>
@@ -33,3 +33,5 @@ export default class Main extends React.Component {
   }
 }
 // component={Home}
+{/* <Route paht='/adsearch' component={AdvancedSearch}/>
+import AdvancedSearch from '../../containers/adSearch' */}
