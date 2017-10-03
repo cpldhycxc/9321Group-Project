@@ -320,11 +320,15 @@ public class HomeController {
         return dbdao.search(param);
     }
 
-
-    @RequestMapping(value = "/advSearchResult", params = {"gender", "dob"}, method = RequestMethod.GET)
-    public ArrayList<UserProfile> advSearch( @RequestParam("gender") String gender ,@RequestParam("dob") String dob){
+    //    String userName, String firstName, String lastName
+    @RequestMapping(value = "/advSearchResult", params = {"gender", "dob", "userName", "firstName", "lastName"}, method = RequestMethod.GET)
+    public ArrayList<UserProfile> advSearch( @RequestParam("gender") String gender ,
+                                             @RequestParam("dob") String dob,
+                                             @RequestParam("userName") String userName,
+                                             @RequestParam("firstName") String firstName,
+                                             @RequestParam("lastName") String lastName){
         System.out.println(gender + " " + dob);
-        return dbdao.advSearch(gender, dob);
+        return dbdao.advSearch(gender, dob, userName, firstName, lastName);
     }
 
 
