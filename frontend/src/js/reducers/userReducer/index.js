@@ -15,6 +15,7 @@ export default function reducer(state = {
           friends: action.payload.friends,
           user: action.payload.user,
           token: localStorage.getItem('id_token'),
+          isfetched:true,
       };
     }
     case "LOGGED_OUT": {
