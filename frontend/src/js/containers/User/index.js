@@ -24,13 +24,15 @@ export default class User extends React.Component {
 
   componentWillMount () {
      const { username }= this.props.match.params;
-     searchByUsername(username)
+     searchByUsername(username,this.props.currentuser.userName)
      .then((res)=>{
+			 console.log(res.data)
        this.setState({ selecteduser: res.data });
      });
   }
 
   render() {
+		console.log
     if(!this.state.selecteduser){
       return null
     }

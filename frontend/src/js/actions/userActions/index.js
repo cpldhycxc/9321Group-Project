@@ -48,8 +48,11 @@ export function logout() {
   };
 }
 
-export function searchByUsername(username){
-  return axios.get(`http://localhost:8080/userProfile/${username}`)
+export function searchByUsername(username1,username2){
+  return axios.post('http://localhost:8080/userProfile/',{
+    selectUserName:username1,
+    userName : username2,
+  })
 }
 
 // return function(dispatch){

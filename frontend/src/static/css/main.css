@@ -238,10 +238,12 @@ input {
 .userprofile {
   height: 250px;
   padding: 0;
+  overflow: auto;
 }
 
 .backbutton {
   margin-right: 5px;
+  margin-top: 10px;
 }
 
 .username {
@@ -251,7 +253,6 @@ input {
 }
 
 .panelbody{
-  height: 300px;
   border: 1px #e5e5e5 solid;
   border-radius: 4px;
 }
@@ -300,3 +301,17 @@ input {
 .admin-button {
   margin-left:5px;
 }
+
+.uploadimag{
+  font-size: 10px;
+  padding: 0;
+  margin-top: 5px;
+  block-size: 20px;
+}
+
+
+
+.warningstyle{
+	font-size: 20px;
+	float: left;
+};

@@ -147,7 +147,7 @@ export default class SignupForm extends React.Component {
                 </div>
                 <div className="form-group">
                     <Button onClick = {this.props.changeform} className='btn btn-primary btn-md backbutton' > Back</Button>
-                  <Button disabled={this.state.invalid} className='btn btn-primary btn-md' type="submit" name="Submit"> Signup</Button>
+                  <Button disabled={this.state.invalid} className='btn btn-primary btn-md backbutton' type="submit" name="Submit"> Signup</Button>
                   {this.state.isloading ?
                     <img src='static/images/loading.svg' height="50" width="50"/>:""}
                 </div>
