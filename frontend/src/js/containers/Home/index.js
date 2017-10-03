@@ -21,7 +21,7 @@ export default class Home extends React.Component {
     return (
       <div>
         <WallContainer />
-        <NewPostButton onClick={this.openModal} />
+        <NewPostButton onClick={this.openModal} onRequestClose={this.closeModal} />
         <NewPost 
           isOpen={this.state.newPostModal}
           onRequestClose={this.closeModal}
