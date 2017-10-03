@@ -133,6 +133,11 @@ public class DBDAOImpl implements DBDAO {
                 user.setUserType(rs.getInt(8));
                 user.setJoinTime(rs.getString(9));
             }
+
+            if(user.getUserType() == User.UNACTIVATED){
+                user.setUserName(null);
+            }
+
         } catch (SQLException e){
             e.printStackTrace();
         }

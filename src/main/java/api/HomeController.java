@@ -2,6 +2,7 @@ package api;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -57,7 +58,7 @@ public class HomeController {
         }
         String msg = "Dear User,"
                 + "\n\n Please click the link to activate your account for UNSW Book" +
-                "\n localhost:9000/validation/" + Integer.toString(dbdao.getUserIdByUserName(user.getUserName()));
+                "\n localhost:9000/#/validation/" + Integer.toString(dbdao.getUserIdByUserName(user.getUserName()));
         sendTLSMail(user.getEmail(), msg);
         return new SignUp(counter.incrementAndGet(), true);
     }
@@ -114,6 +115,8 @@ public class HomeController {
     public FriendRelated addFriend(@RequestBody FriendRequest rf){
         dbdao.addFriendRelation(rf.getUserID(), rf.getFriendID());
         dbdao.addFriendRelation(rf.getFriendID(), rf.getUserID());
+        Notification noti = new Notification(rf.getUserID(),rf.getFriendName()+" is your friend now!");
+		notification.add(noti);        
         return new FriendRelated(counter.incrementAndGet(), true);
     }
     
@@ -177,13 +180,29 @@ public class HomeController {
     @RequestMapping(value = "/notification/{userID}", method = RequestMethod.GET)
     public ArrayList<String> getNotification(@PathVariable int userID) {
     	ArrayList<String> result = new ArrayList<String>();
-    	for(Notification noti:notification) {
+    	System.out.println("Check for the notification!!");
+    	for(Notification no:notification) {
+    		System.out.println(no.getUserID()+"   "+no.getNoti());
+    	}
+    	Iterator<Notification> itr = notification.iterator();
+    	while(itr.hasNext()){
+    		Notification noti = itr.next();
     		if(noti.getUserID() == userID){
     			result.add(noti.getNoti());
-    			notification.remove(noti);
+    			itr.remove();
     		}
     	}
-//    	notification.clear();
+    	
+    	System.out.println("Lets check the request ID");
+    	for(String st:result){
+    		System.out.println("expect :"+userID+ "  "+st);
+    	}
+
+    	System.out.println("After pop out all the noti");
+    	for(Notification no:notification) {
+    		System.out.println(no.getUserID()+"   "+no.getNoti());
+    	}
+    	
     	return result;
     }
     
@@ -204,8 +223,6 @@ public class HomeController {
     	if(getLike) {
     		Notification noti = new Notification(posterID,userName+" likes your post!");
     		notification.add(noti);
-    		System.out.println(posterID);
-    		System.out.println(userName+" likes your post!");
     	}
     	return new LikePost(userID,postID,dbdao.likePost(userID, postID));
     }
