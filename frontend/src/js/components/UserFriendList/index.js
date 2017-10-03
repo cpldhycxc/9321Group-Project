@@ -5,7 +5,6 @@ import { withRouter } from 'react-router';
 class UserFriendList extends React.Component {
     constructor(props) {
       super(props);
-
     }
 
     handleClick(username){

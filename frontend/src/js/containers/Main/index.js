@@ -31,7 +31,7 @@ export default class Main extends React.Component {
                 <Route path='/redirectwindow' component={RedirectWindows}/>
                 <Route path='/userredirect/:username' component={UserRedirect} />
                 <Route path='/addfriend/:userID' component={AddFriend}/ >
-                <Route paht='/advSearch' component={AdvancedSearch} />
+                <Route paht='/advsearch' component={AdvancedSearch} />
                 <Route path='/ActivityReport/:username' component={ActivityReport} />
             </Switch>
         </div>
