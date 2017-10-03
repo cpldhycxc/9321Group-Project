@@ -97,15 +97,15 @@ export default class AdvSearch extends React.Component {
 						<form onSubmit={this.handleSubmit} >
 								<div className={classnames('form-group')} >
 									<label className="control-label">Username:</label>
-									<input onBlur={this.checkUserExists} onChange={this.onChange} type="text" className="form-control" id="username" name="username" placeholder="Enter Username" />
+									<input onBlur={this.checkUserExists} onChange={this.onChange} type="text" className="form-control" id="username" name="username" placeholder="Search by Username" />
 								</div>
 								<div className ={classnames('form-group')}>
 									<label className="control-label">First Name: </label>
-									<input onChange={this.onChange} type="text" className="form-control" id ="firstname" name="firstname" placeholder="Enter your first name"/>
+									<input onChange={this.onChange} type="text" className="form-control" id ="firstname" name="firstname" placeholder="Search by first name"/>
 								</div>
 		            <div className ={classnames('form-group')}>
 		                <label className="control-label">Last Name: </label>
-		              <input onChange={this.onChange} type="text" className="form-control" id ="lastname" name="lastname" placeholder="Enter your last name"/>
+		              <input onChange={this.onChange} type="text" className="form-control" id ="lastname" name="lastname" placeholder="Search by last name"/>
 		            </div>
 		            <div className ='form-group'>
 		                <label className="control-label">Data of Birth: </label>
@@ -148,7 +148,7 @@ export default class AdvSearch extends React.Component {
 				</div>
         </div>
        );
-		} 
+		}
 	}
 }
 
