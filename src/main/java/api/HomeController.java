@@ -58,7 +58,7 @@ public class HomeController {
         }
         String msg = "Dear User,"
                 + "\n\n Please click the link to activate your account for UNSW Book" +
-                "\n localhost:9000/validation/" + Integer.toString(dbdao.getUserIdByUserName(user.getUserName()));
+                "\n localhost:9000/#/validation/" + Integer.toString(dbdao.getUserIdByUserName(user.getUserName()));
         sendTLSMail(user.getEmail(), msg);
         return new SignUp(counter.incrementAndGet(), true);
     }
