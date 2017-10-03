@@ -55,6 +55,23 @@ export function searchByUsername(username1,username2){
   })
 }
 
+export function dovalidation(userID) {
+  return axios.get(`http://localhost:8080/activation/${userID}`)
+}
+
+export function dodevalidation(userID) {
+  return axios.get(`http://localhost:8080/backActivation/${userID}`);
+}
+
+export function addFriend(userID,userName,friendID,friendName){
+  return axios.post('http://localhost:8080/friendRequest/',{
+    userID:userID,
+    userName:userName,
+    friendID:friendID,
+    friendName : friendName,
+  })
+}
+
 // return function(dispatch){
   // axios.post('http://localhost:8000/backend/login/',{
   //     user

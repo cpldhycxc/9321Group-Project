@@ -3,12 +3,14 @@ import React from 'react';
 import { Link, Switch, Route, Redirect } from 'react-router-dom';
 import Nav from './Nav';
 import Search from '../../containers/Search';
+import Home from '../../containers/Home';
 import Profile from '../../containers/Profile';
 import ActivityReport from '../../containers/ActivityReport';
 import User from '../../containers/User';
 import Validation from './validation.js';
 import UserRedirect from '../../containers/User/userredirect.js';
 import AdvancedSearch from '../../containers/AdvSearch';
+import RedirectWindows from './redirectwindow.js';
 
 
 export default class Main extends React.Component {
@@ -19,15 +21,15 @@ export default class Main extends React.Component {
         <div className='content'>
             <Switch>
                 <Route exact path='/' render={() => <Redirect to='/wall' />} />
-                <Route path='/wall' />
+                <Route path='/wall' component={Home} />
                 <Route path='/search' component={Search} />
                 <Route path='/profile' component={Profile} />
                 <Route path='/user/:username' component={User} />
                 <Route path='/validation/:userid' component={Validation} />
+                <Route path='/redirectwindow'component={RedirectWindows}/>
                 <Route path='/userredirect/:username' component={UserRedirect} />
                 <Route paht='/advSearch' component={AdvancedSearch} />
                 <Route path='/ActivityReport/:username' component={ActivityReport} />
-
             </Switch>
         </div>
       </div>
