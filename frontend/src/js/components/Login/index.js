@@ -3,6 +3,8 @@ import { Modal } from 'react-bootstrap';
 import LoginForm from './LoginForm';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/userActions';
+import { withRouter } from 'react-router';
+
 @connect((store) => {
 	return {
 		user: store.user.user,
@@ -10,7 +12,7 @@ import { logout } from '../../actions/userActions';
 	};
 })
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -33,7 +35,7 @@ export default class Login extends React.Component {
 		e.preventDefault();
 		this.props.dispatch(logout());
 		this.setState({ showModal: false });
-		window.location.href='/#/wall';
+		this.props.history.push('/redirectwindow');
 	}
 
 	render() {
@@ -65,3 +67,7 @@ export default class Login extends React.Component {
 		);
 	}
 }
+
+
+const LoginRouter = withRouter(Login);
+export default LoginRouter;

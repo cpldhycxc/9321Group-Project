@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-
+import { dodevalidation, dovalidation,addFriend } from '../../actions/userActions';
 
 
 @connect((store) => {
@@ -14,8 +14,13 @@ export default class UserProfile extends React.Component {
     super(props);
     this.state = {
       isEdit: false,
+      isFriend:  this.props.selecteduser.relationShip,
+      isBan: !this.props.selecteduser.userType,
     };
     this.editprofile = this.editprofile.bind(this);
+    this.banuser = this.banuser.bind(this);
+    this.unbanuser = this.unbanuser.bind(this);
+    this.folllowuser = this.folllowuser.bind(this);
     }
 
 
@@ -23,25 +28,62 @@ export default class UserProfile extends React.Component {
       this.setState({ isEdit: !this.state.isEdit });
     }
 
+    unbanuser(){
+      dovalidation(this.props.selecteduser.userID).
+      then((res)=>{
+        this.setState({ isBan: false });
+      });
+    }
+
+    banuser() {
+      dodevalidation(this.props.selecteduser.userID)
+      .then((res)=>{
+        this.setState({ isBan: true });
+      });
+    }
+
+    folllowuser(){
+      console.log( this.props.self);
+      console.log( this.props.selecteduser);
+      const userID = this.props.self.userID;
+      const username = this.props.self.userName;
+      const friendName = this.props.selecteduser.userName;
+      const friendID= this.props.selecteduser.userID;
+      console.log(username)
+      addFriend(userID, username, friendID, friendName)
+      .then((res)=>{
+        console.log(res);
+
+      })
+    }
+
     renderFollowButton = () => {
       const { isEdit } =this.state;
       if (this.props.self.userType === 2 && this.props.self.userName !== this.props.selecteduser.userName){
+        if(this.state.isBan){
+          return (
+            <div className='admin-block'>
+            <Button className='buttons btn btn-primary admin-button'>Activity</Button>
+            <Button onClick={this.unbanuser} className='buttons btn btn-default'>UnBan</Button>
+          </div>
+          );
+        }
         return (
           <div className='admin-block'>
           <Button className='buttons btn btn-primary admin-button'>Activity</Button>
-          <Button className='buttons btn btn-primary'>Ban</Button>
+          <Button onClick={this.banuser} className='buttons btn btn-primary'>Ban</Button>
         </div>
         );
       }
 
       if (this.props.self.userType===1 && this.props.self.userName !== this.props.selecteduser.userName) {
-        if(this.props.selecteduser.relationShip){
+        if(this.state.isFriend){
           return (
             <Button className='buttons btn btn-default'>Unfollow</Button>
           );
         }
         return (
-          <Button className='buttons btn btn-primary'>Follow</Button>
+          <Button onClick={this.folllowuser} className='buttons btn btn-primary'>Follow</Button>
         );
       }
       if (this.props.self.userType===1 && this.props.self.userName === this.props.selecteduser.userName) {
@@ -58,6 +100,7 @@ export default class UserProfile extends React.Component {
     render() {
       const { selecteduser } = this.props;
       const { isEdit } = this.state;
+      console.log(selecteduser);
       if(isEdit){
         return (
           <div className='panel panel-info panelbody'>
