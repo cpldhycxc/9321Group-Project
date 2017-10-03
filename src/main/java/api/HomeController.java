@@ -236,9 +236,16 @@ public class HomeController {
     @RequestMapping(value="/addPost/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
     public @ResponseBody SignUp handleFileUpload(
             @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
-        String filePath = "posts/" + Integer.toString(userID); //userID, content
         if (!file.isEmpty()) {
             try {
+                int postID;
+                if(content.equals("null")){
+                    postID = (int)dbdao.addPost(userID, null);
+                } else {
+                    postID = (int)dbdao.addPost(userID, content);
+                }
+
+                String filePath = "posts/" + Integer.toString(postID);
                 System.out.println(filePath);
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =
@@ -246,20 +253,12 @@ public class HomeController {
                 stream.write(bytes);
                 stream.close();
 
-                if(content.equals("null")){
-                    dbdao.addPost(userID, null);
-                } else {
-                    dbdao.addPost(userID, content);
-                }
-
                 return new SignUp(counter.incrementAndGet(), true);
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("asdasd");
                 return new SignUp(counter.incrementAndGet(), false);
             }
         } else {
-            System.out.println("kkkk");
             return new SignUp(counter.incrementAndGet(), false);
         }
     }

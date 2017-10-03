@@ -37,7 +37,7 @@ public interface DBDAO {
     public ArrayList<Post> getPostsRandomly();
     public Post getPostByPostID(int postID);
     public String getUserNameByUserID(int userID);
-    public boolean addPost(int userID, String content);
+    public long addPost(int userID, String content);
 //    public UserActivities userActivities(int userID);
     public boolean editProfile(String userID,String fname, String lname, String dob, String email, String gender);
     public void deleteFriendRelation(int userID, int friendID);
