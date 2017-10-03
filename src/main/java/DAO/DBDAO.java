@@ -23,7 +23,7 @@ public interface DBDAO {
     public ArrayList<Post> getPostsByUserID(int userID);
     public ArrayList<Friend> getFriendsByUserID(int userID);
     public ArrayList<UserProfile> search(String param);
-    public ArrayList<UserProfile> advSearch(String gender, String dob);
+    public ArrayList<UserProfile> advSearch(String gender, String dob,  String userName, String firstName, String lastName);
     public UserActivities userActivities(int userID);
 
     public boolean userExistence(String userName);
@@ -37,7 +37,7 @@ public interface DBDAO {
     public ArrayList<Post> getPostsRandomly();
     public Post getPostByPostID(int postID);
     public String getUserNameByUserID(int userID);
-    public boolean addPost(int userID, String content);
+    public long addPost(int userID, String content);
 //    public UserActivities userActivities(int userID);
     public boolean editProfile(String userID,String fname, String lname, String dob, String email, String gender);
     public void deleteFriendRelation(int userID, int friendID);

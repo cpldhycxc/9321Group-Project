@@ -338,15 +338,18 @@ public class DBDAOImpl implements DBDAO {
 
     }
 
-    public ArrayList<UserProfile> advSearch(String gender, String dob) {
+    public ArrayList<UserProfile> advSearch(String gender, String dob, String userName, String firstName, String lastName ) {
 //        ArrayList<String> data = new ArrayList<String>();
 
         try (Connection conn = connect()) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("" +
                     "SELECT userID, userName, email, firstName, lastName, gender, birthday, userType, joinTime " +
-                    "FROM Users WHERE gender = '" + gender + "' " +
-                    "OR birthday = '" + dob +"'");
+                    "FROM Users WHERE gender LIKE '%" + gender + "%' " +
+                    "AND birthday LIKE '%" + dob +"%'" +
+                    "AND userName LIKE '%"+ userName + "%'" +
+                    "AND firstName LIKE '%"+ firstName +"%'" +
+                    "AND lastName LIKE '%"+ lastName +"%'");
             ArrayList<UserProfile> ret = new ArrayList<UserProfile>();
             if (rs == null) {
                 System.out.println("none");
@@ -614,16 +617,17 @@ public class DBDAOImpl implements DBDAO {
         return name;
     }
 
-    public boolean addPost(int userID, String content){
+    public long addPost(int userID, String content){
         try (Connection conn = connect()){
             PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Posts (userID, content) VALUES (?, ?)");
             preStatment.setInt(1, userID);
             preStatment.setString(2, content);
             preStatment.executeUpdate();
-            return true;
+            ResultSet generatedKeys = preStatment.getGeneratedKeys();
+            return generatedKeys.getLong(1);
         } catch (SQLException e){
             e.printStackTrace();
-            return false;
+            return -1;
         }
     }
 

@@ -100,7 +100,7 @@ public class HomeController {
         String toEmail = dbdao.getEmailByUserID(rf.getFriendID());
         String msg = "Dear " + rf.getFriendName() + ","
                 + "\n\n User " + rf.getUserName() + " want to add you as friend on UNSW Book, click the link below to accept" +
-                "\n  localhost:9000/addfriend/" + Integer.toString(rf.getFriendID());
+                "\n  localhost:9000/#/addfriend/" + Integer.toString(rf.getFriendID());
         sendTLSMail(toEmail, msg);
         return new FriendRelated(counter.incrementAndGet(), true);
     }
@@ -238,9 +238,16 @@ public class HomeController {
     @RequestMapping(value="/addPost/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
     public @ResponseBody SignUp handleFileUpload(
             @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
-        String filePath = "posts/" + Integer.toString(userID); //userID, content
         if (!file.isEmpty()) {
             try {
+                int postID;
+                if(content.equals("null")){
+                    postID = (int)dbdao.addPost(userID, null);
+                } else {
+                    postID = (int)dbdao.addPost(userID, content);
+                }
+
+                String filePath = "posts/" + Integer.toString(postID);
                 System.out.println(filePath);
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =
@@ -248,20 +255,12 @@ public class HomeController {
                 stream.write(bytes);
                 stream.close();
 
-                if(content.equals("null")){
-                    dbdao.addPost(userID, null);
-                } else {
-                    dbdao.addPost(userID, content);
-                }
-
                 return new SignUp(counter.incrementAndGet(), true);
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("asdasd");
                 return new SignUp(counter.incrementAndGet(), false);
             }
         } else {
-            System.out.println("kkkk");
             return new SignUp(counter.incrementAndGet(), false);
         }
     }
@@ -365,11 +364,15 @@ public class HomeController {
         return dbdao.search(param);
     }
 
-    @CrossOrigin(value = "*")
-    @RequestMapping(value = "/advSearchResult", params = {"gender", "dob"}, method = RequestMethod.GET)
-    public ArrayList<UserProfile> advSearch( @RequestParam("gender") String gender ,@RequestParam("dob") String dob){
-        System.out.println(gender + " " + dob);
-        return dbdao.advSearch(gender, dob);
+
+    //    String userName, String firstName, String lastName
+    @RequestMapping(value = "/advSearchResult", params = {"gender", "dob", "userName", "firstName", "lastName"}, method = RequestMethod.GET)
+    public ArrayList<UserProfile> advSearch( @RequestParam("gender") String gender ,
+                                             @RequestParam("dob") String dob,
+                                             @RequestParam("userName") String userName,
+                                             @RequestParam("firstName") String firstName,
+                                             @RequestParam("lastName") String lastName){
+        return dbdao.advSearch(gender, dob, userName, firstName, lastName);
     }
 
     @CrossOrigin(value = "*")
