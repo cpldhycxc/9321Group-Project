@@ -1,8 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Resultitem from '../../components/Resultitem';
+import Resultitem from '../ResultItem';
 
 export default class SearchResultContainer extends React.Component {
+
+	constructor(props) {
+		super(props);
+		console.log('sssss')
+		
+	}
+
+
 	render() {
 		return (
 			<div class="ui link cards">
@@ -14,6 +22,7 @@ export default class SearchResultContainer extends React.Component {
 						self_intro={user.self_intro}
 						numOfFriend={user.numOfFriend}
 					/>
+
 				))}
 			</div>
 		);

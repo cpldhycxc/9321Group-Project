@@ -9,13 +9,13 @@ class UserFriendList extends React.Component {
     }
 
     handleClick(username){
-      this.props.history.push(`/user/${username}`);
+      this.props.history.push(`/userredirect/${username}`);
     }
 
     render(){
       const { friendlist } = this.props;
       const result = friendlist.map((friend,i)=>(
-          <tr>
+          <tr key={i}>
           <td><img src='static/images/userprofile.svg' className='friend-img' /></td>
           <td><a onClick={()=> this.handleClick(friend.userName)} className='friend-a'>{friend.userName}</a></td>
           </tr>

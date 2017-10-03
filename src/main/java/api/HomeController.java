@@ -2,7 +2,7 @@ package api;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -10,6 +10,8 @@ import DAO.*;
 import Model.FriendRequest;
 import Model.LikePostM;
 import Model.User;
+import Model.UserP;
+
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -56,7 +58,7 @@ public class HomeController {
         }
         String msg = "Dear User,"
                 + "\n\n Please click the link to activate your account for UNSW Book" +
-                "\n localhost:9000/validation/" + Integer.toString(dbdao.getUserIdByUserName(user.getUserName()));
+                "\n localhost:9000/#/validation/" + Integer.toString(dbdao.getUserIdByUserName(user.getUserName()));
         sendTLSMail(user.getEmail(), msg);
         return new SignUp(counter.incrementAndGet(), true);
     }
@@ -113,6 +115,21 @@ public class HomeController {
     public FriendRelated addFriend(@RequestBody FriendRequest rf){
         dbdao.addFriendRelation(rf.getUserID(), rf.getFriendID());
         dbdao.addFriendRelation(rf.getFriendID(), rf.getUserID());
+        Notification noti = new Notification(rf.getUserID(),rf.getFriendName()+" is your friend now!");
+		notification.add(noti);        
+        return new FriendRelated(counter.incrementAndGet(), true);
+    }
+    
+    /**
+     * confirm to add friend relationship between two user in the db
+     * @param rf
+     * @return
+     */
+    @CrossOrigin(origins = "*")
+    @PostMapping("deleteFriend")
+    public FriendRelated deleteFriend(@RequestBody FriendRequest rf){
+        dbdao.deleteFriendRelation(rf.getUserID(), rf.getFriendID());
+        dbdao.deleteFriendRelation(rf.getFriendID(), rf.getUserID());
         return new FriendRelated(counter.incrementAndGet(), true);
     }
 
@@ -138,11 +155,19 @@ public class HomeController {
     public void userActivation(@PathVariable int userID) {
     	dbdao.userActivation(userID);
     }
+    
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/backActivation/{userID}", method = RequestMethod.GET)
+    public void backUserActivation(@PathVariable int userID) {
+    	dbdao.backUserActivation(userID);
+    }
 
     @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/userProfile/{userName}", method = RequestMethod.GET)
-    public UserProfile userProfile(@PathVariable String userName) {
-    	return dbdao.userProfile(userName);
+    @PostMapping("/userProfile")
+    public UserProfile userProfile(@RequestBody UserP user) {
+    	System.out.println(user.getSelectUserName());
+ 	System.out.println(user.getUserName());
+    	return dbdao.userProfile(user.getSelectUserName(),user.getUserName());
     }
 
     @CrossOrigin(origins = "*")
@@ -155,12 +180,29 @@ public class HomeController {
     @RequestMapping(value = "/notification/{userID}", method = RequestMethod.GET)
     public ArrayList<String> getNotification(@PathVariable int userID) {
     	ArrayList<String> result = new ArrayList<String>();
-    	for(Notification noti:notification) {
+    	System.out.println("Check for the notification!!");
+    	for(Notification no:notification) {
+    		System.out.println(no.getUserID()+"   "+no.getNoti());
+    	}
+    	Iterator<Notification> itr = notification.iterator();
+    	while(itr.hasNext()){
+    		Notification noti = itr.next();
     		if(noti.getUserID() == userID){
     			result.add(noti.getNoti());
+    			itr.remove();
     		}
     	}
-    	notification.clear();
+    	
+    	System.out.println("Lets check the request ID");
+    	for(String st:result){
+    		System.out.println("expect :"+userID+ "  "+st);
+    	}
+
+    	System.out.println("After pop out all the noti");
+    	for(Notification no:notification) {
+    		System.out.println(no.getUserID()+"   "+no.getNoti());
+    	}
+    	
     	return result;
     }
     
@@ -181,8 +223,6 @@ public class HomeController {
     	if(getLike) {
     		Notification noti = new Notification(posterID,userName+" likes your post!");
     		notification.add(noti);
-    		System.out.println(posterID);
-    		System.out.println(userName+" likes your post!");
     	}
     	return new LikePost(userID,postID,dbdao.likePost(userID, postID));
     }
@@ -208,7 +248,11 @@ public class HomeController {
                 stream.write(bytes);
                 stream.close();
 
-                dbdao.addPost(userID, content);
+                if(content.equals("null")){
+                    dbdao.addPost(userID, null);
+                } else {
+                    dbdao.addPost(userID, content);
+                }
 
                 return new SignUp(counter.incrementAndGet(), true);
             } catch (Exception e) {
@@ -309,16 +353,18 @@ public class HomeController {
         }
     }
 
-
+    @CrossOrigin(value = "*")
     @RequestMapping(value = "/activityReport/{userID}", method = RequestMethod.GET)
     public UserActivities userActivity(@PathVariable int userID){
         return dbdao.userActivities(userID);
     }
 
+    @CrossOrigin(value = "*")
     @RequestMapping(value = "/searchResult", params = {"userName"}, method = RequestMethod.GET)
     public ArrayList<UserProfile> search(@RequestParam("userName") String param ){
         return dbdao.search(param);
     }
+
 
     //    String userName, String firstName, String lastName
     @RequestMapping(value = "/advSearchResult", params = {"gender", "dob", "userName", "firstName", "lastName"}, method = RequestMethod.GET)
@@ -327,9 +373,19 @@ public class HomeController {
                                              @RequestParam("userName") String userName,
                                              @RequestParam("firstName") String firstName,
                                              @RequestParam("lastName") String lastName){
-        System.out.println(gender + " " + dob);
         return dbdao.advSearch(gender, dob, userName, firstName, lastName);
     }
 
+    @CrossOrigin(value = "*")
+    @RequestMapping(value = "/updateProfile/{userID}", params = {"fname","lname", "dob", "email", "gender"}, method = RequestMethod.GET)
+    public EditProfile updateProfile(@PathVariable String userID,
+                                 @RequestParam("fname") String fname,
+                                 @RequestParam("lname") String lname,
+                                 @RequestParam("dob") String dob,
+                                 @RequestParam("email") String email,
+                                 @RequestParam("gender") String gender){
+        boolean flag = dbdao.editProfile(userID, fname, lname, dob, email, gender );
+        return new EditProfile(counter.incrementAndGet(), flag);
+    }
 
 }

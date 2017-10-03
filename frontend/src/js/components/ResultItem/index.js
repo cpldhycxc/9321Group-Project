@@ -13,13 +13,16 @@ export default class ResultItem extends React.Component {
 		const id = this.props.id;
 		const numOfFriend = this.props.numOfFriend;
 		const self_intro = this.props.self_intro;
+        const imng = this.props.img;
+        const link = this.props.link;
 		return (
 		<div class="card">
 			<Card
-				image='https://images.celebfamily.com/wp-content/uploads/2016/10/Kin-Jong-Un-Career.jpg'
+				image={imng}
 				meta={id}
 				description={self_intro}
 				extra={extra(numOfFriend)}
+                href={link}
 			/>
 		</div>
 		);

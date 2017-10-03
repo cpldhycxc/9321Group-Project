@@ -46,13 +46,3 @@ export function likeButton(type, postID) {
 		}
 	};
 }
-
-
-export function getSelfID() {
-	return (dispatch, store) => {
-		dispatch({
-			type: 'GET_SELFID',
-			payload: store().user.user.userID
-		});
-	};
-}

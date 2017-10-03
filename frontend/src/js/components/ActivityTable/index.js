@@ -23,7 +23,7 @@ export default class ActivityTable extends React.Component {
 						<Table.Cell>You have joined UNSWBook!</Table.Cell>
 					</Table.Row>
 					{this.props.data.activities.map((e, i) => (
-						<Table.Row keu={i}>
+						<Table.Row key={i}>
 							<Table.Cell>{e.data}</Table.Cell>
 							<Table.Cell>{e.description}</Table.Cell>
 						</Table.Row>
