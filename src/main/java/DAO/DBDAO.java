@@ -23,7 +23,7 @@ public interface DBDAO {
     public ArrayList<Post> getPostsByUserID(int userID);
     public ArrayList<Friend> getFriendsByUserID(int userID);
     public ArrayList<UserProfile> search(String param);
-    public ArrayList<UserProfile> advSearch(String gender, String dob);
+    public ArrayList<UserProfile> advSearch(String gender, String dob,  String userName, String firstName, String lastName);
     public UserActivities userActivities(int userID);
 
     public boolean userExistence(String userName);

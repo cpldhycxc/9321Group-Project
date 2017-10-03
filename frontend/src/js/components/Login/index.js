@@ -22,7 +22,6 @@ export default class Login extends React.Component {
 		}
 
 	close() {
-		console.log(this.state);
 		this.setState({ showModal: false });
 	}
 
