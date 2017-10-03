@@ -105,6 +105,7 @@ public class HomeController {
         return new FriendRelated(counter.incrementAndGet(), true);
     }
 
+    //curl -H "Content-Type: application/json" -X POST -d '{"userID":"1","friendID":"6"}' http://localhost:8080/addFriend
     /**
      * confirm to add friend relationship between two user in the db
      * @param rf
@@ -142,6 +143,12 @@ public class HomeController {
     @GetMapping("getPosts")
     public Posts getPosts(@RequestParam(value = "userID") int userID){
         return new Posts(counter.incrementAndGet(), dbdao.getPostsByUserID(userID));
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("getFriends")
+    public Friends getFriends(@RequestParam(value = "userID") int userID){
+        return new Friends(counter.incrementAndGet(), dbdao.getFriendsByUserID(userID));
     }
 
     @CrossOrigin(origins = "*")
