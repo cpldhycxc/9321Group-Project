@@ -9,6 +9,7 @@ import User from '../../containers/User';
 import Validation from './validation.js';
 import UserRedirect from '../../containers/User/userredirect.js';
 import AdvancedSearch from '../../containers/AdvSearch';
+import Home from '../Home';
 
 
 export default class Main extends React.Component {
@@ -19,7 +20,7 @@ export default class Main extends React.Component {
         <div className='content'>
             <Switch>
                 <Route exact path='/' render={() => <Redirect to='/wall' />} />
-                <Route path='/wall' />
+                <Route path='/wall' component={Home} />
                 <Route path='/search' component={Search} />
                 <Route path='/profile' component={Profile} />
                 <Route path='/user/:username' component={User} />
@@ -27,7 +28,6 @@ export default class Main extends React.Component {
                 <Route path='/userredirect/:username' component={UserRedirect} />
                 <Route paht='/advSearch' component={AdvancedSearch} />
                 <Route path='/ActivityReport/:username' component={ActivityReport} />
-
             </Switch>
         </div>
       </div>
