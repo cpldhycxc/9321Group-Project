@@ -72,6 +72,18 @@ export function addFriend(userID,userName,friendID,friendName){
   })
 }
 
+export function confirmfriend(userID,friendID){
+  console.log(friendID);
+  console.log(userID);
+  return axios.post('http://localhost:8080/addFriend/',{
+    userID:userID,
+    friendID:friendID,
+  })
+}
+
+
+
+
 // return function(dispatch){
   // axios.post('http://localhost:8000/backend/login/',{
   //     user
