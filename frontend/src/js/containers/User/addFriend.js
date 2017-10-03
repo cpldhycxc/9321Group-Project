@@ -16,13 +16,8 @@ export default class User extends React.Component {
   }
 
   componentWillMount () {
-    console.log(this.props.match.params);
     const friendID=this.props.match.params.userID;
-    confirmfriend(friendID, this.props.currentuser.userID)
-    .then((res)=>{
-      console.log(res.data);
-    });
-
+    this.props.dispatch(confirmfriend(this.props.currentuser.userID, friendID));
   }
 
   render() {

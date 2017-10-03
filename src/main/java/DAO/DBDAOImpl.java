@@ -383,8 +383,8 @@ public class DBDAOImpl implements DBDAO {
 	public UserProfile userProfile(String selectedName,String userName) {
 		UserProfile u = new UserProfile();
 		try (Connection conn = connect()){
-			
             Statement stmt = conn.createStatement();
+            System.out.println(selectedName);
             ResultSet rs = stmt.executeQuery("" +
                     "SELECT userID, userName, email, firstName, lastName, gender, birthday, userType, joinTime " +
                     "FROM Users WHERE userName = '" + selectedName+ "'");

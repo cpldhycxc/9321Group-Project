@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { dodevalidation, dovalidation,addFriend } from '../../actions/userActions';
+import { dodevalidation, dovalidation, addFriend, deleteFriend } from '../../actions/userActions';
 
 
 @connect((store) => {
@@ -14,6 +14,7 @@ export default class UserProfile extends React.Component {
     super(props);
     this.state = {
       isEdit: false,
+      pending:false,
       isFriend:  this.props.selecteduser.relationShip,
       isBan: !this.props.selecteduser.userType,
     };
@@ -21,6 +22,7 @@ export default class UserProfile extends React.Component {
     this.banuser = this.banuser.bind(this);
     this.unbanuser = this.unbanuser.bind(this);
     this.folllowuser = this.folllowuser.bind(this);
+    this.Unfollowuser = this.Unfollowuser.bind(this);
     }
 
 
@@ -50,11 +52,18 @@ export default class UserProfile extends React.Component {
       const friendName = this.props.selecteduser.userName;
       const friendID= this.props.selecteduser.userID;
       console.log(username)
+      this.setState({ pending: true, isFriend:true});
       addFriend(userID, username, friendID, friendName)
       .then((res)=>{
         console.log(res);
-
       })
+    }
+
+    Unfollowuser(){
+      console.log("fuck");
+      const friendID = this.props.selecteduser.userID;
+      this.setState({ pending: false, isFriend:false});
+      this.props.dispatch(deleteFriend(this.props.self.userID, friendID));
     }
 
     renderFollowButton = () => {
@@ -77,13 +86,19 @@ export default class UserProfile extends React.Component {
       }
 
       if (this.props.self.userType===1 && this.props.self.userName !== this.props.selecteduser.userName) {
-        if(this.state.isFriend){
+        if(!this.state.isFriend){
           return (
-            <Button className='buttons btn btn-default'>Unfollow</Button>
+            <Button onClick={this.folllowuser} className='buttons btn btn-primary'>Follow</Button>
+
           );
         }
+        if(this.state.pending){
+          return (
+            <Button className='buttons btn btn-default'>Pending</Button>
+          )
+        }
         return (
-          <Button onClick={this.folllowuser} className='buttons btn btn-primary'>Follow</Button>
+          <Button onClick={this.Unfollowuser} className='buttons btn btn-default'>Unfollow</Button>
         );
       }
       if (this.props.self.userType===1 && this.props.self.userName === this.props.selecteduser.userName) {

@@ -6,6 +6,6 @@ home_longitude=151.2303
 password=internet
 birthday=1995-04-04
 home_latitude=-33.9229
-email=liangxubing@gmail.com
+email=test@fuck.com
 zid=z3413158
 mates=[z3466413, z5040176, z3462191, z5063045, z5076002, z3493921, z5099187, z5059413, z5014861]
