@@ -100,7 +100,7 @@ public class HomeController {
         String toEmail = dbdao.getEmailByUserID(rf.getFriendID());
         String msg = "Dear " + rf.getFriendName() + ","
                 + "\n\n User " + rf.getUserName() + " want to add you as friend on UNSW Book, click the link below to accept" +
-                "\n  localhost:9000/addfriend/" + Integer.toString(rf.getFriendID());
+                "\n  localhost:9000/#/addfriend/" + Integer.toString(rf.getFriendID());
         sendTLSMail(toEmail, msg);
         return new FriendRelated(counter.incrementAndGet(), true);
     }
