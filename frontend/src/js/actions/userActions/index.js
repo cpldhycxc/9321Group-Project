@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-export function login(user,changestate) {
+export function login(user,changestate,push) {
     localStorage.setItem('id_token', user.userName);
     return function(dispatch){
       axios.post('http://localhost:8080/login/', {
@@ -14,6 +14,7 @@ export function login(user,changestate) {
             type: 'LOGGED_IN',
             payload: response.data,
           })
+          push('/redirectwindow');
         } else {
           localStorage.removeItem('id_token');
           changestate();
