@@ -31,6 +31,7 @@ class UserProfile extends React.Component {
     editprofile() {
       this.setState({ isEdit: !this.state.isEdit });
       // call api
+      //http://127.0.0.1:8080/updateProfile/11?fname=null&lname=s&dob=null&email=null&gender=null
       const url = "http://localhost:8080/updateProfile/" + this.props.selecteduser.userName + "?fname="
       + this.props.selecteduser.firstName + "&lname=" + this.props.selecteduser.lastName + "&dob="
       + this.props.selecteduser.birthday + "&email=" + this.props.selecteduser.email+"&gender="
@@ -45,7 +46,7 @@ class UserProfile extends React.Component {
           console.log(this.state.result[0]);
       }));
       this.setState(prevState => ({
-          isClick: !prevState.isClick
+          isEdit: !prevState.isEdit
       }))
     }
 

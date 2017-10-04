@@ -12,9 +12,9 @@ export default class AdvSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: null,
-      firstname: null,
-      lastname: null,
+      username: '',
+      firstname: '',
+      lastname: '',
       birthday: moment().toISOString(),
       options: [
 				{ value: 'Male', label: 'Male' },
