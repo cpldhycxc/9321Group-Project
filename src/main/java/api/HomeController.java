@@ -166,7 +166,7 @@ public class HomeController {
     @PostMapping("/userProfile")
     public UserProfile userProfile(@RequestBody UserP user) {
     	System.out.println(user.getSelectUserName());
- 	System.out.println(user.getUserName());
+    	System.out.println(user.getUserName());
     	return dbdao.userProfile(user.getSelectUserName(),user.getUserName());
     }
 
