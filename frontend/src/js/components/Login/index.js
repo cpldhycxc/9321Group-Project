@@ -36,6 +36,7 @@ class Login extends React.Component {
 		this.props.dispatch(logout());
 		this.setState({ showModal: false });
 		this.props.history.push('/redirectwindow');
+		
 	}
 
 	render() {

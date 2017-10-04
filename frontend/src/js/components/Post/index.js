@@ -36,8 +36,8 @@ export default class Post extends React.Component {
 		};
 
 		this.deletePost = this.deletePost.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+		this.openModal = this.openModal.bind(this);
+		this.closeModal = this.closeModal.bind(this);
 		this.checkImg(this.state.postImgURL);
 	}
 
