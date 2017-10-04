@@ -665,19 +665,19 @@ public class DBDAOImpl implements DBDAO {
             Statement stmt4 = conn.createStatement();
             Statement stmt5 = conn.createStatement();
 
-            if(!fname.equalsIgnoreCase("undefined")){
+            if(!fname.equalsIgnoreCase("")){
                 stmt1.executeUpdate("UPDATE users SET firstname ='"+ fname+"' WHERE userID = '"+userID+"'");
             }
-            if(!lname.equalsIgnoreCase("undefined")){
+            if(!lname.equalsIgnoreCase("")){
                 stmt2.executeUpdate("UPDATE users SET lastname ='"+ lname+"' WHERE userID = '"+userID+"'");
             }
-            if(!dob.equalsIgnoreCase("undefined")){
+            if(!dob.equalsIgnoreCase("")){
                 stmt3.executeUpdate("UPDATE users SET dob ='"+ dob+"' WHERE userID = '"+userID+"'");
             }
-            if(!email.equalsIgnoreCase("undefined")){
+            if(!email.equalsIgnoreCase("")){
                 stmt4.executeUpdate("UPDATE users SET email ='"+ email+"' WHERE userID = '"+userID+"'");
             }
-            if(!gender.equalsIgnoreCase("undefined")){
+            if(!gender.equalsIgnoreCase("")){
                 stmt5.executeUpdate("UPDATE users SET gender ='"+ gender+"' WHERE userID = '"+userID+"'");
             }
             return true;
