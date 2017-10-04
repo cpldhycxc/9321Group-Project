@@ -34,6 +34,14 @@ export default function reducer(state = {
           friends: action.payload,
       };
     }
+    case "UPDATE_PROFILE": {
+        localStorage.removeItem('user_info');
+        localStorage.setItem('user_info', JSON.stringify(action.payload.user));
+        return {
+            ...state,
+            
+        };
+    }
   }
   return state;
 }

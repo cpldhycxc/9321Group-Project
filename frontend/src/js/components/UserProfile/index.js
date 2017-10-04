@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { dodevalidation, dovalidation, addFriend, deleteFriend } from '../../actions/userActions';
+import { dodevalidation, dovalidation, addFriend, deleteFriend, updatePorfile } from '../../actions/userActions';
 
 
 @connect((store) => {
@@ -32,22 +32,12 @@ class UserProfile extends React.Component {
       this.setState({ isEdit: !this.state.isEdit });
       // call api
       //http://127.0.0.1:8080/updateProfile/11?fname=null&lname=s&dob=null&email=null&gender=null
-      const url = "http://localhost:8080/updateProfile/" + this.props.selecteduser.userName + "?fname="
-      + this.props.selecteduser.firstName + "&lname=" + this.props.selecteduser.lastName + "&dob="
-      + this.props.selecteduser.birthday + "&email=" + this.props.selecteduser.email+"&gender="
-      + this.props.selecteduser.gender;
-      fetch(url).then(response =>
-          response.json().then(data => ({
-              data: data,
-              status: response.status
-          })
-      ).then(res => {
-          this.setState({ result: res.data });
-          console.log(this.state.result[0]);
-      }));
-      this.setState(prevState => ({
-          isEdit: !prevState.isEdit
-      }))
+      updatePorfile(this.props.selecteduser.userName, this.props.selecteduser.firstName, this.props.selecteduser.lastName
+      , this.props.selecteduser.birthday, this.props.selecteduser.email, this.props.selecteduser.gender)
+      .then((res) => {
+          console.log(res);
+      })
+
     }
 
     unbanuser(){
