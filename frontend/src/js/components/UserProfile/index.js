@@ -18,6 +18,10 @@ class UserProfile extends React.Component {
       pending: false,
       isFriend: this.props.selecteduser.relationShip,
       isBan: !this.props.selecteduser.userType,
+      firstname:this.props.selecteduser.firstName,
+      lastname:this.props.selecteduser.lastName,
+      gender:this.props.selecteduser.gender,
+      email:this.props.selecteduser.email,
     };
     this.editprofile = this.editprofile.bind(this);
     this.banuser = this.banuser.bind(this);
@@ -25,18 +29,12 @@ class UserProfile extends React.Component {
     this.folllowuser = this.folllowuser.bind(this);
     this.Unfollowuser = this.Unfollowuser.bind(this);
     this.ActivityReport = this.ActivityReport.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     }
 
 
     editprofile() {
       this.setState({ isEdit: !this.state.isEdit });
-      // call api
-      //http://127.0.0.1:8080/updateProfile/11?fname=null&lname=s&dob=null&email=null&gender=null
-      updatePorfile(this.props.selecteduser.userName, this.props.selecteduser.firstName, this.props.selecteduser.lastName
-      , this.props.selecteduser.birthday, this.props.selecteduser.email, this.props.selecteduser.gender)
-      .then((res) => {
-          console.log(res);
-      })
 
     }
 
@@ -128,10 +126,14 @@ class UserProfile extends React.Component {
 
     }
 
+    handleChange(e){
+      this.setState({ [e.target.name]: e.target.value });
+      console.log(this.state);
+    }
+
     render() {
       const { selecteduser } = this.props;
       const { isEdit } = this.state;
-      console.log(selecteduser);
       if(isEdit){
         return (
           <div className='panel panel-info panelbody'>
@@ -143,7 +145,7 @@ class UserProfile extends React.Component {
             </div>
             <div className="panel-body">
               <div className="row">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                 <div className='col-md-3 col-lg-3'>
                   <img src='static/images/userprofile.svg' className='profile-img' />
                   <input type="file" className="form-control uploadimag" />
@@ -153,27 +155,27 @@ class UserProfile extends React.Component {
                   <tbody>
                   <tr>
                     <td>FirstName</td>
-                    <td><input className="form-control" type="text" value={selecteduser.firstName} /></td>
+                    <td><input onChange={this.handleChange} name='firstname' className="form-control" type="text" value={this.state.firstname} /></td>
                     </tr>
                     <tr>
                       <td>LastName</td>
-                      <td><input className="form-control" type="text" value={selecteduser.lastName} /></td>
+                      <td><input onChange={this.handleChange} name='lastname' className="form-control" type="text" value={this.state.lastname} /></td>
                       </tr>
                   <tr>
                     <td>Gender</td>
-                    <td><input className="form-control" type="text" value={selecteduser.gender} /></td>
-                    </tr>
-                    <tr>
-                    <td>Birthday</td>
-                      <td><input className="form-control" type="text" value={selecteduser.birthday} /></td>
+                    <td><input onChange={this.handleChange} name='gender' className="form-control" type="text" value={this.state.gender} /></td>
                     </tr>
                     <tr>
                     <td>Email</td>
-                      <td><input className="form-control" type="text" value={selecteduser.email} /></td>
+                      <td><input onChange={this.handleChange} name='email' className="form-control" type="text" value={this.state.email} /></td>
                     </tr>
                     <tr>
                     <td>Join Date</td>
                       <td>{selecteduser.joinTime}</td>
+                    </tr>
+                    <tr>
+                    <td>Birthday</td>
+                    <td>{selecteduser.birthday}</td>
                     </tr>
                     </tbody>
                   </table>
