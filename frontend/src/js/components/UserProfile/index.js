@@ -15,8 +15,8 @@ class UserProfile extends React.Component {
     super(props);
     this.state = {
       isEdit: false,
-      pending:false,
-      isFriend:  this.props.selecteduser.relationShip,
+      pending: false,
+      isFriend: this.props.selecteduser.relationShip,
       isBan: !this.props.selecteduser.userType,
     };
     this.editprofile = this.editprofile.bind(this);
@@ -30,6 +30,23 @@ class UserProfile extends React.Component {
 
     editprofile() {
       this.setState({ isEdit: !this.state.isEdit });
+      // call api
+      const url = "http://localhost:8080/updateProfile/" + this.props.selecteduser.userName + "?fname="
+      + this.props.selecteduser.firstName + "&lname=" + this.props.selecteduser.lastName + "&dob="
+      + this.props.selecteduser.birthday + "&email=" + this.props.selecteduser.email+"&gender="
+      + this.props.selecteduser.gender;
+      fetch(url).then(response =>
+          response.json().then(data => ({
+              data: data,
+              status: response.status
+          })
+      ).then(res => {
+          this.setState({ result: res.data });
+          console.log(this.state.result[0]);
+      }));
+      this.setState(prevState => ({
+          isClick: !prevState.isClick
+      }))
     }
 
     unbanuser(){
@@ -137,31 +154,31 @@ class UserProfile extends React.Component {
               <div className="row">
                 <form>
                 <div className='col-md-3 col-lg-3'>
-                  <img src='static/images/userprofile.svg' className='profile-img'/>
-                  <input type="file" className="form-control uploadimag"/>
+                  <img src='static/images/userprofile.svg' className='profile-img' />
+                  <input type="file" className="form-control uploadimag" />
                 </div>
                 <div className=" col-md-9 col-lg-9">
                 <table className="table table-user-information">
                   <tbody>
                   <tr>
                     <td>FirstName</td>
-                    <td><input className="form-control" type="text" value={selecteduser.firstName}/></td>
+                    <td><input className="form-control" type="text" value={selecteduser.firstName} /></td>
                     </tr>
                     <tr>
                       <td>LastName</td>
-                      <td><input className="form-control" type="text" value= {selecteduser.lastName}/></td>
+                      <td><input className="form-control" type="text" value={selecteduser.lastName} /></td>
                       </tr>
                   <tr>
                     <td>Gender</td>
-                    <td><input className="form-control" type="text" value={selecteduser.gender}/></td>
+                    <td><input className="form-control" type="text" value={selecteduser.gender} /></td>
                     </tr>
                     <tr>
                     <td>Birthday</td>
-                      <td><input className="form-control" type="text" value={selecteduser.birthday}/></td>
+                      <td><input className="form-control" type="text" value={selecteduser.birthday} /></td>
                     </tr>
                     <tr>
                     <td>Email</td>
-                      <td><input className="form-control" type="text" value={selecteduser.email}/></td>
+                      <td><input className="form-control" type="text" value={selecteduser.email} /></td>
                     </tr>
                     <tr>
                     <td>Join Date</td>
