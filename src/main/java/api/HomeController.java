@@ -83,7 +83,7 @@ public class HomeController {
             login.setSuccess(false);
             return login;
         }
-        login.setPosts(dbdao.getPostsByUserID(user.getUserID()));
+        login.setPosts(dbdao.getOwnPostsByUserID(user.getUserID()));
         login.setFriends(dbdao.getFriendsByUserID(user.getUserID()));
         login.setSuccess(true);
         return login;
@@ -143,6 +143,12 @@ public class HomeController {
     @GetMapping("getPosts")
     public Posts getPosts(@RequestParam(value = "userID") int userID){
         return new Posts(counter.incrementAndGet(), dbdao.getPostsByUserID(userID));
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("getSelfPosts")
+    public Posts getSelfPosts(@RequestParam(value = "userID") int userID) {
+        return new Posts(counter.incrementAndGet(), dbdao.getOwnPostsByUserID(userID));
     }
 
     @CrossOrigin(origins = "*")
