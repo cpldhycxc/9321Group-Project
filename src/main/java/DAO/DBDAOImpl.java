@@ -594,6 +594,7 @@ public class DBDAOImpl implements DBDAO {
             while(rs.next()){
             	post.setPostId(rs.getInt(1));
             	System.out.println(rs.getInt(1));
+            	post.setUserID(rs.getInt(2));
             	post.setUserName(getUserNameByUserID(rs.getInt(2)));
             	System.out.println(rs.getInt(2));
             	post.setContent(rs.getString(3));
