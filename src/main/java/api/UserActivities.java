@@ -32,7 +32,7 @@ public class UserActivities {
 
     public void setJoinDate(String date) {
         this.joinDate = date;
-    }
+    }  
 
     public void sortActivities() {
         Collections.sort(this.activities);

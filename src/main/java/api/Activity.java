@@ -24,7 +24,7 @@ public class Activity implements Comparable<Activity>{
     public String getDate() {
         return date;
     }
-
+  
     public int compareTo(Activity o){
          return this.date.compareTo(o.date);
     }

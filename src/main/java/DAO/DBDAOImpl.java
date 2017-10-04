@@ -664,7 +664,7 @@ public class DBDAOImpl implements DBDAO {
             Statement stmt3 = conn.createStatement();
             Statement stmt4 = conn.createStatement();
             Statement stmt5 = conn.createStatement();
-            
+
             if(!fname.equalsIgnoreCase("")){
                 stmt1.executeUpdate("UPDATE users SET firstname ='"+ fname+"' WHERE userID = '"+userID+"'");
             }
