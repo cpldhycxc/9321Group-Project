@@ -12,9 +12,9 @@ export default class AdvSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      firstname: '',
-      lastname: '',
+      username: null,
+      firstname: null,
+      lastname: null,
       birthday: moment().toISOString(),
       options: [
 				{ value: 'Male', label: 'Male' },
@@ -50,9 +50,9 @@ export default class AdvSearch extends React.Component {
   }
 
 	handleSubmit(e) {
-		console.log(this.state);
+		console.log(this.state.birthday.substring(0,10));
 		e.preventDefault();
-		const text = 'dob=' + this.state.birthday + '&&gender=' + this.state.value;
+		const text = 'dob=' + this.state.birthday.substring(0,10) + '&&gender=' + this.state.value + '&&username=' + this.state.username + '&&firstname=' + this.state.firstname + '&&lastname=' + this.state.lastname;
 		const url = 'http://localhost:8080/advSearchResult/?' + text;
         console.log(url);
         fetch(url).then(response =>
@@ -97,15 +97,15 @@ export default class AdvSearch extends React.Component {
 						<form onSubmit={this.handleSubmit} >
 								<div className={classnames('form-group')} >
 									<label className="control-label">Username:</label>
-									<input onBlur={this.checkUserExists} onChange={this.onChange} type="text" className="form-control" id="username" name="username" placeholder="Enter Username" />
+									<input onBlur={this.checkUserExists} onChange={this.onChange} type="text" className="form-control" id="username" name="username" placeholder="Search by Username" />
 								</div>
 								<div className ={classnames('form-group')}>
 									<label className="control-label">First Name: </label>
-									<input onChange={this.onChange} type="text" className="form-control" id ="firstname" name="firstname" placeholder="Enter your first name"/>
+									<input onChange={this.onChange} type="text" className="form-control" id ="firstname" name="firstname" placeholder="Search by first name"/>
 								</div>
 		            <div className ={classnames('form-group')}>
 		                <label className="control-label">Last Name: </label>
-		              <input onChange={this.onChange} type="text" className="form-control" id ="lastname" name="lastname" placeholder="Enter your last name"/>
+		              <input onChange={this.onChange} type="text" className="form-control" id ="lastname" name="lastname" placeholder="Search by last name"/>
 		            </div>
 		            <div className ='form-group'>
 		                <label className="control-label">Data of Birth: </label>
@@ -148,7 +148,7 @@ export default class AdvSearch extends React.Component {
 				</div>
         </div>
        );
-		} 
+		}
 	}
 }
 

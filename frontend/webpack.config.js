@@ -68,6 +68,7 @@ context: path.join(__dirname, "src"),
       },
       compress: true,
       inline:true,
+      host: '127.0.0.1',
       port: 9000
 },
   plugins: debug ? [] : [

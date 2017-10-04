@@ -50,7 +50,7 @@ export default class NewPostBoard extends React.Component {
       url = url.concat(this.state.Description);
     }
     console.log(url);
-    fetch(url.concat(this.state.Description), {
+    fetch(url, {
       method: 'POST',
       body: formData
     }).then((response) => {
@@ -58,7 +58,7 @@ export default class NewPostBoard extends React.Component {
     }).catch((err) => {
       console.log(err);
     });
-
+    window.location.reload();
     // axios.post('http://localhost:8080/upload', data);
     console.log('submit');
   }
@@ -71,7 +71,7 @@ export default class NewPostBoard extends React.Component {
             <h3>Description</h3>
             <Form>
               <TextArea 
-                style={{ minHeight: 100 }} 
+                style={{ minHeight: 100, fontSize: 20 }} 
                 onChange={this.onDescriptionChange}
               />
             </Form>
@@ -111,8 +111,8 @@ export default class NewPostBoard extends React.Component {
                        >
                         <Image src={preview} 
                           role="presentation"  
-                          height={ 300 }
-                          width={ 400 }/>
+                          height={500}
+                          width={500} />
                       </div>
                     </div>
                   </div>

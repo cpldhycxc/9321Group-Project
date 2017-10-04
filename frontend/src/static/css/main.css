@@ -309,9 +309,16 @@ input {
   block-size: 20px;
 }
 
-
+.adsearch {
+  float: left;
+  margin-left: 36%;
+}
 
 .warningstyle{
 	font-size: 20px;
 	float: left;
-};
+}
+
+.activity {
+  margin:0;
+}

@@ -28,6 +28,12 @@ export default function reducer(state = {
           token: null,
       };
     }
+    case "UPDATE_FRIENDS": {
+      return {
+          ...state,
+          friends: action.payload,
+      };
+    }
   }
   return state;
 }

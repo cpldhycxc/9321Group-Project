@@ -24,7 +24,7 @@ export default class ActivityTable extends React.Component {
 					</Table.Row>
 					{this.props.data.activities.map((e, i) => (
 						<Table.Row key={i}>
-							<Table.Cell>{e.data}</Table.Cell>
+							<Table.Cell>{e.date}</Table.Cell>
 							<Table.Cell>{e.description}</Table.Cell>
 						</Table.Row>
 					))}
