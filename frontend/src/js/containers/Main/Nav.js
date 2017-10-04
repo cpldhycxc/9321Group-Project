@@ -13,17 +13,17 @@ import axios from 'axios';
 class Header extends React.Component {
 
   componentDidMount() {
-    // this.notificationSystem = this.refs.notificationSystem;
-    // const url = 'http://localhost:8080/notification/'.concat(this.props.user.userID);
-    // axios.get(url)
-    // .then((response) => {
-		// 	response.data.map((e) => (
-		// 		this.addNotification(e)
-		// 	));
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    this.notificationSystem = this.refs.notificationSystem;
+    const url = 'http://localhost:8080/notification/'.concat(this.props.user.userID);
+    axios.get(url)
+    .then((response) => {
+			response.data.map((e) => (
+				this.addNotification(e)
+			));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   addNotification = (message) => {
