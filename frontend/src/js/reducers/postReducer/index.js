@@ -1,5 +1,5 @@
 const default_state = {
-  posts: [],
+  posts:[],
 };
 
 export default function reducer(state = default_state, action) {
@@ -10,6 +10,12 @@ export default function reducer(state = default_state, action) {
 					posts: action.payload
 				};
 			}
+      case 'GET_RANDOMS':{
+        return {
+          ...state,
+          posts: action.payload
+        }
+      }
     }
     return state;
 }
