@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import { Button } from 'react-bootstrap';
 import searchResult from '../../components/SearchBar/SearchResultContainer';
 import Resultitem from '../../components/ResultItem';
+import axios from 'axios';
 
 export default class AdvSearch extends React.Component {
   constructor(props) {
@@ -70,7 +71,7 @@ export default class AdvSearch extends React.Component {
         }));
         this.setState(prevState => ({
             isClick: !prevState.isClick
-        }))
+        }));
     }
 
 	render() {
@@ -136,19 +137,22 @@ export default class AdvSearch extends React.Component {
 		        </form>
 					</div>
 				</div>
-			)
+			);
 		} else {
 			return (
        <div className="result">
 				<div class="ui link cards">
-					{this.state.result.map((user, i) => (
-						<Resultitem
+					{this.state.result.map((user, i) => {
+						const imgUrl = img + this.state.result[i].userID;
+						return (
+							<Resultitem
 							key={i}
-							img={img + this.state.result[i].userID}
+							img={imgUrl}
 							id={this.state.result[i].firstName}
 							link={l + this.state.result[i].userName}
 						/>
-					))}
+						)
+					})}
 				</div>
         </div>
        );

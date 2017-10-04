@@ -3,7 +3,7 @@ import axios from 'axios';
 export function getPosts() {
 	return (dispatch, store) => {
 		let url;
-		if (store().user.token === null) {
+		if (store().user.user.userID === undefined) {
 			url = 'http://localhost:8080/randomPost/';
 		} else {
 			url = 'http://localhost:8080/getPosts?userID='.concat(store().user.user.userID);
