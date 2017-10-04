@@ -12,9 +12,9 @@ export default class AdvSearch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      firstname: '',
-      lastname: '',
+      username: null,
+      firstname: null,
+      lastname: null,
       birthday: moment().toISOString(),
       options: [
 				{ value: 'Male', label: 'Male' },
@@ -50,9 +50,9 @@ export default class AdvSearch extends React.Component {
   }
 
 	handleSubmit(e) {
-		console.log(this.state);
+		console.log(this.state.birthday.substring(0,10));
 		e.preventDefault();
-		const text = 'dob=' + this.state.birthday + '&&gender=' + this.state.value;
+		const text = 'dob=' + this.state.birthday.substring(0,10) + '&&gender=' + this.state.value + '&&username=' + this.state.username + '&&firstname=' + this.state.firstname + '&&lastname=' + this.state.lastname;
 		const url = 'http://localhost:8080/advSearchResult/?' + text;
         console.log(url);
         fetch(url).then(response =>
