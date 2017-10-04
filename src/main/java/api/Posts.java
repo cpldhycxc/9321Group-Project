@@ -4,6 +4,9 @@ import Model.Post;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties
 public class Posts {
     private long requestID;
     private ArrayList<Post> posts;

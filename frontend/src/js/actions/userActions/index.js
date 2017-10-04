@@ -95,6 +95,19 @@ export function confirmfriend(userID,friendID){
  }
 }
 
+export function getFriends(userID){
+  return function(dispatch){
+      axios.get(`http://localhost:8080/getFriends/?userID=${userID}`).
+      then((res)=>{
+        console.log(res.data.friends);
+        dispatch({
+          type: 'UPDATE_FRIENDS',
+          payload: res.data.friends,
+        })
+      })
+ }
+}
+
 export function deleteFriend(userID,friendID){
   console.log(friendID);
   console.log(userID);

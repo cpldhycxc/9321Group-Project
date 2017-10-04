@@ -2,8 +2,12 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.ParseException;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.text.ParseException;
+@JsonIgnoreProperties
 public class Post {
     private int postId;
     private int userID;
@@ -35,6 +39,7 @@ public class Post {
     public int getUserID() { return userID; }
     public String getUserName() { return userName; }
     public String getContent() { return content; }
+    @JsonIgnore
     public String getPostTime() { return User.SDF.format(postTime); }
     public ArrayList<User> getLikeBy() { return likeBy; }
 
@@ -42,6 +47,7 @@ public class Post {
     public void setUserID(int userID) { this.userID = userID; }
     public void setUserName(String userName) { this.userName = userName; }
     public void setContent(String content) { this.content = content; }
+    @JsonIgnore
     public void setPostTime(Date postTime) { this.postTime = postTime; }
     public void setLikeBy(ArrayList<User> likeBy) { this.likeBy = likeBy; }
 }
