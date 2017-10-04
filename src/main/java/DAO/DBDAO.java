@@ -39,7 +39,7 @@ public interface DBDAO {
     public String getUserNameByUserID(int userID);
     public long addPost(int userID, String content);
 //    public UserActivities userActivities(int userID);
-    public boolean editProfile(String userID,String fname, String lname, String dob, String email, String gender);
+    public UserProfile editProfile(String userID,String fname, String lname, String dob, String email, String gender);
     public void deleteFriendRelation(int userID, int friendID);
     public void backUserActivation(int userID);
 }

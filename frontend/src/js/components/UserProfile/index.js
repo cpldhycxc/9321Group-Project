@@ -24,6 +24,7 @@ class UserProfile extends React.Component {
       email:this.props.selecteduser.email,
     };
     this.editprofile = this.editprofile.bind(this);
+    this.submitprofile = this.submitprofile.bind(this);
     this.banuser = this.banuser.bind(this);
     this.unbanuser = this.unbanuser.bind(this);
     this.folllowuser = this.folllowuser.bind(this);
@@ -34,8 +35,17 @@ class UserProfile extends React.Component {
 
 
     editprofile() {
-      this.setState({ isEdit: !this.state.isEdit });
+      this.setState({ isEdit: false });
+      const firstName = this.state.firstname;
+      const lastName = this.state.lastname;
+      const gender = this.state.gender;
+      const email= this.state.email;
+      const userID = this.props.selecteduser.userID;
+      // this.props.dispatch(updatePorfile(userID,firstName,lastName,gender,email));
+    }
 
+    submitprofile(){
+      this.setState({ isEdit: true });
     }
 
     unbanuser(){
@@ -120,7 +130,7 @@ class UserProfile extends React.Component {
           return (<Button onClick={this.editprofile} className='buttons btn btn-primary'>Save</Button>);
         }
         return (
-          <Button onClick={this.editprofile} className='buttons btn btn-primary'>Edit</Button>
+          <Button onClick={this.submitprofile} className='buttons btn btn-primary'>Edit</Button>
         );
       }
 
@@ -204,11 +214,11 @@ class UserProfile extends React.Component {
           <tbody>
           <tr>
             <td>Name</td>
-            <td>{selecteduser.firstName} {selecteduser.lastName}</td>
+            <td>{this.state.firstname} {this.state.lastname}</td>
             </tr>
           <tr>
             <td>Gender</td>
-            <td>{selecteduser.gender}</td>
+            <td>{this.state.gender}</td>
             </tr>
             <tr>
             <td>Date of Birth</td>
@@ -216,7 +226,7 @@ class UserProfile extends React.Component {
             </tr>
             <tr>
             <td>Email</td>
-              <td>{selecteduser.email}</td>
+              <td>{this.state.email}</td>
             </tr>
             <tr>
             <td>Join Date</td>

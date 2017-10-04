@@ -390,14 +390,14 @@ public class HomeController {
 
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/updateProfile/{userID}", params = {"fname","lname", "dob", "email", "gender"}, method = RequestMethod.GET)
-    public EditProfile updateProfile(@PathVariable String userID,
+    public UserProfile updateProfile(@PathVariable String userID,
                                  @RequestParam("fname") String fname,
                                  @RequestParam("lname") String lname,
                                  @RequestParam("dob") String dob,
                                  @RequestParam("email") String email,
                                  @RequestParam("gender") String gender){
-        boolean flag = dbdao.editProfile(userID, fname, lname, dob, email, gender );
-        return new EditProfile(counter.incrementAndGet(), flag);
+        UserProfile flag = dbdao.editProfile(userID, fname, lname, dob, email, gender );
+        return flag;
     }
 
 }

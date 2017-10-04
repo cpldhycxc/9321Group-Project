@@ -129,15 +129,15 @@ export function deleteFriend(userID,friendID){
  }
 }
 
-export function updatePorfile(userName, firstName, lastName, birthday, email, gender) {
-    const url = 'http://localhost:8080/updateProfile/' + userName + '?fname=' + firstName + '&lname='
-     + lastName + '&dob=' + birthday + '&email=' + email + '&gender=' + gender;
-     return axios.get(url).then((res) => {
-         console.log(res.data);
-         dispatch({
-             type: 'UPDATE_PROFILE',
-         });
-     })
+export function updatePorfile(userID,firstName,lastName,gender,email) {
+    const url = 'http://localhost:8080/updateProfile/' + userID + '?fname=' + firstName + '&lname='
+     + lastName  + '&email=' + email+ '&gender=' + gender+ '&birthday=';
+     return function(dispatch){
+       axios.get(url)
+       .then((res)=>{
+         console.log(res);
+       })
+     }
 }
 
 
