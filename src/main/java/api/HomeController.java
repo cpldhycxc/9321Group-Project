@@ -83,7 +83,7 @@ public class HomeController {
             login.setSuccess(false);
             return login;
         }
-        login.setPosts(dbdao.getPostsByUserID(user.getUserID()));
+        login.setPosts(dbdao.getOwnPostsByUserID(user.getUserID()));
         login.setFriends(dbdao.getFriendsByUserID(user.getUserID()));
         login.setSuccess(true);
         return login;
