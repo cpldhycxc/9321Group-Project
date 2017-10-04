@@ -7,5 +7,5 @@ mates=[z3466413, z5040176, z3413158, z3462191, z5063045, z5076002, z3493921, z50
 program=Biomedical Engineering
 birthday=1995-10-03
 zid=z5059413
-email=A.Vega@unsw.edu.au
+email=shiyun.zhangsyz@gmail.com
 full_name=Amelia Vega

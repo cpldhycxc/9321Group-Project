@@ -6,6 +6,6 @@ birthday=1998-04-27
 program=Computer Science
 full_name=Lana Clarkson
 mates=[z5014861, z5063045, z5059413, z5076002]
-email=L.Clarkson@unsw.edu.au
+email=henrypoon1231@gmail.com
 home_latitude=-33.8062
 password=marine

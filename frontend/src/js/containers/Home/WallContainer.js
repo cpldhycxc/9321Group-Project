@@ -3,36 +3,22 @@ import { connect } from 'react-redux';
 import Post from '../../components/Post';
 import { getPosts } from '../../actions/postActions';
 
-@connect((store) => {
-  return  {
-		post: store.post,
-		user: store.user.user
-	};
-})
-class WallContainer extends React.Component {
-	constructor(props) {
-		super(props);
-		this.props.dispatch(getPosts());
-	}
 
-	componentDidMount() {
-		// console.log('willl')
-		this.props.dispatch(getPosts());
-	}
+
+
+class WallContainer extends React.Component {
 
 	render() {
-		if (this.props.post.posts.length === 0 || this.props.user === null) {
-			return null;
-		} else {
+      console.log(this.props.posts);
 			return (
 				<div>
-					{this.props.post.posts.map((post, i) => (
-						<Post 
-							selfID={this.props.user.userID}
+					{this.props.posts.map((post, i) => (
+						<Post
+							selfID={post.userID}
 							postID={post.postId}
 							userName={post.userName}
 							userID={post.userID}
-							text={post.content} 
+							text={post.content}
 							key={i}
 							postTime={post.postTime}
 							likes={post.likeBy}
@@ -41,7 +27,6 @@ class WallContainer extends React.Component {
 				</div>
 			);
 		}
-	}
 }
 
 export default connect()(WallContainer);

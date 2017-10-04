@@ -36,7 +36,7 @@ export default class SignupForm extends React.Component {
       let errors = this.state.errors;
       errors[field]= ''
       this.setState({ errors });
-      this.setState({ [e.target.name]: e.target.value });
+      this.setState({[e.target.name]: e.target.value});
     }
 
     handleChange(date) {

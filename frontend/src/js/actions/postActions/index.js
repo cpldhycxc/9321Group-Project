@@ -16,6 +16,10 @@ export function getPosts() {
 	};
 }
 
+export function getRandom() {
+	return axios.get('http://localhost:8080/randomPost/');
+}
+
 export function likeButton(type, postID) {
 	return (dispatch, store) => {
 		const url = 'http://localhost:8080/likePost';
