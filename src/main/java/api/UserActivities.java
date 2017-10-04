@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.Date;
 
 public class UserActivities {
-    private Date joinDate;
+    private String joinDate;
     private ArrayList<Activity> activities;
 
-    public UserActivities(Date jd, ArrayList<Activity> acti) {
+    public UserActivities(String jd, ArrayList<Activity> acti) {
         this.joinDate = jd;
         this.activities = acti;
     }
@@ -18,7 +18,7 @@ public class UserActivities {
         this.activities = new ArrayList<Activity>();
     }
 
-    public Date getJoinDate() {
+    public String getJoinDate() {
         return joinDate;
     }
 
@@ -30,7 +30,7 @@ public class UserActivities {
         this.activities.add(act);
     }
 
-    public void setJoinDate(Date date) {
+    public void setJoinDate(String date) {
         this.joinDate = date;
     }
 
