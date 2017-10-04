@@ -44,7 +44,6 @@ export default class Post extends React.Component {
 	checkImg = (url) => {
 		axios.get(url)
 		.then((response) => {
-			console.log(response);
 			this.setState({
 				hasImg: true
 			});
@@ -62,11 +61,11 @@ export default class Post extends React.Component {
 		axios.get(url)
 		.then((response) => {
 			console.log(response);
-			// window.location.reload();
+			window.location.reload();
 		})
 		.catch((err) => {
 			console.log(err);
-		})
+		});
 	}
 
   openModal = () => {
