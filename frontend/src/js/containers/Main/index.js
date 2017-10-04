@@ -28,17 +28,14 @@ export default class Main extends React.Component {
                 <Route path='/profile' component={Profile} />
                 <Route path='/user/:username' component={User} />
                 <Route path='/validation/:userid' component={Validation} />
-                <Route path='/redirectwindow' component={RedirectWindows}/>
+                <Route path='/redirectwindow' component={RedirectWindows} />
                 <Route path='/userredirect/:username' component={UserRedirect} />
                 <Route path='/addfriend/:userID' component={AddFriend}/ >
+                <Route path='/activityreport/:userID' component={ActivityReport} />
                 <Route paht='/advsearch' component={AdvancedSearch} />
-                <Route path='/ActivityReport/:username' component={ActivityReport} />
             </Switch>
         </div>
       </div>
     );
   }
 }
-// component={Home}
-/* <Route paht='/adsearch' component={AdvancedSearch}/>
-import AdvancedSearch from '../../containers/adSearch' */
