@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { dodevalidation, dovalidation, addFriend, deleteFriend } from '../../actions/userActions';
 
 
@@ -9,7 +10,7 @@ import { dodevalidation, dovalidation, addFriend, deleteFriend } from '../../act
     self: store.user.user,
   };
 })
-export default class UserProfile extends React.Component {
+class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +24,7 @@ export default class UserProfile extends React.Component {
     this.unbanuser = this.unbanuser.bind(this);
     this.folllowuser = this.folllowuser.bind(this);
     this.Unfollowuser = this.Unfollowuser.bind(this);
+    this.ActivityReport = this.ActivityReport.bind(this);
     }
 
 
@@ -66,6 +68,12 @@ export default class UserProfile extends React.Component {
       this.props.dispatch(deleteFriend(this.props.self.userID, friendID));
     }
 
+    ActivityReport(){
+      console.log("caonima");
+      const userID=this.props.selecteduser.userID;
+      this.props.history.push(`/activityreport/${userID}`);
+    }
+
     renderFollowButton = () => {
       const { isEdit } =this.state;
       if (this.props.self.userType === 2 && this.props.self.userName !== this.props.selecteduser.userName){
@@ -79,7 +87,7 @@ export default class UserProfile extends React.Component {
         }
         return (
           <div className='admin-block'>
-          <Button className='buttons btn btn-primary admin-button'>Activity</Button>
+          <Button onClick={this.ActivityReport} className='buttons btn btn-primary admin-button'>Activity</Button>
           <Button onClick={this.banuser} className='buttons btn btn-primary'>Ban</Button>
         </div>
         );
@@ -213,3 +221,6 @@ export default class UserProfile extends React.Component {
       )
     }
 }
+
+const UserProfileRoute = withRouter(UserProfile);
+export default UserProfileRoute;
