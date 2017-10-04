@@ -664,20 +664,20 @@ public class DBDAOImpl implements DBDAO {
             Statement stmt3 = conn.createStatement();
             Statement stmt4 = conn.createStatement();
             Statement stmt5 = conn.createStatement();
-
-            if(!fname.equalsIgnoreCase("undefined") || fname == null){
+            
+            if(!fname.equalsIgnoreCase("")){
                 stmt1.executeUpdate("UPDATE users SET firstname ='"+ fname+"' WHERE userID = '"+userID+"'");
             }
-            if(!lname.equalsIgnoreCase("undefined") || lname == null){
+            if(!lname.equalsIgnoreCase("")){
                 stmt2.executeUpdate("UPDATE users SET lastname ='"+ lname+"' WHERE userID = '"+userID+"'");
             }
-            if(!dob.equalsIgnoreCase("undefined") || dob == null){
+            if(!dob.equalsIgnoreCase("")){
                 stmt3.executeUpdate("UPDATE users SET dob ='"+ dob+"' WHERE userID = '"+userID+"'");
             }
-            if(!email.equalsIgnoreCase("undefined") || email == null){
+            if(!email.equalsIgnoreCase("")){
                 stmt4.executeUpdate("UPDATE users SET email ='"+ email+"' WHERE userID = '"+userID+"'");
             }
-            if(!gender.equalsIgnoreCase("undefined") || gender == null){
+            if(!gender.equalsIgnoreCase("")){
                 stmt5.executeUpdate("UPDATE users SET gender ='"+ gender+"' WHERE userID = '"+userID+"'");
             }
             return true;
