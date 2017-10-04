@@ -1,5 +1,5 @@
 import React from 'react';
-import { searchByUsername } from '../../actions/userActions';
+import { searchByUsername, getFriends } from '../../actions/userActions';
 import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
 import UserProfile from '../../components/UserProfile';
@@ -20,6 +20,11 @@ export default class Profile extends React.Component {
   constructor(props) {
     super(props);
   }
+
+	componentWillMount() {
+		console.log("hehehhe");
+		this.props.dispatch(getFriends(this.props.currentuser.userID));
+	}
 
   render() {
     if(!this.props.currentuser){

@@ -146,6 +146,12 @@ public class HomeController {
     }
 
     @CrossOrigin(origins = "*")
+    @GetMapping("getSelfPosts")
+    public Posts getSelfPosts(@RequestParam(value = "userID") int userID) {
+        return new Posts(counter.incrementAndGet(), dbdao.getOwnPostsByUserID(userID));
+    }
+
+    @CrossOrigin(origins = "*")
     @GetMapping("getFriends")
     public Friends getFriends(@RequestParam(value = "userID") int userID){
         return new Friends(counter.incrementAndGet(), dbdao.getFriendsByUserID(userID));

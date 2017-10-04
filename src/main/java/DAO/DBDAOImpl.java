@@ -19,6 +19,10 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 
 
@@ -34,6 +38,7 @@ import java.util.ArrayList;
  * Implementation of the DAO class which talks to database.
  */
 @Component
+@JsonIgnoreProperties
 public class DBDAOImpl implements DBDAO {
 
     final static Logger logger = LoggerFactory.getLogger(DBDAOImpl.class);
@@ -563,6 +568,7 @@ public class DBDAOImpl implements DBDAO {
         return userID;
     }
     
+    @JsonIgnore
     public ArrayList<Post> getPostsRandomly() {
     	System.out.println("hhhhhhhh");
     	ArrayList<Post> postList = new ArrayList<Post>();
@@ -586,7 +592,7 @@ public class DBDAOImpl implements DBDAO {
         }
     	return postList;
     }
-    
+    @JsonIgnore
     public Post getPostByPostID(int postID) {
     	Post post = new Post();
         try (Connection conn = connect()){
@@ -624,7 +630,7 @@ public class DBDAOImpl implements DBDAO {
         }
         return post;
     }
-    
+    @JsonIgnore
     public String getUserNameByUserID(int userID) {
         String name = null;
         try (Connection conn = connect()){
