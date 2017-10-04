@@ -50,10 +50,14 @@ export default class AdvSearch extends React.Component {
   }
 
 	handleSubmit(e) {
-		console.log(this.state.birthday.substring(0,10));
 		e.preventDefault();
-		const text = 'dob=' + this.state.birthday.substring(0,10) + '&&gender=' + this.state.value + '&&username=' + this.state.username + '&&firstname=' + this.state.firstname + '&&lastname=' + this.state.lastname;
-		const url = 'http://localhost:8080/advSearchResult/?' + text;
+		const birthday = this.state.birthday ? this.state.birthday.substring(0, 10) : '';
+		const gender = this.state.value ? this.state.value : '';
+		const username = this.state.username ? this.state.username : '';
+		const firstname = this.state.firstname ? this.state.firstname : '';
+		const lastname = this.state.lastname ? this.state.lastname : '';
+		const text = 'gender=' + gender + '&dob=' + birthday + '&userName=' + username + '&firstName=' + firstname + '&lastName=' + lastname;
+		const url = 'http://localhost:8080/advSearchResult?' + text;
         console.log(url);
         fetch(url).then(response =>
             response.json().then(data => ({

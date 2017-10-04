@@ -379,6 +379,7 @@ public class DBDAOImpl implements DBDAO {
             return ret;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            System.out.println("Hello, im bug");
             return null;
         }
     }
