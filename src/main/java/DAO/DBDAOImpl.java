@@ -598,7 +598,25 @@ public class DBDAOImpl implements DBDAO {
             	System.out.println(rs.getInt(2));
             	post.setContent(rs.getString(3));
             	post.setPostTime(User.SDF.parse(rs.getString(4)));
+            	post.setLikeBy(new ArrayList<>());
+            	ResultSet rss = stmt.executeQuery("SELECT userID, userName, email, firstName, lastName FROM Users WHERE userID IN (SELECT userID FROM Likes WHERE postID = '" + post.getPostId() + "')");
+                while(rss.next()){
+                    post.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
+                }
             }
+            
+            
+            
+//            for(Post p : postArrayList){
+//                p.setLikeBy(new ArrayList<>());
+//                rs = stmt.executeQuery("SELECT userID, userName, email, firstName, lastName FROM Users WHERE userID IN (SELECT userID FROM Likes WHERE postID = '" + p.getPostId() + "')");
+//                while(rs.next()){
+//                    p.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
+//                }
+//            }
+            
+            
+            
         } catch (SQLException | ParseException e){
             e.printStackTrace();
         }
