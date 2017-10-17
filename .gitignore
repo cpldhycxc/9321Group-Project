@@ -22,3 +22,6 @@ bin/
 
 #database
 student.db
+
+#war
+.war
