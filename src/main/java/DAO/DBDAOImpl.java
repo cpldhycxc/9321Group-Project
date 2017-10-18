@@ -1,19 +1,18 @@
 package DAO;
 
-import Model.Friend;
-import Model.Post;
-import Model.User;
+import Model.*;
 import api.Activity;
 
+import api.GraphQuery;
 import api.UserActivities;
 import api.UserProfile;
 
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
-
+import java.util.stream.StreamSupport;
 
 
 //| Annotation | Meaning                                             |
@@ -716,5 +715,207 @@ public class DBDAOImpl implements DBDAO {
         }		
 	}
 
+	@Override
+    public GraphQuery getWholeGraph() {
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TripleStore");
+            return graphQuery(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new GraphQuery();
+        }
+    }
 
+    @Override
+    public GraphQuery getUserGraph(String userID) {
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TripleStore WHERE subject= '"+userID+"' AND (predicate = 'dob' OR predicate = 'gender')");
+            return graphQuery(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new GraphQuery();
+        }
+    }
+
+    public GraphQuery getPostGraph(String postID){
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TripleStore WHERE object= '"+postID+"' AND (predicate = 'posted' OR predicate = 'liked')");
+            return graphQuery(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new GraphQuery();
+        }
+    }
+
+    public GraphQuery getFriendGraph(String userID){
+        ArrayList<Friend> friendList;
+        Map<Integer, Boolean> seen = new HashMap<>();
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(Integer.parseInt(userID));
+        while(!queue.isEmpty()){ // bfs find all friend
+            int currID = queue.poll();
+            if(!seen.containsKey(currID)){
+                seen.put(currID, true);
+                friendList =  getFriendsByUserID(currID);
+                for(Friend f : friendList){
+                    if(!seen.containsKey(f.getUserID())){
+                        queue.add(f.getUserID());
+                    }
+                }
+            }
+        }
+
+        GraphQuery returnGQ = new GraphQuery();
+
+        Map<Node, Boolean> userSeen = new HashMap<>();
+        Map<Edge, Boolean> edgeSeen = new HashMap<>();
+
+        for(int userIndex : seen.keySet()){
+            try (Connection conn = connect()){
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM TripleStore WHERE subject= '"+userIndex+"' AND predicate = 'friend'");
+                GraphQuery temp = graphQuery(rs);
+
+                for(Object k : temp.getNodes()){
+                    Node nodeTemp = (Node) k;
+                    if(!userSeen.containsKey(nodeTemp)){
+                        userSeen.put(nodeTemp, true);
+                    }
+                }
+                for(Object k : temp.getEdges()){
+                    Edge edgeTemp = (Edge) k;
+                    if(!edgeSeen.containsKey(edgeTemp)){
+                        edgeSeen.put(edgeTemp, true);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return new GraphQuery();
+            }
+        }
+        returnGQ.setEdges(new ArrayList<>(edgeSeen.keySet()));
+        returnGQ.setNodes(new ArrayList<>(userSeen.keySet()));
+        return returnGQ;
+    }
+
+    private GraphQuery graphQuery(ResultSet rs){
+        GraphQuery gq = new GraphQuery();
+        ArrayList<Node> nodes = new ArrayList<>();
+        ArrayList<Edge> edges = new ArrayList<>();
+        try {
+
+//            ResultSetMetaData rsmd = rs.getMetaData();
+//            int columnsNumber = rsmd.getColumnCount();
+//            while (rs.next()) {
+//                for (int i = 1; i <= columnsNumber; i++) {
+//                    if (i > 1) System.out.print(",  ");
+//                    String columnValue = rs.getString(i);
+//                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
+//                }
+//                System.out.println();
+//            }
+
+//            3 subject,  Juan Pablo subjectAdd,  dob predicate,  1996-01-27 object,  null objectAdd
+//            3 subject,  Juan Pablo subjectAdd,  gender predicate,  female object,  null objectAdd
+//            4 subject,  Amelia Vega subjectAdd,  friend predicate,  5 object,  Marisa Tomei objectAdd
+//            2 subject,  Carmen Electra subjectAdd,  posted predicate,  4 object,  To Kha-Linh,\nare you single? Need to know so I know if I am allowed to make a move on you or not. objectAdd
+//            6 subject,  Richard Virenque subjectAdd,  liked predicate,  29 object,  Anyone interested in a Lankan guy doing engineering, im sweet as watalappan. objectAdd
+
+            Map<String, Boolean> birthMap = new HashMap<>();
+            //map.put("dog", "type of animal");
+            Map<String, Boolean> genderMap = new HashMap<>();
+            Map<Integer, Boolean>  userMap = new HashMap<>();
+            Map<Integer, Boolean>  postMap = new HashMap<>();
+            int userID;
+            int friendID;
+            int postID;
+            String birth;
+            String gender;
+
+            while (rs.next()){
+                String type = rs.getString(3);
+                switch (type) {
+                    case "dob":
+                        birth = rs.getString(4).split(" ")[0];
+                        if (!birthMap.containsKey(birth)) {
+                            birthMap.put(birth, true);
+                            nodes.add(new Node(0, "age", birth));
+                        }
+                        userID = rs.getInt(1);
+                        if (!userMap.containsKey(userID)) {
+                            userMap.put(userID, true);
+                            nodes.add(new Node(userID, "user", rs.getString(2)));
+                        }
+
+                        edges.add(new Edge(userID, "dob", 0, birth));
+                        break;
+                    case "gender":
+                        gender = rs.getString(4);
+                        if (!genderMap.containsKey(gender)) {
+                            genderMap.put(gender, true);
+                            nodes.add(new Node(0, "gender", gender));
+                        }
+                        userID = rs.getInt(1);
+                        if (!userMap.containsKey(userID)) {
+                            userMap.put(userID, true);
+                            nodes.add(new Node(userID, "user", rs.getString(2)));
+                        }
+
+                        edges.add(new Edge(userID, "gender", 0, gender));
+                        break;
+                    case "friend":
+                        friendID = rs.getInt(4);
+                        if (!userMap.containsKey(friendID)) {
+                            userMap.put(friendID, true);
+                            nodes.add(new Node(friendID, "user", rs.getString(5)));
+                        }
+                        userID = rs.getInt(1);
+                        if (!userMap.containsKey(userID)) {
+                            userMap.put(userID, true);
+                            nodes.add(new Node(userID, "user", rs.getString(2)));
+                        }
+
+                        edges.add(new Edge(userID, "friend", friendID, ""));
+                        break;
+                    case "posted":
+                        postID = rs.getInt(4);
+                        if (!postMap.containsKey(postID)) {
+                            postMap.put(postID, true);
+                            nodes.add(new Node(postID, "post", rs.getString(5)));
+                        }
+                        userID = rs.getInt(1);
+                        if (!userMap.containsKey(userID)) {
+                            userMap.put(userID, true);
+                            nodes.add(new Node(userID, "user", rs.getString(2)));
+                        }
+
+                        edges.add(new Edge(userID, "posted", postID, ""));
+                        break;
+                    case "liked":
+                        postID = rs.getInt(4);
+                        if (!postMap.containsKey(postID)) {
+                            postMap.put(postID, true);
+                            nodes.add(new Node(postID, "post", rs.getString(5)));
+                        }
+                        userID = rs.getInt(1);
+                        if (!userMap.containsKey(userID)) {
+                            userMap.put(userID, true);
+                            nodes.add(new Node(userID, "user", rs.getString(2)));
+                        }
+
+                        edges.add(new Edge(userID, "liked", postID, ""));
+                        break;
+                }
+            }
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        gq.setEdges(edges);
+        gq.setNodes(nodes);
+        return gq;
+    }
 }
