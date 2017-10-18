@@ -52,7 +52,7 @@
     "postcss-mixins": "^5.4.1",
     "prop-types": "^15.6.0",
     "rc-time-picker": "^2.4.1",
-    "react": "^15.6.1",
+    "react": "^15.6.2",
     "react-autosuggest": "^9.3.2",
     "react-bootstrap": "^0.31.3",
     "react-bootstrap-date-picker": "^5.1.0",

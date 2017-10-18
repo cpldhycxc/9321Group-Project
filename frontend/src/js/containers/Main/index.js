@@ -14,8 +14,6 @@ import AdvancedSearch from '../../containers/AdvSearch';
 import RedirectWindows from './redirectwindow.js';
 import Graph from '../../containers/Graph';
 
-
-
 export default class Main extends React.Component {
   render() {
     return (

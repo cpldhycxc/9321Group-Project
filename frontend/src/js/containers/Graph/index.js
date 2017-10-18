@@ -1,5 +1,6 @@
 import React from 'react';
-import Graph from "react-graph-vis";
+import Graph from 'react-graph-vis';
+import { Button, Select, Input } from 'semantic-ui-react';
 
 export default class User extends React.Component {
   render() {
@@ -25,6 +26,23 @@ export default class User extends React.Component {
       }
     };
 
+    const SearchOption = [
+    {
+      key: 'people',
+      value: 'people',
+      text: 'People',
+    },
+    {
+      key: 'posts',
+      value: 'posts',
+      text: 'Posts',
+    },
+    {
+      key: 'friend',
+      value: 'friend',
+      text: 'Friend',
+    }];
+
     const events = {
       select: function(event) {
         var { nodes, edges } = event;
@@ -36,11 +54,13 @@ export default class User extends React.Component {
     };
     return (
         <div>
-          <Graph graph={graph} options={options} events={events} style={{ height: "640px" }} />
+          <Input type='text' placeholder='Search...' action style={{ width: '1000px' }}>
+            <input />
+            <Select compact options={SearchOption} defaultValue='people' />
+            <Button type='submit'>Search</Button>
+          </Input>
+          <Graph graph={graph} options={options} events={events} style={{ height: '640px' }} />
         </div>
     );
   }
 }
-
-
-
