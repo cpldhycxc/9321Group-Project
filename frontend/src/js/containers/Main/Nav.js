@@ -67,7 +67,7 @@ class SideBar extends React.Component {
 	render() {
 		const { path, token } = this.props;
 		const active = path === (path === '/profile' ? 'profile' : path === '/search' ? 'search' : path==='/graph' ? 'graph' :'wall');
-		const base_links = [['wall', true], ['search', false],['graph', false], ['profile', false]];
+		const base_links = [['wall', true], ['search', false],['graph', false], ['profile', false]	];
 		const links = base_links.filter((e) => e[1] || token).map((e) => e[0]);
 		const sideLinks = links.map((link, i) =>
 			<li className={link + '-sidebar sidebar ' + (active === link ? 'active' : '')} key={i}>

@@ -32,7 +32,7 @@ export default class Main extends React.Component {
                 <Route path='/addfriend/:userID' component={AddFriend} />
                 <Route path='/activityreport/:userID' component={ActivityReport} />
                 <Route path='/graph' component={Graph} />
-                <Route path='/advsearch' component={AdvancedSearch} />
+                <Route path='/adsearch' component={AdvancedSearch} />
             </Switch>
         </div>
       </div>
