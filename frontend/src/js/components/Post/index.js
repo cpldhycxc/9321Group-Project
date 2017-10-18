@@ -137,7 +137,7 @@ export default class Post extends React.Component {
 						subtitle={postTime}
 					/>
 					{renderImg()}
-					{text.split('\n\n').map((item, i) => {
+					{text.split('\\n').map((item, i) => {
 						return (
 						<CardTitle
 							title={item}
