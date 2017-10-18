@@ -31,10 +31,10 @@ export default class Main extends React.Component {
                 <Route path='/validation/:userid' component={Validation} />
                 <Route path='/redirectwindow' component={RedirectWindows} />
                 <Route path='/userredirect/:username' component={UserRedirect} />
-                <Route path='/addfriend/:userID' component={AddFriend}/ >
+                <Route path='/addfriend/:userID' component={AddFriend} />
                 <Route path='/activityreport/:userID' component={ActivityReport} />
-                <Route paht='/advsearch' component={AdvancedSearch} />
-                <Route paht='/graph' component={Graph} />
+                <Route path='/graph' component={Graph} />
+                <Route path='/advsearch' component={AdvancedSearch} />
             </Switch>
         </div>
       </div>
