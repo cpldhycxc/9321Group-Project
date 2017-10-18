@@ -12,6 +12,7 @@ import UserRedirect from '../../containers/User/userredirect.js';
 import AddFriend from '../../containers/User/addFriend.js';
 import AdvancedSearch from '../../containers/AdvSearch';
 import RedirectWindows from './redirectwindow.js';
+import Graph from '../../containers/Graph';
 
 
 
@@ -33,6 +34,7 @@ export default class Main extends React.Component {
                 <Route path='/addfriend/:userID' component={AddFriend}/ >
                 <Route path='/activityreport/:userID' component={ActivityReport} />
                 <Route paht='/advsearch' component={AdvancedSearch} />
+                <Route paht='/graph' component={Graph} />
             </Switch>
         </div>
       </div>
