@@ -39,7 +39,7 @@ export default class ActivityReport extends React.Component {
 		}
     return (
 			<div className="content activity">
-				<h1>Activity Report of Henry</h1>
+				<h1>Activity Report</h1>
 				<ActivityTable data={data} />
 			</div>
     );

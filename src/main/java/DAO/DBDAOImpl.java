@@ -19,6 +19,10 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 
 
@@ -34,6 +38,7 @@ import java.util.ArrayList;
  * Implementation of the DAO class which talks to database.
  */
 @Component
+@JsonIgnoreProperties
 public class DBDAOImpl implements DBDAO {
 
     final static Logger logger = LoggerFactory.getLogger(DBDAOImpl.class);
@@ -374,6 +379,7 @@ public class DBDAOImpl implements DBDAO {
             return ret;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            System.out.println("Hello, im bug");
             return null;
         }
     }
@@ -459,18 +465,18 @@ public class DBDAOImpl implements DBDAO {
             //init join date
 //            user.setJoinTime(format.parse(rs.(10)));
             System.out.println("join date: " + joinDate.getString(1));
-            userAct.setJoinDate(format.parse(joinDate.getString(1)));
+            userAct.setJoinDate(joinDate.getString(1));
             // adding posts record
             while (posts.next()) {
-                Activity act = new Activity(1, posts.getString(1), format.parse(posts.getString(2)));
+                Activity act = new Activity(1, posts.getString(1), posts.getString(2));
                 userAct.addActivity(act);
             }
 
             while (addFriends.next()) {
-                Activity act = new Activity(2, addFriends.getString(1), format.parse(addFriends.getString(2)));
+                Activity act = new Activity(2, addFriends.getString(1), addFriends.getString(2));
                 userAct.addActivity(act);
             }
-        } catch (SQLException | ParseException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return userAct;
@@ -562,6 +568,7 @@ public class DBDAOImpl implements DBDAO {
         return userID;
     }
     
+    @JsonIgnore
     public ArrayList<Post> getPostsRandomly() {
     	System.out.println("hhhhhhhh");
     	ArrayList<Post> postList = new ArrayList<Post>();
@@ -585,7 +592,7 @@ public class DBDAOImpl implements DBDAO {
         }
     	return postList;
     }
-    
+    @JsonIgnore
     public Post getPostByPostID(int postID) {
     	Post post = new Post();
         try (Connection conn = connect()){
@@ -626,7 +633,7 @@ public class DBDAOImpl implements DBDAO {
         }
         return post;
     }
-    
+    @JsonIgnore
     public String getUserNameByUserID(int userID) {
         String name = null;
         try (Connection conn = connect()){
@@ -653,37 +660,52 @@ public class DBDAOImpl implements DBDAO {
         }
     }
 
-    public boolean editProfile(String userID, String fname, String lname, String dob, String email, String gender){
+    public UserProfile editProfile(String userID, String fname, String lname, String dob, String email, String gender){
+        UserProfile u = new UserProfile();
         try (Connection conn = connect()){
             Statement stmt1 = conn.createStatement();
             Statement stmt2 = conn.createStatement();
             Statement stmt3 = conn.createStatement();
             Statement stmt4 = conn.createStatement();
             Statement stmt5 = conn.createStatement();
+            Statement stmt6 = conn.createStatement();
 
             if(!fname.equalsIgnoreCase("undefined")){
                 stmt1.executeUpdate("UPDATE users SET firstname ='"+ fname+"' WHERE userID = '"+userID+"'");
             }
-            if(!lname.equalsIgnoreCase("undefined")){
+            if(!lname.equalsIgnoreCase("")){
                 stmt2.executeUpdate("UPDATE users SET lastname ='"+ lname+"' WHERE userID = '"+userID+"'");
             }
-            if(!dob.equalsIgnoreCase("undefined")){
-                stmt3.executeUpdate("UPDATE users SET dob ='"+ dob+"' WHERE userID = '"+userID+"'");
+            if(!dob.equalsIgnoreCase("")){
+                stmt3.executeUpdate("UPDATE users SET birthday ='"+ dob+"' WHERE userID = '"+userID+"'");
             }
-            if(!email.equalsIgnoreCase("undefined")){
+            if(!email.equalsIgnoreCase("")){
                 stmt4.executeUpdate("UPDATE users SET email ='"+ email+"' WHERE userID = '"+userID+"'");
             }
-            if(!gender.equalsIgnoreCase("undefined")){
+            if(!gender.equalsIgnoreCase("")){
                 stmt5.executeUpdate("UPDATE users SET gender ='"+ gender+"' WHERE userID = '"+userID+"'");
             }
-            return true;
+
+            ResultSet rs = stmt6.executeQuery("SELECT * FROM Users`` WHERE userID = '" + userID + "'");
+            int sUserI = rs.getInt(1);
+            while(rs.next()){
+                u.setUserID(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+                u.setEmail(rs.getString(4));
+                u.setFirstName(rs.getString(5));
+                u.setLastName(rs.getString(6));
+                u.setGender(rs.getString(7));
+                u.setBirthday(rs.getString(8));
+                u.setUserType(rs.getInt(9));
+                u.setJoinTime(rs.getString(10));
+            }
+
         } catch (SQLException e){
 
             e.printStackTrace();
-            return false;
 
         }
-
+        return u;
     }
 
     

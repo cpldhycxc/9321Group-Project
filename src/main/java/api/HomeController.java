@@ -83,7 +83,7 @@ public class HomeController {
             login.setSuccess(false);
             return login;
         }
-        login.setPosts(dbdao.getPostsByUserID(user.getUserID()));
+        login.setPosts(dbdao.getOwnPostsByUserID(user.getUserID()));
         login.setFriends(dbdao.getFriendsByUserID(user.getUserID()));
         login.setSuccess(true);
         return login;
@@ -143,6 +143,12 @@ public class HomeController {
     @GetMapping("getPosts")
     public Posts getPosts(@RequestParam(value = "userID") int userID){
         return new Posts(counter.incrementAndGet(), dbdao.getPostsByUserID(userID));
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("getSelfPosts")
+    public Posts getSelfPosts(@RequestParam(value = "userID") int userID) {
+        return new Posts(counter.incrementAndGet(), dbdao.getOwnPostsByUserID(userID));
     }
 
     @CrossOrigin(origins = "*")
@@ -384,14 +390,14 @@ public class HomeController {
 
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/updateProfile/{userID}", params = {"fname","lname", "dob", "email", "gender"}, method = RequestMethod.GET)
-    public EditProfile updateProfile(@PathVariable String userID,
+    public UserProfile updateProfile(@PathVariable String userID,
                                  @RequestParam("fname") String fname,
                                  @RequestParam("lname") String lname,
                                  @RequestParam("dob") String dob,
                                  @RequestParam("email") String email,
                                  @RequestParam("gender") String gender){
-        boolean flag = dbdao.editProfile(userID, fname, lname, dob, email, gender );
-        return new EditProfile(counter.incrementAndGet(), flag);
+        UserProfile flag = dbdao.editProfile(userID, fname, lname, dob, email, gender );
+        return flag;
     }
 
 }

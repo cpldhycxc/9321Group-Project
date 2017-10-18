@@ -36,15 +36,14 @@ export default class Post extends React.Component {
 		};
 
 		this.deletePost = this.deletePost.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+		this.openModal = this.openModal.bind(this);
+		this.closeModal = this.closeModal.bind(this);
 		this.checkImg(this.state.postImgURL);
 	}
 
 	checkImg = (url) => {
 		axios.get(url)
 		.then((response) => {
-			console.log(response);
 			this.setState({
 				hasImg: true
 			});
@@ -62,11 +61,11 @@ export default class Post extends React.Component {
 		axios.get(url)
 		.then((response) => {
 			console.log(response);
-			// window.location.reload();
+			window.location.reload();
 		})
 		.catch((err) => {
 			console.log(err);
-		})
+		});
 	}
 
   openModal = () => {
@@ -138,7 +137,7 @@ export default class Post extends React.Component {
 						subtitle={postTime}
 					/>
 					{renderImg()}
-					{text.split('\n\n').map((item, i) => {
+					{text.split('\\n').map((item, i) => {
 						return (
 						<CardTitle
 							title={item}

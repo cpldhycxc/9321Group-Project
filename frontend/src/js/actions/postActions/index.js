@@ -2,7 +2,12 @@ import axios from 'axios';
 
 export function getPosts() {
 	return (dispatch, store) => {
-		const url = 'http://localhost:8080/getPosts?userID='.concat(store().user.user.userID);
+		let url;
+		if (store().user.user.userID === undefined) {
+			url = 'http://localhost:8080/randomPost/';
+		} else {
+			url = 'http://localhost:8080/getPosts?userID='.concat(store().user.user.userID);
+		}
 		axios.get(url)
 			.then((response) => {
 				dispatch({
@@ -17,7 +22,18 @@ export function getPosts() {
 }
 
 export function getRandom() {
-	return axios.get('http://localhost:8080/randomPost/');
+	return function(dispatch) {
+		 axios.get('http://localhost:8080/randomPost/')
+		 .then((res) => {
+			 dispatch({
+				 type:'GET_RANDOMS',
+				 payload: res.data.posts
+			 })
+		 })
+		 .catch((err)=>{
+			 console.log(err);
+		 })
+	}
 }
 
 export function likeButton(type, postID) {

@@ -2,8 +2,11 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.text.ParseException;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.text.ParseException;
 public class Post {
     private int postId;
     private int userID;

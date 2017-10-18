@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { dodevalidation, dovalidation, addFriend, deleteFriend } from '../../actions/userActions';
+import { dodevalidation, dovalidation, addFriend, deleteFriend, updatePorfile } from '../../actions/userActions';
 
 
 @connect((store) => {
@@ -15,21 +15,37 @@ class UserProfile extends React.Component {
     super(props);
     this.state = {
       isEdit: false,
-      pending:false,
-      isFriend:  this.props.selecteduser.relationShip,
+      pending: false,
+      isFriend: this.props.selecteduser.relationShip,
       isBan: !this.props.selecteduser.userType,
+      firstname:this.props.selecteduser.firstName,
+      lastname:this.props.selecteduser.lastName,
+      gender:this.props.selecteduser.gender,
+      email:this.props.selecteduser.email,
     };
     this.editprofile = this.editprofile.bind(this);
+    this.submitprofile = this.submitprofile.bind(this);
     this.banuser = this.banuser.bind(this);
     this.unbanuser = this.unbanuser.bind(this);
     this.folllowuser = this.folllowuser.bind(this);
     this.Unfollowuser = this.Unfollowuser.bind(this);
     this.ActivityReport = this.ActivityReport.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     }
 
 
     editprofile() {
-      this.setState({ isEdit: !this.state.isEdit });
+      this.setState({ isEdit: false });
+      const firstName = this.state.firstname;
+      const lastName = this.state.lastname;
+      const gender = this.state.gender;
+      const email= this.state.email;
+      const userID = this.props.selecteduser.userID;
+      // this.props.dispatch(updatePorfile(userID,firstName,lastName,gender,email));
+    }
+
+    submitprofile(){
+      this.setState({ isEdit: true });
     }
 
     unbanuser(){
@@ -114,16 +130,20 @@ class UserProfile extends React.Component {
           return (<Button onClick={this.editprofile} className='buttons btn btn-primary'>Save</Button>);
         }
         return (
-          <Button onClick={this.editprofile} className='buttons btn btn-primary'>Edit</Button>
+          <Button onClick={this.submitprofile} className='buttons btn btn-primary'>Edit</Button>
         );
       }
 
     }
 
+    handleChange(e){
+      this.setState({ [e.target.name]: e.target.value });
+      console.log(this.state);
+    }
+
     render() {
       const { selecteduser } = this.props;
       const { isEdit } = this.state;
-      console.log(selecteduser);
       if(isEdit){
         return (
           <div className='panel panel-info panelbody'>
@@ -135,37 +155,37 @@ class UserProfile extends React.Component {
             </div>
             <div className="panel-body">
               <div className="row">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                 <div className='col-md-3 col-lg-3'>
-                  <img src='static/images/userprofile.svg' className='profile-img'/>
-                  <input type="file" className="form-control uploadimag"/>
+                  <img src='static/images/userprofile.svg' className='profile-img' />
+                  <input type="file" className="form-control uploadimag" />
                 </div>
                 <div className=" col-md-9 col-lg-9">
                 <table className="table table-user-information">
                   <tbody>
                   <tr>
                     <td>FirstName</td>
-                    <td><input className="form-control" type="text" value={selecteduser.firstName}/></td>
+                    <td><input onChange={this.handleChange} name='firstname' className="form-control" type="text" value={this.state.firstname} /></td>
                     </tr>
                     <tr>
                       <td>LastName</td>
-                      <td><input className="form-control" type="text" value= {selecteduser.lastName}/></td>
+                      <td><input onChange={this.handleChange} name='lastname' className="form-control" type="text" value={this.state.lastname} /></td>
                       </tr>
                   <tr>
                     <td>Gender</td>
-                    <td><input className="form-control" type="text" value={selecteduser.gender}/></td>
-                    </tr>
-                    <tr>
-                    <td>Birthday</td>
-                      <td><input className="form-control" type="text" value={selecteduser.birthday}/></td>
+                    <td><input onChange={this.handleChange} name='gender' className="form-control" type="text" value={this.state.gender} /></td>
                     </tr>
                     <tr>
                     <td>Email</td>
-                      <td><input className="form-control" type="text" value={selecteduser.email}/></td>
+                      <td><input onChange={this.handleChange} name='email' className="form-control" type="text" value={this.state.email} /></td>
                     </tr>
                     <tr>
                     <td>Join Date</td>
                       <td>{selecteduser.joinTime}</td>
+                    </tr>
+                    <tr>
+                    <td>Birthday</td>
+                    <td>{selecteduser.birthday}</td>
                     </tr>
                     </tbody>
                   </table>
@@ -194,11 +214,11 @@ class UserProfile extends React.Component {
           <tbody>
           <tr>
             <td>Name</td>
-            <td>{selecteduser.firstName} {selecteduser.lastName}</td>
+            <td>{this.state.firstname} {this.state.lastname}</td>
             </tr>
           <tr>
             <td>Gender</td>
-            <td>{selecteduser.gender}</td>
+            <td>{this.state.gender}</td>
             </tr>
             <tr>
             <td>Date of Birth</td>
@@ -206,7 +226,7 @@ class UserProfile extends React.Component {
             </tr>
             <tr>
             <td>Email</td>
-              <td>{selecteduser.email}</td>
+              <td>{this.state.email}</td>
             </tr>
             <tr>
             <td>Join Date</td>

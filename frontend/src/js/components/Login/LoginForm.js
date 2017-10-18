@@ -5,7 +5,8 @@ import SignupForm from '../Signup'
 import { login } from '../../actions/userActions';
 import validateInput from '../../functions/loginvalidation';
 import classnames from 'classnames';
-import Loginfail from './Loginfail'
+import Loginfail from './Loginfail';
+import { withRouter } from 'react-router';
 
 @connect((store) => {
 	return {
@@ -14,7 +15,7 @@ import Loginfail from './Loginfail'
 	};
 })
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -61,7 +62,8 @@ export default class LoginForm extends React.Component {
 		}
 		if(this.isValid()){
 			this.setState({ errors:{}});
-			this.props.dispatch(login(user,this.changestate));
+			this.props.dispatch(login(user,this.changestate,this.props.history.push));
+			// ('/redirectwindow');)
 		}
 
 	}
@@ -130,6 +132,9 @@ export default class LoginForm extends React.Component {
 );
 }
 }
+
+const LoginFormRouter = withRouter(LoginForm);
+export default LoginFormRouter;
 
 			// isSubmitting: false,
 // {this.state.isSubmitting ?

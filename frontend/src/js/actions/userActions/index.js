@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-export function login(user,changestate) {
+export function login(user,changestate,push) {
     localStorage.setItem('id_token', user.userName);
     return function(dispatch){
       axios.post('http://localhost:8080/login/', {
@@ -14,6 +14,7 @@ export function login(user,changestate) {
             type: 'LOGGED_IN',
             payload: response.data,
           })
+          push('/redirectwindow');
         } else {
           localStorage.removeItem('id_token');
           changestate();
@@ -95,6 +96,19 @@ export function confirmfriend(userID,friendID){
  }
 }
 
+export function getFriends(userID){
+  return function(dispatch){
+      axios.get(`http://localhost:8080/getFriends/?userID=${userID}`).
+      then((res)=>{
+        console.log(res.data.friends);
+        dispatch({
+          type: 'UPDATE_FRIENDS',
+          payload: res.data.friends,
+        })
+      })
+ }
+}
+
 export function deleteFriend(userID,friendID){
   console.log(friendID);
   console.log(userID);
@@ -113,6 +127,17 @@ export function deleteFriend(userID,friendID){
       })
     })
  }
+}
+
+export function updatePorfile(userID,firstName,lastName,gender,email) {
+    const url = 'http://localhost:8080/updateProfile/' + userID + '?fname=' + firstName + '&lname='
+     + lastName  + '&email=' + email+ '&gender=' + gender+ '&birthday=';
+     return function(dispatch){
+       axios.get(url)
+       .then((res)=>{
+         console.log(res);
+       })
+     }
 }
 
 

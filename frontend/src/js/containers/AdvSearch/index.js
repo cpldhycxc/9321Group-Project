@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import { Button } from 'react-bootstrap';
 import searchResult from '../../components/SearchBar/SearchResultContainer';
 import Resultitem from '../../components/ResultItem';
+import axios from 'axios';
 
 export default class AdvSearch extends React.Component {
   constructor(props) {
@@ -50,10 +51,14 @@ export default class AdvSearch extends React.Component {
   }
 
 	handleSubmit(e) {
-		console.log(this.state.birthday.substring(0,10));
 		e.preventDefault();
-		const text = 'dob=' + this.state.birthday.substring(0,10) + '&&gender=' + this.state.value + '&&username=' + this.state.username + '&&firstname=' + this.state.firstname + '&&lastname=' + this.state.lastname;
-		const url = 'http://localhost:8080/advSearchResult/?' + text;
+		const birthday = this.state.birthday ? this.state.birthday.substring(0, 10) : '';
+		const gender = this.state.value ? this.state.value : '';
+		const username = this.state.username ? this.state.username : '';
+		const firstname = this.state.firstname ? this.state.firstname : '';
+		const lastname = this.state.lastname ? this.state.lastname : '';
+		const text = 'gender=' + gender + '&dob=' + birthday + '&userName=' + username + '&firstName=' + firstname + '&lastName=' + lastname;
+		const url = 'http://localhost:8080/advSearchResult?' + text;
         console.log(url);
         fetch(url).then(response =>
             response.json().then(data => ({
@@ -66,7 +71,7 @@ export default class AdvSearch extends React.Component {
         }));
         this.setState(prevState => ({
             isClick: !prevState.isClick
-        }))
+        }));
     }
 
 	render() {
@@ -132,19 +137,22 @@ export default class AdvSearch extends React.Component {
 		        </form>
 					</div>
 				</div>
-			)
+			);
 		} else {
 			return (
        <div className="result">
 				<div class="ui link cards">
-					{this.state.result.map((user, i) => (
-						<Resultitem
+					{this.state.result.map((user, i) => {
+						const imgUrl = img + this.state.result[i].userID;
+						return (
+							<Resultitem
 							key={i}
-							img={img + this.state.result[i].userID}
+							img={imgUrl}
 							id={this.state.result[i].firstName}
 							link={l + this.state.result[i].userName}
 						/>
-					))}
+						)
+					})}
 				</div>
         </div>
        );

@@ -5,9 +5,9 @@ import java.util.Date;
 public class Activity implements Comparable<Activity>{
     private int type;
     private String description;
-    private Date date;
+    private String date;
 
-    public Activity(int t, String descrip, Date d){
+    public Activity(int t, String descrip, String d){
         this.type = t;
         this.description = descrip;
         this.date = d;
@@ -21,10 +21,10 @@ public class Activity implements Comparable<Activity>{
         return description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
-
+  
     public int compareTo(Activity o){
          return this.date.compareTo(o.date);
     }

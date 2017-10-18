@@ -13,17 +13,17 @@ import axios from 'axios';
 class Header extends React.Component {
 
   componentDidMount() {
-    // this.notificationSystem = this.refs.notificationSystem;
-    // const url = 'http://localhost:8080/notification/'.concat(this.props.user.userID);
-    // axios.get(url)
-    // .then((response) => {
-		// 	response.data.map((e) => (
-		// 		this.addNotification(e)
-		// 	));
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    this.notificationSystem = this.refs.notificationSystem;
+    const url = 'http://localhost:8080/notification/'.concat(this.props.user.userID);
+    axios.get(url)
+    .then((response) => {
+			response.data.map((e) => (
+				this.addNotification(e)
+			));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   addNotification = (message) => {
@@ -66,8 +66,8 @@ const notifications = {
 class SideBar extends React.Component {
 	render() {
 		const { path, token } = this.props;
-		const active = path === (path === '/profile' ? 'profile' : path === '/search' ? 'search' :'wall');
-		const base_links = [['wall', true], ['search', false], ['profile', false]];
+		const active = path === (path === '/profile' ? 'profile' : path === '/search' ? 'search' : path==='/graph' ? 'graph' :'wall');
+		const base_links = [['wall', true], ['search', false],['graph', false], ['profile', false]	];
 		const links = base_links.filter((e) => e[1] || token).map((e) => e[0]);
 		const sideLinks = links.map((link, i) =>
 			<li className={link + '-sidebar sidebar ' + (active === link ? 'active' : '')} key={i}>
