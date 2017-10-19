@@ -12,6 +12,7 @@ import Model.LikePostM;
 import Model.User;
 import Model.UserP;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -400,4 +401,39 @@ public class HomeController {
         return flag;
     }
 
+    // localhost:8080/getWholeGraph
+    @CrossOrigin(value = "*")
+    @RequestMapping(value = "/getWholeGraph", method = RequestMethod.GET)
+    public GraphQuery wholeGraph(){
+        GraphQuery result = dbdao.getWholeGraph();
+        result.setRequestID(counter.incrementAndGet());
+        return result;
+    }
+
+    //localhost:8080/getUserGraph/1
+    @CrossOrigin(value = "*")
+    @RequestMapping(value = "/getUserGraph/{userID}", method = RequestMethod.GET)
+    public GraphQuery userGraph(@PathVariable String userID){
+        GraphQuery result = dbdao.getUserGraph(userID);
+        result.setRequestID(counter.incrementAndGet());
+        return result;
+    }
+
+    //localhost:8080/getPostGraph/10
+    @CrossOrigin(value = "*")
+    @RequestMapping(value = "/getPostGraph/{postID}", method = RequestMethod.GET)
+    public GraphQuery postGraph(@PathVariable String postID){
+        GraphQuery result = dbdao.getPostGraph(postID);
+        result.setRequestID(counter.incrementAndGet());
+        return result;
+    }
+
+    //localhost:8080/getFriendGraph/2
+    @CrossOrigin(value = "*")
+    @RequestMapping(value = "/getFriendGraph/{userID}", method = RequestMethod.GET)
+    public GraphQuery firendGraph(@PathVariable String userID){
+        GraphQuery result = dbdao.getFriendGraph(userID);
+        result.setRequestID(counter.incrementAndGet());
+        return result;
+    }
 }

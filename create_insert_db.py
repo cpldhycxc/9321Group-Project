@@ -4,6 +4,12 @@ import glob
 import random
 import re
 
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
 # user:
 #     user_id, primary key
 #     username
@@ -87,6 +93,19 @@ conn.execute('''CREATE TABLE Likes
         FOREIGN KEY (postID) REFERENCES Posts(postID));''')
 conn.execute('CREATE INDEX LikeUserIDIndex ON Likes(userID)')
 
+conn.execute('''DROP TABLE IF EXISTS TripleStore''')
+conn.execute('''CREATE TABLE TripleStore
+       (subject        TEXT  NOT NULL,
+        subjectAdd     TEXT  ,
+        predicate      TEXT  NOT NULL, 
+        object         TEXT  NOT NULL,
+        objectAdd      TEXT  );''')
+conn.execute('CREATE INDEX subjectIndex ON TripleStore(subject)')
+conn.execute('CREATE INDEX predicateIndex ON TripleStore(predicate)')
+conn.execute('CREATE INDEX objectIndex ON TripleStore(object)')
+
+
+
 print("Table created successfully")
 print("")
 print("Insert Admin user")
@@ -94,8 +113,8 @@ print("If you want to login Please use userName and password below")
 print("UserName = Admin")
 print("Password = Admin")
 
-conn.execute("INSERT INTO Users (userName, password, email, firstName, lastName, gender, userType) VALUES (?,?,?,?,?,?,?)",
-             ("Admin", "Admin", "553966858@qq.com", "JuBian", "Liang", "female", 2))
+conn.execute("INSERT INTO Users (userName, password, email, firstName, lastName, gender, userType, birthday) VALUES (?,?,?,?,?,?,?,?)",
+             ("Admin", "Admin", "553966858@qq.com", "JuBian", "Liang", "female", 2, "1996-01-01"))
 conn.commit()
 print("Insert Completed")
 
@@ -247,6 +266,65 @@ for index in index_list:
                   (user_id_like_postId_list[index][0],
                    user_id_like_postId_list[index][1]))
 print("Finish adding relationship")
+print("")
+
 conn.commit()
 
 conn.close()
+
+##########################################
+con = sqlite3.connect("student.db")
+con.row_factory = dict_factory
+cur = con.cursor()
+cur.execute("SELECT * FROM Users")
+# print(cur.fetchall())
+users_dict = dict()
+for each_user_dict in cur.fetchall():
+    users_dict[each_user_dict['userID']] = each_user_dict
+
+print("start adding triplestore table")
+print("adding user dob and gender")
+
+for ids in users_dict.keys():
+    print(users_dict[ids]['birthday'])
+    con.execute("INSERT INTO TripleStore (subject, subjectAdd, predicate, object) VALUES (?,?,?,?)",
+          (users_dict[ids]['userID'], users_dict[ids]['firstName'] + " " + users_dict[ids]['lastName'], "dob", users_dict[ids]['birthday']))
+    con.execute("INSERT INTO TripleStore (subject, subjectAdd, predicate, object) VALUES (?,?,?,?)",
+      (users_dict[ids]['userID'], users_dict[ids]['firstName'] + " " + users_dict[ids]['lastName'], "gender", users_dict[ids]['gender']))
+
+print("finish user dob and gender")
+print("")
+
+print("adding user friendship")
+cur.execute("SELECT * FROM Friends")
+for fs in cur.fetchall():
+    con.execute("INSERT INTO TripleStore (subject, subjectAdd, predicate, object, objectAdd) VALUES (?,?,?,?,?)",
+        (fs['userID'], users_dict[fs['userID']]['firstName'] + " " + users_dict[fs['userID']]['lastName'], "friend", fs['friendID'], users_dict[fs['friendID']]['firstName'] + " " + users_dict[fs['friendID']]['lastName']))
+print("finish user friendship")
+print()
+
+print("adding user post")
+post_dict = dict()
+cur.execute("SELECT * FROM Posts")
+for post in cur.fetchall():
+    # print(post)
+    con.execute("INSERT INTO TripleStore (subject, subjectAdd, predicate, object, objectAdd) VALUES (?,?,?,?,?)",
+        (post['userID'],  users_dict[post['userID']]['firstName'] + " " + users_dict[post['userID']]['lastName'], "posted", post['postID'], post['content'])) 
+    post_dict[post['postID']] = post
+print("finish user post")
+print()
+
+print("adding user like")
+cur.execute("SELECT * FROM Likes")
+for like in cur.fetchall():
+    con.execute("INSERT INTO TripleStore (subject, subjectAdd, predicate, object, objectAdd) VALUES (?,?,?,?,?)",
+        (like['userID'], users_dict[like['userID']]['firstName'] + " " + users_dict[like['userID']]['lastName'], "liked", like['postID'], post_dict[like['postID']]['content']))
+
+print("finish user like")
+
+
+print("finish adding triplestore table")
+
+con.commit()
+
+con.close()
