@@ -7,10 +7,7 @@ import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
 import DAO.*;
-import Model.FriendRequest;
-import Model.LikePostM;
-import Model.User;
-import Model.UserP;
+import Model.*;
 
 import com.sun.corba.se.impl.orbutil.graph.Graph;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -407,6 +404,15 @@ public class HomeController {
     public FinalGraphQuery wholeGraph(){
         GraphQuery result = dbdao.getWholeGraph();
         result.setRequestID(counter.incrementAndGet());
+//        for(Object o : result.getNodes()) {
+//            Node n = (Node) o;
+//            System.out.println(n.toString());
+//        }
+//        System.out.println("");
+//        for(Object o : result.getEdges()) {
+//            Edge e = (Edge) o;
+//            System.out.println(e.toString());
+//        }
         return new FinalGraphQuery(result);
     }
 
@@ -427,7 +433,6 @@ public class HomeController {
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/getPostGraph/{keyword}", method = RequestMethod.GET)
     public FinalGraphQuery postGraph(@PathVariable String keyword){
-        System.out.println(keyword);
         GraphQuery result = dbdao.getPostGraph(keyword);
         result.setRequestID(counter.incrementAndGet());
         return new FinalGraphQuery(result);

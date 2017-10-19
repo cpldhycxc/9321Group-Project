@@ -48,4 +48,9 @@ public class Edge {
     public void setToS(String toS) {
         this.toS = toS;
     }
+
+    @Override
+    public String toString() {
+        return "From:" + from + " edgeType:" + edgeType + " to:" + to + " toS: " + toS;
+    }
 }

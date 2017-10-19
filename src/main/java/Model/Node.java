@@ -50,4 +50,9 @@ public class Node {
     public void setNodeType(String nodeType) {
         this.nodeType = nodeType;
     }
+
+    @Override
+    public String toString() {
+        return "ID:" + id + " nodeType:" + nodeType + " additional:" + additional;
+    }
 }

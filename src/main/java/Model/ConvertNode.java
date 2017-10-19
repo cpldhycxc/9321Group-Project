@@ -50,4 +50,9 @@ public class ConvertNode {
     public void setGroup(int group) {
         this.group = group;
     }
+
+    @Override
+    public String toString() {
+        return "ID:" + id + " label:" + label + " group:" + group;
+    }
 }

@@ -38,4 +38,9 @@ public class ConvertEdge {
     public void setLabel(String label) {
         this.label = label;
     }
+
+    @Override
+    public String toString() {
+        return "From:" + from + " to:" + to + " label:" + label;
+    }
 }

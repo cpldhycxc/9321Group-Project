@@ -24,6 +24,8 @@ public class  FinalGraphQuery{
 
         // old userID to new userID mapping
         Map<Integer, Integer> userMap =  new HashMap<>();
+        // old postID to new postID mapping
+        Map<Integer, Integer> postMap = new HashMap<>();
 
         for(Object obj : convFrom.getNodes()){
             Node n = (Node) obj;
@@ -65,24 +67,30 @@ public class  FinalGraphQuery{
                     break;
                 case "post":
                     int postID = n.getId();
-                    nodes.add(new ConvertNode(count, "Post " + count, 4));
+                    nodes.add(new ConvertNode(count, "Post " + postID, 4));
 
-                    for(Object o : convFrom.getEdges()){
-                        Edge e = (Edge) o;
-                        if((e.getEdgeType().equals("liked") || e.getEdgeType().equals("posted")) && e.getTo() == postID){
-                            e.setTo(count);
-                        }
-                    }
+                    postMap.put(postID, count);
 
                     ++count;
                     break;
             }
         }
 
+//        for(Object o : convFrom.getNodes()) {
+//            Node n = (Node) o;
+//            System.out.println(n.toString());
+//        }
+//        System.out.println("");
+//        for(Object o : convFrom.getEdges()) {
+//            Edge e = (Edge) o;
+//            System.out.println(e.toString());
+//        }
+
         for(Object obj : convFrom.getEdges()) {
             Edge e = (Edge) obj;
             int oldUserID = e.getFrom();
             int newUserID = userMap.get(oldUserID);
+            int oldPostID;
             switch (e.getEdgeType()){
                 case "dob":
                     edges.add(new ConvertEdge(newUserID, e.getTo(), "dob"));
@@ -95,10 +103,12 @@ public class  FinalGraphQuery{
                     edges.add(new ConvertEdge(newUserID, newFriendID, "friend"));
                     break;
                 case "posted":
-                    edges.add(new ConvertEdge(newUserID, e.getTo(), "posted"));
+                    oldPostID = e.getTo();
+                    edges.add(new ConvertEdge(newUserID, postMap.get(oldPostID), "posted"));
                     break;
                 case "liked":
-                    edges.add(new ConvertEdge(newUserID, e.getTo(), "liked"));
+                    oldPostID = e.getTo();
+                    edges.add(new ConvertEdge(newUserID, postMap.get(oldPostID), "liked"));
                     break;
             }
         }
