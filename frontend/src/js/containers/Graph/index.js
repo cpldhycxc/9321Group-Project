@@ -14,7 +14,7 @@ export default class User extends React.Component {
         { id: 6, label:  "people 6" },
         { id: 7, label:  "people 7" },
       ],
-      edges: [{ from: 1, to: 2 }, { from: 1, to: 3 }, { from: 2, to: 4 }, { from: 2, to: 5 },{from: 6, to: 7}]
+      edges: [{ from: 1, to: 2 },{ from: 2, to: 1 }, { from: 1, to: 3 }, { from: 2, to: 4 }, { from: 2, to: 5 },{from: 6, to: 7}]
     };
 
     const options = {
@@ -23,6 +23,15 @@ export default class User extends React.Component {
       },
       edges: {
         color: "#000000"
+      },
+      nodes:{
+        shape:'icon',
+        icon: {
+          face: 'Ionicons',
+          code: "\uf3a0",
+          size: 50,  //50,
+          color:'#2B7CE9'
+        },
       }
     };
 
@@ -54,12 +63,16 @@ export default class User extends React.Component {
     };
     return (
         <div>
-          <Input type='text' placeholder='Search...' action style={{ width: '1000px' }}>
+          <div>
+          <Input type='text' placeholder='Search...' action style={{ width: '910px' }}>
             <input />
-            <Select compact options={SearchOption} defaultValue='people' />
-            <Button type='submit'>Search</Button>
-          </Input>
-          <Graph graph={graph} options={options} events={events} style={{ height: '640px' }} />
+              <Select compact options={SearchOption} defaultValue='people' />
+              <Button type='submit'>Search</Button>
+            </Input>
+          </div>
+          <div>
+            <Graph graph={graph} options={options} events={events} style={{ height: '640px' }}  />
+          </div>
         </div>
     );
   }

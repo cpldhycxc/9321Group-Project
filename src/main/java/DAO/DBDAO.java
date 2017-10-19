@@ -1,13 +1,17 @@
 package DAO;
 
 import Model.Friend;
+import Model.Node;
 import Model.Post;
 import Model.User;
+import api.GraphQuery;
 import api.UserActivities;
 import api.UserProfile;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import org.json.JSONArray;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -42,4 +46,9 @@ public interface DBDAO {
     public UserProfile editProfile(String userID,String fname, String lname, String dob, String email, String gender);
     public void deleteFriendRelation(int userID, int friendID);
     public void backUserActivation(int userID);
+
+    public GraphQuery getWholeGraph();
+    public GraphQuery getUserGraph(String userID);
+    public GraphQuery getPostGraph(String postID);
+    public GraphQuery getFriendGraph(String userID);
 }
