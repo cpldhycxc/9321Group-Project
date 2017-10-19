@@ -2,7 +2,9 @@ package api;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -23,6 +25,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
+import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
+import unsw.curation.api.tokenization.ExtractionKeywordImpl;
+
 
 @CrossOrigin
 @RestController
@@ -34,7 +39,8 @@ public class HomeController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
     private ArrayList<Notification> notification = new ArrayList<Notification>();
-
+    private List<String> wordL = new ArrayList<String>();
+    private String keywords;
 
     @CrossOrigin(origins = "*")
     @GetMapping("/greeting")
@@ -258,6 +264,7 @@ public class HomeController {
                     postID = (int)dbdao.addPost(userID, null);
                 } else {
                     postID = (int)dbdao.addPost(userID, content);
+                    checkBully(userID,content,postID);
                 }
 
                 String filePath = "posts/" + Integer.toString(postID);
@@ -399,5 +406,44 @@ public class HomeController {
         UserProfile flag = dbdao.editProfile(userID, fname, lname, dob, email, gender );
         return flag;
     }
+    
+    
+	public void api(String Con) throws Exception {
+		ExtractionKeywordImpl keyword = new ExtractionKeywordImpl();
+		this.keywords = keyword.ExtractSentenceKeyword(Con, new File("src/main/resources/words.txt"));
+	}
+	
+// word extract api test
+//    @CrossOrigin(origins = "*")
+//    @RequestMapping(value = "/testAPI", method = RequestMethod.GET)
+//    public void testAPI() {
+//		int userID = 11;
+//		String content = "HI, CHECK THE ~\n 232	content  Abuse, Abusive  heihei,welfare   h whine";
+//		int postID = 100;
+//		checkBully(userID,content,postID);    		
+//    }
+	
+	
+//if the post content contain any bully word, email will sent to admin which contains: userID, postID and bully word 	
+	public void checkBully(int userID, String content,int postID){
+		ArrayList<String> items = new ArrayList<String>(Arrays.asList(content.replaceAll("[^a-zA-Z'\\s]"," ").split("\\s+")));
+		try{
+			api(content);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		ArrayList<String> checkList = new ArrayList<String>(Arrays.asList(keywords.split(",")));
+		items.removeAll(checkList);
+//		for(String i: items){
+//			System.out.println(i);
+//		}
+		if(!items.isEmpty()){
+			String msg = "Please check the content posted by user.\nUser ID: "+userID
+					+"\nPost ID: "+postID+"\nContent: "+content+"\nWords contained: "+items;
+			sendTLSMail("553966858@qq.com", msg);			
+		}else{
+			System.out.println("no bully-word contained");
+		}
 
+	}
 }
