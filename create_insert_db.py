@@ -72,6 +72,7 @@ conn.execute('''CREATE TABLE Posts
         FOREIGN KEY (userID) REFERENCES Users(userID));''')
 conn.execute('CREATE INDEX postUserIDIndex ON Posts(userID)')
 conn.execute('CREATE INDEX postTime ON Posts(postTime)')
+conn.execute('CREATE INDEX contentIndex ON Posts(content)')
 
 
 conn.execute('''DROP TABLE IF EXISTS Friends;''')
@@ -103,6 +104,7 @@ conn.execute('''CREATE TABLE TripleStore
 conn.execute('CREATE INDEX subjectIndex ON TripleStore(subject)')
 conn.execute('CREATE INDEX predicateIndex ON TripleStore(predicate)')
 conn.execute('CREATE INDEX objectIndex ON TripleStore(object)')
+conn.execute('CREATE INDEX objectAddIndex ON TripleStore(objectAdd)')
 
 
 
@@ -321,7 +323,6 @@ for like in cur.fetchall():
         (like['userID'], users_dict[like['userID']]['firstName'] + " " + users_dict[like['userID']]['lastName'], "liked", like['postID'], post_dict[like['postID']]['content']))
 
 print("finish user like")
-
 
 print("finish adding triplestore table")
 

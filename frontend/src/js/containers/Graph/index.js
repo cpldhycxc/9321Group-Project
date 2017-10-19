@@ -1,20 +1,62 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
 import { Button, Select, Input } from 'semantic-ui-react';
+import axios from 'axios';
 
 export default class User extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      type: 'username',
+      graph:{},
+    };
+    this.setInput = this.setInput.bind(this);
+    this.setType = this.setType.bind(this);
+    this.handleonClick = this.handleonClick.bind(this);
+  }
+
+  setInput(e) {
+    this.setState({ input: e.target.value });
+  }
+
+  setType(value) {
+    this.setState({ type: value });
+  }
+
+  handleonClick(){
+    console.log(this.state);
+  }
+
+  componentWillMount() {
+    axios.get("http://localhost:8080/getWholeGraph/")
+        .then((res)=>{
+          console.log(res);
+          this.setState({
+              graph :{
+                nodes:res.data.nodes,
+                edges:res.data.edges,
+              }
+          })
+        })
+  }
+
+
   render() {
+
     const graph = {
       nodes: [
-        { id: 1, label: "people 1" },
-        { id: 2, label: "people 2" },
-        { id: 3, label: "people 3" },
-        { id: 4, label: "people 4" },
-        { id: 5, label: "people 5" },
-        { id: 6, label:  "people 6" },
-        { id: 7, label:  "people 7" },
+        { id: 1, label: "people 1", group:1 },
+        { id: 2, label: "people 2",group:1 },
+        { id: 3, label: "people 3",group:1 },
+        { id: 4, label: "people 4",group:1 },
+        { id: 5, label: "people 5",group:3 },
+        { id: 6, label:  "people 6",group:2 },
+        { id: 7, label:  "people 7",group:2 },
       ],
-      edges: [{ from: 1, to: 2 },{ from: 2, to: 1 }, { from: 1, to: 3 }, { from: 2, to: 4 }, { from: 2, to: 5 },{from: 6, to: 7}]
+      edges: [{ from: 1, to: 2 ,color:{color:'black'} },{ from: 2, to: 1,color:{color:'black'} },
+        { from: 1, to: 3,color:{color:'black'} }, { from: 2, to: 4,color:{color:'black'} },
+        { from: 2, to: 5,color:{color:'black'} },{from: 6, to: 7 ,color:{color:'black'}}]
     };
 
     const options = {
@@ -24,22 +66,32 @@ export default class User extends React.Component {
       edges: {
         color: "#000000"
       },
-      nodes:{
-        shape:'icon',
-        icon: {
-          face: 'Ionicons',
-          code: "\uf3a0",
-          size: 50,  //50,
-          color:'#2B7CE9'
-        },
-      }
+      // nodes:{
+      //   shape:'icon',
+      //   icon: {
+      //     face: 'FontAwesome',
+      //     code: ' \uf274 ',
+      //     size: 50,  //50,
+      //     color:'#2B7CE9'
+      //   },
+      // }
     };
 
     const SearchOption = [
     {
-      key: 'people',
-      value: 'people',
-      text: 'People',
+      key: 'username',
+      value: 'username',
+      text: 'Username',
+    },
+    {
+      key: 'DOB',
+      value: 'DOB',
+      text: 'DOB',
+    },
+    {
+      key: 'gender',
+      value: 'gender',
+      text: 'Gender',
     },
     {
       key: 'posts',
@@ -50,7 +102,8 @@ export default class User extends React.Component {
       key: 'friend',
       value: 'friend',
       text: 'Friend',
-    }];
+    }
+    ];
 
     const events = {
       select: function(event) {
@@ -63,17 +116,16 @@ export default class User extends React.Component {
     };
     return (
         <div>
-          <div>
-          <Input type='text' placeholder='Search...' action style={{ width: '910px' }}>
+          <Input onChange={this.setInput} type='text' placeholder='Search...' action style={{ width: '100%' }}>
             <input />
-              <Select compact options={SearchOption} defaultValue='people' />
-              <Button type='submit'>Search</Button>
-            </Input>
-          </div>
-          <div>
-            <Graph graph={graph} options={options} events={events} style={{ height: '640px' }}  />
-          </div>
+            <Select onChange={(e, { value }) => this.setType(value)} compact options={SearchOption} defaultValue='username' />
+            <Button type='submit' onClick={this.handleonClick}>Generate</Button>
+          </Input>
+          <Graph graph={graph} options={options} events={events} style={{ height: '640px' }} />
         </div>
     );
   }
 }
+
+
+
