@@ -109,6 +109,7 @@ public class DBDAOImpl implements DBDAO {
             userID = rs.getInt(1);
         } catch (SQLException e){
             e.printStackTrace();
+            return -1;
         }
         return userID;
     }
@@ -739,10 +740,10 @@ public class DBDAOImpl implements DBDAO {
         }
     }
 
-    public GraphQuery getPostGraph(String postID){
+    public GraphQuery getPostGraph(String keyword){
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM TripleStore WHERE object= '"+postID+"' AND (predicate = 'posted' OR predicate = 'liked')");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TripleStore WHERE (predicate = 'posted' OR predicate = 'liked') AND objectAdd LIKE '%" +keyword+"%'");
             return graphQuery(rs);
         } catch (SQLException e) {
             e.printStackTrace();
