@@ -584,7 +584,7 @@ public class DBDAOImpl implements DBDAO {
             int max = count - 1;
             for(int i = 0;i < 10;i++) {
             	r=rand.nextInt((max - 0) + 1) + 0;
-            	System.out.println(r);
+            	System.out.println("check"+r);
             	postList.add(getPostByPostID(r));
             }
         } catch (SQLException e){
@@ -600,12 +600,14 @@ public class DBDAOImpl implements DBDAO {
             ResultSet rs = stmt.executeQuery("SELECT PostID,UserID,content,posttime FROM Posts WHERE postID = '" + postID + "'");
             while(rs.next()){
             	post.setPostId(rs.getInt(1));
-            	System.out.println(rs.getInt(1));
+//            	System.out.println(rs.getInt(1));
             	post.setUserID(rs.getInt(2));
             	post.setUserName(getUserNameByUserID(rs.getInt(2)));
-            	System.out.println(rs.getInt(2));
+//            	System.out.println(rs.getInt(2));
             	post.setContent(rs.getString(3));
+//            	System.out.println(rs.getString(4));
             	post.setPostTime(User.SDF.parse(rs.getString(4)));
+            	
             	post.setLikeBy(new ArrayList<>());
             	ResultSet rss = stmt.executeQuery("SELECT userID, userName, email, firstName, lastName FROM Users WHERE userID IN (SELECT userID FROM Likes WHERE postID = '" + post.getPostId() + "')");
                 while(rss.next()){
@@ -627,6 +629,7 @@ public class DBDAOImpl implements DBDAO {
             
         } catch (SQLException | ParseException e){
             e.printStackTrace();
+            
         }
         return post;
     }
