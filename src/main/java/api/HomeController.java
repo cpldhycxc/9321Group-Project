@@ -404,36 +404,45 @@ public class HomeController {
     // localhost:8080/getWholeGraph
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/getWholeGraph", method = RequestMethod.GET)
-    public GraphQuery wholeGraph(){
+    public FinalGraphQuery wholeGraph(){
         GraphQuery result = dbdao.getWholeGraph();
         result.setRequestID(counter.incrementAndGet());
-        return result;
+        return new FinalGraphQuery(result);
     }
 
     //localhost:8080/getUserGraph/1
     @CrossOrigin(value = "*")
-    @RequestMapping(value = "/getUserGraph/{userID}", method = RequestMethod.GET)
-    public GraphQuery userGraph(@PathVariable String userID){
+    @RequestMapping(value = "/getUserGraph/{userName}", method = RequestMethod.GET)
+    public FinalGraphQuery userGraph(@PathVariable String userName){
+        String userID = Integer.toString(dbdao.getUserIdByUserName(userName));
+        if(userID.equals("-1")){
+            return new FinalGraphQuery();
+        }
         GraphQuery result = dbdao.getUserGraph(userID);
         result.setRequestID(counter.incrementAndGet());
-        return result;
+        return new FinalGraphQuery(result);
     }
 
     //localhost:8080/getPostGraph/10
     @CrossOrigin(value = "*")
-    @RequestMapping(value = "/getPostGraph/{postID}", method = RequestMethod.GET)
-    public GraphQuery postGraph(@PathVariable String postID){
-        GraphQuery result = dbdao.getPostGraph(postID);
+    @RequestMapping(value = "/getPostGraph/{keyword}", method = RequestMethod.GET)
+    public FinalGraphQuery postGraph(@PathVariable String keyword){
+        System.out.println(keyword);
+        GraphQuery result = dbdao.getPostGraph(keyword);
         result.setRequestID(counter.incrementAndGet());
-        return result;
+        return new FinalGraphQuery(result);
     }
 
     //localhost:8080/getFriendGraph/2
     @CrossOrigin(value = "*")
-    @RequestMapping(value = "/getFriendGraph/{userID}", method = RequestMethod.GET)
-    public GraphQuery firendGraph(@PathVariable String userID){
+    @RequestMapping(value = "/getFriendGraph/{userName}", method = RequestMethod.GET)
+    public FinalGraphQuery firendGraph(@PathVariable String userName){
+        String userID = Integer.toString(dbdao.getUserIdByUserName(userName));
+        if(userID.equals("-1")){
+            return new FinalGraphQuery();
+        }
         GraphQuery result = dbdao.getFriendGraph(userID);
         result.setRequestID(counter.incrementAndGet());
-        return result;
+        return new FinalGraphQuery(result);
     }
 }
