@@ -4,6 +4,7 @@ import Model.Friend;
 import Model.Node;
 import Model.Post;
 import Model.User;
+import Model.BullyPost;
 import api.GraphQuery;
 import api.UserActivities;
 import api.UserProfile;
@@ -28,7 +29,7 @@ public interface DBDAO {
     public ArrayList<Friend> getFriendsByUserID(int userID);
     public ArrayList<UserProfile> search(String param);
     public ArrayList<UserProfile> advSearch(String gender, String dob,  String userName, String firstName, String lastName);
-    public UserActivities userActivities(int userID);
+    public UserActivities userActivities(int userID,ArrayList<BullyPost> bullyPost);
 
     public boolean userExistence(String userName);
     public UserProfile userProfile(String selectedName,String userName);

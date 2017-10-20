@@ -450,7 +450,7 @@ public class DBDAOImpl implements DBDAO {
 	 * function to delete the post by post id
 	 */
 	@Override
-    public UserActivities userActivities(int userID) {
+    public UserActivities userActivities(int userID,ArrayList<BullyPost> bullyPost) {
         UserActivities userAct = new UserActivities();
         try (Connection conn = connect()) {
             Statement stmt1 = conn.createStatement();
@@ -460,7 +460,7 @@ public class DBDAOImpl implements DBDAO {
 
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             ResultSet joinDate = stmt1.executeQuery("SELECT joinTime FROM users WHERE userID = '" + userID + "'");
-            ResultSet posts = stmt2.executeQuery("SELECT content, postTime FROM posts WHERE userID= '" + userID + "' ORDER BY postTime");
+            ResultSet posts = stmt2.executeQuery("SELECT content, postTime, postID FROM posts WHERE userID= '" + userID + "' ORDER BY postTime");
             ResultSet addFriends = stmt3.executeQuery("SELECT Users.userName, friends.startDate FROM friends JOIN users on users.userID = friends.friendId WHERE friends.userID = '" + userID + "' ORDER BY startDate");
             //init join date
 //            user.setJoinTime(format.parse(rs.(10)));
@@ -468,8 +468,21 @@ public class DBDAOImpl implements DBDAO {
             userAct.setJoinDate(joinDate.getString(1));
             // adding posts record
             while (posts.next()) {
-                Activity act = new Activity(1, posts.getString(1), posts.getString(2));
-                userAct.addActivity(act);
+            	boolean check = false;
+            	for(BullyPost b: bullyPost){
+            		if(b.getPostID() == posts.getInt(3)){
+            			check = true;
+            			break;
+            		}
+            	}
+            	if(check == true){
+            		Activity act = new Activity(1, posts.getString(1) + " (This post may contain some words related to bullying)", posts.getString(2));
+                    userAct.addActivity(act);
+            	}else{
+            		Activity act = new Activity(1, posts.getString(1), posts.getString(2));
+                    userAct.addActivity(act);
+            	}
+                
             }
 
             while (addFriends.next()) {
