@@ -38,6 +38,7 @@ public class HomeController {
     private final AtomicLong counter = new AtomicLong();
     private ArrayList<Notification> notification = new ArrayList<Notification>();
     private List<String> wordL = new ArrayList<String>();
+    private ArrayList<BullyPost> bullyPost = new ArrayList<BullyPost>();
     private String keywords;
 
     @CrossOrigin(origins = "*")
@@ -373,7 +374,7 @@ public class HomeController {
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/activityReport/{userID}", method = RequestMethod.GET)
     public UserActivities userActivity(@PathVariable int userID){
-        return dbdao.userActivities(userID);
+        return dbdao.userActivities(userID,bullyPost);
     }
 
     @CrossOrigin(value = "*")
@@ -435,6 +436,8 @@ public class HomeController {
 //			System.out.println(i);
 //		}
 		if(!items.isEmpty()){
+			BullyPost p = new BullyPost(postID,userID);
+			bullyPost.add(p);
 			String msg = "Please check the content posted by user.\nUser ID: "+userID
 					+"\nPost ID: "+postID+"\nContent: "+content+"\nWords contained: "+items;
 			sendTLSMail("553966858@qq.com", msg);			
