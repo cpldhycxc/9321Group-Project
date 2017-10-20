@@ -12,6 +12,7 @@ export default class ActivityReport extends React.Component {
 		}
 	}
 
+	//get userid from path and call api to get activity report
 	componentWillMount(){
 		const  userID=this.props.match.params.userID;
 		axios.get(`http://localhost:8080/activityReport/${userID}`)
@@ -27,6 +28,7 @@ export default class ActivityReport extends React.Component {
 		});
 	};
 
+	//render the report table
 	render() {
 		const { joinDate, activities } = this.state;
 		const data ={
@@ -46,23 +48,3 @@ export default class ActivityReport extends React.Component {
   }
 }
 
-// const data = {
-// 	joinDate: '21:00:01 21/09/2017',
-// 	activities: [
-// 		{
-// 			type: 'addFriend',
-// 			description: 'You added Ryan as your friend',
-// 			date: '16:00:01 20/09/2016'
-// 		},
-// 		{
-// 			type: 'addFriend',
-// 			description: 'You added Gary as your friend',
-// 			date: '16:00:01 20/09/2016'
-// 		},
-// 		{
-// 			type: 'post',
-// 			description: 'Hello world',  // if there exists a image
-// 			date: '16:00:01 20/09/2016'		//plz concat it with description after the conten with ' IMG: url'
-// 		}
-// 	]
-// };

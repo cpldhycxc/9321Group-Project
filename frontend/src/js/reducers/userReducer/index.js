@@ -28,6 +28,7 @@ export default function reducer(state = {
           token: null,
       };
     }
+    //friend list will be updated
     case "UPDATE_FRIENDS": {
       return {
           ...state,

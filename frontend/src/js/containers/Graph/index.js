@@ -9,7 +9,7 @@ export default class User extends React.Component {
     this.state = {
       input: '',
       type: 'username',
-      graph:{},
+      graph:null,
     };
     this.setInput = this.setInput.bind(this);
     this.setType = this.setType.bind(this);
@@ -25,13 +25,51 @@ export default class User extends React.Component {
   }
 
   handleonClick(){
-    console.log(this.state);
+    if(this.state.type === 'username'){
+      const url = "http://localhost:8080/getUserGraph/" + this.state.input
+      axios.get(url)
+          .then((res)=>{
+            console.log(res.data);
+            this.setState({
+              graph :{
+                nodes:res.data.nodes,
+                edges:res.data.edges,
+              }
+            })
+          })
+    } else if (this.state.type === 'DOB'){
+      console.log('dob');
+    } else if(this.state.type === 'gender'){
+      console.log('gender');
+    } else if(this.state.type === 'posts'){
+      const url = "http://localhost:8080/getPostGraph/" + this.state.input
+      axios.get(url)
+          .then((res)=>{
+            this.setState({
+              graph :{
+                nodes:res.data.nodes,
+                edges:res.data.edges,
+              }
+            })
+          })
+    } else if(this.state.type === 'friend'){
+      const url = "http://localhost:8080/getFriendGraph/" + this.state.input
+      axios.get(url)
+          .then((res)=>{
+            this.setState({
+              graph :{
+                nodes:res.data.nodes,
+                edges:res.data.edges,
+              }
+            })
+          })
+    }
+
   }
 
   componentWillMount() {
     axios.get("http://localhost:8080/getWholeGraph/")
         .then((res)=>{
-          console.log(res);
           this.setState({
               graph :{
                 nodes:res.data.nodes,
@@ -84,16 +122,6 @@ export default class User extends React.Component {
       text: 'Username',
     },
     {
-      key: 'DOB',
-      value: 'DOB',
-      text: 'DOB',
-    },
-    {
-      key: 'gender',
-      value: 'gender',
-      text: 'Gender',
-    },
-    {
       key: 'posts',
       value: 'posts',
       text: 'Posts',
@@ -114,14 +142,17 @@ export default class User extends React.Component {
         console.log(edges);
       }
     };
-    return (
+        if(!this.state.graph){
+            return null;
+        }
+        return (
         <div>
           <Input onChange={this.setInput} type='text' placeholder='Search...' action style={{ width: '100%' }}>
             <input />
             <Select onChange={(e, { value }) => this.setType(value)} compact options={SearchOption} defaultValue='username' />
             <Button type='submit' onClick={this.handleonClick}>Generate</Button>
           </Input>
-          <Graph graph={graph} options={options} events={events} style={{ height: '640px' }} />
+          <Graph graph={this.state.graph} options={options} events={events} style={{ height: '640px' }} />
         </div>
     );
   }
