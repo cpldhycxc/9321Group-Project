@@ -92,6 +92,7 @@ class UserProfile extends React.Component {
 
     renderFollowButton = () => {
       const { isEdit } =this.state;
+      //if the loged in user is Admin, render activity and ban/unban button
       if (this.props.self.userType === 2 && this.props.self.userName !== this.props.selecteduser.userName){
         if(this.state.isBan){
           return (

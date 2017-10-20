@@ -66,6 +66,7 @@ export function dodevalidation(userID) {
   return axios.get(`http://localhost:8080/backActivation/${userID}`);
 }
 
+//server will send a email to the friend
 export function addFriend(userID,userName,friendID,friendName){
   return axios.post('http://localhost:8080/friendRequest/',{
     userID:userID,
@@ -74,7 +75,7 @@ export function addFriend(userID,userName,friendID,friendName){
     friendName : friendName,
   })
 }
-
+//once friend click on the email
 export function confirmfriend(userID,friendID){
   console.log(friendID);
   console.log(userID);
