@@ -735,7 +735,7 @@ public class DBDAOImpl implements DBDAO {
     public GraphQuery getUserGraph(String userID) {
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM TripleStore WHERE subject= '"+userID+"' AND (predicate = 'dob' OR predicate = 'gender')");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM TripleStore WHERE subject= '"+userID+"' AND (predicate = 'dob' OR predicate = 'gender' OR predicate = 'friend')");
             return graphQuery(rs);
         } catch (SQLException e) {
             e.printStackTrace();
