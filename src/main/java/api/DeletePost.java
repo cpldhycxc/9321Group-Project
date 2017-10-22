@@ -1,9 +1,5 @@
 package api;
 
-import Model.User;
-import Model.Post;
-import DAO.*;
-
 
 public class DeletePost {
 	private int postId;

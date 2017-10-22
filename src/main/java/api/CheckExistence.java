@@ -1,8 +1,5 @@
 package api;
 
-import Model.User;
-import DAO.*;
-
 public class CheckExistence {
 	private String userName;
 	private boolean result;

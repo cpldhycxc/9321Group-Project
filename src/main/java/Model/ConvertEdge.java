@@ -11,7 +11,8 @@ public class ConvertEdge {
         this.label = label;
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return (from + " " + to + " " + label).hashCode();
     }
 

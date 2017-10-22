@@ -11,7 +11,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import DAO.*;
 import Model.*;
 
-import com.sun.corba.se.impl.orbutil.graph.Graph;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,7 +22,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
-import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
 import unsw.curation.api.tokenization.ExtractionKeywordImpl;
 
 
@@ -348,7 +346,8 @@ public class HomeController {
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
+                    @Override
+					protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);
                     }
                 });

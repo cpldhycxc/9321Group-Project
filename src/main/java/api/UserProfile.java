@@ -1,15 +1,11 @@
 package api;
 
-import Model.User;
-import DAO.*;
 import Model.Post;
 import Model.Friend;
 
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class UserProfile {
 	 	public static final int ADMIN = 2;

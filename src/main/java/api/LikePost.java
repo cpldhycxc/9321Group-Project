@@ -1,9 +1,5 @@
 package api;
 
-import Model.User;
-import DAO.*;
-import Model.Post;
-
 public class LikePost {
 	private int userID;
 	private int postID;

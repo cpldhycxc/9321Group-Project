@@ -1,8 +1,5 @@
 package api;
 
-import Model.User;
-import DAO.*;
-
 /**
  * API class that help to return a json
  */
