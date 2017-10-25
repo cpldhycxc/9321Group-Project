@@ -66,107 +66,104 @@
 		    <scope>system</scope>
 		    <systemPath>${project.basedir}/src/main/resources/TextAPI-0.0.1-SNAPSHOT.jar</systemPath>
 		</dependency>
-		
-			<dependency>
-	    <groupId>edu.stanford.nlp</groupId>
-	    <artifactId>stanford-corenlp</artifactId>
-	    <version>3.5.2</version>
-	</dependency>
-	<dependency>
-	    <groupId>edu.stanford.nlp</groupId>
-	    <artifactId>stanford-corenlp</artifactId>
-	    <version>3.5.2</version>
-	    <classifier>models</classifier>
-	</dependency>	
-	
+
+
 		<dependency>
-	  <groupId>joda-time</groupId>
-	  <artifactId>joda-time</artifactId>
-	  <version>2.9.4</version>
-	</dependency>
-		
-		<dependency>
-		    <groupId>edu.mit</groupId>
-		    <artifactId>jwi</artifactId>
-		    <version>2.2.3</version>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-corenlp</artifactId>
+			<version>3.5.2</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.apache.opennlp</groupId>
-		    <artifactId>opennlp-tools</artifactId>
-		    <version>1.6.0</version>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-corenlp</artifactId>
+			<version>3.5.2</version>
+			<classifier>models</classifier>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>commons-codec</groupId>
-		    <artifactId>commons-codec</artifactId>
-		    <version>1.9</version>
+			<groupId>edu.mit</groupId>
+			<artifactId>jwi</artifactId>
+			<version>2.2.3</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>nz.ac.waikato.cms.weka</groupId>
-		    <artifactId>weka-dev</artifactId>
-		    <version>3.7.10</version>
+			<groupId>org.apache.opennlp</groupId>
+			<artifactId>opennlp-tools</artifactId>
+			<version>1.6.0</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>info.debatty</groupId>
-		    <artifactId>java-string-similarity</artifactId>
-		    <version>0.13</version>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>nz.ac.waikato.cms.weka</groupId>
+			<artifactId>weka-dev</artifactId>
+			<version>3.7.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>info.debatty</groupId>
+			<artifactId>java-string-similarity</artifactId>
+			<version>0.13</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.jsoup</groupId>
-		    <artifactId>jsoup</artifactId>
-		    <version>1.7.2</version>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.7.2</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-math3</artifactId>
-		    <version>3.2</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.2</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-lang3</artifactId>
-		    <version>3.4</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.twitter4j</groupId>
-		    <artifactId>twitter4j-stream</artifactId>
-		    <version>4.0.4</version>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-stream</artifactId>
+			<version>4.0.4</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.twitter4j</groupId>
-		    <artifactId>twitter4j-core</artifactId>
-		    <version>4.0.1</version>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-core</artifactId>
+			<version>4.0.1</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.json</groupId>
-		    <artifactId>json</artifactId>
-		    <version>20160810</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-core</artifactId>
-		    <version>4.6.0</version>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>4.6.0</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-analyzers-common</artifactId>
-		    <version>4.6.0</version>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-common</artifactId>
+			<version>4.6.0</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.apache.lucene</groupId>
-		    <artifactId>lucene-queryparser</artifactId>
-		    <version>4.6.0</version>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>4.6.0</version>
 		</dependency>
+
 		<!-- end of API -->
     </dependencies>
 
@@ -204,7 +201,4 @@
     </pluginRepositories>
     
     
-    
-    
-
 </project>

@@ -42,18 +42,19 @@ export default class Post extends React.Component {
 	}
 
 	checkImg = (url) => {
-		axios.get(url)
-		.then((response) => {
-			this.setState({
-				hasImg: true
-			});
-		})
-		.catch((err) => {
-			console.log(err);
-			this.setState({
-				hasImg: false
-			});
-		});
+		console.log("hehehe")
+		// axios.get(url)
+		// .then((response) => {
+		// 	this.setState({
+		// 		hasImg: true
+		// 	});
+		// })
+		// .catch((err) => {
+		// 	console.log(err);
+		// 	this.setState({
+		// 		hasImg: false
+		// 	});
+		// });
 	}
 
 	deletePost = () => {
