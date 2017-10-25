@@ -25,6 +25,7 @@ export function getRandom() {
 	return function(dispatch) {
 		 axios.get('http://localhost:8080/randomPost/')
 		 .then((res) => {
+		 	 
 			 dispatch({
 				 type:'GET_RANDOMS',
 				 payload: res.data.posts

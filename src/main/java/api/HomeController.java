@@ -266,10 +266,11 @@ public class HomeController {
                     postID = (int)dbdao.addPost(userID, null);
                 } else {
                     postID = (int)dbdao.addPost(userID, content);
+                    System.out.println(content);
                     checkBully(userID,content,postID);
                     System.out.println("check here");
                 }
-
+                
                 String filePath = "posts/" + Integer.toString(postID);
                 System.out.println(filePath);
                 byte[] bytes = file.getBytes();
@@ -330,10 +331,8 @@ public class HomeController {
             IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {
-            ex.printStackTrace();
-            throw new RuntimeException("IOError writing file to output stream");
-        }
 
+        }
     }
     
     /**
@@ -441,6 +440,7 @@ public class HomeController {
 	
 //if the post content contain any bully word, email will sent to admin which contains: userID, postID and bully word 	
 	public void checkBully(int userID, String content,int postID){
+		System.out.println("fdfdfd");
 		ArrayList<String> items = new ArrayList<String>(Arrays.asList(content.replaceAll("[^a-zA-Z'\\s]"," ").split("\\s+")));
 		System.out.println("hhh");
 		try{
@@ -461,17 +461,8 @@ public class HomeController {
 			bullyPost.add(p);
 			String msg = "Please check the content posted by user.\nUser ID: "+userID
 					+"\nPost ID: "+postID+"\nContent: "+content+"\nWords contained: "+items;
-<<<<<<< HEAD
-			sendTLSMail("jinyi4869@gmail.com", msg);	
-			 System.out.println("check");
-			 for(BullyPost i: bullyPost){
-				 System.out.println("postID"+i.getPostID());
-				 System.out.println("userID"+i.getUserID()); 
-			 }
-			 
-=======
 			sendTLSMail("liangxubing@gmail.com", msg, "Bullying Keyword Notification");
->>>>>>> f09c163c3372c86da5effc8e518f4837659c1fd5
+
 		}else{
 			System.out.println("no bully-word contained");
 		}

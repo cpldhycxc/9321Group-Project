@@ -16,7 +16,6 @@ class WallContainer extends React.Component {
 	}
 
 	componentWillMount() {
-		// console.log('willl')
 		this.props.dispatch(getPosts());
 	}
 
