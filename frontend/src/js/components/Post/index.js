@@ -43,18 +43,18 @@ export default class Post extends React.Component {
 
 	checkImg = (url) => {
 		console.log("hehehe")
-		// axios.get(url)
-		// .then((response) => {
-		// 	this.setState({
-		// 		hasImg: true
-		// 	});
-		// })
-		// .catch((err) => {
-		// 	console.log(err);
-		// 	this.setState({
-		// 		hasImg: false
-		// 	});
-		// });
+		axios.get(url)
+		.then((response) => {
+			this.setState({
+				hasImg: true
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			this.setState({
+				hasImg: false
+			});
+		});
 	}
 
 	deletePost = () => {
@@ -140,12 +140,18 @@ export default class Post extends React.Component {
 					{renderImg()}
 					{text.split('\\n').map((item, i) => {
 						return (
+
 						<CardTitle
 							title={item}
 							key={i}
 						/>
 						);
 					})}
+					<div style={{marginLeft:'20px'}}>
+						<div><strong>Locations:</strong> {this.props.locations}</div>
+						<div><strong>Org:</strong> {this.props.organizations}</div>
+						<div><strong>Persons:</strong> {this.props.persons}</div>	
+						</div>
 					<div className="Post__footer">
 						<div className="Post_like-button">
 							<p>{this.state.numOfLikes} likes</p>
