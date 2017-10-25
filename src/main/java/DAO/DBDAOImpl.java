@@ -7,6 +7,7 @@ import api.GraphQuery;
 import api.UserActivities;
 import api.UserProfile;
 
+import java.net.URISyntaxException;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
+import unsw.curation.api.tokenization.ExtractionKeywordImpl;
 
 import java.util.ArrayList;
 
@@ -37,6 +40,10 @@ import java.util.ArrayList;
 public class DBDAOImpl implements DBDAO {
 
     final static Logger logger = LoggerFactory.getLogger(DBDAOImpl.class);
+
+    private ExtractEntitySentence ees = new ExtractEntitySentence();
+
+    //
 
     /**
      * function that try to make a connection with database
@@ -174,6 +181,17 @@ public class DBDAOImpl implements DBDAO {
                     p.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
                 }
             }
+
+            try{
+                for(Post p : postArrayList){
+                    p.setLocations(ees.ExtractLocation(p.getContent()));
+                    p.setPersons(ees.ExtractPerson(p.getContent()));
+                    p.setOrganizations(ees.ExtractOrganization(p.getContent()));
+                }
+            } catch (URISyntaxException k){
+                k.printStackTrace();
+            }
+
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -543,6 +561,17 @@ public class DBDAOImpl implements DBDAO {
                     p.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
                 }
             }
+
+            try{
+                for(Post p : postArrayList){
+                    p.setLocations(ees.ExtractLocation(p.getContent()));
+                    p.setPersons(ees.ExtractPerson(p.getContent()));
+                    p.setOrganizations(ees.ExtractOrganization(p.getContent()));
+                }
+            } catch (URISyntaxException k){
+                k.printStackTrace();
+            }
+
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -613,6 +642,18 @@ public class DBDAOImpl implements DBDAO {
             	System.out.println("check"+r);
             	postList.add(getPostByPostID(r));
             }
+
+            try{
+                for(Post p : postList){
+                    p.setLocations(ees.ExtractLocation(p.getContent()));
+                    p.setPersons(ees.ExtractPerson(p.getContent()));
+                    p.setOrganizations(ees.ExtractOrganization(p.getContent()));
+                }
+            } catch (URISyntaxException k){
+                k.printStackTrace();
+            }
+
+
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -640,6 +681,16 @@ public class DBDAOImpl implements DBDAO {
                 while(rss.next()){
                     post.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
                 }
+
+                try{
+                    System.out.println(post.getContent());
+                    post.setLocations(ees.ExtractLocation(post.getContent()));
+                    post.setPersons(ees.ExtractPerson(post.getContent()));
+                    post.setOrganizations(ees.ExtractOrganization(post.getContent()));
+                } catch (URISyntaxException k){
+                    k.printStackTrace();
+                }
+
             }
             
             
