@@ -32,12 +32,17 @@ public class HomeController {
     @Autowired
     private DBDAO dbdao = new DBDAOImpl();
 
+    // extract keyword
+    private ExtractionKeywordImpl eki = new ExtractionKeywordImpl();
+
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
     private ArrayList<Notification> notification = new ArrayList<Notification>();
     private List<String> wordL = new ArrayList<String>();
     private ArrayList<BullyPost> bullyPost = new ArrayList<BullyPost>();
     private String keywords;
+
+
 
     @CrossOrigin(origins = "*")
     @GetMapping("/greeting")
@@ -254,7 +259,10 @@ public class HomeController {
     @RequestMapping(value="/addPost/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
     public @ResponseBody SignUp handleFileUpload(
             @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
+<<<<<<< HEAD
     		System.out.println("fuckfuckfuck");
+=======
+>>>>>>> f09c163c3372c86da5effc8e518f4837659c1fd5
         if (!file.isEmpty()) {
             try {
                 int postID;
@@ -445,6 +453,7 @@ public class HomeController {
 //			System.out.println(i);
 //		}
 		if(!items.isEmpty()){
+		    System.out.println("sending bullying");
 			BullyPost p = new BullyPost(postID,userID);
 			bullyPost.add(p);
 			String msg = "Please check the content posted by user.\nUser ID: "+userID
