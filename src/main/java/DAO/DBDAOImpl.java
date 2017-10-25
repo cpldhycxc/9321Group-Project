@@ -640,7 +640,8 @@ public class DBDAOImpl implements DBDAO {
             for(int i = 0;i < 10;i++) {
             	r=rand.nextInt((max - 0) + 1) + 0;
             	System.out.println("check"+r);
-            	postList.add(getPostByPostID(r));
+            	Post p = getPostByPostID(r);
+            	if(p.getContent() != null) postList.add(p);
             }
 
             try{
@@ -682,27 +683,8 @@ public class DBDAOImpl implements DBDAO {
                     post.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
                 }
 
-                try{
-                    System.out.println(post.getContent());
-                    post.setLocations(ees.ExtractLocation(post.getContent()));
-                    post.setPersons(ees.ExtractPerson(post.getContent()));
-                    post.setOrganizations(ees.ExtractOrganization(post.getContent()));
-                } catch (URISyntaxException k){
-                    k.printStackTrace();
-                }
-
+           
             }
-            
-            
-            
-//            for(Post p : postArrayList){
-//                p.setLikeBy(new ArrayList<>());
-//                rs = stmt.executeQuery("SELECT userID, userName, email, firstName, lastName FROM Users WHERE userID IN (SELECT userID FROM Likes WHERE postID = '" + p.getPostId() + "')");
-//                while(rs.next()){
-//                    p.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
-//                }
-//            }
-            
             
             
         } catch (SQLException | ParseException e){

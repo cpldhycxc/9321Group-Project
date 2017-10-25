@@ -268,6 +268,7 @@ public class HomeController {
                     postID = (int)dbdao.addPost(userID, content);
                     System.out.println(content);
                     checkBully(userID,content,postID);
+                    System.out.println("check here");
                 }
                 
                 String filePath = "posts/" + Integer.toString(postID);
@@ -386,6 +387,9 @@ public class HomeController {
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/activityReport/{userID}", method = RequestMethod.GET)
     public UserActivities userActivity(@PathVariable int userID){
+    	for(BullyPost p: bullyPost){
+    		System.out.println("cehck "+p.getPostID() +" "+p.getUserID());
+    	}
         return dbdao.userActivities(userID,bullyPost);
     }
 
@@ -424,20 +428,21 @@ public class HomeController {
 	}
 	
 // word extract api test
-//    @CrossOrigin(origins = "*")
-//    @RequestMapping(value = "/testAPI", method = RequestMethod.GET)
-//    public void testAPI() {
-//		int userID = 11;
-//		String content = "HI, CHECK THE ~\n 232	content  Abuse, Abusive  heihei,welfare   h whine";
-//		int postID = 100;
-//		checkBully(userID,content,postID);    		
-//    }
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/testAPI", method = RequestMethod.GET)
+    public void testAPI() {
+		int userID = 2;
+		String content = "HI, CHECK THE ~\n 232	content  Abuse, Abusive  heihei,welfare   h whine";
+		int postID = 1;
+		checkBully(userID,content,postID);    		
+    }
 	
 	
 //if the post content contain any bully word, email will sent to admin which contains: userID, postID and bully word 	
 	public void checkBully(int userID, String content,int postID){
 		System.out.println("fdfdfd");
 		ArrayList<String> items = new ArrayList<String>(Arrays.asList(content.replaceAll("[^a-zA-Z'\\s]"," ").split("\\s+")));
+		System.out.println("hhh");
 		try{
 			api(content);
 		}catch(Exception e){
@@ -445,16 +450,19 @@ public class HomeController {
 		}
 		ArrayList<String> checkList = new ArrayList<String>(Arrays.asList(keywords.split(",")));
 		items.removeAll(checkList);
-//		for(String i: items){
-//			System.out.println(i);
-//		}
+		for(String i: items){
+			System.out.println(i);
+		}
 		if(!items.isEmpty()){
 		    System.out.println("sending bullying");
 			BullyPost p = new BullyPost(postID,userID);
+			 System.out.println("postID"+p.getPostID());
+			 System.out.println("userID"+p.getUserID());
 			bullyPost.add(p);
 			String msg = "Please check the content posted by user.\nUser ID: "+userID
 					+"\nPost ID: "+postID+"\nContent: "+content+"\nWords contained: "+items;
 			sendTLSMail("liangxubing@gmail.com", msg, "Bullying Keyword Notification");
+
 		}else{
 			System.out.println("no bully-word contained");
 		}
