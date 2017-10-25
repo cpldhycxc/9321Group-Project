@@ -148,9 +148,9 @@ export default class Post extends React.Component {
 						);
 					})}
 					<div style={{marginLeft:'20px'}}>
-						<div><strong>Locations:</strong> {this.props.locations}</div>
-						<div><strong>Org:</strong> {this.props.organizations}</div>
-						<div><strong>Persons:</strong> {this.props.persons}</div>	
+						<div><strong>Locations:</strong> <span className="label label-default">{this.props.locations}</span></div>
+						<div><strong>Org:</strong> <span className="label label-default">{this.props.organizations}</span></div>
+						<div><strong>Persons:</strong><span className="label label-default">{this.props.persons}</span> </div>	
 						</div>
 					<div className="Post__footer">
 						<div className="Post_like-button">

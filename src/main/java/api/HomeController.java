@@ -466,6 +466,7 @@ public class HomeController {
 		}else{
 			System.out.println("no bully-word contained");
 		}
+		System.out.println(bullyPost.size());
 
 	}
 

@@ -496,7 +496,8 @@ public class DBDAOImpl implements DBDAO {
             // adding posts record
             while (posts.next()) {
             	boolean check = false;
-            	for(BullyPost b: bullyPost){
+            	System.out.println(bullyPost.size());
+            	for(BullyPost b: bullyPost){   		
             		if(b.getPostID() == posts.getInt(3)){
             			check = true;
             			break;
