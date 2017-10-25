@@ -7,6 +7,7 @@ import api.GraphQuery;
 import api.UserActivities;
 import api.UserProfile;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.sql.*;
 import java.text.ParseException;
@@ -21,8 +22,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
 import unsw.curation.api.tokenization.ExtractionKeywordImpl;
-
-import java.util.ArrayList;
 
 
 //| Annotation | Meaning                                             |
@@ -42,6 +41,8 @@ public class DBDAOImpl implements DBDAO {
     final static Logger logger = LoggerFactory.getLogger(DBDAOImpl.class);
 
     private ExtractEntitySentence ees = new ExtractEntitySentence();
+    private ArrayList<BullyPost> bullyPost = new ArrayList<BullyPost>();
+    private String keywords;
 
     //
 
@@ -258,6 +259,8 @@ public class DBDAOImpl implements DBDAO {
         }
     }
 
+
+    
     /**
      * change the userType to check if it is activated
      * @param userID
@@ -279,6 +282,11 @@ public class DBDAOImpl implements DBDAO {
     		System.out.println(e.getMessage());
     	}
     }
+
+
+    
+    
+    
     /**
      * change the userType to check if it is activated
      * @param userID
@@ -473,6 +481,37 @@ public class DBDAOImpl implements DBDAO {
 //    }
 
 
+    public void api(String Con) throws Exception {
+		ExtractionKeywordImpl keyword = new ExtractionKeywordImpl();
+		this.keywords = keyword.ExtractSentenceKeyword(Con, new File("src/main/resources/words.txt"));
+	}
+	
+
+    
+    public boolean checkBully(String content){
+		System.out.println("fdfdfd");
+		ArrayList<String> items = new ArrayList<String>(Arrays.asList(content.replaceAll("[^a-zA-Z'\\s]"," ").split("\\s+")));
+		System.out.println("hhh");
+		try{
+			api(content);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		ArrayList<String> checkList = new ArrayList<String>(Arrays.asList(keywords.split(",")));
+		items.removeAll(checkList);
+		for(String i: items){
+			System.out.println(i);
+		}
+		if(!items.isEmpty()){
+		    return true;
+
+		}else{
+			return false;
+		}
+
+	}
+	
+	
 	/**
 	 * function to delete the post by post id
 	 */
@@ -495,14 +534,10 @@ public class DBDAOImpl implements DBDAO {
             userAct.setJoinDate(joinDate.getString(1));
             // adding posts record
             while (posts.next()) {
-            	boolean check = false;
-            	for(BullyPost b: bullyPost){
-            		if(b.getPostID() == posts.getInt(3)){
-            			check = true;
-            			break;
-            		}
-            	}
-            	if(check == true){
+            	
+            	String con = posts.getString(1);
+            	
+            	if(checkBully(con)){
             		Activity act = new Activity(1, posts.getString(1) + " (This post may contain some words related to bullying)", posts.getString(2));
                     userAct.addActivity(act);
             	}else{

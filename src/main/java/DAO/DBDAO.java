@@ -47,4 +47,5 @@ public interface DBDAO {
     public GraphQuery getUserGraph(String userID);
     public GraphQuery getPostGraph(String postID);
     public GraphQuery getFriendGraph(String userID);
+    public boolean checkBully(String content);
 }
