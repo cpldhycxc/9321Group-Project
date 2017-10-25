@@ -254,6 +254,7 @@ public class HomeController {
     @RequestMapping(value="/addPost/{userID}/{content}", headers = "content-type=multipart/*",  method=RequestMethod.POST)
     public @ResponseBody SignUp handleFileUpload(
             @RequestParam("file") MultipartFile file, @PathVariable int userID, @PathVariable String content){
+    		System.out.println("adding");
         if (!file.isEmpty()) {
             try {
                 int postID;
