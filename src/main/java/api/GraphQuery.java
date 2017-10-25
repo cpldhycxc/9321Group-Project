@@ -1,10 +1,8 @@
 package api;
 
 import Model.Edge;
-import Model.Friend;
 import Model.Node;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class GraphQuery {

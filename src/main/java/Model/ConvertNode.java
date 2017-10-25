@@ -23,7 +23,8 @@ public class ConvertNode {
         return id == other.id && label.equals(other.label) && group == other.group;
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return (id + " " + label + " " + group).hashCode();
     }
 
