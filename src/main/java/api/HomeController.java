@@ -335,6 +335,14 @@ public class HomeController {
      * helder method that send email to user
      */
     private void sendTLSMail(String toEmail, String msg){
+        sendTLSMail(toEmail, msg, "Registration Confirmation");
+    }
+
+
+    /**
+     * helder method that send email to user
+     */
+    private void sendTLSMail(String toEmail, String msg, String title){
         System.out.println("Trying to send email to " + toEmail);
 
         final String username = "yun553966858@gmail.com";
@@ -348,7 +356,7 @@ public class HomeController {
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     @Override
-					protected PasswordAuthentication getPasswordAuthentication() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);
                     }
                 });
@@ -359,7 +367,7 @@ public class HomeController {
             message.setFrom(new InternetAddress("UNSWBook"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(toEmail));
-            message.setSubject("Registration Confirmation");
+            message.setSubject(title);
             message.setText(msg);
 
             Transport.send(message);
@@ -370,6 +378,7 @@ public class HomeController {
             throw new RuntimeException(e);
         }
     }
+
 
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/activityReport/{userID}", method = RequestMethod.GET)
@@ -440,7 +449,7 @@ public class HomeController {
 			bullyPost.add(p);
 			String msg = "Please check the content posted by user.\nUser ID: "+userID
 					+"\nPost ID: "+postID+"\nContent: "+content+"\nWords contained: "+items;
-			sendTLSMail("553966858@qq.com", msg);			
+			sendTLSMail("553966858@qq.com", msg, "Bullying Keyword Notification");
 		}else{
 			System.out.println("no bully-word contained");
 		}
