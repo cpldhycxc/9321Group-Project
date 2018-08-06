@@ -181,27 +181,6 @@ public class DBDAOImpl implements DBDAO {
 
 
     /**
-     * give the userID of a user find out all his friend
-     * @param userID
-     * @return arraylist of friend of the user
-     */
-    public ArrayList<Friend> getFriendsByUserID(int userID){
-        ArrayList<Friend> friendArrayList = new ArrayList<>();
-        try (Connection conn = connect()){
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("" +
-                    "SELECT Friends.friendID, Users.userName FROM Friends INNER JOIN Users " +
-                    "ON Friends.friendID=Users.userID WHERE Friends.userID = '" + Integer.toString(userID) + "'");
-            while(rs.next()){
-                friendArrayList.add(new Friend(rs.getInt(1), rs.getString(2)));
-            }
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-        return friendArrayList;
-    }
-
-    /**
      * get email by userID
      * @param userID
      * @return email for the userID
@@ -536,6 +515,29 @@ public class DBDAOImpl implements DBDAO {
             e.printStackTrace();
         }
         return postArrayList;
+    }
+
+
+
+    /**
+     * give the userID of a user find out all his friend
+     * @param userID
+     * @return arraylist of friend of the user
+     */
+    public ArrayList<Friend> getFriendsByUserID(int userID){
+        ArrayList<Friend> friendArrayList = new ArrayList<>();
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT Friends.friendID, Users.userName FROM Friends INNER JOIN Users " +
+                    "ON Friends.friendID=Users.userID WHERE Friends.userID = '" + Integer.toString(userID) + "'");
+            while(rs.next()){
+                friendArrayList.add(new Friend(rs.getInt(1), rs.getString(2)));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return friendArrayList;
     }
     /**
      * function to like/unlike post

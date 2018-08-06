@@ -383,7 +383,6 @@ public class HomeController {
         return dbdao.search(param);
     }
 
-
     //    String userName, String firstName, String lastName
     @RequestMapping(value = "/advSearchResult", params = {"gender", "dob", "userName", "firstName", "lastName"}, method = RequestMethod.GET)
     public ArrayList<UserProfile> advSearch( @RequestParam("gender") String gender ,

@@ -1,4 +1,4 @@
-1. JDBC is API that connect project with database. if ue JDBC we can have multiple database. pros if using JDBC is we can use one API to query different database.
+ 1. JDBC is API that connect project with database. if ue JDBC we can have multiple database. pros if using JDBC is we can use one API to query different database.
 
 2. JDBC belong to Data Access Layer which is one level higher than Data Storage Layer
 

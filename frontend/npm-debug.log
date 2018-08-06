@@ -1,0 +1,2278 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.4
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly install normalizeTree
+8 silly loadCurrentTree Finishing
+9 silly loadIdealTree Starting
+10 silly install loadIdealTree
+11 silly cloneCurrentTree Starting
+12 silly install cloneCurrentTreeToIdealTree
+13 silly cloneCurrentTree Finishing
+14 silly loadShrinkwrap Starting
+15 silly install loadShrinkwrap
+16 silly loadShrinkwrap Finishing
+17 silly loadAllDepsIntoIdealTree Starting
+18 silly install loadAllDepsIntoIdealTree
+19 silly fetchNamedPackageData autosuggest-highlight
+20 silly mapToRegistry name autosuggest-highlight
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry data Result {
+23 silly mapToRegistry   raw: 'autosuggest-highlight',
+23 silly mapToRegistry   scope: null,
+23 silly mapToRegistry   escapedName: 'autosuggest-highlight',
+23 silly mapToRegistry   name: 'autosuggest-highlight',
+23 silly mapToRegistry   rawSpec: '',
+23 silly mapToRegistry   spec: 'latest',
+23 silly mapToRegistry   type: 'tag' }
+24 silly mapToRegistry uri https://registry.npmjs.org/autosuggest-highlight
+25 silly fetchNamedPackageData axios
+26 silly mapToRegistry name axios
+27 silly mapToRegistry using default registry
+28 silly mapToRegistry registry https://registry.npmjs.org/
+29 silly mapToRegistry data Result {
+29 silly mapToRegistry   raw: 'axios',
+29 silly mapToRegistry   scope: null,
+29 silly mapToRegistry   escapedName: 'axios',
+29 silly mapToRegistry   name: 'axios',
+29 silly mapToRegistry   rawSpec: '',
+29 silly mapToRegistry   spec: 'latest',
+29 silly mapToRegistry   type: 'tag' }
+30 silly mapToRegistry uri https://registry.npmjs.org/axios
+31 silly fetchNamedPackageData babel-plugin-transform-node-env-inline
+32 silly mapToRegistry name babel-plugin-transform-node-env-inline
+33 silly mapToRegistry using default registry
+34 silly mapToRegistry registry https://registry.npmjs.org/
+35 silly mapToRegistry data Result {
+35 silly mapToRegistry   raw: 'babel-plugin-transform-node-env-inline',
+35 silly mapToRegistry   scope: null,
+35 silly mapToRegistry   escapedName: 'babel-plugin-transform-node-env-inline',
+35 silly mapToRegistry   name: 'babel-plugin-transform-node-env-inline',
+35 silly mapToRegistry   rawSpec: '',
+35 silly mapToRegistry   spec: 'latest',
+35 silly mapToRegistry   type: 'tag' }
+36 silly mapToRegistry uri https://registry.npmjs.org/babel-plugin-transform-node-env-inline
+37 silly fetchNamedPackageData classnames
+38 silly mapToRegistry name classnames
+39 silly mapToRegistry using default registry
+40 silly mapToRegistry registry https://registry.npmjs.org/
+41 silly mapToRegistry data Result {
+41 silly mapToRegistry   raw: 'classnames',
+41 silly mapToRegistry   scope: null,
+41 silly mapToRegistry   escapedName: 'classnames',
+41 silly mapToRegistry   name: 'classnames',
+41 silly mapToRegistry   rawSpec: '',
+41 silly mapToRegistry   spec: 'latest',
+41 silly mapToRegistry   type: 'tag' }
+42 silly mapToRegistry uri https://registry.npmjs.org/classnames
+43 silly fetchNamedPackageData create-react-class
+44 silly mapToRegistry name create-react-class
+45 silly mapToRegistry using default registry
+46 silly mapToRegistry registry https://registry.npmjs.org/
+47 silly mapToRegistry data Result {
+47 silly mapToRegistry   raw: 'create-react-class',
+47 silly mapToRegistry   scope: null,
+47 silly mapToRegistry   escapedName: 'create-react-class',
+47 silly mapToRegistry   name: 'create-react-class',
+47 silly mapToRegistry   rawSpec: '',
+47 silly mapToRegistry   spec: 'latest',
+47 silly mapToRegistry   type: 'tag' }
+48 silly mapToRegistry uri https://registry.npmjs.org/create-react-class
+49 silly fetchNamedPackageData elemental
+50 silly mapToRegistry name elemental
+51 silly mapToRegistry using default registry
+52 silly mapToRegistry registry https://registry.npmjs.org/
+53 silly mapToRegistry data Result {
+53 silly mapToRegistry   raw: 'elemental',
+53 silly mapToRegistry   scope: null,
+53 silly mapToRegistry   escapedName: 'elemental',
+53 silly mapToRegistry   name: 'elemental',
+53 silly mapToRegistry   rawSpec: '',
+53 silly mapToRegistry   spec: 'latest',
+53 silly mapToRegistry   type: 'tag' }
+54 silly mapToRegistry uri https://registry.npmjs.org/elemental
+55 silly fetchNamedPackageData eslint-plugin-babel
+56 silly mapToRegistry name eslint-plugin-babel
+57 silly mapToRegistry using default registry
+58 silly mapToRegistry registry https://registry.npmjs.org/
+59 silly mapToRegistry data Result {
+59 silly mapToRegistry   raw: 'eslint-plugin-babel',
+59 silly mapToRegistry   scope: null,
+59 silly mapToRegistry   escapedName: 'eslint-plugin-babel',
+59 silly mapToRegistry   name: 'eslint-plugin-babel',
+59 silly mapToRegistry   rawSpec: '',
+59 silly mapToRegistry   spec: 'latest',
+59 silly mapToRegistry   type: 'tag' }
+60 silly mapToRegistry uri https://registry.npmjs.org/eslint-plugin-babel
+61 silly fetchNamedPackageData eslint-plugin-react
+62 silly mapToRegistry name eslint-plugin-react
+63 silly mapToRegistry using default registry
+64 silly mapToRegistry registry https://registry.npmjs.org/
+65 silly mapToRegistry data Result {
+65 silly mapToRegistry   raw: 'eslint-plugin-react',
+65 silly mapToRegistry   scope: null,
+65 silly mapToRegistry   escapedName: 'eslint-plugin-react',
+65 silly mapToRegistry   name: 'eslint-plugin-react',
+65 silly mapToRegistry   rawSpec: '',
+65 silly mapToRegistry   spec: 'latest',
+65 silly mapToRegistry   type: 'tag' }
+66 silly mapToRegistry uri https://registry.npmjs.org/eslint-plugin-react
+67 silly fetchNamedPackageData file-loader
+68 silly mapToRegistry name file-loader
+69 silly mapToRegistry using default registry
+70 silly mapToRegistry registry https://registry.npmjs.org/
+71 silly mapToRegistry data Result {
+71 silly mapToRegistry   raw: 'file-loader',
+71 silly mapToRegistry   scope: null,
+71 silly mapToRegistry   escapedName: 'file-loader',
+71 silly mapToRegistry   name: 'file-loader',
+71 silly mapToRegistry   rawSpec: '',
+71 silly mapToRegistry   spec: 'latest',
+71 silly mapToRegistry   type: 'tag' }
+72 silly mapToRegistry uri https://registry.npmjs.org/file-loader
+73 silly fetchNamedPackageData font-awesome
+74 silly mapToRegistry name font-awesome
+75 silly mapToRegistry using default registry
+76 silly mapToRegistry registry https://registry.npmjs.org/
+77 silly mapToRegistry data Result {
+77 silly mapToRegistry   raw: 'font-awesome',
+77 silly mapToRegistry   scope: null,
+77 silly mapToRegistry   escapedName: 'font-awesome',
+77 silly mapToRegistry   name: 'font-awesome',
+77 silly mapToRegistry   rawSpec: '',
+77 silly mapToRegistry   spec: 'latest',
+77 silly mapToRegistry   type: 'tag' }
+78 silly mapToRegistry uri https://registry.npmjs.org/font-awesome
+79 silly fetchNamedPackageData font-awesome-sass-loader
+80 silly mapToRegistry name font-awesome-sass-loader
+81 silly mapToRegistry using default registry
+82 silly mapToRegistry registry https://registry.npmjs.org/
+83 silly mapToRegistry data Result {
+83 silly mapToRegistry   raw: 'font-awesome-sass-loader',
+83 silly mapToRegistry   scope: null,
+83 silly mapToRegistry   escapedName: 'font-awesome-sass-loader',
+83 silly mapToRegistry   name: 'font-awesome-sass-loader',
+83 silly mapToRegistry   rawSpec: '',
+83 silly mapToRegistry   spec: 'latest',
+83 silly mapToRegistry   type: 'tag' }
+84 silly mapToRegistry uri https://registry.npmjs.org/font-awesome-sass-loader
+85 silly fetchNamedPackageData jquery
+86 silly mapToRegistry name jquery
+87 silly mapToRegistry using default registry
+88 silly mapToRegistry registry https://registry.npmjs.org/
+89 silly mapToRegistry data Result {
+89 silly mapToRegistry   raw: 'jquery',
+89 silly mapToRegistry   scope: null,
+89 silly mapToRegistry   escapedName: 'jquery',
+89 silly mapToRegistry   name: 'jquery',
+89 silly mapToRegistry   rawSpec: '',
+89 silly mapToRegistry   spec: 'latest',
+89 silly mapToRegistry   type: 'tag' }
+90 silly mapToRegistry uri https://registry.npmjs.org/jquery
+91 silly fetchNamedPackageData lodash
+92 silly mapToRegistry name lodash
+93 silly mapToRegistry using default registry
+94 silly mapToRegistry registry https://registry.npmjs.org/
+95 silly mapToRegistry data Result {
+95 silly mapToRegistry   raw: 'lodash',
+95 silly mapToRegistry   scope: null,
+95 silly mapToRegistry   escapedName: 'lodash',
+95 silly mapToRegistry   name: 'lodash',
+95 silly mapToRegistry   rawSpec: '',
+95 silly mapToRegistry   spec: 'latest',
+95 silly mapToRegistry   type: 'tag' }
+96 silly mapToRegistry uri https://registry.npmjs.org/lodash
+97 silly fetchNamedPackageData material-design-icons
+98 silly mapToRegistry name material-design-icons
+99 silly mapToRegistry using default registry
+100 silly mapToRegistry registry https://registry.npmjs.org/
+101 silly mapToRegistry data Result {
+101 silly mapToRegistry   raw: 'material-design-icons',
+101 silly mapToRegistry   scope: null,
+101 silly mapToRegistry   escapedName: 'material-design-icons',
+101 silly mapToRegistry   name: 'material-design-icons',
+101 silly mapToRegistry   rawSpec: '',
+101 silly mapToRegistry   spec: 'latest',
+101 silly mapToRegistry   type: 'tag' }
+102 silly mapToRegistry uri https://registry.npmjs.org/material-design-icons
+103 silly fetchNamedPackageData material-ui
+104 silly mapToRegistry name material-ui
+105 silly mapToRegistry using default registry
+106 silly mapToRegistry registry https://registry.npmjs.org/
+107 silly mapToRegistry data Result {
+107 silly mapToRegistry   raw: 'material-ui',
+107 silly mapToRegistry   scope: null,
+107 silly mapToRegistry   escapedName: 'material-ui',
+107 silly mapToRegistry   name: 'material-ui',
+107 silly mapToRegistry   rawSpec: '',
+107 silly mapToRegistry   spec: 'latest',
+107 silly mapToRegistry   type: 'tag' }
+108 silly mapToRegistry uri https://registry.npmjs.org/material-ui
+109 silly fetchNamedPackageData moment
+110 silly mapToRegistry name moment
+111 silly mapToRegistry using default registry
+112 silly mapToRegistry registry https://registry.npmjs.org/
+113 silly mapToRegistry data Result {
+113 silly mapToRegistry   raw: 'moment',
+113 silly mapToRegistry   scope: null,
+113 silly mapToRegistry   escapedName: 'moment',
+113 silly mapToRegistry   name: 'moment',
+113 silly mapToRegistry   rawSpec: '',
+113 silly mapToRegistry   spec: 'latest',
+113 silly mapToRegistry   type: 'tag' }
+114 silly mapToRegistry uri https://registry.npmjs.org/moment
+115 silly fetchNamedPackageData postcss-cssnext
+116 silly mapToRegistry name postcss-cssnext
+117 silly mapToRegistry using default registry
+118 silly mapToRegistry registry https://registry.npmjs.org/
+119 silly mapToRegistry data Result {
+119 silly mapToRegistry   raw: 'postcss-cssnext',
+119 silly mapToRegistry   scope: null,
+119 silly mapToRegistry   escapedName: 'postcss-cssnext',
+119 silly mapToRegistry   name: 'postcss-cssnext',
+119 silly mapToRegistry   rawSpec: '',
+119 silly mapToRegistry   spec: 'latest',
+119 silly mapToRegistry   type: 'tag' }
+120 silly mapToRegistry uri https://registry.npmjs.org/postcss-cssnext
+121 silly fetchNamedPackageData postcss-each
+122 silly mapToRegistry name postcss-each
+123 silly mapToRegistry using default registry
+124 silly mapToRegistry registry https://registry.npmjs.org/
+125 silly mapToRegistry data Result {
+125 silly mapToRegistry   raw: 'postcss-each',
+125 silly mapToRegistry   scope: null,
+125 silly mapToRegistry   escapedName: 'postcss-each',
+125 silly mapToRegistry   name: 'postcss-each',
+125 silly mapToRegistry   rawSpec: '',
+125 silly mapToRegistry   spec: 'latest',
+125 silly mapToRegistry   type: 'tag' }
+126 silly mapToRegistry uri https://registry.npmjs.org/postcss-each
+127 silly fetchNamedPackageData postcss-import
+128 silly mapToRegistry name postcss-import
+129 silly mapToRegistry using default registry
+130 silly mapToRegistry registry https://registry.npmjs.org/
+131 silly mapToRegistry data Result {
+131 silly mapToRegistry   raw: 'postcss-import',
+131 silly mapToRegistry   scope: null,
+131 silly mapToRegistry   escapedName: 'postcss-import',
+131 silly mapToRegistry   name: 'postcss-import',
+131 silly mapToRegistry   rawSpec: '',
+131 silly mapToRegistry   spec: 'latest',
+131 silly mapToRegistry   type: 'tag' }
+132 silly mapToRegistry uri https://registry.npmjs.org/postcss-import
+133 silly fetchNamedPackageData postcss-loader
+134 silly mapToRegistry name postcss-loader
+135 silly mapToRegistry using default registry
+136 silly mapToRegistry registry https://registry.npmjs.org/
+137 silly mapToRegistry data Result {
+137 silly mapToRegistry   raw: 'postcss-loader',
+137 silly mapToRegistry   scope: null,
+137 silly mapToRegistry   escapedName: 'postcss-loader',
+137 silly mapToRegistry   name: 'postcss-loader',
+137 silly mapToRegistry   rawSpec: '',
+137 silly mapToRegistry   spec: 'latest',
+137 silly mapToRegistry   type: 'tag' }
+138 silly mapToRegistry uri https://registry.npmjs.org/postcss-loader
+139 silly fetchNamedPackageData postcss-mixins
+140 silly mapToRegistry name postcss-mixins
+141 silly mapToRegistry using default registry
+142 silly mapToRegistry registry https://registry.npmjs.org/
+143 silly mapToRegistry data Result {
+143 silly mapToRegistry   raw: 'postcss-mixins',
+143 silly mapToRegistry   scope: null,
+143 silly mapToRegistry   escapedName: 'postcss-mixins',
+143 silly mapToRegistry   name: 'postcss-mixins',
+143 silly mapToRegistry   rawSpec: '',
+143 silly mapToRegistry   spec: 'latest',
+143 silly mapToRegistry   type: 'tag' }
+144 silly mapToRegistry uri https://registry.npmjs.org/postcss-mixins
+145 silly fetchNamedPackageData prop-types
+146 silly mapToRegistry name prop-types
+147 silly mapToRegistry using default registry
+148 silly mapToRegistry registry https://registry.npmjs.org/
+149 silly mapToRegistry data Result {
+149 silly mapToRegistry   raw: 'prop-types',
+149 silly mapToRegistry   scope: null,
+149 silly mapToRegistry   escapedName: 'prop-types',
+149 silly mapToRegistry   name: 'prop-types',
+149 silly mapToRegistry   rawSpec: '',
+149 silly mapToRegistry   spec: 'latest',
+149 silly mapToRegistry   type: 'tag' }
+150 silly mapToRegistry uri https://registry.npmjs.org/prop-types
+151 silly fetchNamedPackageData rc-time-picker
+152 silly mapToRegistry name rc-time-picker
+153 silly mapToRegistry using default registry
+154 silly mapToRegistry registry https://registry.npmjs.org/
+155 silly mapToRegistry data Result {
+155 silly mapToRegistry   raw: 'rc-time-picker',
+155 silly mapToRegistry   scope: null,
+155 silly mapToRegistry   escapedName: 'rc-time-picker',
+155 silly mapToRegistry   name: 'rc-time-picker',
+155 silly mapToRegistry   rawSpec: '',
+155 silly mapToRegistry   spec: 'latest',
+155 silly mapToRegistry   type: 'tag' }
+156 silly mapToRegistry uri https://registry.npmjs.org/rc-time-picker
+157 silly fetchNamedPackageData react
+158 silly mapToRegistry name react
+159 silly mapToRegistry using default registry
+160 silly mapToRegistry registry https://registry.npmjs.org/
+161 silly mapToRegistry data Result {
+161 silly mapToRegistry   raw: 'react',
+161 silly mapToRegistry   scope: null,
+161 silly mapToRegistry   escapedName: 'react',
+161 silly mapToRegistry   name: 'react',
+161 silly mapToRegistry   rawSpec: '',
+161 silly mapToRegistry   spec: 'latest',
+161 silly mapToRegistry   type: 'tag' }
+162 silly mapToRegistry uri https://registry.npmjs.org/react
+163 silly fetchNamedPackageData react-autosuggest
+164 silly mapToRegistry name react-autosuggest
+165 silly mapToRegistry using default registry
+166 silly mapToRegistry registry https://registry.npmjs.org/
+167 silly mapToRegistry data Result {
+167 silly mapToRegistry   raw: 'react-autosuggest',
+167 silly mapToRegistry   scope: null,
+167 silly mapToRegistry   escapedName: 'react-autosuggest',
+167 silly mapToRegistry   name: 'react-autosuggest',
+167 silly mapToRegistry   rawSpec: '',
+167 silly mapToRegistry   spec: 'latest',
+167 silly mapToRegistry   type: 'tag' }
+168 silly mapToRegistry uri https://registry.npmjs.org/react-autosuggest
+169 silly fetchNamedPackageData react-bootstrap
+170 silly mapToRegistry name react-bootstrap
+171 silly mapToRegistry using default registry
+172 silly mapToRegistry registry https://registry.npmjs.org/
+173 silly mapToRegistry data Result {
+173 silly mapToRegistry   raw: 'react-bootstrap',
+173 silly mapToRegistry   scope: null,
+173 silly mapToRegistry   escapedName: 'react-bootstrap',
+173 silly mapToRegistry   name: 'react-bootstrap',
+173 silly mapToRegistry   rawSpec: '',
+173 silly mapToRegistry   spec: 'latest',
+173 silly mapToRegistry   type: 'tag' }
+174 silly mapToRegistry uri https://registry.npmjs.org/react-bootstrap
+175 silly fetchNamedPackageData react-bootstrap-date-picker
+176 silly mapToRegistry name react-bootstrap-date-picker
+177 silly mapToRegistry using default registry
+178 silly mapToRegistry registry https://registry.npmjs.org/
+179 silly mapToRegistry data Result {
+179 silly mapToRegistry   raw: 'react-bootstrap-date-picker',
+179 silly mapToRegistry   scope: null,
+179 silly mapToRegistry   escapedName: 'react-bootstrap-date-picker',
+179 silly mapToRegistry   name: 'react-bootstrap-date-picker',
+179 silly mapToRegistry   rawSpec: '',
+179 silly mapToRegistry   spec: 'latest',
+179 silly mapToRegistry   type: 'tag' }
+180 silly mapToRegistry uri https://registry.npmjs.org/react-bootstrap-date-picker
+181 silly fetchNamedPackageData react-confirm-alert
+182 silly mapToRegistry name react-confirm-alert
+183 silly mapToRegistry using default registry
+184 silly mapToRegistry registry https://registry.npmjs.org/
+185 silly mapToRegistry data Result {
+185 silly mapToRegistry   raw: 'react-confirm-alert',
+185 silly mapToRegistry   scope: null,
+185 silly mapToRegistry   escapedName: 'react-confirm-alert',
+185 silly mapToRegistry   name: 'react-confirm-alert',
+185 silly mapToRegistry   rawSpec: '',
+185 silly mapToRegistry   spec: 'latest',
+185 silly mapToRegistry   type: 'tag' }
+186 silly mapToRegistry uri https://registry.npmjs.org/react-confirm-alert
+187 silly fetchNamedPackageData react-datepicker
+188 silly mapToRegistry name react-datepicker
+189 silly mapToRegistry using default registry
+190 silly mapToRegistry registry https://registry.npmjs.org/
+191 silly mapToRegistry data Result {
+191 silly mapToRegistry   raw: 'react-datepicker',
+191 silly mapToRegistry   scope: null,
+191 silly mapToRegistry   escapedName: 'react-datepicker',
+191 silly mapToRegistry   name: 'react-datepicker',
+191 silly mapToRegistry   rawSpec: '',
+191 silly mapToRegistry   spec: 'latest',
+191 silly mapToRegistry   type: 'tag' }
+192 silly mapToRegistry uri https://registry.npmjs.org/react-datepicker
+193 silly fetchNamedPackageData react-dropzone
+194 silly mapToRegistry name react-dropzone
+195 silly mapToRegistry using default registry
+196 silly mapToRegistry registry https://registry.npmjs.org/
+197 silly mapToRegistry data Result {
+197 silly mapToRegistry   raw: 'react-dropzone',
+197 silly mapToRegistry   scope: null,
+197 silly mapToRegistry   escapedName: 'react-dropzone',
+197 silly mapToRegistry   name: 'react-dropzone',
+197 silly mapToRegistry   rawSpec: '',
+197 silly mapToRegistry   spec: 'latest',
+197 silly mapToRegistry   type: 'tag' }
+198 silly mapToRegistry uri https://registry.npmjs.org/react-dropzone
+199 silly fetchNamedPackageData react-file-input
+200 silly mapToRegistry name react-file-input
+201 silly mapToRegistry using default registry
+202 silly mapToRegistry registry https://registry.npmjs.org/
+203 silly mapToRegistry data Result {
+203 silly mapToRegistry   raw: 'react-file-input',
+203 silly mapToRegistry   scope: null,
+203 silly mapToRegistry   escapedName: 'react-file-input',
+203 silly mapToRegistry   name: 'react-file-input',
+203 silly mapToRegistry   rawSpec: '',
+203 silly mapToRegistry   spec: 'latest',
+203 silly mapToRegistry   type: 'tag' }
+204 silly mapToRegistry uri https://registry.npmjs.org/react-file-input
+205 silly fetchNamedPackageData react-fontawesome
+206 silly mapToRegistry name react-fontawesome
+207 silly mapToRegistry using default registry
+208 silly mapToRegistry registry https://registry.npmjs.org/
+209 silly mapToRegistry data Result {
+209 silly mapToRegistry   raw: 'react-fontawesome',
+209 silly mapToRegistry   scope: null,
+209 silly mapToRegistry   escapedName: 'react-fontawesome',
+209 silly mapToRegistry   name: 'react-fontawesome',
+209 silly mapToRegistry   rawSpec: '',
+209 silly mapToRegistry   spec: 'latest',
+209 silly mapToRegistry   type: 'tag' }
+210 silly mapToRegistry uri https://registry.npmjs.org/react-fontawesome
+211 silly fetchNamedPackageData react-graph-vis
+212 silly mapToRegistry name react-graph-vis
+213 silly mapToRegistry using default registry
+214 silly mapToRegistry registry https://registry.npmjs.org/
+215 silly mapToRegistry data Result {
+215 silly mapToRegistry   raw: 'react-graph-vis',
+215 silly mapToRegistry   scope: null,
+215 silly mapToRegistry   escapedName: 'react-graph-vis',
+215 silly mapToRegistry   name: 'react-graph-vis',
+215 silly mapToRegistry   rawSpec: '',
+215 silly mapToRegistry   spec: 'latest',
+215 silly mapToRegistry   type: 'tag' }
+216 silly mapToRegistry uri https://registry.npmjs.org/react-graph-vis
+217 silly fetchNamedPackageData react-gravatar
+218 silly mapToRegistry name react-gravatar
+219 silly mapToRegistry using default registry
+220 silly mapToRegistry registry https://registry.npmjs.org/
+221 silly mapToRegistry data Result {
+221 silly mapToRegistry   raw: 'react-gravatar',
+221 silly mapToRegistry   scope: null,
+221 silly mapToRegistry   escapedName: 'react-gravatar',
+221 silly mapToRegistry   name: 'react-gravatar',
+221 silly mapToRegistry   rawSpec: '',
+221 silly mapToRegistry   spec: 'latest',
+221 silly mapToRegistry   type: 'tag' }
+222 silly mapToRegistry uri https://registry.npmjs.org/react-gravatar
+223 silly fetchNamedPackageData react-grid-layout
+224 silly mapToRegistry name react-grid-layout
+225 silly mapToRegistry using default registry
+226 silly mapToRegistry registry https://registry.npmjs.org/
+227 silly mapToRegistry data Result {
+227 silly mapToRegistry   raw: 'react-grid-layout',
+227 silly mapToRegistry   scope: null,
+227 silly mapToRegistry   escapedName: 'react-grid-layout',
+227 silly mapToRegistry   name: 'react-grid-layout',
+227 silly mapToRegistry   rawSpec: '',
+227 silly mapToRegistry   spec: 'latest',
+227 silly mapToRegistry   type: 'tag' }
+228 silly mapToRegistry uri https://registry.npmjs.org/react-grid-layout
+229 silly fetchNamedPackageData react-highlight-words
+230 silly mapToRegistry name react-highlight-words
+231 silly mapToRegistry using default registry
+232 silly mapToRegistry registry https://registry.npmjs.org/
+233 silly mapToRegistry data Result {
+233 silly mapToRegistry   raw: 'react-highlight-words',
+233 silly mapToRegistry   scope: null,
+233 silly mapToRegistry   escapedName: 'react-highlight-words',
+233 silly mapToRegistry   name: 'react-highlight-words',
+233 silly mapToRegistry   rawSpec: '',
+233 silly mapToRegistry   spec: 'latest',
+233 silly mapToRegistry   type: 'tag' }
+234 silly mapToRegistry uri https://registry.npmjs.org/react-highlight-words
+235 silly fetchNamedPackageData react-hot-loader
+236 silly mapToRegistry name react-hot-loader
+237 silly mapToRegistry using default registry
+238 silly mapToRegistry registry https://registry.npmjs.org/
+239 silly mapToRegistry data Result {
+239 silly mapToRegistry   raw: 'react-hot-loader',
+239 silly mapToRegistry   scope: null,
+239 silly mapToRegistry   escapedName: 'react-hot-loader',
+239 silly mapToRegistry   name: 'react-hot-loader',
+239 silly mapToRegistry   rawSpec: '',
+239 silly mapToRegistry   spec: 'latest',
+239 silly mapToRegistry   type: 'tag' }
+240 silly mapToRegistry uri https://registry.npmjs.org/react-hot-loader
+241 silly fetchNamedPackageData react-icons
+242 silly mapToRegistry name react-icons
+243 silly mapToRegistry using default registry
+244 silly mapToRegistry registry https://registry.npmjs.org/
+245 silly mapToRegistry data Result {
+245 silly mapToRegistry   raw: 'react-icons',
+245 silly mapToRegistry   scope: null,
+245 silly mapToRegistry   escapedName: 'react-icons',
+245 silly mapToRegistry   name: 'react-icons',
+245 silly mapToRegistry   rawSpec: '',
+245 silly mapToRegistry   spec: 'latest',
+245 silly mapToRegistry   type: 'tag' }
+246 silly mapToRegistry uri https://registry.npmjs.org/react-icons
+247 silly fetchNamedPackageData react-image-resizer
+248 silly mapToRegistry name react-image-resizer
+249 silly mapToRegistry using default registry
+250 silly mapToRegistry registry https://registry.npmjs.org/
+251 silly mapToRegistry data Result {
+251 silly mapToRegistry   raw: 'react-image-resizer',
+251 silly mapToRegistry   scope: null,
+251 silly mapToRegistry   escapedName: 'react-image-resizer',
+251 silly mapToRegistry   name: 'react-image-resizer',
+251 silly mapToRegistry   rawSpec: '',
+251 silly mapToRegistry   spec: 'latest',
+251 silly mapToRegistry   type: 'tag' }
+252 silly mapToRegistry uri https://registry.npmjs.org/react-image-resizer
+253 silly fetchNamedPackageData react-images-upload
+254 silly mapToRegistry name react-images-upload
+255 silly mapToRegistry using default registry
+256 silly mapToRegistry registry https://registry.npmjs.org/
+257 silly mapToRegistry data Result {
+257 silly mapToRegistry   raw: 'react-images-upload',
+257 silly mapToRegistry   scope: null,
+257 silly mapToRegistry   escapedName: 'react-images-upload',
+257 silly mapToRegistry   name: 'react-images-upload',
+257 silly mapToRegistry   rawSpec: '',
+257 silly mapToRegistry   spec: 'latest',
+257 silly mapToRegistry   type: 'tag' }
+258 silly mapToRegistry uri https://registry.npmjs.org/react-images-upload
+259 silly fetchNamedPackageData react-images-uploader
+260 silly mapToRegistry name react-images-uploader
+261 silly mapToRegistry using default registry
+262 silly mapToRegistry registry https://registry.npmjs.org/
+263 silly mapToRegistry data Result {
+263 silly mapToRegistry   raw: 'react-images-uploader',
+263 silly mapToRegistry   scope: null,
+263 silly mapToRegistry   escapedName: 'react-images-uploader',
+263 silly mapToRegistry   name: 'react-images-uploader',
+263 silly mapToRegistry   rawSpec: '',
+263 silly mapToRegistry   spec: 'latest',
+263 silly mapToRegistry   type: 'tag' }
+264 silly mapToRegistry uri https://registry.npmjs.org/react-images-uploader
+265 silly fetchNamedPackageData react-modal
+266 silly mapToRegistry name react-modal
+267 silly mapToRegistry using default registry
+268 silly mapToRegistry registry https://registry.npmjs.org/
+269 silly mapToRegistry data Result {
+269 silly mapToRegistry   raw: 'react-modal',
+269 silly mapToRegistry   scope: null,
+269 silly mapToRegistry   escapedName: 'react-modal',
+269 silly mapToRegistry   name: 'react-modal',
+269 silly mapToRegistry   rawSpec: '',
+269 silly mapToRegistry   spec: 'latest',
+269 silly mapToRegistry   type: 'tag' }
+270 silly mapToRegistry uri https://registry.npmjs.org/react-modal
+271 silly fetchNamedPackageData react-notification-system
+272 silly mapToRegistry name react-notification-system
+273 silly mapToRegistry using default registry
+274 silly mapToRegistry registry https://registry.npmjs.org/
+275 silly mapToRegistry data Result {
+275 silly mapToRegistry   raw: 'react-notification-system',
+275 silly mapToRegistry   scope: null,
+275 silly mapToRegistry   escapedName: 'react-notification-system',
+275 silly mapToRegistry   name: 'react-notification-system',
+275 silly mapToRegistry   rawSpec: '',
+275 silly mapToRegistry   spec: 'latest',
+275 silly mapToRegistry   type: 'tag' }
+276 silly mapToRegistry uri https://registry.npmjs.org/react-notification-system
+277 silly fetchNamedPackageData react-places-autocomplete
+278 silly mapToRegistry name react-places-autocomplete
+279 silly mapToRegistry using default registry
+280 silly mapToRegistry registry https://registry.npmjs.org/
+281 silly mapToRegistry data Result {
+281 silly mapToRegistry   raw: 'react-places-autocomplete',
+281 silly mapToRegistry   scope: null,
+281 silly mapToRegistry   escapedName: 'react-places-autocomplete',
+281 silly mapToRegistry   name: 'react-places-autocomplete',
+281 silly mapToRegistry   rawSpec: '',
+281 silly mapToRegistry   spec: 'latest',
+281 silly mapToRegistry   type: 'tag' }
+282 silly mapToRegistry uri https://registry.npmjs.org/react-places-autocomplete
+283 silly fetchNamedPackageData react-redux
+284 silly mapToRegistry name react-redux
+285 silly mapToRegistry using default registry
+286 silly mapToRegistry registry https://registry.npmjs.org/
+287 silly mapToRegistry data Result {
+287 silly mapToRegistry   raw: 'react-redux',
+287 silly mapToRegistry   scope: null,
+287 silly mapToRegistry   escapedName: 'react-redux',
+287 silly mapToRegistry   name: 'react-redux',
+287 silly mapToRegistry   rawSpec: '',
+287 silly mapToRegistry   spec: 'latest',
+287 silly mapToRegistry   type: 'tag' }
+288 silly mapToRegistry uri https://registry.npmjs.org/react-redux
+289 silly fetchNamedPackageData react-router
+290 silly mapToRegistry name react-router
+291 silly mapToRegistry using default registry
+292 silly mapToRegistry registry https://registry.npmjs.org/
+293 silly mapToRegistry data Result {
+293 silly mapToRegistry   raw: 'react-router',
+293 silly mapToRegistry   scope: null,
+293 silly mapToRegistry   escapedName: 'react-router',
+293 silly mapToRegistry   name: 'react-router',
+293 silly mapToRegistry   rawSpec: '',
+293 silly mapToRegistry   spec: 'latest',
+293 silly mapToRegistry   type: 'tag' }
+294 silly mapToRegistry uri https://registry.npmjs.org/react-router
+295 silly fetchNamedPackageData react-router-dom
+296 silly mapToRegistry name react-router-dom
+297 silly mapToRegistry using default registry
+298 silly mapToRegistry registry https://registry.npmjs.org/
+299 silly mapToRegistry data Result {
+299 silly mapToRegistry   raw: 'react-router-dom',
+299 silly mapToRegistry   scope: null,
+299 silly mapToRegistry   escapedName: 'react-router-dom',
+299 silly mapToRegistry   name: 'react-router-dom',
+299 silly mapToRegistry   rawSpec: '',
+299 silly mapToRegistry   spec: 'latest',
+299 silly mapToRegistry   type: 'tag' }
+300 silly mapToRegistry uri https://registry.npmjs.org/react-router-dom
+301 silly fetchNamedPackageData react-search
+302 silly mapToRegistry name react-search
+303 silly mapToRegistry using default registry
+304 silly mapToRegistry registry https://registry.npmjs.org/
+305 silly mapToRegistry data Result {
+305 silly mapToRegistry   raw: 'react-search',
+305 silly mapToRegistry   scope: null,
+305 silly mapToRegistry   escapedName: 'react-search',
+305 silly mapToRegistry   name: 'react-search',
+305 silly mapToRegistry   rawSpec: '',
+305 silly mapToRegistry   spec: 'latest',
+305 silly mapToRegistry   type: 'tag' }
+306 silly mapToRegistry uri https://registry.npmjs.org/react-search
+307 silly fetchNamedPackageData react-select
+308 silly mapToRegistry name react-select
+309 silly mapToRegistry using default registry
+310 silly mapToRegistry registry https://registry.npmjs.org/
+311 silly mapToRegistry data Result {
+311 silly mapToRegistry   raw: 'react-select',
+311 silly mapToRegistry   scope: null,
+311 silly mapToRegistry   escapedName: 'react-select',
+311 silly mapToRegistry   name: 'react-select',
+311 silly mapToRegistry   rawSpec: '',
+311 silly mapToRegistry   spec: 'latest',
+311 silly mapToRegistry   type: 'tag' }
+312 silly mapToRegistry uri https://registry.npmjs.org/react-select
+313 silly fetchNamedPackageData react-select-multi
+314 silly mapToRegistry name react-select-multi
+315 silly mapToRegistry using default registry
+316 silly mapToRegistry registry https://registry.npmjs.org/
+317 silly mapToRegistry data Result {
+317 silly mapToRegistry   raw: 'react-select-multi',
+317 silly mapToRegistry   scope: null,
+317 silly mapToRegistry   escapedName: 'react-select-multi',
+317 silly mapToRegistry   name: 'react-select-multi',
+317 silly mapToRegistry   rawSpec: '',
+317 silly mapToRegistry   spec: 'latest',
+317 silly mapToRegistry   type: 'tag' }
+318 silly mapToRegistry uri https://registry.npmjs.org/react-select-multi
+319 silly fetchNamedPackageData react-toolbox
+320 silly mapToRegistry name react-toolbox
+321 silly mapToRegistry using default registry
+322 silly mapToRegistry registry https://registry.npmjs.org/
+323 silly mapToRegistry data Result {
+323 silly mapToRegistry   raw: 'react-toolbox',
+323 silly mapToRegistry   scope: null,
+323 silly mapToRegistry   escapedName: 'react-toolbox',
+323 silly mapToRegistry   name: 'react-toolbox',
+323 silly mapToRegistry   rawSpec: '',
+323 silly mapToRegistry   spec: 'latest',
+323 silly mapToRegistry   type: 'tag' }
+324 silly mapToRegistry uri https://registry.npmjs.org/react-toolbox
+325 silly fetchNamedPackageData react-virtualized-select
+326 silly mapToRegistry name react-virtualized-select
+327 silly mapToRegistry using default registry
+328 silly mapToRegistry registry https://registry.npmjs.org/
+329 silly mapToRegistry data Result {
+329 silly mapToRegistry   raw: 'react-virtualized-select',
+329 silly mapToRegistry   scope: null,
+329 silly mapToRegistry   escapedName: 'react-virtualized-select',
+329 silly mapToRegistry   name: 'react-virtualized-select',
+329 silly mapToRegistry   rawSpec: '',
+329 silly mapToRegistry   spec: 'latest',
+329 silly mapToRegistry   type: 'tag' }
+330 silly mapToRegistry uri https://registry.npmjs.org/react-virtualized-select
+331 silly fetchNamedPackageData redux
+332 silly mapToRegistry name redux
+333 silly mapToRegistry using default registry
+334 silly mapToRegistry registry https://registry.npmjs.org/
+335 silly mapToRegistry data Result {
+335 silly mapToRegistry   raw: 'redux',
+335 silly mapToRegistry   scope: null,
+335 silly mapToRegistry   escapedName: 'redux',
+335 silly mapToRegistry   name: 'redux',
+335 silly mapToRegistry   rawSpec: '',
+335 silly mapToRegistry   spec: 'latest',
+335 silly mapToRegistry   type: 'tag' }
+336 silly mapToRegistry uri https://registry.npmjs.org/redux
+337 silly fetchNamedPackageData redux-logger
+338 silly mapToRegistry name redux-logger
+339 silly mapToRegistry using default registry
+340 silly mapToRegistry registry https://registry.npmjs.org/
+341 silly mapToRegistry data Result {
+341 silly mapToRegistry   raw: 'redux-logger',
+341 silly mapToRegistry   scope: null,
+341 silly mapToRegistry   escapedName: 'redux-logger',
+341 silly mapToRegistry   name: 'redux-logger',
+341 silly mapToRegistry   rawSpec: '',
+341 silly mapToRegistry   spec: 'latest',
+341 silly mapToRegistry   type: 'tag' }
+342 silly mapToRegistry uri https://registry.npmjs.org/redux-logger
+343 silly fetchNamedPackageData redux-promise-middleware
+344 silly mapToRegistry name redux-promise-middleware
+345 silly mapToRegistry using default registry
+346 silly mapToRegistry registry https://registry.npmjs.org/
+347 silly mapToRegistry data Result {
+347 silly mapToRegistry   raw: 'redux-promise-middleware',
+347 silly mapToRegistry   scope: null,
+347 silly mapToRegistry   escapedName: 'redux-promise-middleware',
+347 silly mapToRegistry   name: 'redux-promise-middleware',
+347 silly mapToRegistry   rawSpec: '',
+347 silly mapToRegistry   spec: 'latest',
+347 silly mapToRegistry   type: 'tag' }
+348 silly mapToRegistry uri https://registry.npmjs.org/redux-promise-middleware
+349 silly fetchNamedPackageData redux-thunk
+350 silly mapToRegistry name redux-thunk
+351 silly mapToRegistry using default registry
+352 silly mapToRegistry registry https://registry.npmjs.org/
+353 silly mapToRegistry data Result {
+353 silly mapToRegistry   raw: 'redux-thunk',
+353 silly mapToRegistry   scope: null,
+353 silly mapToRegistry   escapedName: 'redux-thunk',
+353 silly mapToRegistry   name: 'redux-thunk',
+353 silly mapToRegistry   rawSpec: '',
+353 silly mapToRegistry   spec: 'latest',
+353 silly mapToRegistry   type: 'tag' }
+354 silly mapToRegistry uri https://registry.npmjs.org/redux-thunk
+355 silly fetchNamedPackageData semantic-ui-css
+356 silly mapToRegistry name semantic-ui-css
+357 silly mapToRegistry using default registry
+358 silly mapToRegistry registry https://registry.npmjs.org/
+359 silly mapToRegistry data Result {
+359 silly mapToRegistry   raw: 'semantic-ui-css',
+359 silly mapToRegistry   scope: null,
+359 silly mapToRegistry   escapedName: 'semantic-ui-css',
+359 silly mapToRegistry   name: 'semantic-ui-css',
+359 silly mapToRegistry   rawSpec: '',
+359 silly mapToRegistry   spec: 'latest',
+359 silly mapToRegistry   type: 'tag' }
+360 silly mapToRegistry uri https://registry.npmjs.org/semantic-ui-css
+361 silly fetchNamedPackageData semantic-ui-popup
+362 silly mapToRegistry name semantic-ui-popup
+363 silly mapToRegistry using default registry
+364 silly mapToRegistry registry https://registry.npmjs.org/
+365 silly mapToRegistry data Result {
+365 silly mapToRegistry   raw: 'semantic-ui-popup',
+365 silly mapToRegistry   scope: null,
+365 silly mapToRegistry   escapedName: 'semantic-ui-popup',
+365 silly mapToRegistry   name: 'semantic-ui-popup',
+365 silly mapToRegistry   rawSpec: '',
+365 silly mapToRegistry   spec: 'latest',
+365 silly mapToRegistry   type: 'tag' }
+366 silly mapToRegistry uri https://registry.npmjs.org/semantic-ui-popup
+367 silly fetchNamedPackageData semantic-ui-react
+368 silly mapToRegistry name semantic-ui-react
+369 silly mapToRegistry using default registry
+370 silly mapToRegistry registry https://registry.npmjs.org/
+371 silly mapToRegistry data Result {
+371 silly mapToRegistry   raw: 'semantic-ui-react',
+371 silly mapToRegistry   scope: null,
+371 silly mapToRegistry   escapedName: 'semantic-ui-react',
+371 silly mapToRegistry   name: 'semantic-ui-react',
+371 silly mapToRegistry   rawSpec: '',
+371 silly mapToRegistry   spec: 'latest',
+371 silly mapToRegistry   type: 'tag' }
+372 silly mapToRegistry uri https://registry.npmjs.org/semantic-ui-react
+373 silly fetchNamedPackageData semantic-ui-transition
+374 silly mapToRegistry name semantic-ui-transition
+375 silly mapToRegistry using default registry
+376 silly mapToRegistry registry https://registry.npmjs.org/
+377 silly mapToRegistry data Result {
+377 silly mapToRegistry   raw: 'semantic-ui-transition',
+377 silly mapToRegistry   scope: null,
+377 silly mapToRegistry   escapedName: 'semantic-ui-transition',
+377 silly mapToRegistry   name: 'semantic-ui-transition',
+377 silly mapToRegistry   rawSpec: '',
+377 silly mapToRegistry   spec: 'latest',
+377 silly mapToRegistry   type: 'tag' }
+378 silly mapToRegistry uri https://registry.npmjs.org/semantic-ui-transition
+379 silly fetchNamedPackageData url-loader
+380 silly mapToRegistry name url-loader
+381 silly mapToRegistry using default registry
+382 silly mapToRegistry registry https://registry.npmjs.org/
+383 silly mapToRegistry data Result {
+383 silly mapToRegistry   raw: 'url-loader',
+383 silly mapToRegistry   scope: null,
+383 silly mapToRegistry   escapedName: 'url-loader',
+383 silly mapToRegistry   name: 'url-loader',
+383 silly mapToRegistry   rawSpec: '',
+383 silly mapToRegistry   spec: 'latest',
+383 silly mapToRegistry   type: 'tag' }
+384 silly mapToRegistry uri https://registry.npmjs.org/url-loader
+385 silly fetchNamedPackageData validator
+386 silly mapToRegistry name validator
+387 silly mapToRegistry using default registry
+388 silly mapToRegistry registry https://registry.npmjs.org/
+389 silly mapToRegistry data Result {
+389 silly mapToRegistry   raw: 'validator',
+389 silly mapToRegistry   scope: null,
+389 silly mapToRegistry   escapedName: 'validator',
+389 silly mapToRegistry   name: 'validator',
+389 silly mapToRegistry   rawSpec: '',
+389 silly mapToRegistry   spec: 'latest',
+389 silly mapToRegistry   type: 'tag' }
+390 silly mapToRegistry uri https://registry.npmjs.org/validator
+391 verbose request uri https://registry.npmjs.org/autosuggest-highlight
+392 verbose request no auth needed
+393 info attempt registry request try #1 at 15:52:35
+394 verbose request id 1cbcd95d6441275b
+395 http request GET https://registry.npmjs.org/autosuggest-highlight
+396 verbose request uri https://registry.npmjs.org/axios
+397 verbose request no auth needed
+398 info attempt registry request try #1 at 15:52:35
+399 http request GET https://registry.npmjs.org/axios
+400 verbose request uri https://registry.npmjs.org/babel-plugin-transform-node-env-inline
+401 verbose request no auth needed
+402 info attempt registry request try #1 at 15:52:35
+403 http request GET https://registry.npmjs.org/babel-plugin-transform-node-env-inline
+404 verbose request uri https://registry.npmjs.org/classnames
+405 verbose request no auth needed
+406 info attempt registry request try #1 at 15:52:35
+407 http request GET https://registry.npmjs.org/classnames
+408 verbose request uri https://registry.npmjs.org/create-react-class
+409 verbose request no auth needed
+410 info attempt registry request try #1 at 15:52:35
+411 http request GET https://registry.npmjs.org/create-react-class
+412 verbose request uri https://registry.npmjs.org/elemental
+413 verbose request no auth needed
+414 info attempt registry request try #1 at 15:52:35
+415 http request GET https://registry.npmjs.org/elemental
+416 verbose request uri https://registry.npmjs.org/eslint-plugin-babel
+417 verbose request no auth needed
+418 info attempt registry request try #1 at 15:52:35
+419 http request GET https://registry.npmjs.org/eslint-plugin-babel
+420 verbose request uri https://registry.npmjs.org/eslint-plugin-react
+421 verbose request no auth needed
+422 info attempt registry request try #1 at 15:52:35
+423 http request GET https://registry.npmjs.org/eslint-plugin-react
+424 verbose request uri https://registry.npmjs.org/file-loader
+425 verbose request no auth needed
+426 info attempt registry request try #1 at 15:52:35
+427 http request GET https://registry.npmjs.org/file-loader
+428 verbose request uri https://registry.npmjs.org/font-awesome
+429 verbose request no auth needed
+430 info attempt registry request try #1 at 15:52:35
+431 http request GET https://registry.npmjs.org/font-awesome
+432 verbose request uri https://registry.npmjs.org/font-awesome-sass-loader
+433 verbose request no auth needed
+434 info attempt registry request try #1 at 15:52:35
+435 http request GET https://registry.npmjs.org/font-awesome-sass-loader
+436 verbose request uri https://registry.npmjs.org/jquery
+437 verbose request no auth needed
+438 info attempt registry request try #1 at 15:52:35
+439 http request GET https://registry.npmjs.org/jquery
+440 verbose request uri https://registry.npmjs.org/lodash
+441 verbose request no auth needed
+442 info attempt registry request try #1 at 15:52:35
+443 http request GET https://registry.npmjs.org/lodash
+444 verbose request uri https://registry.npmjs.org/material-design-icons
+445 verbose request no auth needed
+446 info attempt registry request try #1 at 15:52:35
+447 http request GET https://registry.npmjs.org/material-design-icons
+448 verbose request uri https://registry.npmjs.org/material-ui
+449 verbose request no auth needed
+450 info attempt registry request try #1 at 15:52:35
+451 http request GET https://registry.npmjs.org/material-ui
+452 verbose request uri https://registry.npmjs.org/moment
+453 verbose request no auth needed
+454 info attempt registry request try #1 at 15:52:35
+455 http request GET https://registry.npmjs.org/moment
+456 verbose request uri https://registry.npmjs.org/postcss-cssnext
+457 verbose request no auth needed
+458 info attempt registry request try #1 at 15:52:35
+459 http request GET https://registry.npmjs.org/postcss-cssnext
+460 verbose request uri https://registry.npmjs.org/postcss-each
+461 verbose request no auth needed
+462 info attempt registry request try #1 at 15:52:35
+463 http request GET https://registry.npmjs.org/postcss-each
+464 verbose request uri https://registry.npmjs.org/postcss-import
+465 verbose request no auth needed
+466 info attempt registry request try #1 at 15:52:35
+467 http request GET https://registry.npmjs.org/postcss-import
+468 verbose request uri https://registry.npmjs.org/postcss-loader
+469 verbose request no auth needed
+470 info attempt registry request try #1 at 15:52:35
+471 http request GET https://registry.npmjs.org/postcss-loader
+472 verbose request uri https://registry.npmjs.org/postcss-mixins
+473 verbose request no auth needed
+474 info attempt registry request try #1 at 15:52:35
+475 http request GET https://registry.npmjs.org/postcss-mixins
+476 verbose request uri https://registry.npmjs.org/prop-types
+477 verbose request no auth needed
+478 info attempt registry request try #1 at 15:52:35
+479 http request GET https://registry.npmjs.org/prop-types
+480 verbose request uri https://registry.npmjs.org/rc-time-picker
+481 verbose request no auth needed
+482 info attempt registry request try #1 at 15:52:35
+483 http request GET https://registry.npmjs.org/rc-time-picker
+484 verbose request uri https://registry.npmjs.org/react
+485 verbose request no auth needed
+486 info attempt registry request try #1 at 15:52:35
+487 http request GET https://registry.npmjs.org/react
+488 verbose request uri https://registry.npmjs.org/react-autosuggest
+489 verbose request no auth needed
+490 info attempt registry request try #1 at 15:52:35
+491 http request GET https://registry.npmjs.org/react-autosuggest
+492 verbose request uri https://registry.npmjs.org/react-bootstrap
+493 verbose request no auth needed
+494 info attempt registry request try #1 at 15:52:35
+495 http request GET https://registry.npmjs.org/react-bootstrap
+496 verbose request uri https://registry.npmjs.org/react-bootstrap-date-picker
+497 verbose request no auth needed
+498 info attempt registry request try #1 at 15:52:35
+499 http request GET https://registry.npmjs.org/react-bootstrap-date-picker
+500 verbose request uri https://registry.npmjs.org/react-confirm-alert
+501 verbose request no auth needed
+502 info attempt registry request try #1 at 15:52:35
+503 http request GET https://registry.npmjs.org/react-confirm-alert
+504 verbose request uri https://registry.npmjs.org/react-datepicker
+505 verbose request no auth needed
+506 info attempt registry request try #1 at 15:52:35
+507 http request GET https://registry.npmjs.org/react-datepicker
+508 verbose request uri https://registry.npmjs.org/react-dropzone
+509 verbose request no auth needed
+510 info attempt registry request try #1 at 15:52:35
+511 http request GET https://registry.npmjs.org/react-dropzone
+512 verbose request uri https://registry.npmjs.org/react-file-input
+513 verbose request no auth needed
+514 info attempt registry request try #1 at 15:52:35
+515 http request GET https://registry.npmjs.org/react-file-input
+516 verbose request uri https://registry.npmjs.org/react-fontawesome
+517 verbose request no auth needed
+518 info attempt registry request try #1 at 15:52:35
+519 http request GET https://registry.npmjs.org/react-fontawesome
+520 verbose request uri https://registry.npmjs.org/react-graph-vis
+521 verbose request no auth needed
+522 info attempt registry request try #1 at 15:52:35
+523 http request GET https://registry.npmjs.org/react-graph-vis
+524 verbose request uri https://registry.npmjs.org/react-gravatar
+525 verbose request no auth needed
+526 info attempt registry request try #1 at 15:52:35
+527 http request GET https://registry.npmjs.org/react-gravatar
+528 verbose request uri https://registry.npmjs.org/react-grid-layout
+529 verbose request no auth needed
+530 info attempt registry request try #1 at 15:52:35
+531 http request GET https://registry.npmjs.org/react-grid-layout
+532 verbose request uri https://registry.npmjs.org/react-highlight-words
+533 verbose request no auth needed
+534 info attempt registry request try #1 at 15:52:35
+535 http request GET https://registry.npmjs.org/react-highlight-words
+536 verbose request uri https://registry.npmjs.org/react-hot-loader
+537 verbose request no auth needed
+538 info attempt registry request try #1 at 15:52:35
+539 http request GET https://registry.npmjs.org/react-hot-loader
+540 verbose request uri https://registry.npmjs.org/react-icons
+541 verbose request no auth needed
+542 info attempt registry request try #1 at 15:52:35
+543 http request GET https://registry.npmjs.org/react-icons
+544 verbose request uri https://registry.npmjs.org/react-image-resizer
+545 verbose request no auth needed
+546 info attempt registry request try #1 at 15:52:35
+547 http request GET https://registry.npmjs.org/react-image-resizer
+548 verbose request uri https://registry.npmjs.org/react-images-upload
+549 verbose request no auth needed
+550 info attempt registry request try #1 at 15:52:35
+551 http request GET https://registry.npmjs.org/react-images-upload
+552 verbose request uri https://registry.npmjs.org/react-images-uploader
+553 verbose request no auth needed
+554 info attempt registry request try #1 at 15:52:35
+555 http request GET https://registry.npmjs.org/react-images-uploader
+556 verbose request uri https://registry.npmjs.org/react-modal
+557 verbose request no auth needed
+558 info attempt registry request try #1 at 15:52:35
+559 http request GET https://registry.npmjs.org/react-modal
+560 verbose request uri https://registry.npmjs.org/react-notification-system
+561 verbose request no auth needed
+562 info attempt registry request try #1 at 15:52:35
+563 http request GET https://registry.npmjs.org/react-notification-system
+564 verbose request uri https://registry.npmjs.org/react-places-autocomplete
+565 verbose request no auth needed
+566 info attempt registry request try #1 at 15:52:35
+567 http request GET https://registry.npmjs.org/react-places-autocomplete
+568 verbose request uri https://registry.npmjs.org/react-redux
+569 verbose request no auth needed
+570 info attempt registry request try #1 at 15:52:35
+571 http request GET https://registry.npmjs.org/react-redux
+572 verbose request uri https://registry.npmjs.org/react-router
+573 verbose request no auth needed
+574 info attempt registry request try #1 at 15:52:35
+575 http request GET https://registry.npmjs.org/react-router
+576 verbose request uri https://registry.npmjs.org/react-router-dom
+577 verbose request no auth needed
+578 info attempt registry request try #1 at 15:52:35
+579 http request GET https://registry.npmjs.org/react-router-dom
+580 verbose request uri https://registry.npmjs.org/react-search
+581 verbose request no auth needed
+582 info attempt registry request try #1 at 15:52:35
+583 http request GET https://registry.npmjs.org/react-search
+584 verbose request uri https://registry.npmjs.org/react-select
+585 verbose request no auth needed
+586 info attempt registry request try #1 at 15:52:35
+587 http request GET https://registry.npmjs.org/react-select
+588 verbose request uri https://registry.npmjs.org/react-select-multi
+589 verbose request no auth needed
+590 info attempt registry request try #1 at 15:52:35
+591 http request GET https://registry.npmjs.org/react-select-multi
+592 verbose request uri https://registry.npmjs.org/react-toolbox
+593 verbose request no auth needed
+594 info attempt registry request try #1 at 15:52:35
+595 http request GET https://registry.npmjs.org/react-toolbox
+596 verbose request uri https://registry.npmjs.org/react-virtualized-select
+597 verbose request no auth needed
+598 info attempt registry request try #1 at 15:52:35
+599 http request GET https://registry.npmjs.org/react-virtualized-select
+600 verbose request uri https://registry.npmjs.org/redux
+601 verbose request no auth needed
+602 info attempt registry request try #1 at 15:52:35
+603 http request GET https://registry.npmjs.org/redux
+604 verbose request uri https://registry.npmjs.org/redux-logger
+605 verbose request no auth needed
+606 info attempt registry request try #1 at 15:52:35
+607 http request GET https://registry.npmjs.org/redux-logger
+608 verbose request uri https://registry.npmjs.org/redux-promise-middleware
+609 verbose request no auth needed
+610 info attempt registry request try #1 at 15:52:35
+611 http request GET https://registry.npmjs.org/redux-promise-middleware
+612 verbose request uri https://registry.npmjs.org/redux-thunk
+613 verbose request no auth needed
+614 info attempt registry request try #1 at 15:52:35
+615 http request GET https://registry.npmjs.org/redux-thunk
+616 verbose request uri https://registry.npmjs.org/semantic-ui-css
+617 verbose request no auth needed
+618 info attempt registry request try #1 at 15:52:35
+619 http request GET https://registry.npmjs.org/semantic-ui-css
+620 verbose request uri https://registry.npmjs.org/semantic-ui-popup
+621 verbose request no auth needed
+622 info attempt registry request try #1 at 15:52:35
+623 http request GET https://registry.npmjs.org/semantic-ui-popup
+624 verbose request uri https://registry.npmjs.org/semantic-ui-react
+625 verbose request no auth needed
+626 info attempt registry request try #1 at 15:52:35
+627 http request GET https://registry.npmjs.org/semantic-ui-react
+628 verbose request uri https://registry.npmjs.org/semantic-ui-transition
+629 verbose request no auth needed
+630 info attempt registry request try #1 at 15:52:35
+631 http request GET https://registry.npmjs.org/semantic-ui-transition
+632 verbose request uri https://registry.npmjs.org/url-loader
+633 verbose request no auth needed
+634 info attempt registry request try #1 at 15:52:35
+635 http request GET https://registry.npmjs.org/url-loader
+636 verbose request uri https://registry.npmjs.org/validator
+637 verbose request no auth needed
+638 info attempt registry request try #1 at 15:52:35
+639 http request GET https://registry.npmjs.org/validator
+640 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+641 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+642 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+643 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+644 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+645 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+646 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+647 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+648 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+649 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+650 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+651 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+652 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+653 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+654 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+655 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+656 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+657 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+658 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+659 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+660 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+661 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+662 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+663 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+664 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+665 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+666 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+667 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+668 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+669 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+670 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+671 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+672 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+673 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+674 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+675 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+676 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+677 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+678 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+679 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+680 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+681 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+682 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+683 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+684 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+685 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+686 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+687 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+688 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+689 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+690 info attempt registry request try #2 at 15:53:06
+691 http request GET https://registry.npmjs.org/prop-types
+692 info attempt registry request try #2 at 15:53:06
+693 http request GET https://registry.npmjs.org/react-confirm-alert
+694 info attempt registry request try #2 at 15:53:06
+695 http request GET https://registry.npmjs.org/file-loader
+696 info attempt registry request try #2 at 15:53:06
+697 http request GET https://registry.npmjs.org/font-awesome
+698 info attempt registry request try #2 at 15:53:06
+699 http request GET https://registry.npmjs.org/react-images-upload
+700 info attempt registry request try #2 at 15:53:06
+701 http request GET https://registry.npmjs.org/react-notification-system
+702 info attempt registry request try #2 at 15:53:06
+703 http request GET https://registry.npmjs.org/moment
+704 info attempt registry request try #2 at 15:53:06
+705 http request GET https://registry.npmjs.org/react-gravatar
+706 info attempt registry request try #2 at 15:53:06
+707 http request GET https://registry.npmjs.org/react-select
+708 info attempt registry request try #2 at 15:53:06
+709 http request GET https://registry.npmjs.org/postcss-loader
+710 info attempt registry request try #2 at 15:53:06
+711 http request GET https://registry.npmjs.org/react-dropzone
+712 info attempt registry request try #2 at 15:53:06
+713 http request GET https://registry.npmjs.org/postcss-mixins
+714 info attempt registry request try #2 at 15:53:06
+715 http request GET https://registry.npmjs.org/react-file-input
+716 info attempt registry request try #2 at 15:53:06
+717 http request GET https://registry.npmjs.org/autosuggest-highlight
+718 info attempt registry request try #2 at 15:53:06
+719 http request GET https://registry.npmjs.org/postcss-cssnext
+720 info attempt registry request try #2 at 15:53:06
+721 http request GET https://registry.npmjs.org/material-ui
+722 info attempt registry request try #2 at 15:53:06
+723 http request GET https://registry.npmjs.org/react-grid-layout
+724 info attempt registry request try #2 at 15:53:06
+725 http request GET https://registry.npmjs.org/react-hot-loader
+726 info attempt registry request try #2 at 15:53:06
+727 http request GET https://registry.npmjs.org/react-search
+728 info attempt registry request try #2 at 15:53:06
+729 http request GET https://registry.npmjs.org/react-router
+730 info attempt registry request try #2 at 15:53:06
+731 http request GET https://registry.npmjs.org/eslint-plugin-react
+732 info attempt registry request try #2 at 15:53:06
+733 http request GET https://registry.npmjs.org/font-awesome-sass-loader
+734 info attempt registry request try #2 at 15:53:06
+735 http request GET https://registry.npmjs.org/postcss-import
+736 info attempt registry request try #2 at 15:53:06
+737 http request GET https://registry.npmjs.org/react-images-uploader
+738 info attempt registry request try #2 at 15:53:06
+739 http request GET https://registry.npmjs.org/react-graph-vis
+740 info attempt registry request try #2 at 15:53:06
+741 http request GET https://registry.npmjs.org/react-modal
+742 info attempt registry request try #2 at 15:53:06
+743 http request GET https://registry.npmjs.org/react-select-multi
+744 info attempt registry request try #2 at 15:53:06
+745 http request GET https://registry.npmjs.org/rc-time-picker
+746 info attempt registry request try #2 at 15:53:06
+747 http request GET https://registry.npmjs.org/react-autosuggest
+748 info attempt registry request try #2 at 15:53:06
+749 http request GET https://registry.npmjs.org/react-datepicker
+750 info attempt registry request try #2 at 15:53:06
+751 http request GET https://registry.npmjs.org/react-bootstrap-date-picker
+752 info attempt registry request try #2 at 15:53:06
+753 http request GET https://registry.npmjs.org/elemental
+754 info attempt registry request try #2 at 15:53:06
+755 http request GET https://registry.npmjs.org/lodash
+756 info attempt registry request try #2 at 15:53:06
+757 http request GET https://registry.npmjs.org/react-image-resizer
+758 info attempt registry request try #2 at 15:53:06
+759 http request GET https://registry.npmjs.org/react-places-autocomplete
+760 info attempt registry request try #2 at 15:53:06
+761 http request GET https://registry.npmjs.org/eslint-plugin-babel
+762 info attempt registry request try #2 at 15:53:06
+763 http request GET https://registry.npmjs.org/jquery
+764 info attempt registry request try #2 at 15:53:06
+765 http request GET https://registry.npmjs.org/react-icons
+766 info attempt registry request try #2 at 15:53:06
+767 http request GET https://registry.npmjs.org/react-redux
+768 info attempt registry request try #2 at 15:53:06
+769 http request GET https://registry.npmjs.org/react
+770 info attempt registry request try #2 at 15:53:06
+771 http request GET https://registry.npmjs.org/react-bootstrap
+772 info attempt registry request try #2 at 15:53:06
+773 http request GET https://registry.npmjs.org/postcss-each
+774 info attempt registry request try #2 at 15:53:06
+775 http request GET https://registry.npmjs.org/react-fontawesome
+776 info attempt registry request try #2 at 15:53:06
+777 http request GET https://registry.npmjs.org/create-react-class
+778 info attempt registry request try #2 at 15:53:06
+779 http request GET https://registry.npmjs.org/material-design-icons
+780 info attempt registry request try #2 at 15:53:06
+781 http request GET https://registry.npmjs.org/react-highlight-words
+782 info attempt registry request try #2 at 15:53:06
+783 http request GET https://registry.npmjs.org/react-router-dom
+784 info attempt registry request try #2 at 15:53:06
+785 http request GET https://registry.npmjs.org/classnames
+786 info attempt registry request try #2 at 15:53:06
+787 http request GET https://registry.npmjs.org/axios
+788 info attempt registry request try #2 at 15:53:06
+789 http request GET https://registry.npmjs.org/babel-plugin-transform-node-env-inline
+790 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+791 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+792 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+793 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+794 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+795 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+796 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+797 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+798 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+799 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+800 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+801 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+802 info attempt registry request try #2 at 15:53:27
+803 http request GET https://registry.npmjs.org/redux
+804 info attempt registry request try #2 at 15:53:27
+805 http request GET https://registry.npmjs.org/semantic-ui-react
+806 info attempt registry request try #2 at 15:53:27
+807 http request GET https://registry.npmjs.org/semantic-ui-transition
+808 info attempt registry request try #2 at 15:53:27
+809 http request GET https://registry.npmjs.org/redux-logger
+810 info attempt registry request try #2 at 15:53:27
+811 http request GET https://registry.npmjs.org/redux-promise-middleware
+812 info attempt registry request try #2 at 15:53:27
+813 http request GET https://registry.npmjs.org/react-toolbox
+814 info attempt registry request try #2 at 15:53:27
+815 http request GET https://registry.npmjs.org/url-loader
+816 info attempt registry request try #2 at 15:53:27
+817 http request GET https://registry.npmjs.org/semantic-ui-css
+818 info attempt registry request try #2 at 15:53:27
+819 http request GET https://registry.npmjs.org/semantic-ui-popup
+820 info attempt registry request try #2 at 15:53:27
+821 http request GET https://registry.npmjs.org/validator
+822 info attempt registry request try #2 at 15:53:27
+823 http request GET https://registry.npmjs.org/react-virtualized-select
+824 info attempt registry request try #2 at 15:53:27
+825 http request GET https://registry.npmjs.org/redux-thunk
+826 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+827 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+828 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+829 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+830 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+831 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+832 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+833 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+834 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+835 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+836 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+837 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+838 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+839 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+840 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+841 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+842 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+843 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+844 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+845 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+846 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+847 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+848 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+849 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+850 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+851 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+852 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+853 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+854 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+855 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+856 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+857 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+858 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+859 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+860 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+861 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+862 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+863 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+864 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+865 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+866 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+867 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+868 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+869 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+870 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+871 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+872 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+873 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+874 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+875 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+876 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+877 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+878 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+879 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+880 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+881 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+882 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+883 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+884 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+885 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+886 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+887 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 151.101.28.162:443
+888 info attempt registry request try #3 at 15:54:27
+889 http request GET https://registry.npmjs.org/react-notification-system
+890 info attempt registry request try #3 at 15:54:27
+891 http request GET https://registry.npmjs.org/prop-types
+892 info attempt registry request try #3 at 15:54:27
+893 http request GET https://registry.npmjs.org/react-images-upload
+894 info attempt registry request try #3 at 15:54:27
+895 http request GET https://registry.npmjs.org/postcss-import
+896 info attempt registry request try #3 at 15:54:27
+897 http request GET https://registry.npmjs.org/react-file-input
+898 info attempt registry request try #3 at 15:54:27
+899 http request GET https://registry.npmjs.org/react-autosuggest
+900 info attempt registry request try #3 at 15:54:27
+901 http request GET https://registry.npmjs.org/react-graph-vis
+902 info attempt registry request try #3 at 15:54:27
+903 http request GET https://registry.npmjs.org/react-select-multi
+904 info attempt registry request try #3 at 15:54:27
+905 http request GET https://registry.npmjs.org/react-gravatar
+906 info attempt registry request try #3 at 15:54:27
+907 http request GET https://registry.npmjs.org/react-search
+908 info attempt registry request try #3 at 15:54:27
+909 http request GET https://registry.npmjs.org/react-dropzone
+910 info attempt registry request try #3 at 15:54:27
+911 http request GET https://registry.npmjs.org/lodash
+912 info attempt registry request try #3 at 15:54:27
+913 http request GET https://registry.npmjs.org/postcss-cssnext
+914 info attempt registry request try #3 at 15:54:27
+915 http request GET https://registry.npmjs.org/react-grid-layout
+916 info attempt registry request try #3 at 15:54:27
+917 http request GET https://registry.npmjs.org/jquery
+918 info attempt registry request try #3 at 15:54:27
+919 http request GET https://registry.npmjs.org/react-places-autocomplete
+920 info attempt registry request try #3 at 15:54:27
+921 http request GET https://registry.npmjs.org/eslint-plugin-react
+922 info attempt registry request try #3 at 15:54:27
+923 http request GET https://registry.npmjs.org/react-bootstrap-date-picker
+924 info attempt registry request try #3 at 15:54:27
+925 http request GET https://registry.npmjs.org/autosuggest-highlight
+926 info attempt registry request try #3 at 15:54:27
+927 http request GET https://registry.npmjs.org/react-router
+928 info attempt registry request try #3 at 15:54:27
+929 http request GET https://registry.npmjs.org/eslint-plugin-babel
+930 info attempt registry request try #3 at 15:54:27
+931 http request GET https://registry.npmjs.org/react-datepicker
+932 info attempt registry request try #3 at 15:54:27
+933 http request GET https://registry.npmjs.org/react-hot-loader
+934 info attempt registry request try #3 at 15:54:27
+935 http request GET https://registry.npmjs.org/material-ui
+936 info attempt registry request try #3 at 15:54:27
+937 http request GET https://registry.npmjs.org/elemental
+938 info attempt registry request try #3 at 15:54:27
+939 http request GET https://registry.npmjs.org/react-image-resizer
+940 info attempt registry request try #3 at 15:54:27
+941 http request GET https://registry.npmjs.org/react-images-uploader
+942 info attempt registry request try #3 at 15:54:27
+943 http request GET https://registry.npmjs.org/react-select
+944 info attempt registry request try #3 at 15:54:27
+945 http request GET https://registry.npmjs.org/react-modal
+946 info attempt registry request try #3 at 15:54:27
+947 http request GET https://registry.npmjs.org/postcss-loader
+948 info attempt registry request try #3 at 15:54:27
+949 http request GET https://registry.npmjs.org/moment
+950 info attempt registry request try #3 at 15:54:27
+951 http request GET https://registry.npmjs.org/postcss-mixins
+952 info attempt registry request try #3 at 15:54:27
+953 http request GET https://registry.npmjs.org/font-awesome-sass-loader
+954 info attempt registry request try #3 at 15:54:27
+955 http request GET https://registry.npmjs.org/react-icons
+956 info attempt registry request try #3 at 15:54:27
+957 http request GET https://registry.npmjs.org/rc-time-picker
+958 info attempt registry request try #3 at 15:54:27
+959 http request GET https://registry.npmjs.org/font-awesome
+960 info attempt registry request try #3 at 15:54:27
+961 http request GET https://registry.npmjs.org/file-loader
+962 info attempt registry request try #3 at 15:54:27
+963 http request GET https://registry.npmjs.org/react-confirm-alert
+964 info attempt registry request try #3 at 15:54:38
+965 http request GET https://registry.npmjs.org/react-bootstrap
+966 info attempt registry request try #3 at 15:54:38
+967 http request GET https://registry.npmjs.org/react
+968 info attempt registry request try #3 at 15:54:38
+969 http request GET https://registry.npmjs.org/postcss-each
+970 info attempt registry request try #3 at 15:54:38
+971 http request GET https://registry.npmjs.org/react-redux
+972 info attempt registry request try #3 at 15:54:38
+973 http request GET https://registry.npmjs.org/react-router-dom
+974 info attempt registry request try #3 at 15:54:38
+975 http request GET https://registry.npmjs.org/react-fontawesome
+976 info attempt registry request try #3 at 15:54:38
+977 http request GET https://registry.npmjs.org/babel-plugin-transform-node-env-inline
+978 info attempt registry request try #3 at 15:54:38
+979 http request GET https://registry.npmjs.org/react-highlight-words
+980 info attempt registry request try #3 at 15:54:38
+981 http request GET https://registry.npmjs.org/create-react-class
+982 info attempt registry request try #3 at 15:54:38
+983 http request GET https://registry.npmjs.org/classnames
+984 info attempt registry request try #3 at 15:54:38
+985 http request GET https://registry.npmjs.org/material-design-icons
+986 info attempt registry request try #3 at 15:54:38
+987 http request GET https://registry.npmjs.org/axios
+988 info attempt registry request try #3 at 15:54:48
+989 http request GET https://registry.npmjs.org/semantic-ui-react
+990 info attempt registry request try #3 at 15:54:48
+991 http request GET https://registry.npmjs.org/redux
+992 info attempt registry request try #3 at 15:54:48
+993 http request GET https://registry.npmjs.org/semantic-ui-transition
+994 info attempt registry request try #3 at 15:54:48
+995 http request GET https://registry.npmjs.org/redux-logger
+996 info attempt registry request try #3 at 15:54:48
+997 http request GET https://registry.npmjs.org/redux-promise-middleware
+998 info attempt registry request try #3 at 15:54:48
+999 http request GET https://registry.npmjs.org/validator
+1000 info attempt registry request try #3 at 15:54:48
+1001 http request GET https://registry.npmjs.org/redux-thunk
+1002 info attempt registry request try #3 at 15:54:48
+1003 http request GET https://registry.npmjs.org/semantic-ui-css
+1004 info attempt registry request try #3 at 15:54:48
+1005 http request GET https://registry.npmjs.org/react-toolbox
+1006 info attempt registry request try #3 at 15:54:48
+1007 http request GET https://registry.npmjs.org/react-virtualized-select
+1008 info attempt registry request try #3 at 15:54:48
+1009 http request GET https://registry.npmjs.org/url-loader
+1010 info attempt registry request try #3 at 15:54:48
+1011 http request GET https://registry.npmjs.org/semantic-ui-popup
+1012 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1012 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1012 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1012 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1012 silly fetchPackageMetaData  error for react-file-input@^0.2.5 { Error: connect ETIMEDOUT 151.101.28.162:443
+1012 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1012 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1012 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1012 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1012 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1012 silly fetchPackageMetaData   syscall: 'connect',
+1012 silly fetchPackageMetaData   address: '151.101.28.162',
+1012 silly fetchPackageMetaData   port: 443 }
+1013 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1013 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1013 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1013 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1013 silly fetchPackageMetaData  error for autosuggest-highlight@^3.1.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1013 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1013 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1013 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1013 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1013 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1013 silly fetchPackageMetaData   syscall: 'connect',
+1013 silly fetchPackageMetaData   address: '151.101.28.162',
+1013 silly fetchPackageMetaData   port: 443 }
+1014 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1014 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1014 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1014 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1014 silly fetchPackageMetaData  error for font-awesome@^4.7.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1014 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1014 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1014 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1014 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1014 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1014 silly fetchPackageMetaData   syscall: 'connect',
+1014 silly fetchPackageMetaData   address: '151.101.28.162',
+1014 silly fetchPackageMetaData   port: 443 }
+1015 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1015 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1015 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1015 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1015 silly fetchPackageMetaData  error for react-hot-loader@^3.0.0-beta.7 { Error: connect ETIMEDOUT 151.101.28.162:443
+1015 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1015 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1015 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1015 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1015 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1015 silly fetchPackageMetaData   syscall: 'connect',
+1015 silly fetchPackageMetaData   address: '151.101.28.162',
+1015 silly fetchPackageMetaData   port: 443 }
+1016 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1016 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1016 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1016 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1016 silly fetchPackageMetaData  error for postcss-mixins@^5.4.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1016 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1016 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1016 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1016 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1016 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1016 silly fetchPackageMetaData   syscall: 'connect',
+1016 silly fetchPackageMetaData   address: '151.101.28.162',
+1016 silly fetchPackageMetaData   port: 443 }
+1017 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1017 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1017 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1017 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1017 silly fetchPackageMetaData  error for elemental@^0.6.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1017 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1017 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1017 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1017 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1017 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1017 silly fetchPackageMetaData   syscall: 'connect',
+1017 silly fetchPackageMetaData   address: '151.101.28.162',
+1017 silly fetchPackageMetaData   port: 443 }
+1018 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1018 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1018 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1018 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1018 silly fetchPackageMetaData  error for postcss-loader@^1.2.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1018 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1018 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1018 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1018 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1018 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1018 silly fetchPackageMetaData   syscall: 'connect',
+1018 silly fetchPackageMetaData   address: '151.101.28.162',
+1018 silly fetchPackageMetaData   port: 443 }
+1019 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1019 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1019 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1019 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1019 silly fetchPackageMetaData  error for react-dropzone@^4.1.3 { Error: connect ETIMEDOUT 151.101.28.162:443
+1019 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1019 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1019 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1019 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1019 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1019 silly fetchPackageMetaData   syscall: 'connect',
+1019 silly fetchPackageMetaData   address: '151.101.28.162',
+1019 silly fetchPackageMetaData   port: 443 }
+1020 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1020 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1020 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1020 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1020 silly fetchPackageMetaData  error for postcss-cssnext@^2.9.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1020 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1020 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1020 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1020 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1020 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1020 silly fetchPackageMetaData   syscall: 'connect',
+1020 silly fetchPackageMetaData   address: '151.101.28.162',
+1020 silly fetchPackageMetaData   port: 443 }
+1021 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1021 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1021 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1021 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1021 silly fetchPackageMetaData  error for react-search@^2.0.5 { Error: connect ETIMEDOUT 151.101.28.162:443
+1021 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1021 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1021 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1021 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1021 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1021 silly fetchPackageMetaData   syscall: 'connect',
+1021 silly fetchPackageMetaData   address: '151.101.28.162',
+1021 silly fetchPackageMetaData   port: 443 }
+1022 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1022 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1022 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1022 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1022 silly fetchPackageMetaData  error for lodash@^4.17.4 { Error: connect ETIMEDOUT 151.101.28.162:443
+1022 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1022 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1022 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1022 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1022 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1022 silly fetchPackageMetaData   syscall: 'connect',
+1022 silly fetchPackageMetaData   address: '151.101.28.162',
+1022 silly fetchPackageMetaData   port: 443 }
+1023 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1023 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1023 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1023 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1023 silly fetchPackageMetaData  error for material-ui@^0.19.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1023 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1023 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1023 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1023 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1023 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1023 silly fetchPackageMetaData   syscall: 'connect',
+1023 silly fetchPackageMetaData   address: '151.101.28.162',
+1023 silly fetchPackageMetaData   port: 443 }
+1024 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1024 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1024 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1024 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1024 silly fetchPackageMetaData  error for moment@^2.18.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1024 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1024 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1024 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1024 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1024 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1024 silly fetchPackageMetaData   syscall: 'connect',
+1024 silly fetchPackageMetaData   address: '151.101.28.162',
+1024 silly fetchPackageMetaData   port: 443 }
+1025 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1025 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1025 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1025 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1025 silly fetchPackageMetaData  error for react-datepicker@^0.55.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1025 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1025 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1025 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1025 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1025 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1025 silly fetchPackageMetaData   syscall: 'connect',
+1025 silly fetchPackageMetaData   address: '151.101.28.162',
+1025 silly fetchPackageMetaData   port: 443 }
+1026 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1026 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1026 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1026 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1026 silly fetchPackageMetaData  error for font-awesome-sass-loader@^2.0.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1026 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1026 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1026 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1026 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1026 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1026 silly fetchPackageMetaData   syscall: 'connect',
+1026 silly fetchPackageMetaData   address: '151.101.28.162',
+1026 silly fetchPackageMetaData   port: 443 }
+1027 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1027 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1027 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1027 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1027 silly fetchPackageMetaData  error for react-notification-system@^0.2.15 { Error: connect ETIMEDOUT 151.101.28.162:443
+1027 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1027 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1027 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1027 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1027 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1027 silly fetchPackageMetaData   syscall: 'connect',
+1027 silly fetchPackageMetaData   address: '151.101.28.162',
+1027 silly fetchPackageMetaData   port: 443 }
+1028 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1028 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1028 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1028 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1028 silly fetchPackageMetaData  error for react-bootstrap-date-picker@^5.1.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1028 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1028 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1028 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1028 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1028 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1028 silly fetchPackageMetaData   syscall: 'connect',
+1028 silly fetchPackageMetaData   address: '151.101.28.162',
+1028 silly fetchPackageMetaData   port: 443 }
+1029 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1029 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1029 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1029 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1029 silly fetchPackageMetaData  error for file-loader@^0.11.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1029 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1029 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1029 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1029 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1029 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1029 silly fetchPackageMetaData   syscall: 'connect',
+1029 silly fetchPackageMetaData   address: '151.101.28.162',
+1029 silly fetchPackageMetaData   port: 443 }
+1030 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1030 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1030 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1030 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1030 silly fetchPackageMetaData  error for react-image-resizer@^1.2.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1030 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1030 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1030 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1030 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1030 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1030 silly fetchPackageMetaData   syscall: 'connect',
+1030 silly fetchPackageMetaData   address: '151.101.28.162',
+1030 silly fetchPackageMetaData   port: 443 }
+1031 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1031 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1031 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1031 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1031 silly fetchPackageMetaData  error for react-modal@^2.3.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1031 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1031 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1031 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1031 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1031 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1031 silly fetchPackageMetaData   syscall: 'connect',
+1031 silly fetchPackageMetaData   address: '151.101.28.162',
+1031 silly fetchPackageMetaData   port: 443 }
+1032 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1032 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1032 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1032 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1032 silly fetchPackageMetaData  error for react-select-multi@^1.6.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1032 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1032 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1032 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1032 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1032 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1032 silly fetchPackageMetaData   syscall: 'connect',
+1032 silly fetchPackageMetaData   address: '151.101.28.162',
+1032 silly fetchPackageMetaData   port: 443 }
+1033 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1033 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1033 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1033 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1033 silly fetchPackageMetaData  error for react-grid-layout@^0.15.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1033 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1033 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1033 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1033 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1033 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1033 silly fetchPackageMetaData   syscall: 'connect',
+1033 silly fetchPackageMetaData   address: '151.101.28.162',
+1033 silly fetchPackageMetaData   port: 443 }
+1034 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1034 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1034 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1034 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1034 silly fetchPackageMetaData  error for react-autosuggest@^9.3.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1034 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1034 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1034 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1034 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1034 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1034 silly fetchPackageMetaData   syscall: 'connect',
+1034 silly fetchPackageMetaData   address: '151.101.28.162',
+1034 silly fetchPackageMetaData   port: 443 }
+1035 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1035 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1035 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1035 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1035 silly fetchPackageMetaData  error for react-places-autocomplete@^5.4.3 { Error: connect ETIMEDOUT 151.101.28.162:443
+1035 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1035 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1035 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1035 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1035 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1035 silly fetchPackageMetaData   syscall: 'connect',
+1035 silly fetchPackageMetaData   address: '151.101.28.162',
+1035 silly fetchPackageMetaData   port: 443 }
+1036 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1036 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1036 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1036 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1036 silly fetchPackageMetaData  error for react-router@^4.1.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1036 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1036 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1036 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1036 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1036 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1036 silly fetchPackageMetaData   syscall: 'connect',
+1036 silly fetchPackageMetaData   address: '151.101.28.162',
+1036 silly fetchPackageMetaData   port: 443 }
+1037 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1037 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1037 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1037 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1037 silly fetchPackageMetaData  error for rc-time-picker@^2.4.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1037 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1037 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1037 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1037 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1037 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1037 silly fetchPackageMetaData   syscall: 'connect',
+1037 silly fetchPackageMetaData   address: '151.101.28.162',
+1037 silly fetchPackageMetaData   port: 443 }
+1038 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1038 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1038 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1038 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1038 silly fetchPackageMetaData  error for eslint-plugin-babel@~4.0.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1038 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1038 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1038 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1038 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1038 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1038 silly fetchPackageMetaData   syscall: 'connect',
+1038 silly fetchPackageMetaData   address: '151.101.28.162',
+1038 silly fetchPackageMetaData   port: 443 }
+1039 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1039 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1039 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1039 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1039 silly fetchPackageMetaData  error for react-icons@^2.2.5 { Error: connect ETIMEDOUT 151.101.28.162:443
+1039 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1039 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1039 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1039 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1039 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1039 silly fetchPackageMetaData   syscall: 'connect',
+1039 silly fetchPackageMetaData   address: '151.101.28.162',
+1039 silly fetchPackageMetaData   port: 443 }
+1040 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1040 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1040 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1040 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1040 silly fetchPackageMetaData  error for react-graph-vis@^1.0.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1040 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1040 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1040 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1040 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1040 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1040 silly fetchPackageMetaData   syscall: 'connect',
+1040 silly fetchPackageMetaData   address: '151.101.28.162',
+1040 silly fetchPackageMetaData   port: 443 }
+1041 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1041 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1041 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1041 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1041 silly fetchPackageMetaData  error for eslint-plugin-react@^6.9.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1041 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1041 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1041 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1041 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1041 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1041 silly fetchPackageMetaData   syscall: 'connect',
+1041 silly fetchPackageMetaData   address: '151.101.28.162',
+1041 silly fetchPackageMetaData   port: 443 }
+1042 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1042 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1042 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1042 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1042 silly fetchPackageMetaData  error for react-confirm-alert@^1.0.7 { Error: connect ETIMEDOUT 151.101.28.162:443
+1042 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1042 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1042 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1042 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1042 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1042 silly fetchPackageMetaData   syscall: 'connect',
+1042 silly fetchPackageMetaData   address: '151.101.28.162',
+1042 silly fetchPackageMetaData   port: 443 }
+1043 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1043 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1043 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1043 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1043 silly fetchPackageMetaData  error for react-gravatar@^2.6.3 { Error: connect ETIMEDOUT 151.101.28.162:443
+1043 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1043 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1043 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1043 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1043 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1043 silly fetchPackageMetaData   syscall: 'connect',
+1043 silly fetchPackageMetaData   address: '151.101.28.162',
+1043 silly fetchPackageMetaData   port: 443 }
+1044 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1044 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1044 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1044 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1044 silly fetchPackageMetaData  error for jquery@^3.2.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1044 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1044 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1044 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1044 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1044 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1044 silly fetchPackageMetaData   syscall: 'connect',
+1044 silly fetchPackageMetaData   address: '151.101.28.162',
+1044 silly fetchPackageMetaData   port: 443 }
+1045 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1045 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1045 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1045 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1045 silly fetchPackageMetaData  error for react-images-uploader@^1.1.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1045 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1045 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1045 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1045 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1045 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1045 silly fetchPackageMetaData   syscall: 'connect',
+1045 silly fetchPackageMetaData   address: '151.101.28.162',
+1045 silly fetchPackageMetaData   port: 443 }
+1046 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1046 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1046 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1046 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1046 silly fetchPackageMetaData  error for react-select@^1.0.0-rc.10 { Error: connect ETIMEDOUT 151.101.28.162:443
+1046 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1046 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1046 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1046 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1046 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1046 silly fetchPackageMetaData   syscall: 'connect',
+1046 silly fetchPackageMetaData   address: '151.101.28.162',
+1046 silly fetchPackageMetaData   port: 443 }
+1047 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1047 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1047 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1047 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1047 silly fetchPackageMetaData  error for prop-types@^15.6.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1047 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1047 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1047 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1047 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1047 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1047 silly fetchPackageMetaData   syscall: 'connect',
+1047 silly fetchPackageMetaData   address: '151.101.28.162',
+1047 silly fetchPackageMetaData   port: 443 }
+1048 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1048 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1048 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1048 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1048 silly fetchPackageMetaData  error for postcss-import@^9.1.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1048 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1048 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1048 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1048 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1048 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1048 silly fetchPackageMetaData   syscall: 'connect',
+1048 silly fetchPackageMetaData   address: '151.101.28.162',
+1048 silly fetchPackageMetaData   port: 443 }
+1049 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1049 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1049 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1049 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1049 silly fetchPackageMetaData  error for react-images-upload@^1.1.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1049 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1049 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1049 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1049 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1049 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1049 silly fetchPackageMetaData   syscall: 'connect',
+1049 silly fetchPackageMetaData   address: '151.101.28.162',
+1049 silly fetchPackageMetaData   port: 443 }
+1050 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1050 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1050 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1050 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1050 silly fetchPackageMetaData  error for react-bootstrap@^0.31.3 { Error: connect ETIMEDOUT 151.101.28.162:443
+1050 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1050 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1050 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1050 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1050 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1050 silly fetchPackageMetaData   syscall: 'connect',
+1050 silly fetchPackageMetaData   address: '151.101.28.162',
+1050 silly fetchPackageMetaData   port: 443 }
+1051 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1051 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1051 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1051 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1051 silly fetchPackageMetaData  error for postcss-each@^0.9.3 { Error: connect ETIMEDOUT 151.101.28.162:443
+1051 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1051 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1051 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1051 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1051 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1051 silly fetchPackageMetaData   syscall: 'connect',
+1051 silly fetchPackageMetaData   address: '151.101.28.162',
+1051 silly fetchPackageMetaData   port: 443 }
+1052 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1052 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1052 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1052 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1052 silly fetchPackageMetaData  error for react-redux@^5.0.4 { Error: connect ETIMEDOUT 151.101.28.162:443
+1052 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1052 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1052 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1052 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1052 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1052 silly fetchPackageMetaData   syscall: 'connect',
+1052 silly fetchPackageMetaData   address: '151.101.28.162',
+1052 silly fetchPackageMetaData   port: 443 }
+1053 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1053 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1053 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1053 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1053 silly fetchPackageMetaData  error for react@^15.6.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1053 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1053 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1053 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1053 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1053 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1053 silly fetchPackageMetaData   syscall: 'connect',
+1053 silly fetchPackageMetaData   address: '151.101.28.162',
+1053 silly fetchPackageMetaData   port: 443 }
+1054 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1054 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1054 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1054 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1054 silly fetchPackageMetaData  error for babel-plugin-transform-node-env-inline@^0.2.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1054 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1054 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1054 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1054 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1054 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1054 silly fetchPackageMetaData   syscall: 'connect',
+1054 silly fetchPackageMetaData   address: '151.101.28.162',
+1054 silly fetchPackageMetaData   port: 443 }
+1055 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1055 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1055 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1055 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1055 silly fetchPackageMetaData  error for react-fontawesome@^1.6.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1055 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1055 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1055 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1055 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1055 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1055 silly fetchPackageMetaData   syscall: 'connect',
+1055 silly fetchPackageMetaData   address: '151.101.28.162',
+1055 silly fetchPackageMetaData   port: 443 }
+1056 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1056 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1056 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1056 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1056 silly fetchPackageMetaData  error for classnames@^2.2.5 { Error: connect ETIMEDOUT 151.101.28.162:443
+1056 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1056 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1056 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1056 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1056 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1056 silly fetchPackageMetaData   syscall: 'connect',
+1056 silly fetchPackageMetaData   address: '151.101.28.162',
+1056 silly fetchPackageMetaData   port: 443 }
+1057 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1057 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1057 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1057 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1057 silly fetchPackageMetaData  error for axios@^0.12.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1057 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1057 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1057 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1057 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1057 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1057 silly fetchPackageMetaData   syscall: 'connect',
+1057 silly fetchPackageMetaData   address: '151.101.28.162',
+1057 silly fetchPackageMetaData   port: 443 }
+1058 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1058 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1058 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1058 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1058 silly fetchPackageMetaData  error for react-highlight-words@^0.9.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1058 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1058 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1058 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1058 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1058 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1058 silly fetchPackageMetaData   syscall: 'connect',
+1058 silly fetchPackageMetaData   address: '151.101.28.162',
+1058 silly fetchPackageMetaData   port: 443 }
+1059 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1059 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1059 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1059 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1059 silly fetchPackageMetaData  error for material-design-icons@^3.0.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1059 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1059 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1059 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1059 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1059 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1059 silly fetchPackageMetaData   syscall: 'connect',
+1059 silly fetchPackageMetaData   address: '151.101.28.162',
+1059 silly fetchPackageMetaData   port: 443 }
+1060 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1060 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1060 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1060 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1060 silly fetchPackageMetaData  error for create-react-class@^15.6.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1060 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1060 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1060 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1060 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1060 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1060 silly fetchPackageMetaData   syscall: 'connect',
+1060 silly fetchPackageMetaData   address: '151.101.28.162',
+1060 silly fetchPackageMetaData   port: 443 }
+1061 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1061 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1061 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1061 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1061 silly fetchPackageMetaData  error for react-router-dom@^4.2.2 { Error: connect ETIMEDOUT 151.101.28.162:443
+1061 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1061 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1061 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1061 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1061 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1061 silly fetchPackageMetaData   syscall: 'connect',
+1061 silly fetchPackageMetaData   address: '151.101.28.162',
+1061 silly fetchPackageMetaData   port: 443 }
+1062 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1062 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1062 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1062 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1062 silly fetchPackageMetaData  error for redux-logger@^3.0.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1062 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1062 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1062 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1062 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1062 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1062 silly fetchPackageMetaData   syscall: 'connect',
+1062 silly fetchPackageMetaData   address: '151.101.28.162',
+1062 silly fetchPackageMetaData   port: 443 }
+1063 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1063 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1063 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1063 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1063 silly fetchPackageMetaData  error for validator@^8.2.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1063 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1063 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1063 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1063 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1063 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1063 silly fetchPackageMetaData   syscall: 'connect',
+1063 silly fetchPackageMetaData   address: '151.101.28.162',
+1063 silly fetchPackageMetaData   port: 443 }
+1064 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1064 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1064 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1064 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1064 silly fetchPackageMetaData  error for redux@^3.6.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1064 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1064 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1064 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1064 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1064 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1064 silly fetchPackageMetaData   syscall: 'connect',
+1064 silly fetchPackageMetaData   address: '151.101.28.162',
+1064 silly fetchPackageMetaData   port: 443 }
+1065 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1065 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1065 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1065 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1065 silly fetchPackageMetaData  error for semantic-ui-css@^2.2.12 { Error: connect ETIMEDOUT 151.101.28.162:443
+1065 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1065 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1065 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1065 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1065 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1065 silly fetchPackageMetaData   syscall: 'connect',
+1065 silly fetchPackageMetaData   address: '151.101.28.162',
+1065 silly fetchPackageMetaData   port: 443 }
+1066 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1066 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1066 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1066 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1066 silly fetchPackageMetaData  error for redux-promise-middleware@^4.2.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1066 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1066 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1066 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1066 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1066 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1066 silly fetchPackageMetaData   syscall: 'connect',
+1066 silly fetchPackageMetaData   address: '151.101.28.162',
+1066 silly fetchPackageMetaData   port: 443 }
+1067 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1067 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1067 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1067 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1067 silly fetchPackageMetaData  error for semantic-ui-transition@^2.2.12 { Error: connect ETIMEDOUT 151.101.28.162:443
+1067 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1067 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1067 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1067 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1067 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1067 silly fetchPackageMetaData   syscall: 'connect',
+1067 silly fetchPackageMetaData   address: '151.101.28.162',
+1067 silly fetchPackageMetaData   port: 443 }
+1068 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1068 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1068 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1068 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1068 silly fetchPackageMetaData  error for redux-thunk@^2.2.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1068 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1068 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1068 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1068 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1068 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1068 silly fetchPackageMetaData   syscall: 'connect',
+1068 silly fetchPackageMetaData   address: '151.101.28.162',
+1068 silly fetchPackageMetaData   port: 443 }
+1069 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1069 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1069 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1069 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1069 silly fetchPackageMetaData  error for semantic-ui-react@^0.73.1 { Error: connect ETIMEDOUT 151.101.28.162:443
+1069 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1069 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1069 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1069 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1069 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1069 silly fetchPackageMetaData   syscall: 'connect',
+1069 silly fetchPackageMetaData   address: '151.101.28.162',
+1069 silly fetchPackageMetaData   port: 443 }
+1070 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1070 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1070 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1070 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1070 silly fetchPackageMetaData  error for react-virtualized-select@^3.1.0 { Error: connect ETIMEDOUT 151.101.28.162:443
+1070 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1070 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1070 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1070 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1070 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1070 silly fetchPackageMetaData   syscall: 'connect',
+1070 silly fetchPackageMetaData   address: '151.101.28.162',
+1070 silly fetchPackageMetaData   port: 443 }
+1071 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1071 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1071 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1071 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1071 silly fetchPackageMetaData  error for semantic-ui-popup@^2.2.12 { Error: connect ETIMEDOUT 151.101.28.162:443
+1071 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1071 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1071 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1071 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1071 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1071 silly fetchPackageMetaData   syscall: 'connect',
+1071 silly fetchPackageMetaData   address: '151.101.28.162',
+1071 silly fetchPackageMetaData   port: 443 }
+1072 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1072 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1072 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1072 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1072 silly fetchPackageMetaData  error for react-toolbox@^2.0.0-beta.12 { Error: connect ETIMEDOUT 151.101.28.162:443
+1072 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1072 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1072 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1072 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1072 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1072 silly fetchPackageMetaData   syscall: 'connect',
+1072 silly fetchPackageMetaData   address: '151.101.28.162',
+1072 silly fetchPackageMetaData   port: 443 }
+1073 silly fetchPackageMetaData Error: connect ETIMEDOUT 151.101.28.162:443
+1073 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1073 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1073 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1073 silly fetchPackageMetaData  error for url-loader@^0.5.9 { Error: connect ETIMEDOUT 151.101.28.162:443
+1073 silly fetchPackageMetaData     at Object.exports._errnoException (util.js:1020:11)
+1073 silly fetchPackageMetaData     at exports._exceptionWithHostPort (util.js:1043:20)
+1073 silly fetchPackageMetaData     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1073 silly fetchPackageMetaData   code: 'ETIMEDOUT',
+1073 silly fetchPackageMetaData   errno: 'ETIMEDOUT',
+1073 silly fetchPackageMetaData   syscall: 'connect',
+1073 silly fetchPackageMetaData   address: '151.101.28.162',
+1073 silly fetchPackageMetaData   port: 443 }
+1074 silly rollbackFailedOptional Starting
+1075 silly rollbackFailedOptional Finishing
+1076 silly runTopLevelLifecycles Finishing
+1077 silly install printInstalled
+1078 verbose stack Error: connect ETIMEDOUT 151.101.28.162:443
+1078 verbose stack     at Object.exports._errnoException (util.js:1020:11)
+1078 verbose stack     at exports._exceptionWithHostPort (util.js:1043:20)
+1078 verbose stack     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)
+1079 verbose cwd C:\Users\User\Documents\GitHub\9321Group-Project\frontend
+1080 error Windows_NT 6.1.7601
+1081 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+1082 error node v6.11.4
+1083 error npm  v3.10.10
+1084 error code ETIMEDOUT
+1085 error errno ETIMEDOUT
+1086 error syscall connect
+1087 error network connect ETIMEDOUT 151.101.28.162:443
+1088 error network This is most likely not a problem with npm itself
+1088 error network and is related to network connectivity.
+1088 error network In most cases you are behind a proxy or have bad network settings.
+1088 error network
+1088 error network If you are behind a proxy, please make sure that the
+1088 error network 'proxy' config is set properly.  See: 'npm help config'
+1089 verbose exit [ 1, true ]
