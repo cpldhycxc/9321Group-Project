@@ -22,7 +22,6 @@ export default class Home extends React.Component {
   }
 
   renderButton = () => {
-    console.log("fuckkkkkkk");
     if (this.props.token) {
       return (
         <NewPostButton onClick={this.openModal} />

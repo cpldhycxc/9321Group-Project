@@ -11,7 +11,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import DAO.*;
 import Model.*;
 
-import com.sun.corba.se.impl.orbutil.graph.Graph;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,7 +22,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
-import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
 import unsw.curation.api.tokenization.ExtractionKeywordImpl;
 
 
@@ -34,12 +32,17 @@ public class HomeController {
     @Autowired
     private DBDAO dbdao = new DBDAOImpl();
 
+    // extract keyword
+    private ExtractionKeywordImpl eki = new ExtractionKeywordImpl();
+
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
     private ArrayList<Notification> notification = new ArrayList<Notification>();
     private List<String> wordL = new ArrayList<String>();
     private ArrayList<BullyPost> bullyPost = new ArrayList<BullyPost>();
     private String keywords;
+
+
 
     @CrossOrigin(origins = "*")
     @GetMapping("/greeting")
@@ -263,9 +266,11 @@ public class HomeController {
                     postID = (int)dbdao.addPost(userID, null);
                 } else {
                     postID = (int)dbdao.addPost(userID, content);
+                    System.out.println(content);
                     checkBully(userID,content,postID);
+                    System.out.println("check here");
                 }
-
+                
                 String filePath = "posts/" + Integer.toString(postID);
                 System.out.println(filePath);
                 byte[] bytes = file.getBytes();
@@ -326,16 +331,22 @@ public class HomeController {
             IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException ex) {
-            ex.printStackTrace();
-            throw new RuntimeException("IOError writing file to output stream");
-        }
 
+        }
     }
     
     /**
      * helder method that send email to user
      */
     private void sendTLSMail(String toEmail, String msg){
+        sendTLSMail(toEmail, msg, "Registration Confirmation");
+    }
+
+
+    /**
+     * helder method that send email to user
+     */
+    private void sendTLSMail(String toEmail, String msg, String title){
         System.out.println("Trying to send email to " + toEmail);
 
         final String username = "yun553966858@gmail.com";
@@ -348,6 +359,7 @@ public class HomeController {
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
+                    @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, password);
                     }
@@ -359,7 +371,7 @@ public class HomeController {
             message.setFrom(new InternetAddress("UNSWBook"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(toEmail));
-            message.setSubject("Registration Confirmation");
+            message.setSubject(title);
             message.setText(msg);
 
             Transport.send(message);
@@ -371,9 +383,13 @@ public class HomeController {
         }
     }
 
+
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/activityReport/{userID}", method = RequestMethod.GET)
     public UserActivities userActivity(@PathVariable int userID){
+    	for(BullyPost p: bullyPost){
+    		System.out.println("cehck "+p.getPostID() +" "+p.getUserID());
+    	}
         return dbdao.userActivities(userID,bullyPost);
     }
 
@@ -411,19 +427,21 @@ public class HomeController {
 	}
 	
 // word extract api test
-//    @CrossOrigin(origins = "*")
-//    @RequestMapping(value = "/testAPI", method = RequestMethod.GET)
-//    public void testAPI() {
-//		int userID = 11;
-//		String content = "HI, CHECK THE ~\n 232	content  Abuse, Abusive  heihei,welfare   h whine";
-//		int postID = 100;
-//		checkBully(userID,content,postID);    		
-//    }
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/testAPI", method = RequestMethod.GET)
+    public void testAPI() {
+		int userID = 2;
+		String content = "HI, CHECK THE ~\n 232	content  Abuse, Abusive  heihei,welfare   h whine";
+		int postID = 1;
+		checkBully(userID,content,postID);    		
+    }
 	
 	
 //if the post content contain any bully word, email will sent to admin which contains: userID, postID and bully word 	
 	public void checkBully(int userID, String content,int postID){
+		System.out.println("fdfdfd");
 		ArrayList<String> items = new ArrayList<String>(Arrays.asList(content.replaceAll("[^a-zA-Z'\\s]"," ").split("\\s+")));
+		System.out.println("hhh");
 		try{
 			api(content);
 		}catch(Exception e){
@@ -431,18 +449,23 @@ public class HomeController {
 		}
 		ArrayList<String> checkList = new ArrayList<String>(Arrays.asList(keywords.split(",")));
 		items.removeAll(checkList);
-//		for(String i: items){
-//			System.out.println(i);
-//		}
+		for(String i: items){
+			System.out.println(i);
+		}
 		if(!items.isEmpty()){
+		    System.out.println("sending bullying");
 			BullyPost p = new BullyPost(postID,userID);
+			 System.out.println("postID"+p.getPostID());
+			 System.out.println("userID"+p.getUserID());
 			bullyPost.add(p);
 			String msg = "Please check the content posted by user.\nUser ID: "+userID
 					+"\nPost ID: "+postID+"\nContent: "+content+"\nWords contained: "+items;
-			sendTLSMail("553966858@qq.com", msg);			
+			sendTLSMail("liangxubing@gmail.com", msg, "Bullying Keyword Notification");
+
 		}else{
 			System.out.println("no bully-word contained");
 		}
+		System.out.println(bullyPost.size());
 
 	}
 

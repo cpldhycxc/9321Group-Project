@@ -10,6 +10,7 @@ export function getPosts() {
 		}
 		axios.get(url)
 			.then((response) => {
+				console.log(response.data)
 				dispatch({
 					type: 'GET_POSTS',
 					payload: response.data.posts
@@ -25,6 +26,7 @@ export function getRandom() {
 	return function(dispatch) {
 		 axios.get('http://localhost:8080/randomPost/')
 		 .then((res) => {
+		 	console.log(res.data)
 			 dispatch({
 				 type:'GET_RANDOMS',
 				 payload: res.data.posts

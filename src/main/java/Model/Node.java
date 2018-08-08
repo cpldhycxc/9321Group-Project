@@ -23,7 +23,8 @@ public class Node {
         return id == other.id && nodeType.equals(other.nodeType) && additional.equals(other.additional);
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return (id + " " + nodeType + " " + additional).hashCode();
     }
 

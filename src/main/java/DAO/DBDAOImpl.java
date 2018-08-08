@@ -7,23 +7,21 @@ import api.GraphQuery;
 import api.UserActivities;
 import api.UserProfile;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.sun.corba.se.impl.orbutil.graph.Graph;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.util.ArrayList;
-import java.util.stream.StreamSupport;
+import unsw.curation.api.extractnamedentity.ExtractEntitySentence;
+import unsw.curation.api.tokenization.ExtractionKeywordImpl;
 
 
 //| Annotation | Meaning                                             |
@@ -42,11 +40,18 @@ public class DBDAOImpl implements DBDAO {
 
     final static Logger logger = LoggerFactory.getLogger(DBDAOImpl.class);
 
+    private ExtractEntitySentence ees = new ExtractEntitySentence();
+    private ArrayList<BullyPost> bullyPost = new ArrayList<BullyPost>();
+    private String keywords;
+
+    //
+
     /**
      * function that try to make a connection with database
      * @return the connection to the database, if can't connect exception is thrown.
      */
-    public Connection connect() {
+    @Override
+	public Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:student.db";
         Connection conn = null;
@@ -65,7 +70,8 @@ public class DBDAOImpl implements DBDAO {
      * @param aUser, Model class which contain user information we want to add to database
      * @return true if user successfully added, false otherwise
      */
-    public boolean userSignUp(User aUser) {
+    @Override
+	public boolean userSignUp(User aUser) {
         try (Connection conn = connect()) {
             // check if the user already exists
             Statement stmt = conn.createStatement();
@@ -101,7 +107,8 @@ public class DBDAOImpl implements DBDAO {
      * @param userName
      * @return
      */
-    public int getUserIdByUserName(String userName) {
+    @Override
+	public int getUserIdByUserName(String userName) {
         int userID = -1;
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
@@ -119,7 +126,8 @@ public class DBDAOImpl implements DBDAO {
      * @param userName
      * @return if username doesn't exist userName field of the user is null, otherwise return user info
      */
-    public User getUserByUserName(String userName, String password) {
+    @Override
+	public User getUserByUserName(String userName, String password) {
         User user = new User();
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
@@ -154,7 +162,8 @@ public class DBDAOImpl implements DBDAO {
      * @param userID
      * @return arraylist of post for the user
      */
-    public ArrayList<Post> getPostsByUserID(int userID) {
+    @Override
+	public ArrayList<Post> getPostsByUserID(int userID) {
         ArrayList<Post> postArrayList = new ArrayList<>();
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
@@ -173,6 +182,17 @@ public class DBDAOImpl implements DBDAO {
                     p.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
                 }
             }
+
+            try{
+                for(Post p : postArrayList){
+                    p.setLocations(ees.ExtractLocation(p.getContent()));
+                    p.setPersons(ees.ExtractPerson(p.getContent()));
+                    p.setOrganizations(ees.ExtractOrganization(p.getContent()));
+                }
+            } catch (URISyntaxException k){
+                k.printStackTrace();
+            }
+
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -181,11 +201,37 @@ public class DBDAOImpl implements DBDAO {
 
 
     /**
+<<<<<<< HEAD
+=======
+     * give the userID of a user find out all his friend
+     * @param userID
+     * @return arraylist of friend of the user
+     */
+    @Override
+	public ArrayList<Friend> getFriendsByUserID(int userID){
+        ArrayList<Friend> friendArrayList = new ArrayList<>();
+        try (Connection conn = connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("" +
+                    "SELECT Friends.friendID, Users.userName FROM Friends INNER JOIN Users " +
+                    "ON Friends.friendID=Users.userID WHERE Friends.userID = '" + Integer.toString(userID) + "'");
+            while(rs.next()){
+                friendArrayList.add(new Friend(rs.getInt(1), rs.getString(2)));
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return friendArrayList;
+    }
+
+    /**
+>>>>>>> a4b1371daac2d7e29eb06abc8b1973f71ae0959e
      * get email by userID
      * @param userID
      * @return email for the userID
      */
-    public String getEmailByUserID(int userID){
+    @Override
+	public String getEmailByUserID(int userID){
         String email = null;
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
@@ -204,7 +250,8 @@ public class DBDAOImpl implements DBDAO {
      * @param userID
      * @param friendID
      */
-    public void addFriendRelation(int userID, int friendID){
+    @Override
+	public void addFriendRelation(int userID, int friendID){
         try (Connection conn = connect()){
             PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Friends (userID, friendID) VALUES (?, ?)");
             preStatment.setInt(1, userID);
@@ -215,11 +262,14 @@ public class DBDAOImpl implements DBDAO {
         }
     }
 
+
+    
     /**
      * change the userType to check if it is activated
      * @param userID
      */
-    public void userActivation(int userID){
+    @Override
+	public void userActivation(int userID){
     	try (Connection conn = connect()) {
     		 String updateType = "UPDATE Users SET userType=? WHERE userID=?";
     		 PreparedStatement pstmt = conn.prepareStatement(updateType);
@@ -235,11 +285,17 @@ public class DBDAOImpl implements DBDAO {
     		System.out.println(e.getMessage());
     	}
     }
+
+
+    
+    
+    
     /**
      * change the userType to check if it is activated
      * @param userID
      */
-    public void backUserActivation(int userID){
+    @Override
+	public void backUserActivation(int userID){
     	try (Connection conn = connect()) {
     		 String updateType = "UPDATE Users SET userType=? WHERE userID=?";
     		 PreparedStatement pstmt = conn.prepareStatement(updateType);
@@ -261,7 +317,8 @@ public class DBDAOImpl implements DBDAO {
      * @param userName as a string
      * @return true if the user exists otherwise false
      */
-    public boolean userExistence(String userName){
+    @Override
+	public boolean userExistence(String userName){
     	boolean result = false;
     	try(Connection conn = connect()) {
     		 Statement stmt = conn.createStatement();
@@ -285,7 +342,8 @@ public class DBDAOImpl implements DBDAO {
     	return result;
     }
 
-    public ArrayList<UserProfile> search(String param){
+    @Override
+	public ArrayList<UserProfile> search(String param){
         try(Connection conn = connect()){
             Statement stmt = conn.createStatement();
 //            ResultSet rs = stmt.executeQuery("SELECT * FROM Users WHERE userName LIKE '% "+ param +" %' ");
@@ -322,7 +380,8 @@ public class DBDAOImpl implements DBDAO {
 
     }
 
-    public ArrayList<UserProfile> advSearch(String gender, String dob, String userName, String firstName, String lastName ) {
+    @Override
+	public ArrayList<UserProfile> advSearch(String gender, String dob, String userName, String firstName, String lastName ) {
 //        ArrayList<String> data = new ArrayList<String>();
 
         try (Connection conn = connect()) {
@@ -425,6 +484,37 @@ public class DBDAOImpl implements DBDAO {
 //    }
 
 
+    public void api(String Con) throws Exception {
+		ExtractionKeywordImpl keyword = new ExtractionKeywordImpl();
+		this.keywords = keyword.ExtractSentenceKeyword(Con, new File("src/main/resources/words.txt"));
+	}
+	
+
+    
+    public boolean checkBully(String content){
+		System.out.println("fdfdfd");
+		ArrayList<String> items = new ArrayList<String>(Arrays.asList(content.replaceAll("[^a-zA-Z'\\s]"," ").split("\\s+")));
+		System.out.println("hhh");
+		try{
+			api(content);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		ArrayList<String> checkList = new ArrayList<String>(Arrays.asList(keywords.split(",")));
+		items.removeAll(checkList);
+		for(String i: items){
+			System.out.println(i);
+		}
+		if(!items.isEmpty()){
+		    return true;
+
+		}else{
+			return false;
+		}
+
+	}
+	
+	
 	/**
 	 * function to delete the post by post id
 	 */
@@ -447,14 +537,10 @@ public class DBDAOImpl implements DBDAO {
             userAct.setJoinDate(joinDate.getString(1));
             // adding posts record
             while (posts.next()) {
-            	boolean check = false;
-            	for(BullyPost b: bullyPost){
-            		if(b.getPostID() == posts.getInt(3)){
-            			check = true;
-            			break;
-            		}
-            	}
-            	if(check == true){
+ 
+            	String con = posts.getString(1);
+           	
+            	if(checkBully(con)){
             		Activity act = new Activity(1, posts.getString(1) + " (This post may contain some words related to bullying)", posts.getString(2));
                     userAct.addActivity(act);
             	}else{
@@ -474,6 +560,7 @@ public class DBDAOImpl implements DBDAO {
         return userAct;
     }
 
+	@Override
 	public boolean deletePost(int postID) {
 		boolean result = false;
 		try(Connection conn = connect()){			
@@ -493,7 +580,8 @@ public class DBDAOImpl implements DBDAO {
      * @param userID
      * @return arraylist of post for the user
      */
-    public ArrayList<Post> getOwnPostsByUserID(int userID) {
+    @Override
+	public ArrayList<Post> getOwnPostsByUserID(int userID) {
         ArrayList<Post> postArrayList = new ArrayList<>();
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
@@ -511,6 +599,17 @@ public class DBDAOImpl implements DBDAO {
                     p.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
                 }
             }
+
+            try{
+                for(Post p : postArrayList){
+                    p.setLocations(ees.ExtractLocation(p.getContent()));
+                    p.setPersons(ees.ExtractPerson(p.getContent()));
+                    p.setOrganizations(ees.ExtractOrganization(p.getContent()));
+                }
+            } catch (URISyntaxException k){
+                k.printStackTrace();
+            }
+
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -571,7 +670,8 @@ public class DBDAOImpl implements DBDAO {
 	}
 	
 	//return the posterID
-    public int getUserIdByPostID(int postID) {
+    @Override
+	public int getUserIdByPostID(int postID) {
         int userID = -1;
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
@@ -583,7 +683,8 @@ public class DBDAOImpl implements DBDAO {
         return userID;
     }
     
-    @JsonIgnore
+    @Override
+	@JsonIgnore
     public ArrayList<Post> getPostsRandomly() {
     	System.out.println("hhhhhhhh");
     	ArrayList<Post> postList = new ArrayList<Post>();
@@ -600,14 +701,28 @@ public class DBDAOImpl implements DBDAO {
             for(int i = 0;i < 10;i++) {
             	r=rand.nextInt((max - 0) + 1) + 0;
             	System.out.println("check"+r);
-            	postList.add(getPostByPostID(r));
+            	Post p = getPostByPostID(r);
+            	if(p.getContent() != null) postList.add(p);
             }
+
+            try{
+                for(Post p : postList){
+                    p.setLocations(ees.ExtractLocation(p.getContent()));
+                    p.setPersons(ees.ExtractPerson(p.getContent()));
+                    p.setOrganizations(ees.ExtractOrganization(p.getContent()));
+                }
+            } catch (URISyntaxException k){
+                k.printStackTrace();
+            }
+
+
         } catch (SQLException e){
             e.printStackTrace();
         }
     	return postList;
     }
-    @JsonIgnore
+    @Override
+	@JsonIgnore
     public Post getPostByPostID(int postID) {
     	Post post = new Post();
         try (Connection conn = connect()){
@@ -628,18 +743,9 @@ public class DBDAOImpl implements DBDAO {
                 while(rss.next()){
                     post.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
                 }
+
+           
             }
-            
-            
-            
-//            for(Post p : postArrayList){
-//                p.setLikeBy(new ArrayList<>());
-//                rs = stmt.executeQuery("SELECT userID, userName, email, firstName, lastName FROM Users WHERE userID IN (SELECT userID FROM Likes WHERE postID = '" + p.getPostId() + "')");
-//                while(rs.next()){
-//                    p.getLikeBy().add(new User(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4 ),rs.getString(5)));
-//                }
-//            }
-            
             
             
         } catch (SQLException | ParseException e){
@@ -648,7 +754,8 @@ public class DBDAOImpl implements DBDAO {
         }
         return post;
     }
-    @JsonIgnore
+    @Override
+	@JsonIgnore
     public String getUserNameByUserID(int userID) {
         String name = null;
         try (Connection conn = connect()){
@@ -661,7 +768,8 @@ public class DBDAOImpl implements DBDAO {
         return name;
     }
 
-    public long addPost(int userID, String content){
+    @Override
+	public long addPost(int userID, String content){
         try (Connection conn = connect()){
             PreparedStatement preStatment = conn.prepareStatement("INSERT INTO Posts (userID, content) VALUES (?, ?)");
             preStatment.setInt(1, userID);
@@ -675,7 +783,8 @@ public class DBDAOImpl implements DBDAO {
         }
     }
 
-    public UserProfile editProfile(String userID, String fname, String lname, String dob, String email, String gender){
+    @Override
+	public UserProfile editProfile(String userID, String fname, String lname, String dob, String email, String gender){
         UserProfile u = new UserProfile();
         try (Connection conn = connect()){
             Statement stmt1 = conn.createStatement();
@@ -758,7 +867,8 @@ public class DBDAOImpl implements DBDAO {
         }
     }
 
-    public GraphQuery getPostGraph(String keyword){
+    @Override
+	public GraphQuery getPostGraph(String keyword){
         try (Connection conn = connect()){
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM TripleStore WHERE (predicate = 'posted' OR predicate = 'liked') AND objectAdd LIKE '%" +keyword+"%'");
@@ -769,7 +879,8 @@ public class DBDAOImpl implements DBDAO {
         }
     }
 
-    public GraphQuery getFriendGraph(String userID){
+    @Override
+	public GraphQuery getFriendGraph(String userID){
         ArrayList<Friend> friendList;
         Map<Integer, Boolean> seen = new HashMap<>();
         Queue<Integer> queue = new LinkedList<>();

@@ -1,8 +1,6 @@
 package Model;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Model of a user which represent what the user look like in our database

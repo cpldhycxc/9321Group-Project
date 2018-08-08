@@ -16,7 +16,6 @@ class WallContainer extends React.Component {
 	}
 
 	componentWillMount() {
-		// console.log('willl')
 		this.props.dispatch(getPosts());
 	}
 
@@ -24,9 +23,11 @@ class WallContainer extends React.Component {
 		if (this.props.post.posts.length === 0 || this.props.user === null) {
 			return null;
 		} else {
+			console.log(this.props.post)
 			return (
 				<div>
 					{this.props.post.posts.map((post, i) => (
+						<div>
 						<Post
 							selfID={this.props.user.userID}
 							postID={post.postId}
@@ -35,8 +36,13 @@ class WallContainer extends React.Component {
 							text={post.content}
 							key={i}
 							postTime={post.postTime}
+							locations={post.locations}
+							org={post.organizations}
+							persons={post.persons}
 							likes={post.likeBy}
 						/>
+
+						</div>	
 					))}
 				</div>
 			);

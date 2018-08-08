@@ -1,7 +1,5 @@
 package api;
 
-import java.util.Date;
-
 public class Activity implements Comparable<Activity>{
     private int type;
     private String description;
@@ -25,7 +23,8 @@ public class Activity implements Comparable<Activity>{
         return date;
     }
   
-    public int compareTo(Activity o){
+    @Override
+	public int compareTo(Activity o){
          return this.date.compareTo(o.date);
     }
 }

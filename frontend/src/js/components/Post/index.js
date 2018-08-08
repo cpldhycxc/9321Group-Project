@@ -42,6 +42,7 @@ export default class Post extends React.Component {
 	}
 
 	checkImg = (url) => {
+		console.log("hehehe")
 		axios.get(url)
 		.then((response) => {
 			this.setState({
@@ -139,12 +140,18 @@ export default class Post extends React.Component {
 					{renderImg()}
 					{text.split('\\n').map((item, i) => {
 						return (
+
 						<CardTitle
 							title={item}
 							key={i}
 						/>
 						);
 					})}
+					<div style={{marginLeft:'20px'}}>
+						<div><strong>Locations:</strong> <span className="label label-default">{this.props.locations}</span></div>
+						<div><strong>Org:</strong> <span className="label label-default">{this.props.organizations}</span></div>
+						<div><strong>Persons:</strong><span className="label label-default">{this.props.persons}</span> </div>	
+						</div>
 					<div className="Post__footer">
 						<div className="Post_like-button">
 							<p>{this.state.numOfLikes} likes</p>

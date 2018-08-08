@@ -13,7 +13,8 @@ public class Edge {
         toS = tos;
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return (from + " " + edgeType + " " + to + " " + toS).hashCode();
     }
 
